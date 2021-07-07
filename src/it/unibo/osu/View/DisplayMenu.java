@@ -18,17 +18,20 @@ public class DisplayMenu {
 	private Pane gameRoot = new Pane();
 	private Scene gameScene;
 	
-	
+	private GameMenu gameOptions;
 	public DisplayMenu(final Stage primary) {
 		primary.setTitle("USo!");
 		
+		gameOptions = new GameMenu();
+
 		try {
-			setImage();
+			setImage(gameOptions);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		this.gameScene = new Scene(this.gameRoot, SCENE_WIDTH, SCENE_HEIGHT);
+		
 		
 		primary.setScene(gameScene);
 		
@@ -37,13 +40,13 @@ public class DisplayMenu {
 }
 
 
-	private void setImage() throws IOException {
+	private void setImage(GameMenu g) throws IOException {
 		InputStream is = Files.newInputStream(Paths.get("res/wallpaper/uso.png"));
 		Image background = new Image(is);
 		is.close();
 		ImageView imgview = new ImageView(background);
 		imgview.setFitWidth(SCENE_WIDTH);
 		imgview.setFitHeight(SCENE_HEIGHT);
-		gameRoot.getChildren().addAll(imgview);
+		gameRoot.getChildren().addAll(imgview, g); // questa roba non si puo guardare assolutamente ......
 	}
 }
