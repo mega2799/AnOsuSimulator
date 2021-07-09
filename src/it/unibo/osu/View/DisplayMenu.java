@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import it.unibo.osu.Player.MusicPlayer;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,8 +18,10 @@ public class DisplayMenu {
 	private static final double SCENE_HEIGHT = 720;
 	private Pane gameRoot = new Pane();
 	private Scene gameScene;
+	private MusicPlayer mp;
 	
 	private GameMenu gameOptions;
+
 	public DisplayMenu(final Stage primary) {
 		primary.setTitle("USo!");
 		
@@ -32,6 +35,10 @@ public class DisplayMenu {
 
 		this.gameScene = new Scene(this.gameRoot, SCENE_WIDTH, SCENE_HEIGHT);
 		
+		mp = new MusicPlayer("res/tracks/joshiraku.wav");
+
+		startSong(); // la canzone muore dopo qualche secondo, probabilmente la memoria viene deallocata e l' oggetto
+		// eliminato
 		
 		primary.setScene(gameScene);
 		
@@ -39,6 +46,10 @@ public class DisplayMenu {
 	
 }
 
+
+	public void startSong() {
+		this.mp.run();
+	}
 
 	private void setImage(GameMenu g) throws IOException {
 		InputStream is = Files.newInputStream(Paths.get("res/wallpaper/uso.png"));
