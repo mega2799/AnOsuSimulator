@@ -18,7 +18,7 @@ public class DisplayMenu {
 	private static final double SCENE_HEIGHT = 720;
 	private Pane gameRoot = new Pane();
 	private Scene gameScene;
-	private MusicPlayer mp;
+	private static MusicPlayer mp;
 	
 	private GameMenu gameOptions;
 
@@ -37,19 +37,14 @@ public class DisplayMenu {
 		
 		mp = new MusicPlayer("res/tracks/joshiraku.wav");
 
-		startSong(); // la canzone muore dopo qualche secondo, probabilmente la memoria viene deallocata e l' oggetto
-		// eliminato
 		
+		this.mp.run();
+
 		primary.setScene(gameScene);
 		
 		primary.show();
 	
 }
-
-
-	public void startSong() {
-		this.mp.run();
-	}
 
 	private void setImage(GameMenu g) throws IOException {
 		InputStream is = Files.newInputStream(Paths.get("res/wallpaper/uso.png"));
