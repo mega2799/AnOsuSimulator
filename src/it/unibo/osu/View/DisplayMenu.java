@@ -25,7 +25,7 @@ public class DisplayMenu {
 	public DisplayMenu(final Stage primary) {
 		primary.setTitle("USo!");
 		
-		gameOptions = new GameMenu();
+		gameOptions = new GameMenu(SCENE_WIDTH, SCENE_HEIGHT);
 
 		try {
 			setImage(gameOptions);
@@ -36,7 +36,6 @@ public class DisplayMenu {
 		this.gameScene = new Scene(this.gameRoot, SCENE_WIDTH, SCENE_HEIGHT);
 		
 		mp = new MusicPlayer("res/tracks/joshiraku.wav");
-
 		
 		this.mp.run();
 
@@ -45,7 +44,7 @@ public class DisplayMenu {
 		primary.show();
 	
 }
-
+	// questa funione qua non è molto carina
 	private void setImage(GameMenu g) throws IOException {
 		InputStream is = Files.newInputStream(Paths.get("res/wallpaper/uso.png"));
 		Image background = new Image(is);
