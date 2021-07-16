@@ -1,13 +1,13 @@
 package it.unibo.osu.View;
 
+import it.unibo.osu.Controller.MusicControllerImpl;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 public class GameMenu extends Parent{
 	private final static double BUTTON_WEIGHT = 160;
 	private final static double BUTTON_HEIGHT = 40;
+	private static MusicControllerImpl audio;
 	
 	public GameMenu(final double sceneWidth, double sceneHeight){
 		VBox menu0 = new VBox(15);
@@ -17,6 +17,10 @@ public class GameMenu extends Parent{
 		//menu0.setTranslateY(300);
 	
 
+		this.audio = new MusicControllerImpl("/tracks/joshiraku.wav");
+		
+		this.audio.startMusic();
+		
 		menu0.setTranslateX(computeWidht(sceneWidth, BUTTON_WEIGHT));
 		menu0.setTranslateY(computeHeight(sceneHeight, BUTTON_HEIGHT));
 	
@@ -28,7 +32,12 @@ public class GameMenu extends Parent{
 		// quindi va sistemata, dato che la avvio nella classe DisplayMenu....
 		MenuButton exitBtn = new MenuButton("Exit", BUTTON_WEIGHT, BUTTON_HEIGHT);
 		
+		newGameBtn.setOnMouseClicked(e -> {
+			this.audio.stopMusic();
+		});
+		
 		exitBtn.setOnMouseClicked(e -> {
+			this.audio.stopMusic();
 			System.exit(1);
 		});
 		
@@ -42,7 +51,7 @@ public class GameMenu extends Parent{
 	}
 
 	private double computeHeight(final double height, final double buttonHeight) {
-		return (height - buttonHeight )/ 2;
+		return (height - buttonHeight )/ 2 + 100;
 	}
 
 }
