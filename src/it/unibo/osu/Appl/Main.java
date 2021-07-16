@@ -11,6 +11,7 @@ public class Main extends Application{
 	public void start(Stage myStage) throws Exception {
 		
 		DisplayMenu menu = new DisplayMenu(myStage);
+		
 		/*
 		myStage.setTitle("Mi piacciono i gatti");
 		
