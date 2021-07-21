@@ -66,7 +66,7 @@ public class DisplayMenu {
 
 		
 		// questo button serve solo a testare la gif e alune cose, da rimuovere alla fine
-		MenuButton newGameBtn = new MenuButton("BUttton guy", 100, 50);
+		MenuButton newGameBtn = new MenuButton("Buttton guy", 100, 50);
 		
 		newGameBtn.setOnMouseClicked(e -> {
 			// ovviamente cosi non va bene, pero questo sono i codici da utilizzare per fare un animazione pop up

@@ -27,11 +27,14 @@ public class GameMenu extends Parent{
 		menu1.setTranslateX(100);
 		menu1.setTranslateY(300);
 
+		// questi in realta sarebbero dei pane, non proprio dei pulsanti
 		MenuButton newGameBtn = new MenuButton("Play Uso!", BUTTON_WEIGHT, BUTTON_HEIGHT);
 		// io dovrei far fermare la musica d'intro ma questo sarebbe da implementare con MVC 
 		// quindi va sistemata, dato che la avvio nella classe DisplayMenu....
 		MenuButton exitBtn = new MenuButton("Exit", BUTTON_WEIGHT, BUTTON_HEIGHT);
 		
+		NeonButton pressMeBtn = new NeonButton("Press me", sceneWidth, sceneHeight);
+
 		newGameBtn.setOnMouseClicked(e -> {
 			this.audio.stopMusic();
 		});
@@ -41,7 +44,8 @@ public class GameMenu extends Parent{
 			System.exit(1);
 		});
 		
-		menu0.getChildren().addAll(newGameBtn, exitBtn);
+	//	menu0.getChildren().addAll(newGameBtn, exitBtn);
+		menu0.getChildren().addAll(newGameBtn, exitBtn, pressMeBtn);
 		
 		getChildren().addAll(menu0);
 	}
