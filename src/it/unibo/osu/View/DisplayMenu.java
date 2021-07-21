@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import it.unibo.osu.Controller.MusicControllerImpl;
 import it.unibo.osu.Player.MusicPlayer;
 import javafx.animation.FadeTransition;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -42,6 +43,12 @@ public class DisplayMenu {
 
 		this.gameScene = new Scene(this.gameRoot, SCENE_WIDTH, SCENE_HEIGHT);
 
+		gameScene.setCursor(new ImageCursor(new Image("/wallpaper/biggerCursor.png")));
+		// nel gioco sarebbe anche fattibile creare una shadow del cursore
+		// sarebbe fattibile usando la funzione render, in cui prendo le posizioni del mouse
+		// e utilizzo fadein e fadeout con un effetto per poter creare una traccia 
+		
+		
 		primary.setScene(gameScene);
 	
 		primary.show();
@@ -59,7 +66,7 @@ public class DisplayMenu {
 
 		
 		// questo button serve solo a testare la gif e alune cose, da rimuovere alla fine
-		MenuButton newGameBtn = new MenuButton("BUttton guy", 100, 50);
+		MenuButton newGameBtn = new MenuButton("Buttton guy", 100, 50);
 		
 		newGameBtn.setOnMouseClicked(e -> {
 			// ovviamente cosi non va bene, pero questo sono i codici da utilizzare per fare un animazione pop up
