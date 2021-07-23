@@ -1,4 +1,4 @@
-package it.unibo.osu.Player;
+package daTogliereCredo;
 
 import java.io.File;
 
