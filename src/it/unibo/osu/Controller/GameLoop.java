@@ -19,7 +19,6 @@ public class GameLoop extends AnimationTimer {
 		this.game = game;
 		this.view = view;
 		this.previous = System.nanoTime();
-		this.setInputHandler();
 		this.start();
 	}
 	@Override
@@ -77,25 +76,6 @@ public class GameLoop extends AnimationTimer {
 		//System.out.println((1d/ (this.previous - tmp))*  1e9);
 	}
 	
-	private void setInputHandler() {
-		this.view.getScene().setOnKeyPressed(e ->{
-			if(e.getCode().equals(KeyCode.SPACE) || this.game.getStatus() != GameStatus.PAUSE) {
-				switch( e.getCode()) {
-				case SPACE: 
-					this.game.setPause();
-					break;
-				case X: 
-					//lanciare x,z come se fosse un click
-					//cercare come lanciare un evento stile mouseclick
-					break;
-				case Z:
-					break;
-				default:
-					break;
-				}
-			}
-		});
 
-	}
 
 }
