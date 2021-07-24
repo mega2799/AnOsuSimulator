@@ -1,5 +1,6 @@
 package it.unibo.osu.View;
 
+import it.unibo.osu.Controller.Controller;
 import it.unibo.osu.Controller.MusicControllerImpl;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
@@ -34,6 +35,7 @@ public class GameMenu extends Parent{
 		
 		newGameBtn.setOnMouseClicked(e -> {
 			this.audio.stopMusic();
+			new Controller(null);
 		});
 		
 		exitBtn.setOnMouseClicked(e -> {

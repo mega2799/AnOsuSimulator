@@ -21,8 +21,9 @@ public class GameModel {
 	}
 	
 	
-	public void update() {
-		// da implementare
+	public void update(double t) {
+		// da implementare, dovrà tener conto di quanto passato nella song, e di stato di gioco che se è in pausa
+		// non può procedere 
 	}
 	
     public void setPause() {
