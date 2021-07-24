@@ -1,9 +1,15 @@
 package it.unibo.osu.Controller;
 
+
+
+
 import Model.GameModel;
+import Model.GameStatus;
 import it.unibo.osu.View.GameView;
+import it.unibo.osu.View.PauseMenu;
 import javafx.animation.AnimationTimer;
-import javafx.util.Duration;
+import javafx.scene.input.KeyCode;
+
 
 public class GameLoop extends AnimationTimer {
 	private GameModel game;
@@ -13,16 +19,46 @@ public class GameLoop extends AnimationTimer {
 		this.game = game;
 		this.view = view;
 		this.previous = System.nanoTime();
+		this.setInputHandler();
 		this.start();
 	}
 	@Override
 	public void handle(long now) {
 		long t =  (now - this.previous);
-		//processInput();
+	
+		//rendo ciclo deterministico, fissando loop a 60 fps, sfruttando il pulse di javafx
+		//long tmp = this.previous;
+		
+		switch(this.game.getStatus()) {
+		case START:
+			this.game.initGameOnStart();
+			this.previous = now;
+			break;
+		case RUNNING:
+			this.tick(t,now);
+			break;
+		case PAUSE:
+			// da sistemare, altrimenti apre un menu pausa ad ogni ciclo così...lol
+			//new PauseMenu();
+			this.previous = now;
+			break;
+		case ENDGAME:
+			// da implem
+			this.previous = now;
+			break;
+		default:
+			System.out.println("non dovrebbe entrare qui.");
+			throw new RuntimeException();		
+		}
+		
+	}
+	private void tick(long t,long now) {
+		
 		//this.game.update(t); 
 		//this.view.render();
 		
-		//rendo ciclo deterministico, fissando loop a 60 fps 
+		
+		
 		//long tmp = this.previous;
 		if(t*1e-6 < 17 ) {
 			try {
@@ -30,16 +66,35 @@ public class GameLoop extends AnimationTimer {
 				Thread.sleep((long) (diff));
 				this.previous = (long) (now + diff*1e6);
 				//this.previous = System.nanoTime();
-				
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		} else {
 			this.previous = now;
 		}
-		
-		//uncomment this and "tmp" variable to see actual fps rate
+		//uncomment to see actual gameloop
 		//System.out.println((1d/ (this.previous - tmp))*  1e9);
+	}
+	
+	private void setInputHandler() {
+		this.view.getScene().setOnKeyPressed(e ->{
+			if(e.getCode().equals(KeyCode.SPACE) || this.game.getStatus() != GameStatus.PAUSE) {
+				switch( e.getCode()) {
+				case SPACE: 
+					this.game.setPause();
+					break;
+				case X: 
+					//lanciare x,z come se fosse un click
+					//cercare come lanciare un evento stile mouseclick
+					break;
+				case Z:
+					break;
+				default:
+					break;
+				}
+			}
+		});
 
 	}
 

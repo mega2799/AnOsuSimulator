@@ -20,6 +20,10 @@ public class GameModel {
 		this.scoreManager = new ScoreManager(this);
 	}
 	
+	public void initGameOnStart() {
+		this.status = GameStatus.RUNNING;
+		// TODO Auto-generated method stub
+	}
 	
 	public void update(double t) {
 		// da implementare, dovrà tener conto di quanto passato nella song, e di stato di gioco che se è in pausa
@@ -72,5 +76,8 @@ public class GameModel {
     public void setMultiplier(final int value) {
     	this.multiplier = value;
     }
+
+
+	
  
 }

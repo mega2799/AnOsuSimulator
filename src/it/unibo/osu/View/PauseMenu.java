@@ -5,13 +5,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class GameView extends Stage{
-	public GameView() {
+public class PauseMenu extends Stage {
+	public PauseMenu() {
 		Pane root = new Pane();
 		
 		this.setScene(new Scene(root,600,600));
-		root.getChildren().add(new Label("Game View"));
+		root.getChildren().add(new Label("Pause Menu"));
 		this.show();
 	}
-
 }
