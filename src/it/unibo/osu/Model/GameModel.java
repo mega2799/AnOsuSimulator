@@ -1,4 +1,4 @@
-package Model;
+package it.unibo.osu.Model;
 
 import it.unibo.osu.Controller.MusicController;
 import it.unibo.osu.Controller.MusicControllerImpl;

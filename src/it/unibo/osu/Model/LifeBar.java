@@ -1,4 +1,4 @@
-package Model;
+package it.unibo.osu.Model;
 
 // da implementare
 public class LifeBar {

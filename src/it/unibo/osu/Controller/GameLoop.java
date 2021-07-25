@@ -3,10 +3,10 @@ package it.unibo.osu.Controller;
 
 
 
-import Model.GameModel;
-import Model.GameStatus;
+import it.unibo.osu.Model.GameModel;
+import it.unibo.osu.Model.GameStatus;
 import it.unibo.osu.View.GameView;
-import it.unibo.osu.View.PauseMenu;
+import it.unibo.osu.View.PauseMenuView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 

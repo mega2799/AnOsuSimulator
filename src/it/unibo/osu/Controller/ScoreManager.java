@@ -1,6 +1,6 @@
 package it.unibo.osu.Controller;
 
-import Model.GameModel;
+import it.unibo.osu.Model.GameModel;
 
 public class ScoreManager {
 
