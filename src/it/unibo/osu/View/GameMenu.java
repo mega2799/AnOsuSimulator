@@ -2,6 +2,7 @@ package it.unibo.osu.View;
 
 import java.io.IOException;
 
+import it.unibo.osu.Controller.Controller;
 import it.unibo.osu.Controller.MusicControllerImpl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -53,6 +54,8 @@ public class GameMenu extends Parent {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		//parte aggiunta da manu per far partire gioco quando c era play
+		//	new Controller(null);
 		});
 
 		exitBtn.setOnMouseClicked(e -> {

@@ -6,8 +6,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import daTogliereCredo.MusicPlayer;
 import it.unibo.osu.Controller.MusicControllerImpl;
-import it.unibo.osu.Player.MusicPlayer;
 import javafx.animation.FadeTransition;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
