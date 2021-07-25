@@ -16,7 +16,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class DisplayMenu {
@@ -33,7 +35,7 @@ public class DisplayMenu {
 		
 		primary.setTitle("USo!");
 		
-		this.gameOptions = new GameMenu(SCENE_WIDTH, SCENE_HEIGHT);
+		this.gameOptions = new GameMenu(primary, SCENE_WIDTH, SCENE_HEIGHT);
 
 		try {
 			setImage(gameOptions);
@@ -48,9 +50,7 @@ public class DisplayMenu {
 		// sarebbe fattibile usando la funzione render, in cui prendo le posizioni del mouse
 		// e utilizzo fadein e fadeout con un effetto per poter creare una traccia 
 		
-		
 		primary.setScene(gameScene);
-	
 		primary.show();
 	
 }
