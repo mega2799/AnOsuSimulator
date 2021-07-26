@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 
 public class BeatmapReader extends BufferedReader{
-	private List<SpaceTimeCoord> xyt;
+	private List<SpaceTimeCoord> hitpoints;
 	private Integer n;
 	private int index = 0;
 	private List<String> lines;
@@ -18,56 +18,61 @@ public class BeatmapReader extends BufferedReader{
 	public BeatmapReader(FileReader in)  {
 		super(in);
 		this.lines = super.lines().collect(Collectors.toList());
-		if(this.n==null) {
-			try {
-				this.n = findNumOfLinesToHitcircle(this.lines);
-			} catch (IOException e) {
-				System.out.println("Error: stringa \"[HitObjects]\" non presente nella beatmap!");
-				e.printStackTrace();
-			}
-		} 		
-		this.xyt = lines.stream().skip(n.intValue()).map((x)-> {
+		this.setHitpoints();
+	}
+	
+	private void setHitpoints() {
+		try {
+			this.n = findNumOfLinesToOptions(this.lines,BeatmapOptions.HITOBJECTS);
+		} catch (IOException e) {
+			System.out.println("Error: stringa \"[HitObjects]\" non presente nella beatmap!");
+			e.printStackTrace();
+		}
+		this.hitpoints = lines.stream().skip(n.intValue())
+				.takeWhile(x -> x.equals("n"))
+				.map((x)-> {
 					String[] values = x.split(",");
 					return new SpaceTimeCoord(Double.parseDouble(values[0]), Double.parseDouble(values[1]),Double.parseDouble(values[2]));
-				}).collect(Collectors.toList());
+				})
+				.collect(Collectors.toList());
 	}
 	
 	public  List<SpaceTimeCoord> getHitpoints(){
-		return this.xyt;
+		return this.hitpoints;
 	}
 	
 	public Stream<SpaceTimeCoord> hitPointsStream() {
-		return this.xyt.stream();
+		return this.hitpoints.stream();
 	}
 	
-	private boolean hasNext() {
-		if(this.xyt.get(index+1)!=null) {
+	private boolean hasNextHitpoint() {
+		if(this.hitpoints.get(index+1)!=null) {
 			return true;
 		} else {
-			this.index = 0;
+			this.resetIndex(); 
 			return false;
 		}
 	}
 	public SpaceTimeCoord readHitpoint() {
-		if(this.hasNext()) {
+		if(this.hasNextHitpoint()) {
 			index += 1;
-			return this.xyt.get(index);
+			return this.hitpoints.get(index);
 		} else {
 			return null;
 		}
 	}
-	public void reset() {
+	
+	public void resetIndex() {
 		this.index = 0;
 	}
 	
-	
-	private int findNumOfLinesToHitcircle(List<String> lines) throws IOException  {
+	private int findNumOfLinesToOptions(List<String> lines,BeatmapOptions opt) throws IOException  {
 			int count = 0;
 			boolean flagFound = false;
 			for(String line: lines) {
 				//System.out.println(line);
 				count += 1;
-				if(line.contains("[HitObjects]")){
+				if(line.contains(opt.getValue())){
 					flagFound = true;
 					break;
 				}
