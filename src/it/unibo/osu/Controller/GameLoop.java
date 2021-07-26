@@ -37,12 +37,10 @@ public class GameLoop extends AnimationTimer {
 			this.tick(t,now);
 			break;
 		case PAUSE:
-			// da sistemare, altrimenti apre un menu pausa ad ogni ciclo così...lol
-			//new PauseMenu();
 			this.previous = now;
 			break;
 		case ENDGAME:
-			// da implem
+			// da implementare, aprirà una nuova scena o stage finale.
 			this.previous = now;
 			break;
 		default:
