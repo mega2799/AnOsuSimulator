@@ -2,7 +2,14 @@ package it.unibo.osu.util;
 
 public enum BeatmapOptions {
 	
-	HITOBJECTS("[HitObjects]");
+	HITOBJECTS("[HitObjects]"),
+	GENERAL("[General]"),
+	EDITOR("[Editor]"),
+	METADATA("[Metadata]"),
+	DIFFICULTY("[Difficulty]"),
+	EVENTS("[Events]"),
+	TIMINGPOINTS("[TimingPoints]"),
+	COLOURS("[Colours]");
 	
 	private String value;
 	private BeatmapOptions(String value) {

@@ -4,9 +4,12 @@ package it.unibo.osu.util;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 
 
 public class BeatmapReader extends BufferedReader{
@@ -29,7 +32,7 @@ public class BeatmapReader extends BufferedReader{
 			e.printStackTrace();
 		}
 		this.hitpoints = lines.stream().skip(n.intValue())
-				.takeWhile(x -> x.equals("n"))
+				.takeWhile(x -> !x.equals(""))
 				.map((x)-> {
 					String[] values = x.split(",");
 					return new SpaceTimeCoord(Double.parseDouble(values[0]), Double.parseDouble(values[1]),Double.parseDouble(values[2]));
@@ -82,6 +85,19 @@ public class BeatmapReader extends BufferedReader{
 			} else {
 				throw new IOException();
 			}
+	}
+	
+	//solo per retribuire elementi separati da ": " non per BeatmapOptions con la "," . quindi non posso usare 
+	// questo metodo per [events],[timingpoints],[hitobjects], vanno gestiti nel caso come ho fatto con
+	//gli hitobjects -> vedere set hitpoints
+	public HashMap<String, String>  getOptionMap(BeatmapOptions opt) throws IOException {
+		this.n = findNumOfLinesToOptions(this.lines, opt);
+		HashMap<String,String> map =  (HashMap<String, String>) this.lines.stream()
+				.skip(this.n)
+				.takeWhile(x -> !x.equals(""))
+				.map(x ->  Arrays.asList(x.split(": ")) )
+				.collect(Collectors.toMap(x -> x.get(0), x ->  x.get(1)));
+			return map;
 	}
 	
 }
