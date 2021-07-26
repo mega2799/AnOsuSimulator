@@ -90,12 +90,14 @@ public class BeatmapReader extends BufferedReader{
 	//solo per retribuire elementi separati da ": " non per BeatmapOptions con la "," . quindi non posso usare 
 	// questo metodo per [events],[timingpoints],[hitobjects], vanno gestiti nel caso come ho fatto con
 	//gli hitobjects -> vedere set hitpoints
+	// guardando gli unici utili potrebbero essere hitobjects e difficulty
 	public HashMap<String, String>  getOptionMap(BeatmapOptions opt) throws IOException {
 		this.n = findNumOfLinesToOptions(this.lines, opt);
 		HashMap<String,String> map =  (HashMap<String, String>) this.lines.stream()
 				.skip(this.n)
 				.takeWhile(x -> !x.equals(""))
-				.map(x ->  Arrays.asList(x.split(": ")) )
+				.map(x ->  Arrays.asList(x.split(":")) )
+				//sostituire . con ,?
 				.collect(Collectors.toMap(x -> x.get(0), x ->  x.get(1)));
 			return map;
 	}
