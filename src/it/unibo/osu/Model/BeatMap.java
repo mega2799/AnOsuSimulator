@@ -11,6 +11,7 @@ import it.unibo.osu.util.*;
 //da implementare usando un reader da file + parser 
 public class BeatMap {
 
+	//campi obbligatori quindi per ogni beatmap file
 	private List<SpaceTimeCoord> hitpoints;
 	private double hpDrainRate;
 	private double circleSize;

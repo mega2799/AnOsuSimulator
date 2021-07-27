@@ -8,7 +8,7 @@ public class LifeBar {
 		
 	}
 
-	public void gainLife() {
+	public void gainLife(GamePoints gamePoints) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,23 +1,22 @@
 package it.unibo.osu.Model;
 
-import it.unibo.osu.Controller.MusicController;
-import it.unibo.osu.Controller.MusicControllerImpl;
+
 import it.unibo.osu.Controller.ScoreManager;
 
 public class GameModel {
 	private GameStatus status;
 	private BeatMap beatMap;
 	private ScoreManager scoreManager;
-	private int score;
+	private Score score;
 	private int multiplier;
 	private LifeBar lifeBar;
 	
 	public GameModel(final String name) {
 		this.status = GameStatus.START;
-		this.score = 0;
+		this.score = new Score();
 		this.multiplier = 0;
 		this.beatMap = new BeatMap(name);
-		this.scoreManager = new ScoreManager(this);
+		this.scoreManager = new ScoreManager(this.score);
 	}
 	
 	public void initGameOnStart() {
@@ -40,13 +39,13 @@ public class GameModel {
     
     public void buttonMissed() {
     	this.lifeBar.lostLife();
-    	this.scoreManager.hitted();
+    	this.scoreManager.missed();
     	
     }
     
-    public void buttonHitted() {
-    	this.lifeBar.gainLife();
-    	this.scoreManager.missed();
+    public void buttonHitted(GamePoints gamePoints) {
+    	this.lifeBar.gainLife(gamePoints);
+    	this.scoreManager.hitted(gamePoints);
     }
     
     
@@ -60,7 +59,7 @@ public class GameModel {
 	}
 
 
-	public int getScore() {
+	public Score getScore() {
 		return score;
 	}
 
@@ -68,16 +67,6 @@ public class GameModel {
 	public int getMultiplier() {
 		return multiplier;
 	}
-    
-    public void incScore(final int value) {
-    	this.score += value;
-    }
-    
-    public void setMultiplier(final int value) {
-    	this.multiplier = value;
-    }
 
-
-	
  
 }
