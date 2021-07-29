@@ -1,23 +1,18 @@
 package it.unibo.osu.Controller;
 
-
-
-
 import it.unibo.osu.Model.GameModel;
-import it.unibo.osu.Model.GameStatus;
 import it.unibo.osu.View.GameView;
-import it.unibo.osu.View.PauseMenuView;
 import javafx.animation.AnimationTimer;
-import javafx.scene.input.KeyCode;
-
 
 public class GameLoop extends AnimationTimer {
 	private GameModel game;
 	private GameView view;
+	private MusicController musicController;
 	private long previous;
-	public GameLoop(GameModel game, GameView view) {
+	public GameLoop(GameModel game, GameView view, MusicController musicController) {
 		this.game = game;
 		this.view = view;
+		this.musicController = musicController;
 		this.previous = System.nanoTime();
 		this.start();
 	}
@@ -31,6 +26,7 @@ public class GameLoop extends AnimationTimer {
 		switch(this.game.getStatus()) {
 		case START:
 			this.game.initGameOnStart();
+			this.musicController.startMusic();
 			this.previous = now;
 			break;
 		case RUNNING:
@@ -51,7 +47,7 @@ public class GameLoop extends AnimationTimer {
 	}
 	private void tick(long t,long now) {
 		
-		//this.game.update(t); 
+		this.game.update(t); 
 		//this.view.render();
 		
 		
@@ -61,6 +57,7 @@ public class GameLoop extends AnimationTimer {
 			try {
 				long diff = (long) (17d - t*1e-6);
 				Thread.sleep((long) (diff));
+				this.game.update(diff); //aggiornare quei pochi millisecondi per sincronizzare ciclo <--
 				this.previous = (long) (now + diff*1e6);
 				//this.previous = System.nanoTime();
 

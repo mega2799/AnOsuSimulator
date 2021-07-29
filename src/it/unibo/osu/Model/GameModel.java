@@ -1,32 +1,37 @@
 package it.unibo.osu.Model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import it.unibo.osu.Controller.Observer;
 import it.unibo.osu.Controller.ScoreManager;
+import it.unibo.osu.util.HitobjectSelector;
+import it.unibo.osu.util.SpaceTimeCoord;
 
-public class GameModel {
+public class GameModel implements Observer{
 	private GameStatus status;
 	private BeatMap beatMap;
 	private ScoreManager scoreManager;
-	private Score score;
-	private int multiplier;
 	private LifeBar lifeBar;
+	private List<SpaceTimeCoord> currentHitbuttons;
+	private HitobjectSelector selector;
+	
 	
 	public GameModel(final String name) {
 		this.status = GameStatus.START;
-		this.score = new Score();
-		this.multiplier = 0;
 		this.beatMap = new BeatMap(name);
-		this.scoreManager = new ScoreManager(this.score);
 	}
 	
 	public void initGameOnStart() {
+		this.scoreManager = new ScoreManager(new Score());
+		this.lifeBar = new LifeBar(this.beatMap.getHpDrainRate());
+		this.clearCurrentHitbuttons(new ArrayList<>());
+		this.selector = new HitobjectSelector(List.copyOf(this.beatMap.getHitpoints()));
 		this.status = GameStatus.RUNNING;
-		// TODO Auto-generated method stub
 	}
 	
 	public void update(double t) {
-		// da implementare, dovrà tener conto di quanto passato nella song, e di stato di gioco che se è in pausa
-		// non può procedere 
+		this.currentHitbuttons = this.selector.nextHitobjects(t);
 	}
 	
     public void setPause() {
@@ -48,25 +53,38 @@ public class GameModel {
     	this.scoreManager.hitted(gamePoints);
     }
     
-    
 	public GameStatus getStatus() {
 		return status;
 	}
-
 
 	public BeatMap getBeatMap() {
 		return beatMap;
 	}
 
-
 	public Score getScore() {
-		return score;
+		return this.scoreManager.getScore();
 	}
 
-
-	public int getMultiplier() {
-		return multiplier;
+	public List<SpaceTimeCoord> getCurrentHitbuttons() {
+		return currentHitbuttons;
 	}
 
+	public void clearCurrentHitbuttons(List<SpaceTimeCoord> currentHitbuttons) {
+		this.currentHitbuttons.clear();;
+	}
+	
+	//da implementare
+	public boolean isGameOver() {
+		if(this.status.equals(GameStatus.ENDGAME)) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void notifyEntity() {
+		this.status = GameStatus.ENDGAME;
+	}
+	
  
 }

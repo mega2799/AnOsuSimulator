@@ -12,7 +12,7 @@ public class Score {
 	
 	public void initScore() {
 		this.points = 0;
-		this.multiplier = 1;
+		this.multiplier = 0;
 	}
 	
 	public void setPoints(int points) {
@@ -40,6 +40,6 @@ public class Score {
 	}
 	
 	public void resetMultiplier() {
-		this.multiplier = 1;
+		this.multiplier = 0;
 	}
 }

@@ -6,6 +6,7 @@ import it.unibo.osu.Model.GameModel;
 import it.unibo.osu.Model.GameStatus;
 import it.unibo.osu.View.GameView;
 import it.unibo.osu.View.PauseMenuView;
+import it.unibo.osu.util.HitobjectSelector;
 import javafx.animation.AnimationTimer;
 import javafx.event.Event;
 import javafx.event.EventType;
@@ -16,24 +17,25 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.PickResult;
+import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.robot.Robot;
 
 public class Controller {
 	private final GameView view;
 	private final GameModel game;
-	private final String songName;
 	private final Robot robot;
 	private final PauseMenuView pauseMenu;
+	private final MusicControllerImpl musicController;
+	
 	public Controller(final String name) {
 		this.view = new GameView();
-		this.songName = name;
 		this.game = new GameModel(name);
 		this.robot = new Robot();
 		this.pauseMenu = new PauseMenuView();
+		this.musicController = new MusicControllerImpl(name);
 		this.setInputHandler();
-
-		//procedere con gameloop poi finire model 
-		new GameLoop(this.game, this.view);
+		
+		new GameLoop(this.game, this.view, this.musicController);
 	}
 	
 	
@@ -43,6 +45,13 @@ public class Controller {
 				switch( e.getCode()) {
 				case SPACE: 
 					this.game.setPause();
+					
+					if(this.musicController.getStatus().equals(Status.PAUSED)) {
+						this.musicController.pauseMusic();
+					} else {
+						this.musicController.pauseMusic();
+					}
+					
 					if(!this.pauseMenu.isShowing()) {
 						this.pauseMenu.show();
 					} 

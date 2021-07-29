@@ -42,6 +42,10 @@ public class MusicControllerImpl implements MusicController{
 		return this.audioMedia.getTotalDuration();
 	}
 	
+	public MediaPlayer.Status getStatus(){
+		return this.audioMedia.getStatus();
+	}
+	
 	@Override
 	public void pauseMusic() {
 		this.audioMedia.pause();

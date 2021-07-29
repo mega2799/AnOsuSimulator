@@ -1,8 +1,8 @@
 package it.unibo.osu.Model;
 
 public enum GamePoints {
-	GOOD(50),
-	GREAT(100),
+	OK(50),
+	GREAT(300),
 	PERFECT(300);
 	
 	private int value;
