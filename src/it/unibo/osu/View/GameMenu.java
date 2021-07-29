@@ -46,14 +46,15 @@ public class GameMenu extends Parent {
 
 		newGameBtn.setOnMouseClicked(e -> {
 			this.audio.stopMusic();
+			new Controller("/beatmaps/legendsNeverDie.osu");
 	//		Clock cl = new Clock();
 		//	cl.start(primary); // ma questa ha senso ?
-			try {
-				SongListMenu ll  = new SongListMenu();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+//			try {
+//				SongListMenu ll  = new SongListMenu();
+//			} catch (IOException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
 		//parte aggiunta da manu per far partire gioco quando c era play
 		//	new Controller(null);
 		});

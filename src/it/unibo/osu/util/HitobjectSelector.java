@@ -9,7 +9,7 @@ public class HitobjectSelector {
 	private List<SpaceTimeCoord> hitobjects;
 	
 	public HitobjectSelector(List<SpaceTimeCoord> hitobjects) {
-		this.hitobjects = hitobjects;
+		this.hitobjects = new ArrayList<>(hitobjects);
 	}
 	
 	public List<SpaceTimeCoord> nextHitobjects(double t){

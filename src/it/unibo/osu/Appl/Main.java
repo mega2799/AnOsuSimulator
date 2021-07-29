@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 public class Main extends Application{
 	@Override
 	public void start(Stage myStage) throws Exception {
-		new BeatMap("/beatmaps/legendsNeverDie.osu");
 		DisplayMenu menu = new DisplayMenu(myStage);
 		
 		/*

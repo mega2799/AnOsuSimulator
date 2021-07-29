@@ -25,13 +25,20 @@ public class GameModel implements Observer{
 	public void initGameOnStart() {
 		this.scoreManager = new ScoreManager(new Score());
 		this.lifeBar = new LifeBar(this.beatMap.getHpDrainRate());
-		this.clearCurrentHitbuttons(new ArrayList<>());
-		this.selector = new HitobjectSelector(List.copyOf(this.beatMap.getHitpoints()));
+		this.currentHitbuttons = new ArrayList<>();
+		this.selector = new HitobjectSelector(this.beatMap.getHitpoints());
 		this.status = GameStatus.RUNNING;
 	}
 	
 	public void update(double t) {
-		this.currentHitbuttons = this.selector.nextHitobjects(t);
+		this.currentHitbuttons.addAll(this.selector.nextHitobjects(t));
+		//il render fara` il clear della lista currentHitObjects
+		//per debug quanto segue da togliere
+//		if(!this.currentHitbuttons.equals(List.of())) {
+//			System.out.println(this.currentHitbuttons);
+//			this.currentHitbuttons.clear();
+//		}
+		//
 	}
 	
     public void setPause() {
@@ -70,7 +77,7 @@ public class GameModel implements Observer{
 	}
 
 	public void clearCurrentHitbuttons(List<SpaceTimeCoord> currentHitbuttons) {
-		this.currentHitbuttons.clear();;
+		this.currentHitbuttons.clear();
 	}
 	
 	//da implementare

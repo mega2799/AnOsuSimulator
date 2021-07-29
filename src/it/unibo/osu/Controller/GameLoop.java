@@ -1,6 +1,7 @@
 package it.unibo.osu.Controller;
 
 import it.unibo.osu.Model.GameModel;
+import it.unibo.osu.View.EndgameView;
 import it.unibo.osu.View.GameView;
 import javafx.animation.AnimationTimer;
 
@@ -30,13 +31,16 @@ public class GameLoop extends AnimationTimer {
 			this.previous = now;
 			break;
 		case RUNNING:
-			this.tick(t,now);
+			this.tick(t,now); //conversione da nano a millisec
 			break;
 		case PAUSE:
 			this.previous = now;
 			break;
 		case ENDGAME:
 			// da implementare, aprirà una nuova scena o stage finale.
+			this.view.close();
+			new EndgameView();
+			this.stop();
 			this.previous = now;
 			break;
 		default:
@@ -45,9 +49,11 @@ public class GameLoop extends AnimationTimer {
 		}
 		
 	}
+	
+	//togliere magic numbers qui e aggiungere render
 	private void tick(long t,long now) {
-		
-		this.game.update(t); 
+		double updateTime = t * 1e-6; //fare una costante qui, togliere magic numbers
+		this.game.update(updateTime); 
 		//this.view.render();
 		
 		

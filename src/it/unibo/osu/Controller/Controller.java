@@ -32,7 +32,8 @@ public class Controller {
 		this.game = new GameModel(name);
 		this.robot = new Robot();
 		this.pauseMenu = new PauseMenuView();
-		this.musicController = new MusicControllerImpl(name,this.game);
+		//qui bisogna passare il nome della song giustamente 
+		this.musicController = new MusicControllerImpl("/tracks/joshiraku.wav",this.game);
 		this.setInputHandler();
 		
 		new GameLoop(this.game, this.view, this.musicController);
@@ -45,13 +46,9 @@ public class Controller {
 				switch( e.getCode()) {
 				case SPACE: 
 					this.game.setPause();
-					
-					if(this.musicController.getStatus().equals(Status.PAUSED)) {
-						this.musicController.pauseMusic();
-					} else {
-						this.musicController.pauseMusic();
-					}
-					
+
+					this.musicController.pauseMusic();
+
 					if(!this.pauseMenu.isShowing()) {
 						this.pauseMenu.show();
 					} 
@@ -75,6 +72,8 @@ public class Controller {
 			if(e.getCode().equals(KeyCode.SPACE) && this.pauseMenu.isShowing()) {
 				this.pauseMenu.close();
 			}
+			this.musicController.startMusic();
+			this.game.setPause();
 		});
 	}
 	
