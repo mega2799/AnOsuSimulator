@@ -32,7 +32,7 @@ public class Controller {
 		this.game = new GameModel(name);
 		this.robot = new Robot();
 		this.pauseMenu = new PauseMenuView();
-		this.musicController = new MusicControllerImpl(name);
+		this.musicController = new MusicControllerImpl(name,this.game);
 		this.setInputHandler();
 		
 		new GameLoop(this.game, this.view, this.musicController);

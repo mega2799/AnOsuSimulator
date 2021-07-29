@@ -82,7 +82,7 @@ public class GameModel implements Observer{
 	}
 
 	@Override
-	public void notifyEntity() {
+	public void onNotify() {
 		this.status = GameStatus.ENDGAME;
 	}
 	
