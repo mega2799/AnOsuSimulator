@@ -1,33 +1,44 @@
 package it.unibo.osu.Model;
 
-import it.unibo.osu.Controller.MusicController;
-import it.unibo.osu.Controller.MusicControllerImpl;
-import it.unibo.osu.Controller.ScoreManager;
 
-public class GameModel {
+import java.util.ArrayList;
+import java.util.List;
+import it.unibo.osu.Controller.Observer;
+import it.unibo.osu.Controller.ScoreManager;
+import it.unibo.osu.util.HitobjectSelector;
+import it.unibo.osu.util.SpaceTimeCoord;
+
+public class GameModel implements Observer{
 	private GameStatus status;
 	private BeatMap beatMap;
 	private ScoreManager scoreManager;
-	private int score;
-	private int multiplier;
 	private LifeBar lifeBar;
+	private List<SpaceTimeCoord> currentHitbuttons;
+	private HitobjectSelector selector;
+	
 	
 	public GameModel(final String name) {
 		this.status = GameStatus.START;
-		this.score = 0;
-		this.multiplier = 0;
 		this.beatMap = new BeatMap(name);
-		this.scoreManager = new ScoreManager(this);
 	}
 	
 	public void initGameOnStart() {
+		this.scoreManager = new ScoreManager(new Score());
+		this.lifeBar = new LifeBar(this.beatMap.getHpDrainRate());
+		this.currentHitbuttons = new ArrayList<>();
+		this.selector = new HitobjectSelector(this.beatMap.getHitpoints());
 		this.status = GameStatus.RUNNING;
-		// TODO Auto-generated method stub
 	}
 	
 	public void update(double t) {
-		// da implementare, dovrà tener conto di quanto passato nella song, e di stato di gioco che se è in pausa
-		// non può procedere 
+		this.currentHitbuttons.addAll(this.selector.nextHitobjects(t));
+		//il render fara` il clear della lista currentHitObjects
+		//per debug quanto segue da togliere
+//		if(!this.currentHitbuttons.equals(List.of())) {
+//			System.out.println(this.currentHitbuttons);
+//			this.currentHitbuttons.clear();
+//		}
+		//
 	}
 	
     public void setPause() {
@@ -40,44 +51,47 @@ public class GameModel {
     
     public void buttonMissed() {
     	this.lifeBar.lostLife();
-    	this.scoreManager.hitted();
+    	this.scoreManager.missed();
     	
     }
     
-    public void buttonHitted() {
-    	this.lifeBar.gainLife();
-    	this.scoreManager.missed();
+    public void buttonHitted(GamePoints gamePoints) {
+    	this.lifeBar.gainLife(gamePoints);
+    	this.scoreManager.hitted(gamePoints);
     }
-    
     
 	public GameStatus getStatus() {
 		return status;
 	}
 
-
 	public BeatMap getBeatMap() {
 		return beatMap;
 	}
 
-
-	public int getScore() {
-		return score;
+	public Score getScore() {
+		return this.scoreManager.getScore();
 	}
 
-
-	public int getMultiplier() {
-		return multiplier;
+	public List<SpaceTimeCoord> getCurrentHitbuttons() {
+		return currentHitbuttons;
 	}
-    
-    public void incScore(final int value) {
-    	this.score += value;
-    }
-    
-    public void setMultiplier(final int value) {
-    	this.multiplier = value;
-    }
 
+	public void clearCurrentHitbuttons(List<SpaceTimeCoord> currentHitbuttons) {
+		this.currentHitbuttons.clear();
+	}
+	
+	//da implementare
+	public boolean isGameOver() {
+		if(this.status.equals(GameStatus.ENDGAME)) {
+			return true;
+		}
+		return false;
+	}
 
+	@Override
+	public void onNotify() {
+		this.status = GameStatus.ENDGAME;
+	}
 	
  
 }

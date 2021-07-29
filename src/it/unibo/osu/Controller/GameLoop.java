@@ -1,23 +1,19 @@
 package it.unibo.osu.Controller;
 
-
-
-
 import it.unibo.osu.Model.GameModel;
-import it.unibo.osu.Model.GameStatus;
+import it.unibo.osu.View.EndgameView;
 import it.unibo.osu.View.GameView;
-import it.unibo.osu.View.PauseMenuView;
 import javafx.animation.AnimationTimer;
-import javafx.scene.input.KeyCode;
-
 
 public class GameLoop extends AnimationTimer {
 	private GameModel game;
 	private GameView view;
+	private MusicController musicController;
 	private long previous;
-	public GameLoop(GameModel game, GameView view) {
+	public GameLoop(GameModel game, GameView view, MusicController musicController) {
 		this.game = game;
 		this.view = view;
+		this.musicController = musicController;
 		this.previous = System.nanoTime();
 		this.start();
 	}
@@ -31,18 +27,20 @@ public class GameLoop extends AnimationTimer {
 		switch(this.game.getStatus()) {
 		case START:
 			this.game.initGameOnStart();
+			this.musicController.startMusic();
 			this.previous = now;
 			break;
 		case RUNNING:
-			this.tick(t,now);
+			this.tick(t,now); //conversione da nano a millisec
 			break;
 		case PAUSE:
-			// da sistemare, altrimenti apre un menu pausa ad ogni ciclo così...lol
-			//new PauseMenu();
 			this.previous = now;
 			break;
 		case ENDGAME:
-			// da implem
+			// da implementare, aprirà una nuova scena o stage finale.
+			this.view.close();
+			new EndgameView();
+			this.stop();
 			this.previous = now;
 			break;
 		default:
@@ -51,9 +49,11 @@ public class GameLoop extends AnimationTimer {
 		}
 		
 	}
+	
+	//togliere magic numbers qui e aggiungere render
 	private void tick(long t,long now) {
-		
-		//this.game.update(t); 
+		double updateTime = t * 1e-6; //fare una costante qui, togliere magic numbers
+		this.game.update(updateTime); 
 		//this.view.render();
 		
 		
@@ -63,6 +63,7 @@ public class GameLoop extends AnimationTimer {
 			try {
 				long diff = (long) (17d - t*1e-6);
 				Thread.sleep((long) (diff));
+				this.game.update(diff); //aggiornare quei pochi millisecondi per sincronizzare ciclo <--
 				this.previous = (long) (now + diff*1e6);
 				//this.previous = System.nanoTime();
 

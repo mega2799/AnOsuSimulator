@@ -3,15 +3,14 @@ package it.unibo.osu.Controller;
 //import java.io.File;
 import java.net.URISyntaxException;
 
+import it.unibo.osu.Model.GameModel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaPlayer.Status;
 import javafx.util.Duration;
-
-public class MusicControllerImpl implements MusicController{
+public class MusicControllerImpl extends AbstractSubject implements MusicController {
 
 	private MediaPlayer audioMedia;
-
+	private GameModel game;
 	public MusicControllerImpl(final String name) {
 		//this.audioMedia = new MediaPlayer(new Media(new File(this.getClass().getResource(name).toString()).toString()));
 
@@ -24,6 +23,12 @@ public class MusicControllerImpl implements MusicController{
 
 	}
 	
+	public MusicControllerImpl(String name, GameModel game) {
+		this(name);
+		this.game = game;
+		this.audioMedia.setOnEndOfMedia(() -> notifyObs());
+	}
+
 	@Override
 	public void startMusic() {
 		this.audioMedia.play();
@@ -42,9 +47,18 @@ public class MusicControllerImpl implements MusicController{
 		return this.audioMedia.getTotalDuration();
 	}
 	
+	public MediaPlayer.Status getStatus(){
+		return this.audioMedia.getStatus();
+	}
+	
 	@Override
 	public void pauseMusic() {
 		this.audioMedia.pause();
+	}
+
+	@Override
+	public void notifyObs() {
+		this.game.onNotify();
 	}
 	
 //	@Override
