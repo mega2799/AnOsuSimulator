@@ -40,21 +40,17 @@ public class GameMenu extends Parent {
 		// quindi va sistemata, dato che la avvio nella classe DisplayMenu....
 		MenuButton exitBtn = new MenuButton("Exit", BUTTON_WEIGHT, BUTTON_HEIGHT);
 
-		NeonButton pressMeBtn = new NeonButton("Press me", sceneWidth, sceneHeight);
-
-		//HBox box = FXMLLoader.load(ClassLoader.getSystemResource("fxmlStuff/NeonButton.fxml"));
-
 		newGameBtn.setOnMouseClicked(e -> {
 			this.audio.stopMusic();
-			new Controller("/beatmaps/legendsNeverDie.osu");
+	//		new Controller("/beatmaps/legendsNeverDie.osu");
 	//		Clock cl = new Clock();
 		//	cl.start(primary); // ma questa ha senso ?
-//			try {
-//				SongListMenu ll  = new SongListMenu();
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
+			try {
+				SongListMenu ll  = new SongListMenu();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		//parte aggiunta da manu per far partire gioco quando c era play
 		//	new Controller(null);
 		});

@@ -1,35 +1,39 @@
 package it.unibo.osu.View;
 
-import javafx.geometry.Pos;
+import java.io.IOException;
+
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.InnerShadow;
-import javafx.scene.effect.BlurType;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.scene.effect.Glow;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 
-public class NeonButton extends Button {
+public class NeonButton extends Button{
 
-	private Text text;
-	private static final int FONT_SIZE = 30;
+	private Button neon;
 
-	public NeonButton(final String name, final double buttonWeight, final double buttonHeight) {
-		this.text = new Text(name);
-		setFont(text.getFont().font(FONT_SIZE));
-		setText(name);
+	public final Button getNeon() {
+		return this.neon;
+	}
 
-		DropShadow mineNeon = new DropShadow(BlurType.THREE_PASS_BOX, Color.CYAN, 0, 0, 0, 0);
+	public NeonButton(final String text) throws IOException {
 
-		mineNeon.setWidth(75);
-		mineNeon.setHeight(75);
-		// mineNeon.setSpread(0.8); tamarro assai
-		mineNeon.setSpread(0.5);
-
-		setOnMouseEntered(e -> this.setEffect(mineNeon));
-		setOnMouseExited(e -> this.setEffect(null));
-
-		setAlignment(Pos.CENTER);
+		this.neon = FXMLLoader.load(ClassLoader.getSystemResource("fxmlStuff/NeonButton.fxml"));
+		
+		this.neon.setText(text);
+		
+		this.neon.setOnMouseClicked(e -> {
+			System.out.println(text);
+		});
+		/*
+		this.neon.setOnMouseEntered(e -> {
+			this.neon.setStyle("text-fill: RED");
+		});
+		
+		this.neon.setOnMouseExited(e -> {
+			this.neon.setStyle("text-fill: WHITE");
+		});
+		*/
 	}
 
 }
