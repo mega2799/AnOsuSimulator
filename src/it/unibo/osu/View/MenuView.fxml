@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+<?import javafx.stage.Stage?>
+
+<Stage fx:id="stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MenuController">
+    <scene>
+        <Scene fx:id="scene">
+            <AnchorPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="420.0" minWidth="680.0" prefHeight="1080.0" prefWidth="1920.0">
+            <children>
+               <MediaView fx:id="mediaView" fitHeight="1080.0" fitWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               <ImageView fx:id="mainLogo" fitHeight="300.0" fitWidth="300.0" layoutX="810.0" layoutY="490.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../res/image/uso_icon2.png" />
+                  </image>
+               </ImageView>
+               <VBox fx:id="vbox1" alignment="TOP_CENTER" layoutX="98.0" layoutY="310.0" prefHeight="612.0" prefWidth="372.0">
+                  <padding>
+                     <Insets bottom="50.0" top="50.0" />
+                  </padding>
+                  <children>
+                     <ImageView fx:id="banner" fitHeight="150.0" fitWidth="500.0" pickOnBounds="true">
+                        <image>
+                           <Image url="@../../res/image/uso_icon.png" />
+                        </image>
+                     </ImageView>
+                     <ImageView fx:id="banner1" fitHeight="150.0" fitWidth="500.0" pickOnBounds="true">
+                        <image>
+                           <Image url="@../../res/image/uso_icon.png" />
+                        </image>
+                     </ImageView>
+                     <ImageView fx:id="banner2" fitHeight="150.0" fitWidth="500.0" pickOnBounds="true">
+                        <image>
+                           <Image url="@../../res/image/uso_icon.png" />
+                        </image>
+                     </ImageView>
+                  </children>
+               </VBox>
+               <ImageView fitHeight="146.0" fitWidth="126.0" layoutX="1586.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../res/image/avatarImage.png" />
+                  </image>
+               </ImageView>
+               <Label layoutX="1722.0" layoutY="38.0" prefHeight="85.0" prefWidth="152.0" text="UserName" textFill="#ff25db">
+                  <font>
+                     <Font name="Candara Light" size="30.0" />
+                  </font>
+               </Label>
+               <ImageView fx:id="welcomeString" fitHeight="250.0" fitWidth="400.0" layoutX="760.0" layoutY="850.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../res/image/welcomeString.png" />
+                  </image>
+               </ImageView>
+            </children></AnchorPane>
+        </Scene>
+    </scene>
+</Stage>
