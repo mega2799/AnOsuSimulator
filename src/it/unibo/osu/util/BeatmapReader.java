@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +32,9 @@ public class BeatmapReader extends BufferedReader{
 			System.out.println("Error: stringa \"[HitObjects]\" non presente nella beatmap!");
 			e.printStackTrace();
 		}
-		this.hitpoints = lines.stream().skip(n.intValue())
+		this.hitpoints = lines.stream()
+				.skip(n.intValue())
+				.filter(x -> !x.contains("//"))
 				.takeWhile(x -> !x.equals(""))
 				.map((x)-> {
 					String[] values = x.split(",");
@@ -95,6 +98,7 @@ public class BeatmapReader extends BufferedReader{
 		this.n = findNumOfLinesToOptions(this.lines, opt);
 		HashMap<String,String> map =  (HashMap<String, String>) this.lines.stream()
 				.skip(this.n)
+				.filter(x -> !x.contains("//"))
 				.takeWhile(x -> !x.equals(""))
 				.map(x ->  Arrays.asList(x.split(":")) )
 				//sostituire . con ,?
@@ -102,4 +106,21 @@ public class BeatmapReader extends BufferedReader{
 			return map;
 	}
 	
+	public String getBakground() {
+		try {
+			this.n = findNumOfLinesToOptions(this.lines,BeatmapOptions.EVENTS);
+		} catch (IOException e) {
+			System.out.println("Error: stringa \"[Events]\" non presente nella beatmap!");
+			e.printStackTrace();
+		}
+		return this.lines.stream()
+				.skip(this.n)
+				.filter(x -> !x.contains("//"))
+				.takeWhile(x -> !x.equals(""))
+				.map((x)-> {
+					String[] values = x.split(",");
+					return Arrays.asList(values).get(2);})
+				.collect(Collectors.toList()).get(0).replaceAll("\"", "");
+	}
 }
+

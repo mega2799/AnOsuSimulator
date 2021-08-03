@@ -40,7 +40,7 @@ SliderTickRate:1
 
 [Events]
 //Background and Video events
-0,0,"ez.jpg",0,0
+0,0,"ReiBackgroundVideo.mp4",0,0
 //Break Periods
 2,89532,91751
 2,151437,163237

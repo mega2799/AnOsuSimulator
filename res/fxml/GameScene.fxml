@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
+<?import javafx.scene.text.Font?>
+
+<Scene xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.osu.view.GameSceneController">
+    <AnchorPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="420.0" minWidth="680.0" prefHeight="1080.0" prefWidth="1920.0">
+      <children>
+         <MediaView fx:id="backgroundMedia" fitHeight="1080.0" fitWidth="1920.0" />
+         <ImageView fx:id="backgroundImage" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" />
+         <ProgressBar fx:id="lifebar" focusTraversable="false" layoutX="80.0" layoutY="84.0" prefHeight="50.0" prefWidth="760.0" progress="1.0" style="-fx-accent: white; -fx-control-inner-background: black;" />
+         <Label fx:id="multiplier" alignment="CENTER" focusTraversable="false" layoutX="110.0" layoutY="856.0" prefHeight="117.0" prefWidth="264.0" text="x0" textAlignment="CENTER" textFill="WHITE">
+            <font>
+               <Font name="Franklin Gothic Medium Italic" size="94.0" />
+            </font>
+         </Label>
+         <Label fx:id="points" alignment="CENTER" focusTraversable="false" layoutX="1268.0" layoutY="58.0" prefHeight="117.0" prefWidth="596.0" text="00000000" textAlignment="CENTER" textFill="WHITE">
+            <font>
+               <Font name="Franklin Gothic Medium Italic" size="94.0" />
+            </font>
+         </Label>
+      </children></AnchorPane>
+</Scene>
