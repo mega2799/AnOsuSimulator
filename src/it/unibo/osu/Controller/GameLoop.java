@@ -1,7 +1,7 @@
 package it.unibo.osu.Controller;
 
 import it.unibo.osu.Model.GameModel;
-import it.unibo.osu.View.EndgameView;
+import it.unibo.osu.View.EndGameView;
 import it.unibo.osu.View.GameView;
 import javafx.animation.AnimationTimer;
 
@@ -37,9 +37,9 @@ public class GameLoop extends AnimationTimer {
 			this.previous = now;
 			break;
 		case ENDGAME:
-			// da implementare, aprirà una nuova scena o stage finale.
+			// da implementare, aprirï¿½ una nuova scena o stage finale.
 			this.view.close();
-			new EndgameView();
+			new EndGameView();
 			this.stop();
 			this.previous = now;
 			break;

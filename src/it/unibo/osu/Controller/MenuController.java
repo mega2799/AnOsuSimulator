@@ -1,4 +1,4 @@
-package application;
+package it.unibo.osu.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
