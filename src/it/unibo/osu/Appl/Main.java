@@ -23,7 +23,7 @@ public class Main extends Application{
 		
 		myStage.show();*/
 		
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("view/MenuView.fxml"));
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/MenuView.fxml"));
 
 		try {
 			Stage stage = loader.load();
