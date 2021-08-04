@@ -55,7 +55,7 @@ public class MenuController implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.mediaView.setMediaPlayer(new MediaPlayer(new Media(this.getClass().getResource("/video/ReiBackgroundVideo.mp4").toString())));
+		this.mediaView.setMediaPlayer(new MediaPlayer(new Media(this.getClass().getResource("video/ReiBackgroundVideo.mp4").toString())));
 		this.mediaView.getMediaPlayer().play();
 		this.scene.setOnMouseClicked(e->{
 			changeResolution(680, 420);
