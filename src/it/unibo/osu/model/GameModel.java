@@ -7,14 +7,14 @@ import java.util.List;
 import it.unibo.osu.controller.Observer;
 import it.unibo.osu.controller.ScoreManager;
 import it.unibo.osu.util.HitobjectSelector;
-import it.unibo.osu.util.SpaceTimeCoord;
+import it.unibo.osu.util.Hitpoint;
 
 public class GameModel implements Observer{
 	private GameStatus status;
 	private BeatMap beatMap;
 	private ScoreManager scoreManager;
 	private LifeBar lifeBar;
-	private List<SpaceTimeCoord> currentHitbuttons;
+	private List<Hitpoint> currentHitbuttons;
 	private HitobjectSelector selector;
 	private double timeAcc;
 	
@@ -76,11 +76,11 @@ public class GameModel implements Observer{
 		return this.scoreManager.getScore();
 	}
 
-	public List<SpaceTimeCoord> getCurrentHitbuttons() {
+	public List<Hitpoint> getCurrentHitbuttons() {
 		return currentHitbuttons;
 	}
 
-	public void clearCurrentHitbuttons(List<SpaceTimeCoord> currentHitbuttons) {
+	public void clearCurrentHitbuttons(List<Hitpoint> currentHitbuttons) {
 		this.currentHitbuttons.clear();
 	}
 	

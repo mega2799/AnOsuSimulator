@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 
 public class BeatmapReader extends BufferedReader{
-	private List<SpaceTimeCoord> hitpoints;
+	private List<Hitpoint> hitpoints;
 	private Integer n;
 	private int index = 0;
 	private List<String> lines;
@@ -38,16 +38,16 @@ public class BeatmapReader extends BufferedReader{
 				.takeWhile(x -> !x.equals(""))
 				.map((x)-> {
 					String[] values = x.split(",");
-					return new SpaceTimeCoord(Double.parseDouble(values[0]), Double.parseDouble(values[1]),Double.parseDouble(values[2]));
+					return new Hitpoint(Double.parseDouble(values[0]), Double.parseDouble(values[1]),Double.parseDouble(values[2]));
 				})
 				.collect(Collectors.toList());
 	}
 	
-	public  List<SpaceTimeCoord> getHitpoints(){
+	public  List<Hitpoint> getHitpoints(){
 		return this.hitpoints;
 	}
 	
-	public Stream<SpaceTimeCoord> hitPointsStream() {
+	public Stream<Hitpoint> hitPointsStream() {
 		return this.hitpoints.stream();
 	}
 	
@@ -59,7 +59,7 @@ public class BeatmapReader extends BufferedReader{
 			return false;
 		}
 	}
-	public SpaceTimeCoord readHitpoint() {
+	public Hitpoint readHitpoint() {
 		if(this.hasNextHitpoint()) {
 			index += 1;
 			return this.hitpoints.get(index);

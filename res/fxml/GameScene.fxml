@@ -14,7 +14,7 @@
       <children>
          <MediaView fx:id="backgroundMedia" fitHeight="1080.0" fitWidth="1920.0" />
          <ImageView fx:id="backgroundImage" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" />
-         <ProgressBar fx:id="lifebar" focusTraversable="false" layoutX="201.0" layoutY="81.0" prefHeight="21.0" prefWidth="640.0" progress="1.0" style="-fx-accent: black; -fx-control-inner-background: white; -fx-border-insets: grey;" />
+         <ProgressBar fx:id="lifebar" focusTraversable="false" layoutX="201.0" layoutY="81.0" prefHeight="21.0" prefWidth="640.0" progress="1.0" style="-fx-accent: black; -fx-control-inner-background: white;" />
          <ImageView fitHeight="129.0" fitWidth="823.0" layoutX="31.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../wallpaper/lifeBar.png" />

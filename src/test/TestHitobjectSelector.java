@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.util.HitobjectSelector;
-import it.unibo.osu.util.SpaceTimeCoord;
+import it.unibo.osu.util.Hitpoint;
 
 public class TestHitobjectSelector {
 
@@ -14,7 +14,7 @@ public class TestHitobjectSelector {
 	public void test() {
 		HitobjectSelector selector = new HitobjectSelector(new BeatMap("/beatmaps/legendsNeverDie.osu").getHitpoints());
 		while(selector.hasElements()) {
-			List<SpaceTimeCoord> elements = selector.nextHitobjects(020);
+			List<Hitpoint> elements = selector.nextHitobjects(020);
 			try {
 				Thread.sleep(020);
 			} catch (InterruptedException e) {
