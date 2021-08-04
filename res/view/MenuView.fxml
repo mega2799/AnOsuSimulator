@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
-<Stage fx:id="stage" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.osu.Controller.MenuController">
+<Stage fx:id="stage" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.osu.View.MenuController">
     <scene>
         <Scene fx:id="scene">
             <AnchorPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="420.0" minWidth="680.0" prefHeight="1080.0" prefWidth="1920.0">

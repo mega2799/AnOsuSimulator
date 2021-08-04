@@ -1,5 +1,7 @@
-package it.unibo.osu.Controller;
+package it.unibo.osu.View;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -99,7 +101,21 @@ public class MenuController implements Initializable {
 				x.getTransforms().setAll(Transform.translate(-50, 0));
 			});
 		});
+		this.stage.setOnShown(e -> {
+			this.setInitialRes();
+		});
 		
+	}
+	
+	public AnchorPane getPane() {
+		return this.pane;
+	}
+
+	public void setInitialRes() {
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+	    this.changeResolution(screen.getWidth(), screen.getHeight());
+	    this.stage.setX(0);
+	    this.stage.setY(0);		
 	}
 	
 }
