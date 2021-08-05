@@ -8,7 +8,7 @@ import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
 	private GameModel game;
-	private GameView view;
+	private GameView view;  // <-- forse meglio passare solo controller, con file fxml che ha dentro anche stage così da fare getStage all occorrenza
 	private GameSceneController sceneController;
 	private MusicController musicController;
 	private long previous;

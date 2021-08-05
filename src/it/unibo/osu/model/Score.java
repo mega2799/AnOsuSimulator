@@ -42,4 +42,5 @@ public class Score {
 	public void resetMultiplier() {
 		this.multiplier = 0;
 	}
+
 }

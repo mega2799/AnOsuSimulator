@@ -3,6 +3,12 @@ package it.unibo.osu.view;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibo.osu.controller.HitActionObserver;
+import it.unibo.osu.controller.HitActionSubject;
+import it.unibo.osu.controller.Observer;
+import it.unibo.osu.controller.Subject;
+import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.GamePoints;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
@@ -10,7 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class HitcircleViewImpl implements HitcircleView {
+public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	private ImageView innerCircle;
 	private ImageView outerCircle;
 	private double circleSize;
@@ -24,6 +30,7 @@ public class HitcircleViewImpl implements HitcircleView {
 	private double y;
 	private double fadeInTime;
 	private double approachTime;
+	private List<HitActionObserver> observers;
 	
 	
 	public HitcircleViewImpl(String innerCircleUrl, String outerCircleUrl, double circleSize, double overallDifficulty,
@@ -115,4 +122,29 @@ public class HitcircleViewImpl implements HitcircleView {
 		}
 		return preempt - this.getFadeInTime();
 	}
+	
+	@Override
+	public void setInputHandlers(GameModel game) {
+		// da implementare 
+	}
+
+
+	@Override
+	public void notifyObs(GamePoints points) {
+		this.observers.forEach(x -> x.onNotify(points));
+	}
+
+
+	@Override
+	public void addObserver(HitActionObserver obs) {
+		this.observers.add(obs);
+	}
+
+
+	@Override
+	public void removeObserver(HitActionObserver obs) {
+		this.observers.remove(obs);
+	}
+
+
 }

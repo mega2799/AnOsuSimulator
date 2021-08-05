@@ -1,14 +1,10 @@
 package it.unibo.osu.view;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.LifeBar;
 import it.unibo.osu.model.Score;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -18,7 +14,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 
-public class GameSceneController {
+public class GameSceneController{
 
     @FXML
     private AnchorPane pane;
@@ -58,6 +54,7 @@ public class GameSceneController {
     	this.game.getCurrentHitbuttons().forEach(x -> {
     		HitcircleView hitcircleView = factory.getHitcircleView(x);
     		this.pane.getChildren().addAll(hitcircleView.getChildren());
+    		hitcircleView.setInputHandlers(this.game);
     		hitcircleView.getParallelTransition().play();
     	});
     	this.game.getCurrentHitbuttons().clear();
