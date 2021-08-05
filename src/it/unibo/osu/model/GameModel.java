@@ -7,7 +7,6 @@ import java.util.List;
 import it.unibo.osu.controller.Observer;
 import it.unibo.osu.controller.ScoreManager;
 import it.unibo.osu.util.HitobjectSelector;
-import it.unibo.osu.util.Hitpoint;
 
 public class GameModel implements Observer{
 	private GameStatus status;
@@ -34,7 +33,7 @@ public class GameModel implements Observer{
 	
 	public void update(double t) {
 		this.currentHitbuttons.addAll(this.selector.nextHitobjects(t));
-		this.lifeBar.drain();
+		this.lifeBar.drain();   // ricorda di scommentare/commentare per testare game
 		
 		//il render fara` il clear della lista currentHitObjects
 		//per debug quanto segue da togliere

@@ -3,6 +3,7 @@ package it.unibo.osu.view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.LifeBar;
 import it.unibo.osu.model.Score;
@@ -39,9 +40,13 @@ public class GameSceneController {
     
     private GameModel game;
     
+    private HitcircleViewFactory factory;
+    
     public void init(GameModel game) {
     	this.game = game;
     	this.setBackground();
+    	BeatMap beatmap = this.game.getBeatMap();
+    	this.factory = new HitcircleViewFactory("/image/innerCircle.png", "/image/outerCircle.png", beatmap.getCircleSize(), beatmap.getOverallDifficulty(), beatmap.getApproachRate());
     }
     
 	
@@ -50,6 +55,12 @@ public class GameSceneController {
     	Score score = this.game.getScore();
     	this.multiplier.setText("x" + Integer.toString(score.getMultiplier()));
     	this.points.setText(Integer.toString(score.getPoints()));
+    	this.game.getCurrentHitbuttons().forEach(x -> {
+    		HitcircleView hitcircleView = factory.getHitcircleView(x);
+    		this.pane.getChildren().addAll(hitcircleView.getChildren());
+    		hitcircleView.getParallelTransition().play();
+    	});
+    	this.game.getCurrentHitbuttons().clear();
     	//aggiugnere cerchietti presi da model
     }
     private String getBackgroundType(String url) {

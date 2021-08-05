@@ -1,4 +1,4 @@
-package it.unibo.osu.util;
+package it.unibo.osu.model;
 
 
 import javafx.geometry.Point2D;

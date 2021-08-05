@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import it.unibo.osu.model.Hitpoint;
+
 
 
 public class BeatmapReader extends BufferedReader{

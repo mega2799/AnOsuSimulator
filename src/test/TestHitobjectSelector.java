@@ -5,8 +5,8 @@ import java.util.List;
 import org.junit.Test;
 
 import it.unibo.osu.model.BeatMap;
+import it.unibo.osu.model.Hitpoint;
 import it.unibo.osu.util.HitobjectSelector;
-import it.unibo.osu.util.Hitpoint;
 
 public class TestHitobjectSelector {
 
