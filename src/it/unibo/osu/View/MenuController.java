@@ -15,13 +15,17 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
@@ -57,8 +61,8 @@ public class MenuController implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.mediaView.setMediaPlayer(new MediaPlayer(new Media(this.getClass().getResource("/video/ReiBackgroundVideo.mp4").toString())));
-		this.mediaView.getMediaPlayer().play();
+		//this.mediaView.setMediaPlayer(new MediaPlayer(new Media(this.getClass().getResource("/video/ReiBackgroundVideo.mp4").toString())));
+		//this.mediaView.getMediaPlayer().play();
 		this.scene.setOnMouseClicked(e->{
 			changeResolution(680, 420);
 		});
@@ -71,8 +75,8 @@ public class MenuController implements Initializable {
 		trans1.setByY(0.1); 
 		trans1.play();
 		this.setInputHandlers();
-		this.menuPlayer = new MediaPlayer(new Media(this.getClass().getResource("/music/menuOst.mp3").toString()));
-		this.menuPlayer.play();
+		//this.menuPlayer = new MediaPlayer(new Media(this.getClass().getResource("/music/menuOst.mp3").toString()));
+		//this.menuPlayer.play();
 		
 		this.welcomeString.setLayoutX(-this.welcomeString.getFitWidth());
 		Timeline timeline = new Timeline();
@@ -81,6 +85,26 @@ public class MenuController implements Initializable {
 		timeline.play();
 		//new KeyFrame(Duration.seconds(3), new KeyValue(this.welcomeString.translateXProperty(), 0)
 		//new KeyValue(this.welcomeString.translateXProperty(), this.pane.getWidth())
+
+		// qua va sistemato da file fxml 
+		this.vbox1.getChildren().removeAll(this.vbox1.getChildren());
+		Image coverBtn = new Image(this.getClass().getResource("/buttonSkin/uso_icon_play.png").toString());
+		ImageView imm = new ImageView(coverBtn);
+		imm.setFitHeight(150);
+		imm.setFitWidth(500);
+		Button btn = new Button("", imm);
+		btn.setStyle(
+				"-fx-background-radius: 5em;" + 
+				"-fx-min-width: 3px; " +
+                "-fx-min-height: 3px; " +
+                "-fx-max-width: 3px; " +
+                "-fx-max-height: 3px;");
+		// come se non fosse un button :^ ) 
+		//usare addAll e poi separare
+		Button playBtn= new MenuSkinButton("/buttonSkin/uso_icon_play.png").getSkinnedButton();
+		Button optBtn = new MenuSkinButton("/buttonSkin/uso_icon_options.png").getSkinnedButton();
+		Button extBtn = new MenuSkinButton("/buttonSkin/uso_icon_exit.png").getSkinnedButton();
+		this.vbox1.getChildren().addAll(playBtn, optBtn, extBtn);
 	}
     
 	public void changeResolution(double width,double height) {
