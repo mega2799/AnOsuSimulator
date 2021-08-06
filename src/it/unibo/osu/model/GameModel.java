@@ -33,7 +33,7 @@ public class GameModel implements Observer{
 	
 	public void update(double t) {
 		this.currentHitbuttons.addAll(this.selector.nextHitobjects(t));
-		this.lifeBar.drain();   // ricorda di scommentare/commentare per testare game
+		//this.lifeBar.drain();   // ricorda di scommentare/commentare per testare game
 		
 		//il render fara` il clear della lista currentHitObjects
 		//per debug quanto segue da togliere
@@ -71,8 +71,8 @@ public class GameModel implements Observer{
 		return beatMap;
 	}
 
-	public Score getScore() {
-		return this.scoreManager.getScore();
+	public ScoreManager getScoreManager() {
+		return this.scoreManager;
 	}
 
 	public List<Hitpoint> getCurrentHitbuttons() {

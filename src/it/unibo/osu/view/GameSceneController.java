@@ -1,14 +1,21 @@
 package it.unibo.osu.view;
 
+
+import java.util.List;
+
+
+import it.unibo.osu.controller.ScoreManager;
 import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.LifeBar;
 import it.unibo.osu.model.Score;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -45,20 +52,19 @@ public class GameSceneController{
     	this.factory = new HitcircleViewFactory("/image/innerCircle.png", "/image/outerCircle.png", beatmap.getCircleSize(), beatmap.getOverallDifficulty(), beatmap.getApproachRate());
     }
     
-	
-    public void render() {
+     public void  render() {
     	this.lifebar.setProgress(this.game.getLifeBar().getHp()/LifeBar.MAXHP);
-    	Score score = this.game.getScore();
-    	this.multiplier.setText("x" + Integer.toString(score.getMultiplier()));
-    	this.points.setText(Integer.toString(score.getPoints()));
+    	ScoreManager scoreManager = this.game.getScoreManager();
+    	this.multiplier.setText("x" + Integer.toString(scoreManager.getMultiplier()));
+    	this.points.setText(Integer.toString(scoreManager.getPoints()));
     	this.game.getCurrentHitbuttons().forEach(x -> {
-    		HitcircleView hitcircleView = factory.getHitcircleView(x);
+    		HitcircleViewImpl hitcircleView = factory.getHitcircleView(x);
     		this.pane.getChildren().addAll(hitcircleView.getChildren());
-    		hitcircleView.setInputHandlers(this.game);
+    		hitcircleView.addObserver(this.game.getLifeBar());
+    		hitcircleView.addObserver(this.game.getScoreManager());
     		hitcircleView.getParallelTransition().play();
     	});
     	this.game.getCurrentHitbuttons().clear();
-    	//aggiugnere cerchietti presi da model
     }
     private String getBackgroundType(String url) {
     	String ext = url.substring(url.indexOf(".") + 1);

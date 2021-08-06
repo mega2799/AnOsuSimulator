@@ -20,6 +20,7 @@ public class GameLoop extends AnimationTimer {
 		this.previous = System.nanoTime();
 		this.start();
 	}
+	
 	@Override
 	public void handle(long now) {
 		long t =  (now - this.previous);

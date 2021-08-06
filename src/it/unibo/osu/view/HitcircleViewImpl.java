@@ -3,6 +3,7 @@ package it.unibo.osu.view;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import it.unibo.osu.controller.HitActionObserver;
 import it.unibo.osu.controller.HitActionSubject;
 import it.unibo.osu.controller.Observer;
@@ -12,8 +13,14 @@ import it.unibo.osu.model.GamePoints;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
+import javafx.event.EventDispatcher;
+import javafx.print.PageLayout;
+import javafx.scene.Group;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
@@ -30,13 +37,15 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	private double y;
 	private double fadeInTime;
 	private double approachTime;
-	private List<HitActionObserver> observers;
+	private List<HitActionObserver> observers = new ArrayList<>();
 	
 	
 	public HitcircleViewImpl(String innerCircleUrl, String outerCircleUrl, double circleSize, double overallDifficulty,
 			double approachRate,double x, double y) {
-		this.innerCircle = new ImageView(new Image(this.getClass().getResource(innerCircleUrl).toString()));
+		
 		this.outerCircle = new ImageView(new Image(this.getClass().getResource(outerCircleUrl).toString()));
+		this.innerCircle = new ImageView(new Image(this.getClass().getResource(innerCircleUrl).toString()));
+		
 		this.circleSize = circleSize;
 		this.overallDifficulty = overallDifficulty;
 		this.approachRate = approachRate;
@@ -50,7 +59,7 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.fadeInTime = this.getFadeInTime();
 		this.approachTime = this.getApproachTime();
 		this.init();
-		
+		this.setInputHandlers();
 	}
 
 	
@@ -96,6 +105,7 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		return list;
 	}
 
+
 	@Override
 	public ParallelTransition getParallelTransition() {
 		return this.pararallelTrans;
@@ -124,27 +134,49 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	}
 	
 	@Override
-	public void setInputHandlers(GameModel game) {
-		// da implementare 
+	public void setInputHandlers() {
+		this.innerCircle.setOnMousePressed(e -> {
+			this.scaleOuterCircle.pause();
+			this.innerCircle.setVisible(false);
+			this.outerCircle.setVisible(false);
+			double time = this.scaleOuterCircle.getTotalDuration().toMillis() - this.scaleOuterCircle.getCurrentTime().toMillis();
+			System.out.println(time);
+			GamePoints points = this.getHitWindowScore(time);
+			this.notifyObs(points);	
+		});
+		
+		this.scaleOuterCircle.setOnFinished(e -> {
+			this.innerCircle.setVisible(false);
+			this.outerCircle.setVisible(false);
+			this.notifyObs(GamePoints.MISS);
+		});	
 	}
-
 
 	@Override
 	public void notifyObs(GamePoints points) {
 		this.observers.forEach(x -> x.onNotify(points));
 	}
 
-
 	@Override
 	public void addObserver(HitActionObserver obs) {
 		this.observers.add(obs);
 	}
-
 
 	@Override
 	public void removeObserver(HitActionObserver obs) {
 		this.observers.remove(obs);
 	}
 
-
+	private GamePoints getHitWindowScore(double time) {
+		System.out.println(time);
+		if(time <= 160 - 12 *  this.overallDifficulty) {
+			return GamePoints.PERFECT;
+		} else if(time <= 280 - 16 * this.overallDifficulty) {
+			return GamePoints.GREAT;
+		} else if(time <= 400 - 20 * this.overallDifficulty) {
+			return GamePoints.OK;
+		} else {
+			return GamePoints.MISS;
+		}
+	}
 }
