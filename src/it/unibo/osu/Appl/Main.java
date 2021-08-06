@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import it.unibo.osu.View.LoginMenu;
 import it.unibo.osu.View.MenuController;
 
 public class Main extends Application{
@@ -28,17 +29,17 @@ public class Main extends Application{
 		
 		myStage.show();*/
 		
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/MenuView.fxml"));
+		/*
+		 * FXMLLoader loader = new
+		 * FXMLLoader(this.getClass().getResource("/view/MenuView.fxml"));
+		 * 
+		 * try { Stage stage = loader.load(); stage.initStyle(StageStyle.UNDECORATED);
+		 * stage.show(); // ((MenuController) loader.getController()).setInitialRes();
+		 * 
+		 * } catch (IOException e) { e.printStackTrace(); }
+		 */
 
-		try {
-			Stage stage = loader.load();
-			stage.initStyle(StageStyle.UNDECORATED);
-		    stage.show();
-//		    ((MenuController) loader.getController()).setInitialRes();
-		    
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		LoginMenu l = new LoginMenu();
 	}
 
 	public static void main(String[] args) {

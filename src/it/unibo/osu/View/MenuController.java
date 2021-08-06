@@ -87,24 +87,18 @@ public class MenuController implements Initializable {
 		//new KeyValue(this.welcomeString.translateXProperty(), this.pane.getWidth())
 
 		// qua va sistemato da file fxml 
-		this.vbox1.getChildren().removeAll(this.vbox1.getChildren());
-		Image coverBtn = new Image(this.getClass().getResource("/buttonSkin/uso_icon_play.png").toString());
-		ImageView imm = new ImageView(coverBtn);
-		imm.setFitHeight(150);
-		imm.setFitWidth(500);
-		Button btn = new Button("", imm);
-		btn.setStyle(
-				"-fx-background-radius: 5em;" + 
-				"-fx-min-width: 3px; " +
-                "-fx-min-height: 3px; " +
-                "-fx-max-width: 3px; " +
-                "-fx-max-height: 3px;");
-		// come se non fosse un button :^ ) 
+		VBox vB = new VBox(200);
+		vB.setTranslateX(300);
+		vB.setTranslateY(300);
+		this.vbox1.getChildren().removeAll(this.vbox1.getChildren()); // va rimosso dal file fxml
 		//usare addAll e poi separare
 		Button playBtn= new MenuSkinButton("/buttonSkin/uso_icon_play.png").getSkinnedButton();
 		Button optBtn = new MenuSkinButton("/buttonSkin/uso_icon_options.png").getSkinnedButton();
 		Button extBtn = new MenuSkinButton("/buttonSkin/uso_icon_exit.png").getSkinnedButton();
-		this.vbox1.getChildren().addAll(playBtn, optBtn, extBtn);
+		//this.vbox1.getChildren().addAll(playBtn, optBtn, extBtn);
+	vB.getChildren().addAll(playBtn, optBtn, extBtn);
+		getPane().getChildren().add(vB);
+
 	}
     
 	public void changeResolution(double width,double height) {
