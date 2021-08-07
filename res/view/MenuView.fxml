@@ -22,28 +22,6 @@
                      <Image url="@../../res/image/uso_icon2.png" />
                   </image>
                </ImageView>
-               <VBox fx:id="vbox1" alignment="TOP_CENTER" layoutX="98.0" layoutY="310.0" prefHeight="612.0" prefWidth="372.0">
-                  <padding>
-                     <Insets bottom="50.0" top="50.0" />
-                  </padding>
-                  <children>
-                     <ImageView fx:id="banner" fitHeight="150.0" fitWidth="500.0" pickOnBounds="true">
-                        <image>
-                           <Image url="@../../res/image/uso_icon.png" />
-                        </image>
-                     </ImageView>
-                     <ImageView fx:id="banner1" fitHeight="150.0" fitWidth="500.0" pickOnBounds="true">
-                        <image>
-                           <Image url="@../../res/image/uso_icon.png" />
-                        </image>
-                     </ImageView>
-                     <ImageView fx:id="banner2" fitHeight="150.0" fitWidth="500.0" pickOnBounds="true">
-                        <image>
-                           <Image url="@../../res/image/uso_icon.png" />
-                        </image>
-                     </ImageView>
-                  </children>
-               </VBox>
                <ImageView fitHeight="146.0" fitWidth="126.0" layoutX="1586.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../../res/image/avatarImage.png" />
