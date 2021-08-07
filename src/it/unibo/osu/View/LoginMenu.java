@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -66,18 +67,23 @@ public class LoginMenu extends Stage {
 			user.setOnAction(es -> {
 				// inserie un controllo per il campo vuoto !!!!!!!
 				
+				if(user.getText().toString().equals("")) {
+					System.exit(1);
+				}
 				System.out.println(user.getText().toString()); // questa va inviato al menu e poi alle statistiche
 
 				  FXMLLoader loader = new  FXMLLoader(this.getClass().getResource("/view/MenuView.fxml"));
-					  
+				  
 				  try { Stage stage = loader.load(); stage.initStyle(StageStyle.UNDECORATED);
-				  	//	stage.show();   //((MenuController) loader.getController()).setInitialRes();
+				  	// commenta stage.show() per restare nello stesso stage ma male
+				  		stage.show();   //((MenuController) loader.getController()).setInitialRes();
+				  		stage.close();
+				  		//questa cosa e' inguardabile ma non so come funziona, lo ammetto
 				  } catch (IOException ex) { ex.printStackTrace(); }
 
 				 
 				  // code to slide scenes 
 				  	Parent root = ((MenuController) loader.getController()).getPane();
-			        //Scene scene = root.getScene();
 				  	Scene scene = this.ap.getScene();
 			        //Set Y of second scene to Height of window
 				  	root.translateYProperty().set(s.getHeight()); /// l'altezzza qui non va bene.... 
