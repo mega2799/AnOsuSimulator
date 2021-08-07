@@ -73,6 +73,7 @@ public class LoginMenu extends Stage {
 				  try { Stage stage = loader.load(); stage.initStyle(StageStyle.UNDECORATED);
 				  	//	stage.show();   //((MenuController) loader.getController()).setInitialRes();
 				  } catch (IOException ex) { ex.printStackTrace(); }
+
 				 
 				  // code to slide scenes 
 				  	Parent root = ((MenuController) loader.getController()).getPane();
