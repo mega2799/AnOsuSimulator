@@ -136,11 +136,10 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	@Override
 	public void setInputHandlers() {
 		this.innerCircle.setOnMousePressed(e -> {
-			this.scaleOuterCircle.pause();
 			this.innerCircle.setVisible(false);
 			this.outerCircle.setVisible(false);
 			double time = this.scaleOuterCircle.getTotalDuration().toMillis() - this.scaleOuterCircle.getCurrentTime().toMillis();
-			System.out.println(time);
+			this.scaleOuterCircle.stop();
 			GamePoints points = this.getHitWindowScore(time);
 			this.notifyObs(points);	
 		});
@@ -168,7 +167,6 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	}
 
 	private GamePoints getHitWindowScore(double time) {
-		System.out.println(time);
 		if(time <= 160 - 12 *  this.overallDifficulty) {
 			return GamePoints.PERFECT;
 		} else if(time <= 280 - 16 * this.overallDifficulty) {
