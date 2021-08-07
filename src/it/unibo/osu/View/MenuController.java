@@ -97,6 +97,9 @@ public class MenuController implements Initializable {
 		Button extBtn = new MenuSkinButton("/buttonSkin/uso_icon_exit.png").getSkinnedButton();
 		//this.vbox1.getChildren().addAll(playBtn, optBtn, extBtn);
 	vB.getChildren().addAll(playBtn, optBtn, extBtn);
+	playBtn.setOnMouseClicked(e -> {
+		System.out.println("plaii");
+	});
 		getPane().getChildren().add(vB);
 
 	}

@@ -3,9 +3,14 @@ package it.unibo.osu.View;
 import java.io.IOException;
 
 import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,10 +27,14 @@ import javafx.util.Duration;
 
 public class LoginMenu extends Stage {
 	private Pane pane;
+	private Pane ap;
+	private Scene s;
 
 	public LoginMenu() {
-		this.pane = new StackPane();
-		this.setScene(new Scene(pane));
+		this.ap = new AnchorPane();
+		this.pane = new StackPane(ap);
+		this.s = new Scene(pane);
+		this.setScene(s);
 		this.setFullScreen(true);
 
 		ImageView logo = new ImageView(new Image(this.getClass().getResource("/image/uso_icon2.png").toString()));
@@ -55,30 +64,43 @@ public class LoginMenu extends Stage {
 			hb.setAlignment(Pos.CENTER);
 
 			user.setOnAction(es -> {
-				System.out.println(user.getText().toString()); // questa va inviato al menu e poi alle statistiche
-				this.close();
+				// inserie un controllo per il campo vuoto !!!!!!!
 				
-				// funzionare funziona ma la transizione fa schifo 
-				// vedere per un modo decente per passare da una finestra all altra
-				FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/MenuView.fxml"));
-		  
-		  try {
-			  Stage stage = loader.load(); 
-			  stage.initStyle(StageStyle.UNDECORATED);
-			  stage.show(); // ((MenuController) loader.getController()).setInitialRes();
-		  
-		  } catch (IOException ex) { ex.printStackTrace(); }
+				System.out.println(user.getText().toString()); // questa va inviato al menu e poi alle statistiche
+
+				//this.close();
+			
+				  FXMLLoader loader = new  FXMLLoader(this.getClass().getResource("/view/MenuView.fxml"));
+				
+					  
+				  try { Stage stage = loader.load(); stage.initStyle(StageStyle.UNDECORATED);
+				  	//stage.show(); // ((MenuController) loader.getController()).setInitialRes();
+				  } catch (IOException ex) { ex.printStackTrace(); }
+				 
+				  	Parent root = ((MenuController) loader.getController()).getPane();
+			        //Scene scene = root.getScene();
+				  	Scene scene = this.ap.getScene();
+			        //Set Y of second scene to Height of window
+				  	root.translateYProperty().set(s.getHeight()); /// l'altezzza qui non va bene.... 
+			        //root.translateYProperty().set(this.getHeight());/// l'altezzza qui non va bene.... 
+			        //Add second scene. Now both first and second scene is present
+			        this.pane.getChildren().add(root);
+			 
+			        //Create new TimeLine animation
+			        Timeline timeline = new Timeline();
+			        //Animate Y property
+			        KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+			        KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+			        timeline.getKeyFrames().add(kf);
+			        //After completing animation, remove first scene
+			        timeline.setOnFinished(t -> {
+			        	//this.pane.getChildren().remove(this.pane.getChildren());
+			            this.pane.getChildren().remove(ap);
+			        });
+			        timeline.play();
+			    
 			});
-		}
-		/*
-		 * FXMLLoader loader = new
-		 * FXMLLoader(this.getClass().getResource("/view/MenuView.fxml"));
-		 * 
-		 * try { Stage stage = loader.load(); stage.initStyle(StageStyle.UNDECORATED);
-		 * stage.show(); // ((MenuController) loader.getController()).setInitialRes();
-		 * 
-		 * } catch (IOException ex) { ex.printStackTrace(); } }
-		 */ );
+		});
 	}
 
 }
