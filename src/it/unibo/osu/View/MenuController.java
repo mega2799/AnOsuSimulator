@@ -51,9 +51,6 @@ public class MenuController implements Initializable {
     @FXML
     private ImageView banner;
     
-    @FXML
-    private VBox vbox1;
-    
     private MediaPlayer menuPlayer;
     
     @FXML 
@@ -75,6 +72,7 @@ public class MenuController implements Initializable {
 		trans1.setByY(0.1); 
 		trans1.play();
 		this.setInputHandlers();
+
 		//this.menuPlayer = new MediaPlayer(new Media(this.getClass().getResource("/music/menuOst.mp3").toString()));
 		//this.menuPlayer.play();
 		
@@ -90,13 +88,10 @@ public class MenuController implements Initializable {
 		VBox vB = new VBox(200);
 		vB.setTranslateX(300);
 		vB.setTranslateY(300);
-		this.vbox1.getChildren().removeAll(this.vbox1.getChildren()); // va rimosso dal file fxml
-		//usare addAll e poi separare
 		Button playBtn= new MenuSkinButton("/buttonSkin/uso_icon_play.png").getSkinnedButton();
 		Button optBtn = new MenuSkinButton("/buttonSkin/uso_icon_options.png").getSkinnedButton();
 		Button extBtn = new MenuSkinButton("/buttonSkin/uso_icon_exit.png").getSkinnedButton();
-		//this.vbox1.getChildren().addAll(playBtn, optBtn, extBtn);
-	vB.getChildren().addAll(playBtn, optBtn, extBtn);
+		vB.getChildren().addAll(playBtn, optBtn, extBtn);
 	playBtn.setOnMouseClicked(e -> {
 		System.out.println("plaii");
 	});
@@ -113,15 +108,6 @@ public class MenuController implements Initializable {
 	}
 	
 	private void setInputHandlers() {
-		
-		this.vbox1.getChildren().forEach(x -> {
-			x.setOnMouseEntered(e ->{
-				x.getTransforms().setAll(Transform.translate(50, 0));
-			});
-			x.setOnMouseExited(e -> {
-				x.getTransforms().setAll(Transform.translate(-50, 0));
-			});
-		});
 		this.stage.setOnShown(e -> {
 			this.setInitialRes();
 		});

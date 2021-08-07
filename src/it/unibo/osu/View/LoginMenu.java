@@ -68,15 +68,13 @@ public class LoginMenu extends Stage {
 				
 				System.out.println(user.getText().toString()); // questa va inviato al menu e poi alle statistiche
 
-				//this.close();
-			
 				  FXMLLoader loader = new  FXMLLoader(this.getClass().getResource("/view/MenuView.fxml"));
-				
 					  
 				  try { Stage stage = loader.load(); stage.initStyle(StageStyle.UNDECORATED);
-				  	//stage.show(); // ((MenuController) loader.getController()).setInitialRes();
+				  	//	stage.show();   //((MenuController) loader.getController()).setInitialRes();
 				  } catch (IOException ex) { ex.printStackTrace(); }
 				 
+				  // code to slide scenes 
 				  	Parent root = ((MenuController) loader.getController()).getPane();
 			        //Scene scene = root.getScene();
 				  	Scene scene = this.ap.getScene();
@@ -86,6 +84,8 @@ public class LoginMenu extends Stage {
 			        //Add second scene. Now both first and second scene is present
 			        this.pane.getChildren().add(root);
 			 
+			        //((MenuController) loader.getController()).changeResolution(s.getWidth(), s.getHeight());
+
 			        //Create new TimeLine animation
 			        Timeline timeline = new Timeline();
 			        //Animate Y property
