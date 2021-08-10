@@ -20,15 +20,10 @@ import it.unibo.osu.util.HitobjectSelector;
 public class TestHitobjectSelector {
 
 	@Test
-	public void test() {
+	public void getHipointsTest() {
 		HitobjectSelector selector = new HitobjectSelector(new BeatMap("/beatmaps/legendsNeverDie.osu").getHitpoints());
 		while(selector.hasElements()) {
 			List<Hitpoint> elements = selector.nextHitobjects(020);
-			try {
-				Thread.sleep(020);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			if(!elements.equals(List.of())) {
 				System.out.println(elements);
 			}
@@ -36,7 +31,7 @@ public class TestHitobjectSelector {
 	}
 	
 	@Test 
-	public void tets2() {
+	public void getStartingTimeTest() {
 		try(BeatmapReader reader = new BeatmapReader(new FileReader(new File(this.getClass().getResource("/beatmaps/legendsNeverDie.osu").toURI())))){
 			System.out.println(reader.getStartingTime());
 		} catch (IOException | URISyntaxException e) {
@@ -46,7 +41,7 @@ public class TestHitobjectSelector {
 	}
 	
 	@Test
-	public void test3() {
+	public void getBreakTimesTest() {
 		try(BeatmapReader reader = new BeatmapReader(new FileReader(new File(this.getClass().getResource("/beatmaps/legendsNeverDie.osu").toURI())))){
 			System.out.println(reader.getBreakTimes());
 		} catch (IOException | URISyntaxException e) {

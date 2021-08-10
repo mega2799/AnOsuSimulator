@@ -133,15 +133,6 @@ public class BeatmapReader extends BufferedReader{
 			System.out.println("Error: stringa \"[Events]\" non presente nella beatmap!");
 			e.printStackTrace();
 		}
-//		  return  this.lines.stream()
-//		   .skip(n)
-//		   .limit(1)
-//		   .map(x -> {
-//			return Arrays.asList(x.split(",")).subList(0, 1).stream()
-//					.map(y -> Double.parseDouble(y))
-//					.collect(Collectors.toList());
-//		}).flatMap(x -> x.stream())
-//		   .collect(Collectors.toList());
 		  Double returnValue =  this.lines.stream().skip(this.n)
 				  .limit(1)
 				  .map(x -> {
@@ -162,7 +153,6 @@ public class BeatmapReader extends BufferedReader{
 			System.out.println("Error: stringa \"[Events]\" non presente nella beatmap!");
 			e.printStackTrace();
 		}
-
 		return this.lines.stream()
 				.skip(this.n)
 				.filter(x -> !x.contains("//"))
