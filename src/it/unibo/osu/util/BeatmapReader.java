@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -123,6 +124,56 @@ public class BeatmapReader extends BufferedReader{
 					String[] values = x.split(",");
 					return Arrays.asList(values).get(2);})
 				.collect(Collectors.toList()).get(0).replaceAll("\"", "");
+	}
+	
+	public Double getStartingTime(){
+		try {
+			this.n = findNumOfLinesToOptions(this.lines,BeatmapOptions.TIMINGPOINTS);
+		} catch (IOException e) {
+			System.out.println("Error: stringa \"[Events]\" non presente nella beatmap!");
+			e.printStackTrace();
+		}
+//		  return  this.lines.stream()
+//		   .skip(n)
+//		   .limit(1)
+//		   .map(x -> {
+//			return Arrays.asList(x.split(",")).subList(0, 1).stream()
+//					.map(y -> Double.parseDouble(y))
+//					.collect(Collectors.toList());
+//		}).flatMap(x -> x.stream())
+//		   .collect(Collectors.toList());
+		  Double returnValue =  this.lines.stream().skip(this.n)
+				  .limit(1)
+				  .map(x -> {
+					  return Double.parseDouble(Arrays.asList(x.split(",")).get(0));
+				  }).reduce((x,y) -> x + y).get();
+		  if(returnValue == null) {
+			  System.out.println("Missing starting time.");
+			  throw new RuntimeException();
+		  } else {
+			  return returnValue;
+		  }
+	}
+
+	public List<List<Double>> getBreakTimes(){
+		try {
+			this.n = findNumOfLinesToOptions(this.lines,BeatmapOptions.EVENTS);
+		} catch (IOException e) {
+			System.out.println("Error: stringa \"[Events]\" non presente nella beatmap!");
+			e.printStackTrace();
+		}
+
+		return this.lines.stream()
+				.skip(this.n)
+				.filter(x -> !x.contains("//"))
+				.takeWhile(x -> !x.equals(""))
+				.filter(x -> x.split(",")[0].equals("2"))
+				.map((x)-> {
+					String[] values = x.split(",");
+					return Arrays.asList(values).subList(1, 3).stream()
+							.map(y -> Double.parseDouble(y))
+							.collect(Collectors.toList());})
+				.collect(Collectors.toList());
 	}
 }
 

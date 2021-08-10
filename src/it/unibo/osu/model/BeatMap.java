@@ -20,7 +20,6 @@ public class BeatMap {
 	private String background;   
 	private String songName;
 	
-	
 	public BeatMap(String filaName) {
 		try(BeatmapReader reader = new BeatmapReader(new FileReader(new File(this.getClass().getResource(filaName).toURI())))){
 			Map<String, String> map = reader.getOptionMap(BeatmapOptions.DIFFICULTY);
