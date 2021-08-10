@@ -20,22 +20,31 @@ public class LifeBar implements Updatable, HitActionObserver {
 	}
 
 	public void gainLife(GamePoints gamePoints) {
+		double hpValue;
 		switch(gamePoints) {
+		case MISS:
+			break;
 		case OK:
-			this.hp -= LifeBar.MAX_HEALTH_INCREASE * 0.5;
+			hpValue = (this.hp + LifeBar.MAX_HEALTH_INCREASE * 0.5);
+			this.addHp(hpValue);
 			break;
 		case GREAT:
-			this.hp += LifeBar.MAX_HEALTH_INCREASE;
+			hpValue = (this.hp +  LifeBar.MAX_HEALTH_INCREASE);
+			this.addHp(hpValue);
 			break;
 		case PERFECT:
-			this.hp -= LifeBar.MAX_HEALTH_INCREASE * 1.05;
+			hpValue = (this.hp + LifeBar.MAX_HEALTH_INCREASE * 1.05);
+			this.addHp(hpValue);
 			break;
 		}
 		
 	}
+	private void addHp(double hpValue) {
+		this.hp = (this.hp + hpValue) > MAXHP ? MAXHP : (this.hp + hpValue);
+	}
 	
 	public void drain() {
-		// /60 che sono gli fps del gioco cosi da togliere hpdrainrate al secondo
+		// /60 che sono gli fps del gioco cosi da togliere hpdrainrate al secondo forse si puo fare meglio.
 		this.hp -= hpDrainRate/60;
 	}
 

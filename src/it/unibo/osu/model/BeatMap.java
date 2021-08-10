@@ -19,6 +19,8 @@ public class BeatMap {
 	private double approachRate;
 	private String background;   
 	private String songName;
+	private List<List<Double>> breakTimes;
+	private double startingTime;
 	
 	public BeatMap(String filaName) {
 		try(BeatmapReader reader = new BeatmapReader(new FileReader(new File(this.getClass().getResource(filaName).toURI())))){
@@ -30,6 +32,8 @@ public class BeatMap {
 			this.hitpoints = reader.getHitpoints();
 			this.background = reader.getBakground();
 			this.songName = reader.getOptionMap(BeatmapOptions.GENERAL).get("AudioFilename");
+			this.breakTimes = reader.getBreakTimes();
+			this.startingTime = reader.getStartingTime();
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		} 		
@@ -61,6 +65,14 @@ public class BeatMap {
 
 	public String getSongName() {
 		return songName;
+	}
+
+	public List<List<Double>> getBreakTimes() {
+		return breakTimes;
+	}
+
+	public double getStartingTime() {
+		return startingTime;
 	}
 
 }

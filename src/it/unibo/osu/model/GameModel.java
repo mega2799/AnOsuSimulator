@@ -32,16 +32,12 @@ public class GameModel implements Observer{
 	}
 	
 	public void update(double t) {
+		this.timeAcc += t;
 		this.currentHitbuttons.addAll(this.selector.nextHitobjects(t));
 		//this.lifeBar.drain();   // ricorda di scommentare/commentare per testare game
-		
-		//il render fara` il clear della lista currentHitObjects
-		//per debug quanto segue da togliere
-//		if(!this.currentHitbuttons.equals(List.of())) {
-//			System.out.println(this.currentHitbuttons);
-//			this.currentHitbuttons.clear();
-//		}
-		//
+		if(this.isDrainable()) {
+			this.lifeBar.drain();
+		}
 	}
 	
     public void setPause() {
@@ -100,7 +96,19 @@ public class GameModel implements Observer{
 	public LifeBar getLifeBar() {
 		return this.lifeBar;
 	}
-
+	
+	private boolean isDrainable() {
+		if(this.timeAcc < this.beatMap.getStartingTime()){
+			return false;
+		} else {
+			for(List<Double> breakTime: this.beatMap.getBreakTimes()) {
+				if( this.timeAcc >= breakTime.get(0) && this.timeAcc <= breakTime.get(1)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	
  
 }
