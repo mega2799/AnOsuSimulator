@@ -22,11 +22,6 @@
                      <Image url="@../../res/image/uso_icon2.png" />
                   </image>
                </ImageView>
-               <ImageView fitHeight="146.0" fitWidth="126.0" layoutX="1586.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../res/image/avatarImage.png" />
-                  </image>
-               </ImageView>
                <Label layoutX="1722.0" layoutY="38.0" prefHeight="85.0" prefWidth="152.0" text="UserName" textFill="#ff25db">
                   <font>
                      <Font name="Candara Light" size="30.0" />

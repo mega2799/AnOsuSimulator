@@ -1,7 +1,10 @@
 package it.unibo.osu.View;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 
+import it.unibo.osu.Controller.MusicControllerImpl;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -17,6 +20,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -27,34 +35,74 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class LoginMenu extends Stage {
-	private Pane pane;
-	private Pane ap;
-	private Scene s;
+	private StackPane pane;
+
+	private AnchorPane ap;
+
+	private Scene scene;
+
+	private ImageView logo;
+
 
 	public LoginMenu() {
 		this.ap = new AnchorPane();
 		this.pane = new StackPane(ap);
-		this.s = new Scene(pane);
-		this.setScene(s);
+		this.scene = new Scene(pane);
+		this.setScene(scene);
 		this.setFullScreen(true);
 
-		ImageView logo = new ImageView(new Image(this.getClass().getResource("/image/uso_icon2.png").toString()));
-		logo.setFitWidth(500);
-		logo.setFitHeight(500);
+		drawLogo(this.logo);
 
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+
+		drawBackgroundImage(screen);
+	
 		// cambiare el nome a questa qua
+	this.show();
+			}
+
+
+	private void drawBackgroundImage(Dimension screen) {
+		Image image = new Image(this.getClass().getResource("/image/rainTokyo.png").toString());
+
+		BackgroundSize bSize = new BackgroundSize(screen.getWidth(), screen.getHeight(), false, false, true, false);
+
+	    this.pane.setBackground(new Background(new BackgroundImage(image,
+	            BackgroundRepeat.NO_REPEAT,
+	            BackgroundRepeat.NO_REPEAT,
+	            BackgroundPosition.CENTER,
+	            bSize)));
+		
+		
+		
+		ImageView background = new ImageView(new Image(this.getClass().getResource("/image/rei.png").toString()));
+		background.setFitHeight(screen.getHeight());
+		background.setFitWidth(screen.getWidth());
+		//this.pane.getChildren().add(background);
+	}
+
+
+	private void drawLogo(ImageView logoImage) {
+		logoImage = new ImageView(new Image(this.getClass().getResource("/image/uso_icon2.png").toString()));
+		logoImage.setFitWidth(500);
+		logoImage.setFitHeight(500);
+
 		ScaleTransition trans1 = new ScaleTransition();
-		trans1.setNode(logo);
+		trans1.setNode(logoImage);
 		trans1.setAutoReverse(true);
 		trans1.setCycleCount(Animation.INDEFINITE);
 		trans1.setDuration(Duration.seconds(1));
 		trans1.setByX(0.1);
 		trans1.setByY(0.1);
 		trans1.play();
-		this.pane.getChildren().add(logo);
-		StackPane.setAlignment(logo, Pos.CENTER);
-		this.show();
-		logo.setOnMouseClicked(e -> {
+
+		this.pane.getChildren().add(logoImage);
+		StackPane.setAlignment(logoImage, Pos.CENTER);
+		
+		MusicControllerImpl welcome = new MusicControllerImpl("/music/welcome_sound.wav");
+		welcome.startMusic();
+
+		logoImage.setOnMouseClicked(e -> {
 			final TextField user = new TextField();
 			user.setMaxWidth(300);
 			user.setStyle("-fx-background-radius: 5em;");
@@ -65,34 +113,22 @@ public class LoginMenu extends Stage {
 			hb.setAlignment(Pos.CENTER);
 
 			user.setOnAction(es -> {
-				// inserie un controllo per il campo vuoto !!!!!!!
-				
 				if(user.getText().toString().equals("")) {
 					System.exit(1);
 				}
-				System.out.println(user.getText().toString()); // questa va inviato al menu e poi alle statistiche
 
-				  FXMLLoader loader = new  FXMLLoader(this.getClass().getResource("/view/MenuView.fxml"));
-				  
-				  try { Stage stage = loader.load(); stage.initStyle(StageStyle.UNDECORATED);
-				  	// commenta stage.show() per restare nello stesso stage ma male
-				  		stage.show();   //((MenuController) loader.getController()).setInitialRes();
-				  		stage.close();
-				  		//questa cosa e' inguardabile ma non so come funziona, lo ammetto
-				  } catch (IOException ex) { ex.printStackTrace(); }
+				MenuView mV = new MenuView(user.getText().toString(), this);
 
-				 
-				  // code to slide scenes 
-				  	Parent root = ((MenuController) loader.getController()).getPane();
+				welcome.stopMusic();
+				
+			        Parent root = mV.getPane();
 				  	Scene scene = this.ap.getScene();
-			        //Set Y of second scene to Height of window
-				  	root.translateYProperty().set(s.getHeight()); /// l'altezzza qui non va bene.... 
+				  	root.translateYProperty().set(scene.getHeight()); /// l'altezzza qui non va bene.... 
 			        //root.translateYProperty().set(this.getHeight());/// l'altezzza qui non va bene.... 
 			        //Add second scene. Now both first and second scene is present
 			        this.pane.getChildren().add(root);
-			 
-			        //((MenuController) loader.getController()).changeResolution(s.getWidth(), s.getHeight());
-
+	
+			        
 			        //Create new TimeLine animation
 			        Timeline timeline = new Timeline();
 			        //Animate Y property
@@ -101,13 +137,23 @@ public class LoginMenu extends Stage {
 			        timeline.getKeyFrames().add(kf);
 			        //After completing animation, remove first scene
 			        timeline.setOnFinished(t -> {
-			        	//this.pane.getChildren().remove(this.pane.getChildren());
 			            this.pane.getChildren().remove(ap);
 			        });
 			        timeline.play();
-			    
 			});
 		});
 	}
+	
+	 
+	// va tenuta qua perche questo è lo stage che rimane attivo 
+	public void changeResolution(double width,double height) {
+		// lo scale fa vedere l' immagine sotto lo stage, qualcosa non torna
+		Scale scale = new Scale(width/this.pane.getWidth(),height/this.pane.getHeight());
+		this.pane.getTransforms().add(scale);
+		this.pane.setPrefHeight(height);
+		this.pane.setPrefWidth(width);
+		this.sizeToScene();
+	}
+
 
 }
