@@ -1,35 +1,36 @@
 package it.unibo.osu.View;
 
-import javafx.geometry.Pos;
+import java.io.IOException;
+
+import com.sun.prism.paint.Color;
+
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.InnerShadow;
-import javafx.scene.effect.BlurType;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
-public class NeonButton extends Button {
+public class NeonButton {
+	private Button button;
 
-	private Text text;
-	private static final int FONT_SIZE = 30;
+	public Button getButton() {
+		return this.button;
+	}
 
-	public NeonButton(final String name, final double buttonWeight, final double buttonHeight) {
-		this.text = new Text(name);
-		setFont(text.getFont().font(FONT_SIZE));
-		setText(name);
+	public NeonButton(final String text) {
+		try {
+			this.button = FXMLLoader.load(this.getClass().getResource("/view/NeonPinkButton.fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-		DropShadow mineNeon = new DropShadow(BlurType.THREE_PASS_BOX, Color.CYAN, 0, 0, 0, 0);
+		this.button.setText(text);
 
-		mineNeon.setWidth(75);
-		mineNeon.setHeight(75);
-		// mineNeon.setSpread(0.8); tamarro assai
-		mineNeon.setSpread(0.5);
+		this.button.setOnMouseEntered(e -> {
+			this.button.setStyle("-fx-background-color: pink; -fx-background-radius: 50;");
+		});
 
-		setOnMouseEntered(e -> this.setEffect(mineNeon));
-		setOnMouseExited(e -> this.setEffect(null));
+		this.button.setOnMouseExited(e -> {
+			this.button.setStyle("-fx-background-color: white; -fx-background-radius: 50;");
+		});
 
-		setAlignment(Pos.CENTER);
 	}
 
 }

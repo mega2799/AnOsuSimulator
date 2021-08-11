@@ -14,7 +14,7 @@ public class ScoreManager {
 	public void hitted(GamePoints points) {
 		int value = points.getValue();
 		this.score.addPoints(value + value* this.score.getMultiplier());//ci vorrebbe anche difficulty multiplier ma magari ci guardiamo poi 
-		this.score.increaseMultiplier();
+		this.score.increaseMultiplier();		
 	}
 	
 	public void missed() {

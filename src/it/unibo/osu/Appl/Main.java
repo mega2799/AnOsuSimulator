@@ -1,16 +1,22 @@
 package it.unibo.osu.Appl;
 
-import it.unibo.osu.Model.BeatMap;
-import it.unibo.osu.View.DisplayMenu;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.io.IOException;
+
+
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.FlowPane;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import it.unibo.osu.View.LoginMenu;
+import it.unibo.osu.View.MenuController;
 
 public class Main extends Application{
 	@Override
 	public void start(Stage myStage) throws Exception {
-		DisplayMenu menu = new DisplayMenu(myStage);
+		// DisplayMenu menu = new DisplayMenu(myStage);
 		
 		/*
 		myStage.setTitle("Mi piacciono i gatti");
@@ -22,6 +28,18 @@ public class Main extends Application{
 		myStage.setScene(myScene);
 		
 		myStage.show();*/
+		
+		/*
+		 * FXMLLoader loader = new
+		 * FXMLLoader(this.getClass().getResource("/view/MenuView.fxml"));
+		 * 
+		 * try { Stage stage = loader.load(); stage.initStyle(StageStyle.UNDECORATED);
+		 * stage.show(); // ((MenuController) loader.getController()).setInitialRes();
+		 * 
+		 * } catch (IOException e) { e.printStackTrace(); }
+		 */
+
+		LoginMenu l = new LoginMenu();
 	}
 
 	public static void main(String[] args) {
