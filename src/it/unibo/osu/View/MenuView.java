@@ -3,15 +3,25 @@ package it.unibo.osu.View;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
+import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -22,9 +32,11 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -33,6 +45,8 @@ public class MenuView extends Stage {
 	private LoginMenu parent;
 	
 	private BorderPane root;
+	
+	private StackPane songList;
 	
 	private VBox vbox;
 	
@@ -56,6 +70,8 @@ public class MenuView extends Stage {
 	
 	private Dimension full; 
 	
+	private static final int BOX_SPACING = 20;
+
 	public MenuView(final String name, final LoginMenu parent) {
 		this.parent = parent;
 		this.username = name;
@@ -85,7 +101,7 @@ public class MenuView extends Stage {
 		username.setTextFill(Color.WHITE);
 		username.setTranslateY(50);
 
-		HBox hb = new HBox(20);
+		HBox hb = new HBox(BOX_SPACING);
 		hb.getChildren().addAll(avatar, username);
 		hb.setAlignment(Pos.TOP_RIGHT);
 
@@ -137,18 +153,88 @@ public class MenuView extends Stage {
 			this.root.setRight(gameOptions(this.options)); // non mi convince apssargli come argumento
 		});
 		
+		this.playBtn.setOnMouseClicked(e -> {
+			this.root.setRight(scrollableSongList(this.songList));
+		});
+		
+		this.exitBtn.setOnMouseClicked(e -> {
+			System.exit(1);
+		});
+		
 		this.root.setLeft(menuBox); // lo lascio qua ?
 	}
 
+	private StackPane scrollableSongList(StackPane songList) {
+		songList = new StackPane();
+
+		ScrollPane scroll = new ScrollPane();
+
+		FadeTransition fadeout = new FadeTransition(Duration.seconds(2), songList);
+		fadeout.setFromValue(1.0);
+		fadeout.setToValue(0);
+
+		FadeTransition fadein = new FadeTransition(Duration.seconds(2), songList);
+		fadein.setFromValue(0);
+		fadein.setToValue(1);
+		
+		List<Button> l = List.of(new Button("matte"), new Button("manu"), new Button("osu"), new Button("matte"), new Button("manu"), new Button("osu")
+				, new Button("matte"), new Button("manu"), new Button("osu"), new Button("matte"), new Button("manu"), new Button("osu"), new Button("matte"), new Button("manu"), new Button("osu"), new Button("matte"), new Button("manu"), new Button("Susw")
+				, new Button("hello"), new Button("There"));
+		
+		VBox vb = new VBox(BOX_SPACING);
+
+		vb.getChildren().addAll(l);
+
+
+		scroll.setPrefHeight(400);
+		scroll.setPrefWidth(100);
+		scroll.setContent(vb);
+
+		scroll.getStylesheets().add("/view/style.css");
+
+		scroll.vvalueProperty().addListener(new ChangeListener<Number>() {
+        @Override
+        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            //System.out.println("observable " + observable + " oldValue " + oldValue + " " + "newValue " + newValue);
+            double hmin = scroll.getHmin();
+            double hmax = scroll.getHmax();
+            double hvalue = scroll.getHvalue();
+            double contentWidth = scroll.getContent().getLayoutBounds().getWidth();
+            double viewportWidth = scroll.getViewportBounds().getWidth();
+
+            double hoffset = 
+            Math.max(0, contentWidth - viewportWidth) * (hvalue - hmin) / (hmax - hmin);
+
+            vb.setLayoutY(hoffset);
+            //pane.requestLayout();                
+        }
+    });        
+
+		songList.getChildren().add(scroll);
+		songList.setPrefWidth(600);
+		//songList.setStyle("-fx-background-color: transparent;");
+		fadein.play();
+		return songList;
+	}
+
 	private VBox gameOptions(VBox options) {
-		options = new VBox(20);
+		options = new VBox(BOX_SPACING);
+		
+		FadeTransition fadeout = new FadeTransition(Duration.seconds(2), options);
+		fadeout.setFromValue(1.0);
+		fadeout.setToValue(0);
+
+		FadeTransition fadein = new FadeTransition(Duration.seconds(2), options);
+		fadein.setFromValue(0);
+		fadein.setToValue(1);
+		
 		//row 1 
 		Label resolution = new Label("Resolution");
 		resolution .setFont(new Font("Inconsolata Condensed ExtraBold", 30));
 		resolution .setTextFill(Color.WHITE);
 		
 		//row 2
-		HBox hb = new HBox(5);
+		HBox hb = new HBox(BOX_SPACING);
 		Button full = new NeonButton("Full screen").getButton();
 		Button medium = new NeonButton("1920x1080").getButton();
 		Button quadratic = new NeonButton("700x700").getButton();
@@ -163,7 +249,7 @@ public class MenuView extends Stage {
 		
 
 		//row 4 
-		HBox hb1 = new HBox(25);
+		HBox hb1 = new HBox(BOX_SPACING);
 		Button yes = new NeonButton("Yes").getButton();
 		Button no = new NeonButton("No").getButton();
 		
@@ -211,8 +297,13 @@ public class MenuView extends Stage {
 		
 		Button undo = new Button("UNDO");
 		
+		
 		undo.setOnMouseClicked(e ->{
-			this.root.setRight(null);
+			fadeout.play();
+			
+			fadeout.setOnFinished(ev -> {
+				this.root.setRight(null);
+			});
 		});
 		
 		HBox hb2 = new HBox(undo);
@@ -220,6 +311,8 @@ public class MenuView extends Stage {
 		
 		options.getChildren().addAll(hb2);
 		
+		fadein.play();
+
 		return options;
 	}
 
