@@ -6,20 +6,20 @@ import java.util.List;
 import it.unibo.osu.controller.Observer;
 import it.unibo.osu.controller.ScoreManager;
 import it.unibo.osu.util.HitobjectSelector;
-import it.unibo.osu.util.SpaceTimeCoord;
 
 public class GameModel implements Observer{
 	private GameStatus status;
 	private BeatMap beatMap;
 	private ScoreManager scoreManager;
 	private LifeBar lifeBar;
-	private List<SpaceTimeCoord> currentHitbuttons;
+	private List<Hitpoint> currentHitbuttons;
 	private HitobjectSelector selector;
-	
+	private double timeAcc;
 	
 	public GameModel(final String name) {
 		this.status = GameStatus.START;
 		this.beatMap = new BeatMap(name);
+		this.timeAcc = 0;
 	}
 	
 	public void initGameOnStart() {
@@ -31,14 +31,12 @@ public class GameModel implements Observer{
 	}
 	
 	public void update(double t) {
+		this.timeAcc += t;
 		this.currentHitbuttons.addAll(this.selector.nextHitobjects(t));
-		//il render fara` il clear della lista currentHitObjects
-		//per debug quanto segue da togliere
-//		if(!this.currentHitbuttons.equals(List.of())) {
-//			System.out.println(this.currentHitbuttons);
-//			this.currentHitbuttons.clear();
-//		}
-		//
+		//this.lifeBar.drain();   // ricorda di scommentare/commentare per testare game
+		if(this.isDrainable()) {
+			this.lifeBar.drain();
+		}
 	}
 	
     public void setPause() {
@@ -68,21 +66,22 @@ public class GameModel implements Observer{
 		return beatMap;
 	}
 
-	public Score getScore() {
-		return this.scoreManager.getScore();
+	public ScoreManager getScoreManager() {
+		return this.scoreManager;
 	}
 
-	public List<SpaceTimeCoord> getCurrentHitbuttons() {
+	public List<Hitpoint> getCurrentHitbuttons() {
 		return currentHitbuttons;
 	}
 
-	public void clearCurrentHitbuttons(List<SpaceTimeCoord> currentHitbuttons) {
+	public void clearCurrentHitbuttons(List<Hitpoint> currentHitbuttons) {
 		this.currentHitbuttons.clear();
 	}
 	
 	//da implementare
 	public boolean isGameOver() {
-		if(this.status.equals(GameStatus.ENDGAME)) {
+		if(this.lifeBar.getHp() <= 0) {
+			this.status = GameStatus.ENDGAME;
 			return true;
 		}
 		return false;
@@ -91,6 +90,23 @@ public class GameModel implements Observer{
 	@Override
 	public void onNotify() {
 		this.status = GameStatus.ENDGAME;
+	}
+	
+	public LifeBar getLifeBar() {
+		return this.lifeBar;
+	}
+	
+	private boolean isDrainable() {
+		if(this.timeAcc < this.beatMap.getStartingTime()){
+			return false;
+		} else {
+			for(List<Double> breakTime: this.beatMap.getBreakTimes()) {
+				if( this.timeAcc >= breakTime.get(0) && this.timeAcc <= breakTime.get(1)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
  

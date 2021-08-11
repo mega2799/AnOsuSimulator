@@ -1,7 +1,9 @@
 package it.unibo.osu.model;
 
+import it.unibo.osu.controller.HitActionObserver;
+
 // da implementare
-public class LifeBar implements Updatable {
+public class LifeBar implements Updatable, HitActionObserver {
 
 	private double hpDrainRate;
 	private double hp;
@@ -18,22 +20,32 @@ public class LifeBar implements Updatable {
 	}
 
 	public void gainLife(GamePoints gamePoints) {
+		double hpValue;
 		switch(gamePoints) {
+		case MISS:
+			break;
 		case OK:
-			this.hp -= LifeBar.MAX_HEALTH_INCREASE * 0.5;
+			hpValue = (this.hp + LifeBar.MAX_HEALTH_INCREASE * 0.5);
+			this.addHp(hpValue);
 			break;
 		case GREAT:
-			this.hp += LifeBar.MAX_HEALTH_INCREASE;
+			hpValue = (this.hp +  LifeBar.MAX_HEALTH_INCREASE);
+			this.addHp(hpValue);
 			break;
 		case PERFECT:
-			this.hp -= LifeBar.MAX_HEALTH_INCREASE * 1.05;
+			hpValue = (this.hp + LifeBar.MAX_HEALTH_INCREASE * 1.05);
+			this.addHp(hpValue);
 			break;
 		}
 		
 	}
+	private void addHp(double hpValue) {
+		this.hp = (this.hp + hpValue) > MAXHP ? MAXHP : (this.hp + hpValue);
+	}
 	
 	public void drain() {
-		this.hp -= hpDrainRate;
+		// /60 che sono gli fps del gioco cosi da togliere hpdrainrate al secondo forse si puo fare meglio.
+		this.hp -= hpDrainRate/60;
 	}
 
 	public double getHp() {
@@ -43,6 +55,18 @@ public class LifeBar implements Updatable {
 	@Override
 	public void update() {
 		this.drain();
+	}
+
+	@Override
+	public void onNotify(GamePoints points) {
+		switch (points) {
+		case MISS:
+			this.lostLife();
+			break;
+		default:
+			this.gainLife(points);
+			break;
+		}
 	}
 	
 }

@@ -12,11 +12,15 @@ import it.unibo.osu.util.*;
 public class BeatMap {
 
 	//campi obbligatori quindi per ogni beatmap file
-	private List<SpaceTimeCoord> hitpoints;
+	private List<Hitpoint> hitpoints;
 	private double hpDrainRate;
 	private double circleSize;
 	private double overallDifficulty;
 	private double approachRate;
+	private String background;   
+	private String songName;
+	private List<List<Double>> breakTimes;
+	private double startingTime;
 	
 	public BeatMap(String filaName) {
 		try(BeatmapReader reader = new BeatmapReader(new FileReader(new File(this.getClass().getResource(filaName).toURI())))){
@@ -26,12 +30,16 @@ public class BeatMap {
 			this.approachRate = Double.parseDouble(map.get("ApproachRate"));
 			this.hpDrainRate = Double.parseDouble(map.get("HPDrainRate"));
 			this.hitpoints = reader.getHitpoints();
+			this.background = reader.getBakground();
+			this.songName = reader.getOptionMap(BeatmapOptions.GENERAL).get("AudioFilename");
+			this.breakTimes = reader.getBreakTimes();
+			this.startingTime = reader.getStartingTime();
 		} catch (IOException | URISyntaxException e) {
 			e.printStackTrace();
 		} 		
 	}
 	
-	public List<SpaceTimeCoord> getHitpoints() {
+	public List<Hitpoint> getHitpoints() {
 		return hitpoints;
 	}
 
@@ -49,6 +57,22 @@ public class BeatMap {
 
 	public double getApproachRate() {
 		return approachRate;
+	}
+	
+	public String getBackground() {
+		return this.background;
+	}
+
+	public String getSongName() {
+		return songName;
+	}
+
+	public List<List<Double>> getBreakTimes() {
+		return breakTimes;
+	}
+
+	public double getStartingTime() {
+		return startingTime;
 	}
 
 }

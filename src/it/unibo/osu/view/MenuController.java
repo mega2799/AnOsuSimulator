@@ -40,6 +40,7 @@ import javafx.scene.transform.Transform;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+//da togliere, teniamo perchè ci sono cose utili per il momento
 public class MenuController implements Initializable {
 
     @FXML

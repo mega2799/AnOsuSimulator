@@ -3,7 +3,7 @@ package it.unibo.osu.controller;
 import it.unibo.osu.model.GamePoints;
 import it.unibo.osu.model.Score;
 
-public class ScoreManager {
+public class ScoreManager implements HitActionObserver{
 
 	private Score score;
 	
@@ -35,6 +35,17 @@ public class ScoreManager {
 	
 	public int getMultiplier() {
 		return this.score.getMultiplier();
+	}
+
+	@Override
+	public void onNotify(GamePoints points) {
+		switch (points) {
+		case MISS:
+			this.missed();
+			break;
+		default:
+			this.hitted(points);
+		}
 	}
 	
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.unibo.osu.controller.Controller;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -154,7 +155,8 @@ public class MenuView extends Stage {
 		});
 		
 		this.playBtn.setOnMouseClicked(e -> {
-			this.root.setRight(scrollableSongList(this.songList));
+			//this.root.setRight(scrollableSongList(this.songList));
+			new Controller("/beatmaps/legendsNeverDie.osu");
 		});
 		
 		this.exitBtn.setOnMouseClicked(e -> {

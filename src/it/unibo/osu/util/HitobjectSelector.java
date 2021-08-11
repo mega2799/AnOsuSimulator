@@ -4,23 +4,25 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import it.unibo.osu.model.Hitpoint;
+
 public class HitobjectSelector {
 	private double time;
-	private List<SpaceTimeCoord> hitobjects;
+	private List<Hitpoint> hitobjects;
 	
-	public HitobjectSelector(List<SpaceTimeCoord> hitobjects) {
+	public HitobjectSelector(List<Hitpoint> hitobjects) {
 		this.hitobjects = new ArrayList<>(hitobjects);
 	}
 	
-	public List<SpaceTimeCoord> nextHitobjects(double t){
+	public List<Hitpoint> nextHitobjects(double t){
 		if(!this.hasElements()) {
 			return List.of();
 		}
 		this.time += t;
-		List<SpaceTimeCoord> hitobjectsToReturn = new ArrayList<>();
-		Iterator<SpaceTimeCoord> iterator = this.hitobjects.iterator();
+		List<Hitpoint> hitobjectsToReturn = new ArrayList<>();
+		Iterator<Hitpoint> iterator = this.hitobjects.iterator();
 		while(iterator.hasNext()) {
-			SpaceTimeCoord next = iterator.next();
+			Hitpoint next = iterator.next();
 			if(next.getTime() <= this.time) {
 				hitobjectsToReturn.add(next);
 			}

@@ -1,22 +1,27 @@
 package it.unibo.osu.controller;
 
 import it.unibo.osu.model.GameModel;
-import it.unibo.osu.view.EndGameView;
+
+import it.unibo.osu.view.EndgameView;
+import it.unibo.osu.view.GameSceneController;
 import it.unibo.osu.view.GameView;
 import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
 	private GameModel game;
-	private GameView view;
+	private GameView view;  // <-- forse meglio passare solo controller, con file fxml che ha dentro anche stage così da fare getStage all occorrenza
+	private GameSceneController sceneController;
 	private MusicController musicController;
 	private long previous;
-	public GameLoop(GameModel game, GameView view, MusicController musicController) {
+	public GameLoop(GameModel game, GameView view, GameSceneController sceneController, MusicController musicController) {
 		this.game = game;
 		this.view = view;
+		this.sceneController = sceneController;
 		this.musicController = musicController;
 		this.previous = System.nanoTime();
 		this.start();
 	}
+	
 	@Override
 	public void handle(long now) {
 		long t =  (now - this.previous);
@@ -31,6 +36,10 @@ public class GameLoop extends AnimationTimer {
 			this.previous = now;
 			break;
 		case RUNNING:
+			if( this.game.isGameOver()) {
+				this.musicController.stopMusic();
+				break;
+			}
 			this.tick(t,now); //conversione da nano a millisec
 			break;
 		case PAUSE:
@@ -39,7 +48,7 @@ public class GameLoop extends AnimationTimer {
 		case ENDGAME:
 			// da implementare, aprirï¿½ una nuova scena o stage finale.
 			this.view.close();
-			new EndGameView();
+			new EndgameView();
 			this.stop();
 			this.previous = now;
 			break;
@@ -54,7 +63,7 @@ public class GameLoop extends AnimationTimer {
 	private void tick(long t,long now) {
 		double updateTime = t * 1e-6; //fare una costante qui, togliere magic numbers
 		this.game.update(updateTime); 
-		//this.view.render();
+		this.sceneController.render();
 		
 		
 		

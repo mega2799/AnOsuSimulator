@@ -9,11 +9,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class EndGameView  extends Stage{
+public class EndgameView  extends Stage{
 	private BorderPane root;
 	private GridPane statPane;
 	
-	public EndGameView() {
+	public EndgameView() {
 		this.root = new BorderPane();
 		this.statPane = new GridPane();
 		

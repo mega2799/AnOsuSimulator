@@ -1,17 +1,17 @@
-package it.unibo.osu.util;
+package it.unibo.osu.model;
 
 
 import javafx.geometry.Point2D;
 
-public class SpaceTimeCoord {
+public class Hitpoint {
 	private Point2D position;
 	private double time;
 	
-	public SpaceTimeCoord(Point2D position, double time) {
+	public Hitpoint(Point2D position, double time) {
 		this.position = position;
 		this.time = time;
 	}
-	public SpaceTimeCoord(double x,double y, double time) {
+	public Hitpoint(double x,double y, double time) {
 		this.position = new Point2D(x, y);
 		this.time = time;
 	}

@@ -7,7 +7,7 @@ public class Score {
 	
 	public Score() {
 		this.points = 0;
-		this.multiplier = 1;
+		this.multiplier = 0;
 	}
 	
 	public void initScore() {
@@ -42,4 +42,5 @@ public class Score {
 	public void resetMultiplier() {
 		this.multiplier = 0;
 	}
+
 }
