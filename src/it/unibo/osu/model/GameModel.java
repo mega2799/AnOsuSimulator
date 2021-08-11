@@ -1,10 +1,10 @@
-package it.unibo.osu.Model;
+package it.unibo.osu.model;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import it.unibo.osu.Controller.Observer;
-import it.unibo.osu.Controller.ScoreManager;
+import it.unibo.osu.controller.Observer;
+import it.unibo.osu.controller.ScoreManager;
 import it.unibo.osu.util.HitobjectSelector;
 import it.unibo.osu.util.SpaceTimeCoord;
 

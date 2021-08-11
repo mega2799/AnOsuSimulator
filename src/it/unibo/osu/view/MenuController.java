@@ -1,14 +1,13 @@
-package it.unibo.osu.View;
+package it.unibo.osu.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.sun.media.jfxmedia.MediaException;
 
-import it.unibo.osu.Controller.MusicControllerImpl;
-import it.unibo.osu.Controller.Observer;
+import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.controller.Observer;
 import javafx.animation.KeyValue;
 
 import javafx.animation.Animation;

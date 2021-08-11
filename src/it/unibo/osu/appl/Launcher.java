@@ -1,4 +1,4 @@
-package it.unibo.osu.Appl;
+package it.unibo.osu.appl;
 
 public class Launcher {
 	private Launcher() {

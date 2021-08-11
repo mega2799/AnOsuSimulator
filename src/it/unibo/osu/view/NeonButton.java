@@ -1,8 +1,7 @@
-package it.unibo.osu.View;
+package it.unibo.osu.view;
 
 import java.io.IOException;
 
-import com.sun.prism.paint.Color;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;

@@ -1,9 +1,9 @@
-package it.unibo.osu.Controller;
+package it.unibo.osu.controller;
 
 //import java.io.File;
 import java.net.URISyntaxException;
 
-import it.unibo.osu.Model.GameModel;
+import it.unibo.osu.model.GameModel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;

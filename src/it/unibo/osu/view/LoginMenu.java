@@ -1,10 +1,10 @@
-package it.unibo.osu.View;
+package it.unibo.osu.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
-import it.unibo.osu.Controller.MusicControllerImpl;
+import it.unibo.osu.controller.MusicControllerImpl;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;

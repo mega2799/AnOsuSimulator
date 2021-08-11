@@ -1,8 +1,8 @@
-package it.unibo.osu.Controller;
+package it.unibo.osu.controller;
 
-import it.unibo.osu.Model.GameModel;
-import it.unibo.osu.View.EndGameView;
-import it.unibo.osu.View.GameView;
+import it.unibo.osu.model.GameModel;
+import it.unibo.osu.view.EndGameView;
+import it.unibo.osu.view.GameView;
 import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {

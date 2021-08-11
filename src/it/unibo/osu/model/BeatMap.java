@@ -1,4 +1,4 @@
-package it.unibo.osu.Model;
+package it.unibo.osu.model;
 
 import java.io.File;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package it.unibo.osu.View;
+package it.unibo.osu.view;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

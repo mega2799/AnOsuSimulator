@@ -1,11 +1,11 @@
-package it.unibo.osu.Controller;
+package it.unibo.osu.controller;
 
 
 
-import it.unibo.osu.Model.GameModel;
-import it.unibo.osu.Model.GameStatus;
-import it.unibo.osu.View.GameView;
-import it.unibo.osu.View.PauseMenuView;
+import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.GameStatus;
+import it.unibo.osu.view.GameView;
+import it.unibo.osu.view.PauseMenuView;
 import it.unibo.osu.util.HitobjectSelector;
 import javafx.animation.AnimationTimer;
 import javafx.event.Event;
@@ -33,7 +33,7 @@ public class Controller {
 		this.robot = new Robot();
 		this.pauseMenu = new PauseMenuView();
 		//qui bisogna passare il nome della song giustamente 
-		this.musicController = new MusicControllerImpl("/tracks/joshiraku.wav",this.game);
+		this.musicController = new MusicControllerImpl("/tracks/joshiraku.wav", this.game);
 		this.setInputHandler();
 		
 		new GameLoop(this.game, this.view, this.musicController);

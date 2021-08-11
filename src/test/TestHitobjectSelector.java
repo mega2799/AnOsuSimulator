@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import it.unibo.osu.Model.BeatMap;
+import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.util.HitobjectSelector;
 import it.unibo.osu.util.SpaceTimeCoord;
 

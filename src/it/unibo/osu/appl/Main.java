@@ -1,4 +1,4 @@
-package it.unibo.osu.Appl;
+package it.unibo.osu.appl;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -10,8 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import it.unibo.osu.View.LoginMenu;
-import it.unibo.osu.View.MenuController;
+import it.unibo.osu.view.LoginMenu;
+import it.unibo.osu.view.MenuController;
 
 public class Main extends Application{
 	@Override

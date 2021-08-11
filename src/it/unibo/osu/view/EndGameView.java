@@ -1,4 +1,4 @@
-package it.unibo.osu.View;
+package it.unibo.osu.view;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

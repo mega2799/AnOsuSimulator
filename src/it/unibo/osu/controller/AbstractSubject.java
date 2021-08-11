@@ -1,6 +1,6 @@
-package it.unibo.osu.Controller;
-import it.unibo.osu.Controller.Observer;
-import it.unibo.osu.Controller.Subject;
+package it.unibo.osu.controller;
+import it.unibo.osu.controller.Observer;
+import it.unibo.osu.controller.Subject;
 
 public abstract class AbstractSubject implements Subject {
 

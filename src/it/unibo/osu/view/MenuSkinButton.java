@@ -1,4 +1,4 @@
-package it.unibo.osu.View;
+package it.unibo.osu.view;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;

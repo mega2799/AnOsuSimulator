@@ -1,4 +1,4 @@
-package it.unibo.osu.Controller;
+package it.unibo.osu.controller;
 
 import javafx.util.Duration;
 

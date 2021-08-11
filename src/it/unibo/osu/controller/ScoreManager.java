@@ -1,7 +1,7 @@
-package it.unibo.osu.Controller;
+package it.unibo.osu.controller;
 
-import it.unibo.osu.Model.GamePoints;
-import it.unibo.osu.Model.Score;
+import it.unibo.osu.model.GamePoints;
+import it.unibo.osu.model.Score;
 
 public class ScoreManager {
 
