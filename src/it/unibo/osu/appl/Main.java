@@ -1,7 +1,6 @@
 package it.unibo.osu.appl;
 
 import it.unibo.osu.model.BeatMap;
-import it.unibo.osu.view.DisplayMenu;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
