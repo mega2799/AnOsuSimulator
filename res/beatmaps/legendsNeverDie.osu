@@ -31,7 +31,7 @@ BeatmapID:1418271
 BeatmapSetID:669826
 
 [Difficulty]
-HPDrainRate:4
+HPDrainRate:1
 CircleSize:3.3
 OverallDifficulty:4
 ApproachRate:5
@@ -40,7 +40,7 @@ SliderTickRate:1
 
 [Events]
 //Background and Video events
-0,0,"ez.jpg",0,0
+0,0,"ReiBackgroundVideo.mp4",0,0
 //Break Periods
 2,89532,91751
 2,151437,163237

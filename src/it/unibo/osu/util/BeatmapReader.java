@@ -5,15 +5,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import it.unibo.osu.model.Hitpoint;
 
 
 
 public class BeatmapReader extends BufferedReader{
-	private List<SpaceTimeCoord> hitpoints;
+	private List<Hitpoint> hitpoints;
 	private Integer n;
 	private int index = 0;
 	private List<String> lines;
@@ -31,20 +35,22 @@ public class BeatmapReader extends BufferedReader{
 			System.out.println("Error: stringa \"[HitObjects]\" non presente nella beatmap!");
 			e.printStackTrace();
 		}
-		this.hitpoints = lines.stream().skip(n.intValue())
+		this.hitpoints = lines.stream()
+				.skip(n.intValue())
+				.filter(x -> !x.contains("//"))
 				.takeWhile(x -> !x.equals(""))
 				.map((x)-> {
 					String[] values = x.split(",");
-					return new SpaceTimeCoord(Double.parseDouble(values[0]), Double.parseDouble(values[1]),Double.parseDouble(values[2]));
+					return new Hitpoint(Double.parseDouble(values[0]), Double.parseDouble(values[1]),Double.parseDouble(values[2]));
 				})
 				.collect(Collectors.toList());
 	}
 	
-	public  List<SpaceTimeCoord> getHitpoints(){
+	public  List<Hitpoint> getHitpoints(){
 		return this.hitpoints;
 	}
 	
-	public Stream<SpaceTimeCoord> hitPointsStream() {
+	public Stream<Hitpoint> hitPointsStream() {
 		return this.hitpoints.stream();
 	}
 	
@@ -56,7 +62,7 @@ public class BeatmapReader extends BufferedReader{
 			return false;
 		}
 	}
-	public SpaceTimeCoord readHitpoint() {
+	public Hitpoint readHitpoint() {
 		if(this.hasNextHitpoint()) {
 			index += 1;
 			return this.hitpoints.get(index);
@@ -95,6 +101,7 @@ public class BeatmapReader extends BufferedReader{
 		this.n = findNumOfLinesToOptions(this.lines, opt);
 		HashMap<String,String> map =  (HashMap<String, String>) this.lines.stream()
 				.skip(this.n)
+				.filter(x -> !x.contains("//"))
 				.takeWhile(x -> !x.equals(""))
 				.map(x ->  Arrays.asList(x.split(":")) )
 				//sostituire . con ,?
@@ -102,4 +109,61 @@ public class BeatmapReader extends BufferedReader{
 			return map;
 	}
 	
+	public String getBakground() {
+		try {
+			this.n = findNumOfLinesToOptions(this.lines,BeatmapOptions.EVENTS);
+		} catch (IOException e) {
+			System.out.println("Error: stringa \"[Events]\" non presente nella beatmap!");
+			e.printStackTrace();
+		}
+		return this.lines.stream()
+				.skip(this.n)
+				.filter(x -> !x.contains("//"))
+				.takeWhile(x -> !x.equals(""))
+				.map((x)-> {
+					String[] values = x.split(",");
+					return Arrays.asList(values).get(2);})
+				.collect(Collectors.toList()).get(0).replaceAll("\"", "");
+	}
+	
+	public Double getStartingTime(){
+		try {
+			this.n = findNumOfLinesToOptions(this.lines,BeatmapOptions.TIMINGPOINTS);
+		} catch (IOException e) {
+			System.out.println("Error: stringa \"[Events]\" non presente nella beatmap!");
+			e.printStackTrace();
+		}
+		  Double returnValue =  this.lines.stream().skip(this.n)
+				  .limit(1)
+				  .map(x -> {
+					  return Double.parseDouble(Arrays.asList(x.split(",")).get(0));
+				  }).reduce((x,y) -> x + y).get();
+		  if(returnValue == null) {
+			  System.out.println("Missing starting time.");
+			  throw new RuntimeException();
+		  } else {
+			  return returnValue;
+		  }
+	}
+
+	public List<List<Double>> getBreakTimes(){
+		try {
+			this.n = findNumOfLinesToOptions(this.lines,BeatmapOptions.EVENTS);
+		} catch (IOException e) {
+			System.out.println("Error: stringa \"[Events]\" non presente nella beatmap!");
+			e.printStackTrace();
+		}
+		return this.lines.stream()
+				.skip(this.n)
+				.filter(x -> !x.contains("//"))
+				.takeWhile(x -> !x.equals(""))
+				.filter(x -> x.split(",")[0].equals("2"))
+				.map((x)-> {
+					String[] values = x.split(",");
+					return Arrays.asList(values).subList(1, 3).stream()
+							.map(y -> Double.parseDouble(y))
+							.collect(Collectors.toList());})
+				.collect(Collectors.toList());
+	}
 }
+
