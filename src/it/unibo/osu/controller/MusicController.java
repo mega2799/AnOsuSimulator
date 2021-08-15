@@ -1,13 +1,16 @@
 package it.unibo.osu.controller;
 
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public interface MusicController {
-	public void startMusic();
+	void startMusic();
 	
-	public void stopMusic();
+	void stopMusic();
 	
-	public Duration getDuration();
+	Duration getDuration();
 	
-	public void pauseMusic();
+	void pauseMusic();
+	
+	MediaPlayer getAudio();	
 }

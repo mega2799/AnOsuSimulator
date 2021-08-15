@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.osu.controller.Controller;
+import it.unibo.osu.controller.MusicController;
+import it.unibo.osu.controller.MusicControllerImpl;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -36,6 +38,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -160,7 +163,9 @@ public class MenuView extends Stage {
 		});
 		
 		this.exitBtn.setOnMouseClicked(e -> {
-			System.exit(1);
+			MusicController sayonara = new MusicControllerImpl("/music/sayonara_sound.wav");
+			sayonara.startMusic();
+			sayonara.getAudio().setOnEndOfMedia(() -> System.exit(1));
 		});
 		
 		this.root.setLeft(menuBox); // lo lascio qua ?

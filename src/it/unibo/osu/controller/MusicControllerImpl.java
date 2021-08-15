@@ -60,6 +60,11 @@ public class MusicControllerImpl extends AbstractSubject implements MusicControl
 	public void notifyObs() {
 		this.game.onNotify();
 	}
+
+	@Override
+	public MediaPlayer getAudio() {
+		return this.audioMedia;
+	}
 	
 //	@Override
 //	public void notifyEntity() {
