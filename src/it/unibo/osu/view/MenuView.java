@@ -151,7 +151,9 @@ public class MenuView extends Stage {
 		
 		menuBox.setAlignment(Pos.CENTER_RIGHT);
 		menuBox.setPrefWidth(250); // node position adjustment 
-		menuBox.getChildren().addAll(this.playBtn, this.optionBtn, this.exitBtn);
+		//menuBox.getChildren().addAll(this.playBtn, this.optionBtn, this.exitBtn);
+
+		menuBox.getChildren().addAll(this.playBtn, this.optionBtn, this.exitBtn, new HitCircleButton(0).getGroup());
 
 		this.optionBtn.setOnMouseClicked(e -> {
 			this.root.setRight(gameOptions(this.options)); // non mi convince apssargli come argumento
