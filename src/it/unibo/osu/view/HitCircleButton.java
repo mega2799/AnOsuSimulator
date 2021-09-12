@@ -21,42 +21,33 @@ public class HitCircleButton {
 
 	public HitCircleButton(final int number) {
 		this.button = new Button(String.valueOf(number));
-		//this.button.setShape(new Circle(RADIUS));
 		this.circle = new Circle(RADIUS);
 		this.circle.setFill(Color.RED);
-		//this.circle.setFill(Color.TRANSPARENT); per fare il ring
 		this.circle.setStroke(Color.WHITESMOKE);
-		this.circle.relocate(0, 0);
-	//	this.circle.setStrokeType(StrokeType.OUTSIDE);
-		//this.circle.setStrokeType(StrokeType.INSIDE);
-	    this.circle.setStrokeWidth(5);
-	    this.ring = new Circle(1.25 * RADIUS, Color.TRANSPARENT);
-	    this.ring.setCenterX(this.circle.getCenterX());
-	    this.ring.setCenterY(this.circle.getCenterY());
+		this.circle.setStrokeWidth(5);
+		this.ring = new Circle(1.25 * RADIUS, Color.TRANSPARENT);
+		this.ring.setCenterX(this.circle.getCenterX());
+		this.ring.setCenterY(this.circle.getCenterY());
 		this.ring.setStroke(Color.WHITESMOKE);
 		this.text = new Text(String.valueOf(number));
-	    this.text.setFont(new Font(30));
-	    this.text.setFill(Color.WHITESMOKE);
-	    double W = text.getBoundsInLocal().getWidth();
-        double H = text.getBoundsInLocal().getHeight();
-        this.text.relocate(RADIUS - W / 2, RADIUS - H / 2);
+		this.text.setFont(new Font(30));
+		this.text.setFill(Color.WHITESMOKE);
+		this.text.setX(this.circle.getCenterX());
+		this.text.setY(this.circle.getCenterY());
 
-	    this.group = new Group(this.circle, this.ring, text);
+		this.group = new Group(this.circle, this.ring, this.text);
 
-	    // non riesco a farli spawnare concentrici... 
+		ScaleTransition trans = new ScaleTransition(Duration.seconds(0.125), this.group);
+		trans.setByX(0.2);
+		trans.setByY(0.2);
 
-	    ScaleTransition trans = new ScaleTransition(Duration.seconds(0.125), this.group);
-	    	trans.setByX(0.2);
-	    	trans.setByY(0.2);
-	    	
-	    
-	    this.group.setOnMouseClicked(e -> {
-	    	trans.play();
-	    	trans.setOnFinished(end -> {
-	    		this.group.setVisible(false);
-	    		});
-	    });
-	    
+		this.group.setOnMouseClicked(e -> {
+			trans.play();
+			trans.setOnFinished(end -> {
+				this.group.setVisible(false);
+			});
+		});
+
 	}
 
 	public Group getGroup() {
