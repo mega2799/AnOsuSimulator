@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import java.io.IOException;
 
 import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.model.OsuSlider;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -12,6 +13,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -56,9 +58,22 @@ public class LoginMenu extends Stage {
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
 		drawBackgroundImage(screen);
-	
+		
+		//prova dello slider 
+		/*
+		OsuSlider ss = new OsuSlider(new Point2D(150.0, 300.0),  new Point2D(600.0, 300.0));
+		System.out.println(ss.toString());
+		OsuSliderView v = new OsuSliderView(ss);
+		
+		this.ap.getChildren().add(v.getSlider());
 		// cambiare el nome a questa qua
-	this.show();
+		 */
+		
+		//prova dello spinner 
+		OsuSpinnerView spin = new OsuSpinnerView(2000);
+		this.ap.getChildren().add(spin.getSpinner());
+		this.show();
+		
 			}
 
 

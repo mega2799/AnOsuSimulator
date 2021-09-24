@@ -1,12 +1,11 @@
 package it.unibo.osu.view;
 
 import javafx.animation.ScaleTransition;
-import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -19,9 +18,13 @@ public class HitCircleButton {
 	private Text text;
 	private final static double RADIUS = 75.0;
 
-	public HitCircleButton(final int number) {
+	public final double getRadius() {
+		return RADIUS;
+	}
+
+	public HitCircleButton(Point2D head, int number) {
 		this.button = new Button(String.valueOf(number));
-		this.circle = new Circle(RADIUS);
+		this.circle = new Circle(head.getX(), head.getY(), RADIUS);
 		this.circle.setFill(Color.RED);
 		this.circle.setStroke(Color.WHITESMOKE);
 		this.circle.setStrokeWidth(5);
