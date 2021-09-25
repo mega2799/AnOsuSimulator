@@ -42,13 +42,17 @@ public class GameSceneController{
     
     private GameModel game;
     
-    private HitcircleViewFactory factory;
+    //private HitcircleViewFactory factory;
+    private HitCircleButtonFactory factory;
     
     public void init(GameModel game) {
     	this.game = game;
     	//this.setBackground();
     	BeatMap beatmap = this.game.getBeatMap();
-    	this.factory = new HitcircleViewFactory("/image/innerCircle.png", "/image/outerCircle.png", beatmap.getCircleSize(), beatmap.getOverallDifficulty(), beatmap.getApproachRate());
+    	//quella da sostituire per i hitbuttons
+    	//this.factory = new HitcircleViewFactory("/image/innerCircle.png", "/image/outerCircle.png", beatmap.getCircleSize(), beatmap.getOverallDifficulty(), beatmap.getApproachRate());
+    	this.factory = new HitCircleButtonFactory(beatmap.getCircleSize(), beatmap.getOverallDifficulty(), beatmap.getApproachRate());
+    	
     	Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
     	this.changeResolution(toolkit.getScreenSize().getWidth(), toolkit.getScreenSize().getHeight());
     }
@@ -59,11 +63,12 @@ public class GameSceneController{
     	this.multiplier.setText("x" + Integer.toString(scoreManager.getMultiplier()));
     	this.points.setText(Integer.toString(scoreManager.getPoints()));
     	this.game.getCurrentHitbuttons().forEach(x -> {
-    		HitcircleViewImpl hitcircleView = factory.getHitcircleView(x);
-    		this.pane.getChildren().addAll(hitcircleView.getChildren());
+    		//HitcircleViewImpl hitcircleView = factory.getHitcircleView(x);
+    		HitCircleButton hitcircleView = factory.getHitcircleView(x);
+    		this.pane.getChildren().addAll(hitcircleView.getGroup());
     		hitcircleView.addObserver(this.game.getLifeBar());
     		hitcircleView.addObserver(this.game.getScoreManager());
-    		hitcircleView.getParallelTransition().play();
+    		//hitcircleView.getParallelTransition().play();
     	});
     	this.game.getCurrentHitbuttons().clear();
     }

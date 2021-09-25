@@ -26,8 +26,8 @@ public class OsuSliderView {
 			System.out.println("fuori come un balcone");
 		});
 
-		this.slider = new Group(ll, new HitCircleButton(s.getHead(), 0).getGroup(),
-									new HitCircleButton(s.getTail(),0).getGroup());
+		//this.slider = new Group(ll, new HitCircleButton(s.getHead(), 0).getGroup(),
+			//						new HitCircleButton(s.getTail(),0).getGroup());
 	}
 
 	public final Group getSlider() {
