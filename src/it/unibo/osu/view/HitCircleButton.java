@@ -11,6 +11,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -36,7 +37,9 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 
 	private ScaleTransition scaleRing;
 
-	private FadeTransition groupFadeOut;
+	private FadeTransition groupFade;
+
+	private ParallelTransition pararallelTrans;
 
 	public final double getRadius() {
 		return this.radius;
@@ -50,19 +53,22 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 		this.circle.setFill(Color.RED);
 		this.circle.setStroke(Color.WHITESMOKE);
 		this.circle.setStrokeWidth(5);
-		computeRingScaleTransition();
 		this.ring = new Circle(2 * this.radius, Color.TRANSPARENT);
 		this.ring.setCenterX(this.circle.getCenterX());
 		this.ring.setCenterY(this.circle.getCenterY());
 		//this.ring.setStroke(Color.WHITESMOKE); colore corretto
 		this.ring.setStroke(Color.BLACK);
+		computeRingScaleTransition();
 		this.text = new Text(String.valueOf(number));
 		this.text.setFont(new Font(30));
 		this.text.setFill(Color.WHITESMOKE);
 		this.text.setX(this.circle.getCenterX());
 		this.text.setY(this.circle.getCenterY());
-
+		
 		this.group = new Group(this.circle, this.ring, this.text);
+
+		
+		//this.scaleRing.play();
 		ScaleTransition trans = new ScaleTransition(Duration.seconds(0.125), this.group);
 		trans.setByX(0.2);
 		trans.setByY(0.2);
@@ -153,7 +159,7 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 
 	@Override
 	public ParallelTransition getParallelTransition() {
-		return null;
+		return this.pararallelTrans;
 	}
 
 	@Override

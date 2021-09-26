@@ -93,8 +93,8 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.fadeOuterCircle.setFromValue(0);
 		this.fadeOuterCircle.setToValue(1);
 		this.fadeOuterCircle.setDuration(Duration.millis(this.fadeInTime));
+
 		this.pararallelTrans.setOnFinished(e -> this.scaleOuterCircle.play());
-		
 	}
 
 	@Override
