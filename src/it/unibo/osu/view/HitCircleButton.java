@@ -32,6 +32,8 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 	private double overallDifficulty; //<--
 	private double approachRate;
 	
+	private double fadeTime;
+	private double approachTime;
 
 	private List<HitActionObserver> observers = new ArrayList<>();
 
@@ -47,18 +49,25 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 
 	public HitCircleButton(final Point2D head,final double radius, final int number, final double overallDifficulty, 
 			final double approachRate) {
+
+		this.fadeTime = getFadeInTime();
+		this.approachTime = getApproachTime();
+		
 		computeRadius(radius);
 		this.button = new Button(String.valueOf(number));
+
 		this.circle = new Circle(head.getX(), head.getY(), this.radius);
 		this.circle.setFill(Color.RED);
 		this.circle.setStroke(Color.WHITESMOKE);
-		this.circle.setStrokeWidth(5);
+		this.circle.setStrokeWidth(45);
+
 		this.ring = new Circle(2 * this.radius, Color.TRANSPARENT);
 		this.ring.setCenterX(this.circle.getCenterX());
 		this.ring.setCenterY(this.circle.getCenterY());
 		//this.ring.setStroke(Color.WHITESMOKE); colore corretto
 		this.ring.setStroke(Color.BLACK);
 		computeRingScaleTransition();
+
 		this.text = new Text(String.valueOf(number));
 		this.text.setFont(new Font(30));
 		this.text.setFill(Color.WHITESMOKE);
@@ -67,8 +76,6 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 		
 		this.group = new Group(this.circle, this.ring, this.text);
 
-		
-		//this.scaleRing.play();
 		ScaleTransition trans = new ScaleTransition(Duration.seconds(0.125), this.group);
 		trans.setByX(0.2);
 		trans.setByY(0.2);
@@ -97,8 +104,8 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 		this.scaleRing.setToX(0.6);
 		this.scaleRing.setToY(0.6);
 		this.scaleRing.setCycleCount(1);
-		this.scaleRing.setDuration(Duration.millis(this.getApproachTime()));
-		this.scaleRing.play(); // perche non vuole partire ??
+		this.scaleRing.setDuration(Duration.millis(this.approachTime));
+		this.scaleRing.play(); 
 	}
 	
 	
@@ -121,7 +128,7 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 		} else {
 			preempt = 1200 - 750 * (this.approachRate - 5) / 5;
 		}
-		return preempt - this.getFadeInTime();
+		return preempt - this.fadeTime;
 	}
 	private void computeRadius(double radius) {
 		this.radius = 109 - 9 * radius;
