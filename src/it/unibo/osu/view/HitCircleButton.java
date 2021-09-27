@@ -53,6 +53,7 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 		this.fadeTime = getFadeInTime();
 		this.approachTime = getApproachTime();
 		
+		this.overallDifficulty = overallDifficulty;
 		computeRadius(radius);
 		this.button = new Button(String.valueOf(number));
 

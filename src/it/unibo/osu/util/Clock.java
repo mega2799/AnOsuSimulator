@@ -1,27 +1,24 @@
 package it.unibo.osu.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import it.unibo.osu.controller.HitActionObserver;
+import it.unibo.osu.model.GamePoints;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Clock extends Application{
-	Scene scene;
-	VBox vBox;
-	HBox hBox;
-	Text text;
+public class Clock implements HitActionObserver{
+	private Text text;
 	Timeline timeline;
 	int mins = 0, secs = 0, millis = 0;
 	boolean sos = true;
+	private Text endTime;
+	private Map<String, GamePoints> timeStatistic = new HashMap<>();
 
 	void change(Text text) {
 		if(millis == 1000) {
@@ -37,8 +34,7 @@ public class Clock extends Application{
 			+ (((millis/10) == 0) ? "00" : (((millis/100) == 0) ? "0" : "")) + millis++);
     }
 
-	@Override
-	public void start(Stage stage) {
+	public void start() {
 		text = new Text("00:00:000");
 		timeline = new Timeline(new KeyFrame(Duration.millis(1), new EventHandler<ActionEvent>() {
 			@Override
@@ -46,6 +42,7 @@ public class Clock extends Application{
             	change(text);
 			}
 		}));
+
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.setAutoReverse(false);
             	if(sos) {
@@ -55,14 +52,21 @@ public class Clock extends Application{
             		timeline.pause();
             		sos = true;
             	}
-        hBox = new HBox(30);
-		hBox.setAlignment(Pos.CENTER);
-		vBox = new VBox(30);
-		vBox.setAlignment(Pos.CENTER);
-		vBox.getChildren().addAll(text, hBox);
-		scene = new Scene(vBox, 200, 150);
-		stage.setScene(scene);
-        stage.setTitle("Stopwatch");
-		stage.show();
 	}
+	
+	public String getCurrent() {
+		return this.text.toString();
+	}
+	
+	public void stop() {
+		timeline.stop();
+		this.endTime = this.text;
+	}
+
+	@Override
+	public void onNotify(GamePoints points) {
+		this.timeStatistic.put(this.text.getText(), points);
+		System.out.println(points);
+	}
+	
 }
