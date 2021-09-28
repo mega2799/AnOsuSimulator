@@ -32,9 +32,9 @@ BeatmapSetID:669826
 
 [Difficulty]
 HPDrainRate:1
-CircleSize:3.3
-OverallDifficulty:4
-ApproachRate:5
+CircleSize:1
+OverallDifficulty:1
+ApproachRate:1
 SliderMultiplier:1.1
 SliderTickRate:1
 

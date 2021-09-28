@@ -60,13 +60,13 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 		this.circle = new Circle(head.getX(), head.getY(), this.radius);
 		this.circle.setFill(Color.RED);
 		this.circle.setStroke(Color.WHITESMOKE);
-		this.circle.setStrokeWidth(45);
+		this.circle.setStrokeWidth(5);
 
 		this.ring = new Circle(2 * this.radius, Color.TRANSPARENT);
+		this.ring.setStrokeWidth(12);
 		this.ring.setCenterX(this.circle.getCenterX());
 		this.ring.setCenterY(this.circle.getCenterY());
-		//this.ring.setStroke(Color.WHITESMOKE); colore corretto
-		this.ring.setStroke(Color.BLACK);
+		this.ring.setStroke(Color.WHITESMOKE); 
 		computeRingScaleTransition();
 
 		this.text = new Text(String.valueOf(number));
@@ -102,8 +102,8 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 	private void computeRingScaleTransition() {
 		this.scaleRing = new ScaleTransition();
 		this.scaleRing.setNode(this.ring);
-		this.scaleRing.setToX(0.6);
-		this.scaleRing.setToY(0.6);
+		this.scaleRing.setToX(0.5);
+		this.scaleRing.setToY(0.5);
 		this.scaleRing.setCycleCount(1);
 		this.scaleRing.setDuration(Duration.millis(this.approachTime));
 		this.scaleRing.play(); 
