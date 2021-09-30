@@ -51,11 +51,11 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 			final double approachRate) {
 
 		this.fadeTime = getFadeInTime();
-		this.approachTime = getApproachTime();
+		this.approachTime = getApproachTime() * 1.3;
 		
 		this.overallDifficulty = overallDifficulty;
 		computeRadius(radius);
-		this.button = new Button(String.valueOf(number));
+		//this.button = new Button(String.valueOf(number));
 
 		this.circle = new Circle(head.getX(), head.getY(), this.radius);
 		this.circle.setFill(Color.RED);
@@ -63,7 +63,7 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 		this.circle.setStrokeWidth(5);
 
 		this.ring = new Circle(2 * this.radius, Color.TRANSPARENT);
-		this.ring.setStrokeWidth(12);
+		this.ring.setStrokeWidth(7);
 		this.ring.setCenterX(this.circle.getCenterX());
 		this.ring.setCenterY(this.circle.getCenterY());
 		this.ring.setStroke(Color.WHITESMOKE); 
@@ -132,7 +132,7 @@ public class HitCircleButton  implements HitcircleView, HitActionSubject {
 		return preempt - this.fadeTime;
 	}
 	private void computeRadius(double radius) {
-		this.radius = 109 - 9 * radius;
+		this.radius = (109 - 9 * radius)/2;
 	}
 @Override
 	public void notifyObs(GamePoints points) {
