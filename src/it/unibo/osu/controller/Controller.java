@@ -45,7 +45,8 @@ public class Controller {
 		this.robot = new Robot();
 		this.pauseMenu = new PauseMenuView();
 		//qui bisogna passare il nome della song giustamente 
-		this.musicController = new MusicControllerImpl("/tracks/joshiraku.wav", this.game);
+		//this.musicController = new MusicControllerImpl("/tracks/joshiraku.wav", this.game);
+		this.musicController = new MusicControllerImpl("/tracks/demonSlayer.wav", this.game);
 		this.setInputHandler();
 		
 		//new GameLoop(this.game, this.view, this.musicController);
