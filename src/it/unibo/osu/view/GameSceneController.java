@@ -6,7 +6,6 @@ import it.unibo.osu.controller.ScoreManager;
 import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.LifeBar;
-import it.unibo.osu.util.Clock;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -44,7 +43,6 @@ public class GameSceneController{
     private GameModel game;
     
     private HitcircleViewFactory factory;
-    private Clock clock;
     
     public void init(GameModel game) {
     	this.game = game;
@@ -53,8 +51,6 @@ public class GameSceneController{
     	this.factory = new HitcircleViewFactory("/image/innerCircle.png", "/image/outerCircle.png", beatmap.getCircleSize(), beatmap.getOverallDifficulty(), beatmap.getApproachRate());
     	Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
     	this.changeResolution(toolkit.getScreenSize().getWidth(), toolkit.getScreenSize().getHeight());
-    	this.clock = new Clock();
-    	this.clock.start();
     }
     
      public void  render() {
@@ -67,7 +63,6 @@ public class GameSceneController{
     		this.pane.getChildren().addAll(hitcircleView.getChildren());
     		hitcircleView.addObserver(this.game.getLifeBar());
     		hitcircleView.addObserver(this.game.getScoreManager());
-    		hitcircleView.addObserver(this.clock);
     		hitcircleView.getParallelTransition().play();
     	});
     	this.game.getCurrentHitbuttons().clear();
