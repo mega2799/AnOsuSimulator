@@ -175,7 +175,7 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		
 		this.innerCircle.setOnMouseClicked(e -> {
 			double time = this.scaleOuterCircle.getTotalDuration().toMillis() - this.scaleOuterCircle.getCurrentTime().toMillis();
-			//this.scaleOuterCircle.stop();
+			this.scaleOuterCircle.stop();
 			this.finalParallelTrans.play();
 			GamePoints points = this.getHitWindowScore(time);
 			this.notifyObs(points);	

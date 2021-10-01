@@ -95,6 +95,7 @@ public class LoginMenu extends Stage {
 		trans1.setByX(0.1);
 		trans1.setByY(0.1);
 		trans1.play();
+		
 
 		this.pane.getChildren().add(logoImage);
 		StackPane.setAlignment(logoImage, Pos.CENTER);
