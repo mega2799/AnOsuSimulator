@@ -24,8 +24,8 @@ public class Controller {
 	private final PauseMenuView pauseMenu;
 	private final MusicControllerImpl musicController;
 	
-	public Controller(final String name) {
-		this.game = new GameModel(name);
+	public Controller(final String name, final String beatmap) {
+		this.game = new GameModel(name + beatmap);
 
 		this.view = new GameView();
 		//here
@@ -46,7 +46,8 @@ public class Controller {
 		this.pauseMenu = new PauseMenuView();
 		//qui bisogna passare il nome della song giustamente 
 		//this.musicController = new MusicControllerImpl("/tracks/joshiraku.wav", this.game);
-		this.musicController = new MusicControllerImpl("/tracks/demonSlayer.wav", this.game);
+		//this.musicController = new MusicControllerImpl("/tracks/demonSlayer.wav", this.game);
+		this.musicController = new MusicControllerImpl(name + "/audio.wav", this.game);
 		this.setInputHandler();
 		
 		//new GameLoop(this.game, this.view, this.musicController);

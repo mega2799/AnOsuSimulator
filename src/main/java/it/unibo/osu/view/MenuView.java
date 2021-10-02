@@ -157,7 +157,11 @@ public class MenuView extends Stage {
 		this.playBtn.setOnMouseClicked(e -> {
 			//this.root.setRight(scrollableSongList(this.songList));
 			//new Controller("/beatmaps/legendsNeverDie.osu");
-			new Controller("/beatmaps/normal.osu");
+			//new Controller("/beatmaps/normal.osu");
+			
+			//new Controller("/demonSlayer", "/Gurenge[Normal].osu");
+			//harder
+			new Controller("/demonSlayer", "/Gurenge[Hard].osu");
 		});
 		
 		this.exitBtn.setOnMouseClicked(e -> {
