@@ -55,7 +55,7 @@ public class Clock implements HitActionObserver{
 	}
 	
 	public String getCurrent() {
-		return this.text.getText();
+		return this.text.toString();
 	}
 	
 	public void stop() {

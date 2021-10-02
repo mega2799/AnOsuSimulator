@@ -51,7 +51,7 @@ public class GameSceneController{
     
     public void init(GameModel game) {
     	this.game = game;
-    	//this.setBackground();
+    	this.setBackground();
     	BeatMap beatmap = this.game.getBeatMap();
     	//quella da sostituire per i hitbuttons
     	//this.factory = new HitcircleViewFactory("/image/innerCircle.png", "/image/outerCircle.png", beatmap.getCircleSize(), beatmap.getOverallDifficulty(), beatmap.getApproachRate());
