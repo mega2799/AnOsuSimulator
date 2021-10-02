@@ -22,8 +22,9 @@ public class BeatMap {
 	private List<List<Double>> breakTimes;
 	private double startingTime;
 	
-	public BeatMap(String filaName) {
-		try(BeatmapReader reader = new BeatmapReader(new FileReader(new File(this.getClass().getResource(filaName).toURI())))){
+	public BeatMap(String fileName) {
+
+		try(BeatmapReader reader = new BeatmapReader(this.getClass().getResourceAsStream(fileName))){
 			Map<String, String> map = reader.getOptionMap(BeatmapOptions.DIFFICULTY);
 			this.circleSize = Double.parseDouble(map.get("CircleSize"));
 			this.overallDifficulty = Double.parseDouble(map.get("OverallDifficulty"));
@@ -34,7 +35,7 @@ public class BeatMap {
 			this.songName = reader.getOptionMap(BeatmapOptions.GENERAL).get("AudioFilename");
 			this.breakTimes = reader.getBreakTimes();
 			this.startingTime = reader.getStartingTime();
-		} catch (IOException | URISyntaxException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		} 		
 	}

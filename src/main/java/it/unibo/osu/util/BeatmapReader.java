@@ -1,9 +1,13 @@
 package it.unibo.osu.util;
 
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,8 +26,8 @@ public class BeatmapReader extends BufferedReader{
 	private int index = 0;
 	private List<String> lines;
 	
-	public BeatmapReader(FileReader in)  {
-		super(in);
+	public BeatmapReader(InputStream in)  {
+		super(new InputStreamReader(in));
 		this.lines = super.lines().collect(Collectors.toList());
 		this.setHitpoints();
 	}
