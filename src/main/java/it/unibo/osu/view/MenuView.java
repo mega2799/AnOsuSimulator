@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.osu.controller.Controller;
+import it.unibo.osu.controller.MusicController;
+import it.unibo.osu.controller.MusicControllerImpl;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -71,6 +73,8 @@ public class MenuView extends Stage {
 	
 	private Dimension full; 
 	
+	private MusicController ost;
+
 	private static final int BOX_SPACING = 20;
 
 	public MenuView(final String name, final LoginMenu parent) {
@@ -90,6 +94,9 @@ public class MenuView extends Stage {
 		// lo vogliamo davvero mettere ?
 		//makeLogo(this.mainLogo); // center 
 		setAvatar(name); //top
+		
+		this.ost = new MusicControllerImpl("/music/menuOst.wav");
+		this.ost.startMusic();
 	}
 
 	private void setAvatar(String name) {
@@ -155,13 +162,19 @@ public class MenuView extends Stage {
 		});
 		
 		this.playBtn.setOnMouseClicked(e -> {
+			this.ost.stopMusic();
 			//this.root.setRight(scrollableSongList(this.songList));
 			//new Controller("/beatmaps/legendsNeverDie.osu");
 			//new Controller("/beatmaps/normal.osu");
+
 			
-			//new Controller("/demonSlayer", "/Gurenge[Normal].osu");
+			new Controller(this.username, "/demonSlayer", "/Gurenge[Normal].osu");
 			//harder
-			new Controller("/demonSlayer", "/Gurenge[Hard].osu");
+			//new Controller("/demonSlayer", "/Gurenge[Hard].osu");
+
+			//new Controller("/sindromeRap", "/VirginitySyndrome[Normal].osu");
+			//harder
+			//new Controller("/sindromeRap", "/VirginitySyndrome[Insane].osu");
 		});
 		
 		this.exitBtn.setOnMouseClicked(e -> {

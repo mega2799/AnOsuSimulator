@@ -23,10 +23,11 @@ public class Controller {
 	private final Robot robot;
 	private final PauseMenuView pauseMenu;
 	private final MusicControllerImpl musicController;
-	
-	public Controller(final String name, final String beatmap) {
-		this.game = new GameModel(name + beatmap);
 
+	// name sarebbe il package :::
+	public Controller(final String username, final String name, final String beatmap) {
+		this.game = new GameModel(name + beatmap);
+		this.game.setUser(username);
 		this.view = new GameView();
 		//here
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/GameScene.fxml"));
@@ -34,7 +35,7 @@ public class Controller {
 		try {
 			this.view.setScene(loader.load());
 			this.sceneController = ((GameSceneController) loader.getController());
-			this.sceneController.init(game);
+			this.sceneController.init(game, name); 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -53,7 +54,6 @@ public class Controller {
 		//new GameLoop(this.game, this.view, this.musicController);
 		new GameLoop(this.game, this.view, this.sceneController, this.musicController);
 	}
-	
 	
 	private void setInputHandler() {
 		this.view.getScene().setOnKeyPressed(e ->{

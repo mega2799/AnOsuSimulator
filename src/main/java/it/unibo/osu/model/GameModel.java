@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.unibo.osu.controller.Observer;
 import it.unibo.osu.controller.ScoreManager;
+import it.unibo.osu.util.Clock;
 import it.unibo.osu.util.HitobjectSelector;
 
 public class GameModel implements Observer{
@@ -14,11 +15,14 @@ public class GameModel implements Observer{
 	private LifeBar lifeBar;
 	private List<Hitpoint> currentHitbuttons;
 	private HitobjectSelector selector;
+	private Clock osuClock;
 	private double timeAcc;
+	private String username;
 	
 	public GameModel(final String name) {
 		this.status = GameStatus.START;
 		this.beatMap = new BeatMap(name);
+		this.osuClock = new Clock();
 		this.timeAcc = 0;
 	}
 	
@@ -28,6 +32,7 @@ public class GameModel implements Observer{
 		this.currentHitbuttons = new ArrayList<>();
 		this.selector = new HitobjectSelector(this.beatMap.getHitpoints());
 		this.status = GameStatus.RUNNING;
+		this.osuClock.start();
 	}
 	
 	public void update(double t) {
@@ -42,8 +47,10 @@ public class GameModel implements Observer{
     public void setPause() {
         if (this.status.equals(GameStatus.RUNNING)) {
             this.status = GameStatus.PAUSE;
+            this.osuClock.pause();
         } else if (this.status.equals(GameStatus.PAUSE)) {
             this.status = GameStatus.RUNNING;
+            this.osuClock.start();
         }
     }
     
@@ -72,6 +79,10 @@ public class GameModel implements Observer{
 
 	public List<Hitpoint> getCurrentHitbuttons() {
 		return currentHitbuttons;
+	}
+
+	public final Clock getOsuClock() {
+		return osuClock;
 	}
 
 	public void clearCurrentHitbuttons(List<Hitpoint> currentHitbuttons) {
@@ -108,6 +119,13 @@ public class GameModel implements Observer{
 		}
 		return true;
 	}
+
+	public void setUser(String username) {
+		this.username = username;
+	}
 	
+	public String getUser() {
+		return this.username;
+	}
  
 }

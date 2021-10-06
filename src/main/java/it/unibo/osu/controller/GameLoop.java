@@ -1,7 +1,7 @@
 package it.unibo.osu.controller;
 
 import it.unibo.osu.model.GameModel;
-
+import it.unibo.osu.util.Clock;
 import it.unibo.osu.view.EndgameView;
 import it.unibo.osu.view.GameSceneController;
 import it.unibo.osu.view.GameView;
@@ -9,10 +9,11 @@ import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
 	private GameModel game;
-	private GameView view;  // <-- forse meglio passare solo controller, con file fxml che ha dentro anche stage così da fare getStage all occorrenza
+	private GameView view;  // <-- forse meglio passare solo controller, con file fxml che ha dentro anche stage cosï¿½ da fare getStage all occorrenza
 	private GameSceneController sceneController;
 	private MusicController musicController;
 	private long previous;
+
 	public GameLoop(GameModel game, GameView view, GameSceneController sceneController, MusicController musicController) {
 		this.game = game;
 		this.view = view;
@@ -48,7 +49,8 @@ public class GameLoop extends AnimationTimer {
 		case ENDGAME:
 			// da implementare, aprirï¿½ una nuova scena o stage finale.
 			this.view.close();
-			new EndgameView();
+			///new EndgameView(this.game.getOsuClock().getTimeStatistic()); // passare map del clock in qualche modo 
+			new EndgameView(this.game);
 			this.stop();
 			this.previous = now;
 			break;

@@ -43,10 +43,11 @@ public class GameSceneController{
     private GameModel game;
     
     private HitcircleViewFactory factory;
-    
-    public void init(GameModel game) {
+   
+    // name sarebbe package
+    public void init(GameModel game, String name) {
     	this.game = game;
-    	this.setBackground();
+    	this.setBackground(name);
     	BeatMap beatmap = this.game.getBeatMap();
     	this.factory = new HitcircleViewFactory("/image/innerCircle.png", "/image/outerCircle.png", beatmap.getCircleSize(), beatmap.getOverallDifficulty(), beatmap.getApproachRate());
     	Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
@@ -63,6 +64,7 @@ public class GameSceneController{
     		this.pane.getChildren().addAll(hitcircleView.getChildren());
     		hitcircleView.addObserver(this.game.getLifeBar());
     		hitcircleView.addObserver(this.game.getScoreManager());
+    		hitcircleView.addObserver(this.game.getOsuClock());
     		hitcircleView.getParallelTransition().play();
     	});
     	this.game.getCurrentHitbuttons().clear();
@@ -75,11 +77,12 @@ public class GameSceneController{
         	return "video";
         }
     }
-    private void setBackground() {
+    private void setBackground(final String name) {
     	String fileName = game.getBeatMap().getBackground();
     	String type = getBackgroundType(fileName);
     	if( type.equals("photo")) {
-    		this.backgroundImage.setImage(new Image(this.getClass().getResource("/wallpaper/" + fileName).toString()));
+    		System.out.println(name + fileName);
+    		this.backgroundImage.setImage(new Image(this.getClass().getResource(name + "/" + fileName).toString()));
     	} else {
     		this.backgroundMedia.setMediaPlayer(new MediaPlayer(new Media(this.getClass().getResource("/video/" + fileName).toString())));
     		this.backgroundMedia.getMediaPlayer().play();

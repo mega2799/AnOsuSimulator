@@ -58,7 +58,8 @@ public class LoginMenu extends Stage {
 		drawBackgroundImage(screen);
 	
 		// cambiare el nome a questa qua
-	this.show();
+		this.show();
+		//this.setResizable(false);
 			}
 
 
