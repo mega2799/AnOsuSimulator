@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import it.unibo.osu.controller.MusicControllerImpl;
 import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -56,25 +57,24 @@ public class LoginMenu extends Stage {
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
 		drawBackgroundImage(screen);
-	
+
 		// cambiare el nome a questa qua
-	this.show();
-			}
+		this.show();
+	}
 
 
 	private void drawBackgroundImage(Dimension screen) {
 		Image image = new Image(this.getClass().getResource("/image/rainTokyo.png").toString());
 
 		BackgroundSize bSize = new BackgroundSize(screen.getWidth(), screen.getHeight(), false, false, true, false);
+		this.pane.setBackground(new Background(new BackgroundImage(image,
+				BackgroundRepeat.NO_REPEAT,
+				BackgroundRepeat.NO_REPEAT,
+				BackgroundPosition.CENTER,
+				bSize)));
 
-	    this.pane.setBackground(new Background(new BackgroundImage(image,
-	            BackgroundRepeat.NO_REPEAT,
-	            BackgroundRepeat.NO_REPEAT,
-	            BackgroundPosition.CENTER,
-	            bSize)));
-		
-		
-		
+
+
 		ImageView background = new ImageView(new Image(this.getClass().getResource("/image/rei.png").toString()));
 		background.setFitHeight(screen.getHeight());
 		background.setFitWidth(screen.getWidth());
@@ -109,38 +109,62 @@ public class LoginMenu extends Stage {
 			user.setStyle("-fx-background-radius: 5em;");
 			HBox hb = new HBox();
 			hb.getChildren().addAll(new Label("Login"), user, new Label(" Desu!"));
-			trans1.stop();
+			//trans1.stop();
 			this.pane.getChildren().add(hb);
 			hb.setAlignment(Pos.CENTER);
 
 			user.setOnAction(es -> {
-				if(user.getText().toString().equals("")) {
-					System.exit(1);
-				}
+				if(!user.getText().toString().equals("")) {
+					MenuView mV = new MenuView(user.getText().toString(), this);
 
-				MenuView mV = new MenuView(user.getText().toString(), this);
+					welcome.stopMusic();
 
-				welcome.stopMusic();
+					Parent root = mV.getPane();
+					Scene scene = this.ap.getScene();
+					FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/SongMenu.fxml"));
+					
+					
 				
-			        Parent root = mV.getPane();
-				  	Scene scene = this.ap.getScene();
-				  	root.translateYProperty().set(scene.getHeight()); /// l'altezzza qui non va bene.... 
-			        //root.translateYProperty().set(this.getHeight());/// l'altezzza qui non va bene.... 
-			        //Add second scene. Now both first and second scene is present
-			        this.pane.getChildren().add(root);
-	
-			        
-			        //Create new TimeLine animation
-			        Timeline timeline = new Timeline();
-			        //Animate Y property
-			        KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-			        KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
-			        timeline.getKeyFrames().add(kf);
-			        //After completing animation, remove first scene
-			        timeline.setOnFinished(t -> {
-			            this.pane.getChildren().remove(ap);
-			        });
-			        timeline.play();
+
+					//trans1.stop();
+					//root.translateYProperty().set(scene.getHeight()); /// l'altezzza qui non va bene.... 
+					//root.translateYProperty().set(this.getHeight());/// l'altezzza qui non va bene.... 
+					//Add second scene. Now both first and second scene is present
+					//this.pane.getChildren().add(root);
+
+
+					//Create new TimeLine animation
+					//Timeline timeline = new Timeline();
+					//Animate Y property
+					//				KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
+					//				KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+					//				timeline.getKeyFrames().add(kf);
+					//After completing animation, remove first scene
+					//				timeline.setOnFinished(event -> {
+					FadeTransition fade = new FadeTransition();
+					fade.setNode(this.pane);
+					fade.setOnFinished(eve -> {
+						this.pane.getChildren().remove(ap);
+						//this.pane.getChildren().add(root);
+						try {
+							this.pane.getChildren().add(loader.load());
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						fade.setFromValue(0);
+						fade.setToValue(1);
+						fade.setDuration(Duration.seconds(1));
+						fade.setOnFinished(null);
+						fade.playFromStart();
+						//				});
+					});
+					fade.setFromValue(1.0);
+					fade.setToValue(0.0); 
+					fade.setDuration(Duration.seconds(1));
+					fade.play();
+					
+					//				timeline.play();
+				}
 			});
 		});
 	}

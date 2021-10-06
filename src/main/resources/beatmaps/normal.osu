@@ -40,7 +40,7 @@ SliderTickRate:1
 
 [Events]
 //Background and Video events
-0,0,"Gurenge.png",0,0
+0,0,"ReiBackgroundVideo.mp4",0,0
 Video,0,"video.mp4"
 //Break Periods
 2,47804,53395

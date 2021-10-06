@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="anchorPane1" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SongMenuController">
+   <children>
+      <Pane fx:id="pane2" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="imageView1" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/rainTokyo.png" />
+               </image>
+            </ImageView>
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="1126.0" prefHeight="1080.0" prefWidth="794.0" vbarPolicy="NEVER" />
+            <Pane fx:id="upperBorder" layoutX="1126.0" prefHeight="76.0" prefWidth="792.0" />
+            <Pane fx:id="downBorder" layoutX="1126.0" layoutY="1004.0" prefHeight="78.0" prefWidth="792.0" />
+         </children>
+      </Pane>
+      <VBox fx:id="vbox1" layoutX="1126.0" prefHeight="1080.0" prefWidth="794.0" />
+   </children>
+</AnchorPane>
