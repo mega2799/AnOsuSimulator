@@ -42,6 +42,7 @@ public class StatisticImpl implements Statistic {
 
 	@Override
 	public void writeJson() {
+		/*
 		ObjectMapper objM = new ObjectMapper();
 			try {
 				String json = objM.writeValueAsString(Map.of(this.song, this.map));
@@ -50,6 +51,7 @@ public class StatisticImpl implements Statistic {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			*/
 	}
 
 }

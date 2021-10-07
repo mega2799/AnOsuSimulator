@@ -48,17 +48,14 @@ public class EndgameView  extends Stage{
 
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setScene(new Scene(root, 1450, 800)); //da aggiustare
-		Label n = new Label("NOME SONG");
-		n.setStyle("-fx-font-size: 31pt;"
-				+ "    -fx-font-family: \"Segoe UI Semibold\";"
-				+ "    -fx-text-fill: black;"
-				+ "    -fx-opacity: 0.6;");
-		
-		this.root.setTop(n);
-		this.root.setAlignment(n, Pos.TOP_CENTER);
+		Label topLbl = styledLabel("Nome song");
+		this.root.setTop(topLbl);
+		this.root.setAlignment(topLbl, Pos.TOP_CENTER);
 		this.root.setCenter(statPane);
 		//this.root.setBottom(makeChart(stat));
-		this.root.setBottom(new Label(this.game.getUser() + " has scored " + this.game.getScoreManager().getPoints()));
+		Label btmLbl = styledLabel(this.game.getUser() + " has scored " + this.game.getScoreManager().getPoints());
+		this.root.setBottom(btmLbl);
+		this.root.setAlignment(btmLbl, Pos.BOTTOM_CENTER);
 		//root.getChildren().add(new Label("EndGame"));
 		drawBackgroundImage();
 		this.show();
@@ -110,8 +107,9 @@ public class EndgameView  extends Stage{
 		background.setFitWidth(this.getScene().getWidth());
 		//this.pane.getChildren().add(background);
 	}
+
 	private void gridSetter() {
-		this.statPane.setGridLinesVisible(false);
+		this.statPane.setGridLinesVisible(true);
 		
 		this.statPane.getColumnConstraints().add(new ColumnConstraints(200));
 		this.statPane.getColumnConstraints().add(new ColumnConstraints(200));
@@ -124,15 +122,21 @@ public class EndgameView  extends Stage{
 		
 		final Map<GamePoints, Integer> map = this.game.getScoreManager().getStatistic();
 
-		//for(int i = 0; i < map.size() ;i++) {
 		int i = 0;
 		final Iterator<GamePoints> it =  map.keySet().iterator();
 		while(it.hasNext()) {
 			GamePoints gp = it.next();
-			this.statPane.add(new Label(gp.toString()), 0, i);
-			this.statPane.add(new Label(map.get(gp).toString()), 1, i);
-			i++;
+			this.statPane.add(styledLabel(gp.toString()), 0, i);
+			this.statPane.add(styledLabel(map.get(gp).toString()), 1, i++);
 		}
 	}
 
+	private Label styledLabel(final String arg) {
+		Label lbl = new Label(arg);
+		lbl.setStyle("-fx-font-size: 31pt;"
+				+ "    -fx-font-family: \"Segoe UI Semibold\";"
+				+ "    -fx-text-fill: black;"
+				+ "    -fx-opacity: 0.6;");
+		return lbl;
+	}
 }
