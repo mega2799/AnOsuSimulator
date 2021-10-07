@@ -1,20 +1,14 @@
 package it.unibo.osu.view;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GamePoints;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.chart.AreaChart;
-import javafx.scene.chart.Axis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,7 +20,6 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
@@ -47,52 +40,36 @@ public class EndgameView  extends Stage{
 		gridSetter();
 
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setScene(new Scene(root, 1450, 800)); //da aggiustare
+		this.setScene(new Scene(root, screen.getHeight(), screen.getWidth())); //da aggiustare
 		Label topLbl = styledLabel("Nome song");
 		this.root.setTop(topLbl);
 		this.root.setAlignment(topLbl, Pos.TOP_CENTER);
 		this.root.setCenter(statPane);
-		//this.root.setBottom(makeChart(stat));
 		Label btmLbl = styledLabel(this.game.getUser() + " has scored " + this.game.getScoreManager().getPoints());
+		
+		
+		Button exitBtn = new Button("Close the game");
+		exitBtn.setStyle("-fx-background-radius: 5em;");
+		exitBtn.setOnMouseClicked(e -> {
+			System.exit(1);
+		});
 		this.root.setBottom(btmLbl);
 		this.root.setAlignment(btmLbl, Pos.BOTTOM_CENTER);
+		this.root.setRight(exitBtn);
+		this.root.setAlignment(exitBtn, Pos.CENTER_LEFT);
+		this.setFullScreen(true);
 		//root.getChildren().add(new Label("EndGame"));
-		drawBackgroundImage();
+		drawBackgroundImage(screen);
 		this.show();
 	}
 
-	private Node makeChart(Map<String, GamePoints> stat) {
-        final Axis yAxis = new NumberAxis();
-        yAxis.setAutoRanging(true);
-        //final NumberAxis xAxis = new NumberAxis();
-        final Axis xAxis = new NumberAxis();
-        xAxis.setAutoRanging(true);
-        final AreaChart<Number,Number> ac = 
-                new AreaChart<Number,Number>(xAxis,yAxis);
-        XYChart.Series seriesApril= new XYChart.Series();
-        
-        System.out.println(stat.keySet());
-        //stat.forEach((k,v) -> new XYChart.Data<>(dateFormat.format(k), v));
-        //stat.forEach((k,v) -> seriesApril.getData().add( new XYChart.Data<>(dateFormat.format(k), v)));
-        stat.forEach((k,v) -> seriesApril.getData().add(
-        		new XYChart.Data<>(k, v)));
+	private void drawBackgroundImage(Dimension screen) {
+		//Image image = new Image(this.getClass().getResource("/image/wallpaper.png").toString());
 
-        ac.getData().add(seriesApril);
+		Image image = new Image(this.getClass().getResource("/wallpaper/uso.png").toString());
+		
 
-		return ac;
-	}
-
-	private String toDate(String key) throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("mm:ss:SSS");
-        Date date = dateFormat.parse(key);
-		return dateFormat.format(date);
-	}
-
-
-	private void drawBackgroundImage() {
-		Image image = new Image(this.getClass().getResource("/image/wallpaper.png").toString());
-
-		BackgroundSize bSize = new BackgroundSize(this.getScene().getWidth(), this.getScene().getHeight(), false, false, true, false);
+		BackgroundSize bSize = new BackgroundSize(screen.getWidth(), screen.getHeight(), false, false, true, false);
 
 	    this.root.setBackground(new Background(new BackgroundImage(image,
 	            BackgroundRepeat.NO_REPEAT,
