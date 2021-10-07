@@ -168,13 +168,13 @@ public class MenuView extends Stage {
 			//new Controller("/beatmaps/normal.osu");
 
 			
-			new Controller(this.username, "/demonSlayer", "/Gurenge[Normal].osu");
+			//new Controller(this.username, "/demonSlayer", "/Gurenge[Normal].osu");
 			//harder
 			//new Controller("/demonSlayer", "/Gurenge[Hard].osu");
 
 			//new Controller("/sindromeRap", "/VirginitySyndrome[Normal].osu");
 			//harder
-			//new Controller("/sindromeRap", "/VirginitySyndrome[Insane].osu");
+			new Controller(this.username, "/sindromeRap", "/VirginitySyndrome[Insane].osu");
 		});
 		
 		this.exitBtn.setOnMouseClicked(e -> {

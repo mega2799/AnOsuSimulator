@@ -8,6 +8,7 @@ import java.util.Map;
 
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GamePoints;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.AreaChart;
@@ -46,15 +47,20 @@ public class EndgameView  extends Stage{
 		gridSetter();
 
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setScene(new Scene(root,screen.getHeight(),screen.getWidth()));
+		this.setScene(new Scene(root, 1450, 800)); //da aggiustare
+		Label n = new Label("NOME SONG");
+		n.setStyle("-fx-font-size: 31pt;"
+				+ "    -fx-font-family: \"Segoe UI Semibold\";"
+				+ "    -fx-text-fill: black;"
+				+ "    -fx-opacity: 0.6;");
 		
-		this.root.setTop(new Label("NOME SONG"));
+		this.root.setTop(n);
+		this.root.setAlignment(n, Pos.TOP_CENTER);
 		this.root.setCenter(statPane);
 		//this.root.setBottom(makeChart(stat));
-		this.root.setBottom(new Label(this.game.getUser() + "has scored" + this.game.getScoreManager().getPoints()));
+		this.root.setBottom(new Label(this.game.getUser() + " has scored " + this.game.getScoreManager().getPoints()));
 		//root.getChildren().add(new Label("EndGame"));
 		drawBackgroundImage();
-		this.setFullScreen(true); //scazza tutto questa roba qua 
 		this.show();
 	}
 
@@ -127,8 +133,6 @@ public class EndgameView  extends Stage{
 			this.statPane.add(new Label(map.get(gp).toString()), 1, i);
 			i++;
 		}
-		//this.statPane.setStyle("/view/gridPane.css");
-		//this.statPane.getStyleClass().add("/view/gridPane.css");
 	}
 
 }

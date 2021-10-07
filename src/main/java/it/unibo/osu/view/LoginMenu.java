@@ -5,6 +5,8 @@ import java.awt.Toolkit;
 import java.io.IOException;
 
 import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.model.Statistic;
+import it.unibo.osu.model.StatisticImpl;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -13,6 +15,7 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.ImageCursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -50,17 +53,24 @@ public class LoginMenu extends Stage {
 		this.scene = new Scene(pane);
 		this.setScene(scene);
 		this.setFullScreen(true);
-
+		
 		drawLogo(this.logo);
 
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
 		drawBackgroundImage(screen);
 	
+		cursorImg();
 		// cambiare el nome a questa qua
 		this.show();
 		//this.setResizable(false);
 			}
+
+
+	private void cursorImg() {
+		Image cursor = new Image(this.getClass().getResourceAsStream("/wallpaper/cursor.png"));
+		this.scene.setCursor(new ImageCursor(cursor));
+	}
 
 
 	private void drawBackgroundImage(Dimension screen) {
@@ -120,6 +130,7 @@ public class LoginMenu extends Stage {
 				}
 
 				MenuView mV = new MenuView(user.getText().toString(), this);
+
 
 				welcome.stopMusic();
 				

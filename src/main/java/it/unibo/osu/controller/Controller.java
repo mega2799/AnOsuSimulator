@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GameStatus;
+import it.unibo.osu.model.StatisticImpl;
 import it.unibo.osu.view.GameView;
 import it.unibo.osu.view.PauseMenuView;
 
@@ -28,6 +29,11 @@ public class Controller {
 	public Controller(final String username, final String name, final String beatmap) {
 		this.game = new GameModel(name + beatmap);
 		this.game.setUser(username);
+
+		StatisticImpl.getStat().addPlayer(username); // singleton (?)
+		StatisticImpl.getStat().setSong(name + beatmap);
+		StatisticImpl.getStat().writeJson();
+
 		this.view = new GameView();
 		//here
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/GameScene.fxml"));
