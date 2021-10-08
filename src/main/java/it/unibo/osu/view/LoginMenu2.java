@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-public class LoginMenu extends Stage {
+public class LoginMenu2 extends Stage {
 	private StackPane pane;
 
 	private AnchorPane ap;
@@ -45,7 +45,7 @@ public class LoginMenu extends Stage {
 	private ImageView logo;
 
 
-	public LoginMenu() {
+	public LoginMenu2() {
 		this.ap = new AnchorPane();
 		this.pane = new StackPane(ap);
 		this.scene = new Scene(pane);
@@ -57,7 +57,13 @@ public class LoginMenu extends Stage {
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
 		drawBackgroundImage(screen);
-
+		//qui giusto:
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/SongMenu.fxml"));
+		try {
+			this.pane.getChildren().add(0,loader.load());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		// cambiare el nome a questa qua
 		this.show();
 	}
@@ -112,6 +118,7 @@ public class LoginMenu extends Stage {
 			//trans1.stop();
 			this.pane.getChildren().add(hb);
 			hb.setAlignment(Pos.CENTER);
+			
 
 			user.setOnAction(es -> {
 				if(!user.getText().toString().equals("")) {
@@ -121,8 +128,12 @@ public class LoginMenu extends Stage {
 
 					Parent root = mV.getPane();
 					Scene scene = this.ap.getScene();
-					FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/SongMenu.fxml"));
-					
+//					FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/SongMenu.fxml"));
+//					try {
+//						this.pane.getChildren().add(0,loader.load());
+//					} catch (IOException e1) {
+//						e1.printStackTrace();
+//					}
 					
 				
 
@@ -146,11 +157,11 @@ public class LoginMenu extends Stage {
 					fade.setOnFinished(eve -> {
 						this.pane.getChildren().remove(ap);
 						//this.pane.getChildren().add(root);
-						try {
-							this.pane.getChildren().add(loader.load());
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
+//						try {
+//							this.pane.getChildren().add(loader.load());
+//						} catch (IOException e1) {
+//							e1.printStackTrace();
+//						}
 						fade.setFromValue(0);
 						fade.setToValue(1);
 						fade.setDuration(Duration.seconds(1));

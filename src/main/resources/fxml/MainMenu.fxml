@@ -1,26 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorPane1" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SongMenuController">
+<AnchorPane fx:id="pane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="it.unibo.osu.view.MainMenuController">
    <children>
-      <Pane fx:id="pane2" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../image/montagneAnimeMenu.jpg" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" layoutX="622.0" layoutY="316.0" prefHeight="434.0" prefWidth="1296.0" scaleShape="false" spacing="25.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <ImageView fx:id="imageView1" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/rainTokyo.png" />
-               </image>
-            </ImageView>
-            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="1126.0" prefHeight="1080.0" prefWidth="794.0" vbarPolicy="NEVER" />
-            <Pane fx:id="upperBorder" layoutX="1126.0" prefHeight="76.0" prefWidth="792.0" />
-            <Pane fx:id="downBorder" layoutX="1126.0" layoutY="1004.0" prefHeight="78.0" prefWidth="792.0" />
+            <StackPane>
+               <children>
+                  <ImageView fx:id="playButton" fitHeight="94.0" fitWidth="1418.0" opacity="0.89" pickOnBounds="true">
+                     <image>
+                        <Image url="@../image/menuButton.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#9de8ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Play" wrappingWidth="240.13671875">
+                     <font>
+                        <Font name="Verdana Italic" size="37.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+            <StackPane>
+               <children>
+                  <ImageView fx:id="PauseButton" fitHeight="94.0" fitWidth="1300.0" opacity="0.89" pickOnBounds="true" style="-fx-image-border-radius: 10;">
+                     <image>
+                        <Image url="@../image/menuButton.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#9de8ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Pause" wrappingWidth="240.13671875">
+                     <font>
+                        <Font name="Verdana Italic" size="37.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+            <StackPane>
+               <children>
+                  <ImageView fx:id="exitButton" fitHeight="94.0" fitWidth="1300.0" opacity="0.89" pickOnBounds="true" style="-fx-image-border-radius: 10;">
+                     <image>
+                        <Image url="@../image/menuButton.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#9de8ff" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit" wrappingWidth="240.13671875">
+                     <font>
+                        <Font name="Verdana Italic" size="37.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
          </children>
-      </Pane>
-      <VBox fx:id="vbox1" layoutX="1126.0" prefHeight="1080.0" prefWidth="794.0" />
+      </VBox>
+      <ImageView fx:id="logo" fitHeight="663.0" fitWidth="676.0" layoutX="190.0" layoutY="219.0" opacity="0.87" pickOnBounds="true" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="1054.0" AnchorPane.topAnchor="219.0">
+         <image>
+            <Image url="@../image/uso_icon2.png" />
+         </image></ImageView>
    </children>
 </AnchorPane>

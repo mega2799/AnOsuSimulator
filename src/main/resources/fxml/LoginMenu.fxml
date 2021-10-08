@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<Scene fx:id="scene" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="it.unibo.osu.view.LoginMenuController">
+   <root>
+      <AnchorPane fx:id="fixedPane" maxHeight="1080.0" maxWidth="1920.0" minHeight="420.0" minWidth="680.0" prefHeight="1080.0" prefWidth="1920.0">
+         <children>
+            <AnchorPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="420.0" minWidth="680.0" prefHeight="1080.0" prefWidth="1920.0">
+               <children>
+                  <ImageView fx:id="background" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../image/rainTokyo.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="icon" fitHeight="690.0" fitWidth="948.0" layoutX="618.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="618.0" AnchorPane.rightAnchor="612.0" AnchorPane.topAnchor="156.0">
+                     <image>
+                        <Image url="@../image/uso_icon2.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="textField" alignment="CENTER" layoutX="854.0" layoutY="598.0" prefHeight="43.0" prefWidth="213.0" promptText="NickName" style="-fx-background-radius: 10; -fx-focus-color: transparent;" visible="false">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </root>
+</Scene>

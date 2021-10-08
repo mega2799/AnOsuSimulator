@@ -43,7 +43,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MenuView extends Stage {
-	private LoginMenu parent;
+	private LoginMenu2 parent;
 	
 	private BorderPane root;
 	
@@ -73,7 +73,7 @@ public class MenuView extends Stage {
 	
 	private static final int BOX_SPACING = 20;
 
-	public MenuView(final String name, final LoginMenu parent) {
+	public MenuView(final String name, final LoginMenu2 parent) {
 		this.parent = parent;
 		this.username = name;
 		this.root = new BorderPane(); // usare construcor super figo qua
