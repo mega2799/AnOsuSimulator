@@ -84,9 +84,10 @@ public class MenuView extends Stage {
 		this.scene = new Scene(root);
 	
 		this.setScene(scene);
-		this.setFullScreen(true);
+		//this.setFullScreen(true);
 		this.full = getCurrentScreen();
 		
+		this.setResizable(true);
 
 		imageOnBackground(getCurrentScreen()); // whole screen
 
@@ -250,8 +251,8 @@ public class MenuView extends Stage {
 		
 		//row 1 
 		Label resolution = new Label("Resolution");
-		resolution .setFont(new Font("Inconsolata Condensed ExtraBold", 30));
-		resolution .setTextFill(Color.WHITE);
+		resolution.setFont(new Font("Inconsolata Condensed ExtraBold", 30));
+		resolution.setTextFill(Color.WHITE);
 		
 		//row 2
 		HBox hb = new HBox(BOX_SPACING);
@@ -298,7 +299,9 @@ public class MenuView extends Stage {
 	
 		full.setOnMouseClicked(e -> {
 			//if(!getCurrentScreen().equals(this.full)) {
-				this.setFullScreen(true);
+				//this.setFullScreen(true);
+			System.out.print(this.full);
+			this.parent.changeResolution(this.full.getWidth(), this.full.getHeight());
 			//}
 		});
 	
@@ -338,9 +341,9 @@ public class MenuView extends Stage {
 
 	private Dimension getCurrentScreen() {
 		//questo cast non convince  e poi forse non fuzniona
-		System.out.println(new Dimension((int)this.parent.getScene().getHeight(), (int)this.parent.getScene().getWidth()));
-		return new Dimension((int)this.parent.getScene().getHeight(), (int)this.parent.getScene().getWidth());
-		//return Toolkit.getDefaultToolkit().getScreenSize();
+		//System.out.println(new Dimension((int)this.parent.getScene().getHeight(), (int)this.parent.getScene().getWidth()));
+		//return new Dimension((int)this.parent.getScene().getHeight(), (int)this.parent.getScene().getWidth());
+		return Toolkit.getDefaultToolkit().getScreenSize();
 	}
 	
 	public BorderPane getPane() {

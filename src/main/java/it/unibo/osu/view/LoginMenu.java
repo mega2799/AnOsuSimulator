@@ -52,18 +52,22 @@ public class LoginMenu extends Stage {
 		this.pane = new StackPane(ap);
 		this.scene = new Scene(pane);
 		this.setScene(scene);
-		this.setFullScreen(true);
+		
+		//this.setFullScreen(true);
 		
 		drawLogo(this.logo);
 
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		//changeResolution(screen.getWidth(), screen.getHeight());
+		this.setWidth(screen.getWidth());
+		this.setHeight(screen.getHeight());
 
 		drawBackgroundImage(screen);
 	
 		cursorImg();
-		// cambiare el nome a questa qua
 		this.show();
-		//this.setResizable(false);
+		this.setResizable(true);
 			}
 
 
@@ -161,11 +165,16 @@ public class LoginMenu extends Stage {
 	// va tenuta qua perche questo è lo stage che rimane attivo 
 	public void changeResolution(double width,double height) {
 		// lo scale fa vedere l' immagine sotto lo stage, qualcosa non torna
+		//Scale scale = new Scale(width/this.pane.getWidth(),height/this.pane.getHeight());
+		/*
 		Scale scale = new Scale(width/this.pane.getWidth(),height/this.pane.getHeight());
 		this.pane.getTransforms().add(scale);
 		this.pane.setPrefHeight(height);
 		this.pane.setPrefWidth(width);
 		this.sizeToScene();
+		*/
+		this.setWidth(width);
+		this.setHeight(height);
 	}
 
 
