@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Scale;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class LoginMenuController extends Resizeable {
@@ -43,14 +44,16 @@ public class LoginMenuController extends Resizeable {
     private MusicControllerImpl welcomeMusic;
     private FadeTransition fadeout;
     private FXMLLoader loader;
+    private Stage stage;
     
 
 	
-	public void init(){
+	public void init(Stage stage){
+		this.stage = stage;
 		loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
 		try {
 			this.fixedPane.getChildren().add(0,loader.load());
-			((MainMenuController) loader.getController()).init();
+			((MainMenuController) loader.getController()).init(stage);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -102,5 +105,11 @@ public class LoginMenuController extends Resizeable {
 			this.fadeout.play();
 		});
 	}
+	@Override
+	public void changeResolution(Pane pane, double width, double height) {
+		super.changeResolution(pane, width, height);
+		this.stage.sizeToScene();
+	}
+	
 	
 }

@@ -1,25 +1,49 @@
 package it.unibo.osu.view;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class MainMenuController extends Resizeable{
 
+    private static final int BOX_SPACING = 20;
+    
     @FXML
-    private ImageView PauseButton;
+    private StackPane optionPane;
+    
+	@FXML
+    private StackPane optionButton;
+	
+	@FXML
+	private StackPane playButton;
 
     @FXML
-    private ImageView exitButton;
+    private StackPane exitButton;
 
     @FXML
     private ImageView icon;
@@ -27,15 +51,21 @@ public class MainMenuController extends Resizeable{
     @FXML
     private AnchorPane pane;
 
-    @FXML
-    private ImageView playButton;
+  
 
 	private ScaleTransition iconTrans;
 	private Pane fixedPane;
 	private FadeTransition fadeout;
+	private Stage stage;
+
+	private FadeTransition fadeoutOption;
+	private FadeTransition fadeinOption;
+	private HBox options;
+
 	
     
-    public void init() {
+    public void init(Stage stage) {
+    	this.stage = stage;
     	FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/SongMenu.fxml"));
 		try {
 			fixedPane = ((Pane)this.pane.getParent());
@@ -46,7 +76,7 @@ public class MainMenuController extends Resizeable{
     	this.setInputHandlers();
 		this.initializeTransitions();
 		this.initializeSounds();
-		this.iconTrans.play();
+		this.gameOptions();
     }
 
 	private void initializeSounds() {
@@ -60,11 +90,43 @@ public class MainMenuController extends Resizeable{
 		this.playButton.setOnMouseClicked(playEvent -> {
 			this.fadeout.play();
 		});
+		this.optionButton.setOnMouseClicked(optionsEvent -> {
+			if( this.options.getOpacity()==1) {
+				this.fadeoutOption.play();
+			} else {
+				this.fadeinOption.play();
+			}
+		});
+		this.exitButton.setOnMouseEntered(e1 -> {
+			buttonEffect((Node)this.exitButton, MouseEvent.MOUSE_ENTERED);
+			});
+		this.exitButton.setOnMouseExited(e2 -> {
+			buttonEffect((Node)this.exitButton, MouseEvent.MOUSE_EXITED);
+		});
+		this.optionButton.setOnMouseEntered(e3 -> {
+			buttonEffect((Node)this.optionButton, MouseEvent.MOUSE_ENTERED);
+			});
+		this.optionButton.setOnMouseExited(e4 -> {
+			buttonEffect((Node)this.optionButton, MouseEvent.MOUSE_EXITED);
+		});
+		this.playButton.setOnMouseEntered(e5 -> {
+			buttonEffect((Node)this.playButton, MouseEvent.MOUSE_ENTERED);
+			});
+		this.playButton.setOnMouseExited(e6 -> {
+			buttonEffect((Node)this.playButton, MouseEvent.MOUSE_EXITED);
+		});
 	}
-
+	private void buttonEffect(Node node, EventType<MouseEvent> mouseEntered) {
+		if( mouseEntered.equals(MouseEvent.MOUSE_ENTERED)) {
+			node.setTranslateX(50);
+		} else {
+			node.setTranslateX(-50);
+		}
+	}
 	private void initializeTransitions() {
 		this.iconTrans = new ScaleTransition();
 		this.iconTrans.setNode(this.icon);
+
 		this.iconTrans.setAutoReverse(true);
 		this.iconTrans.setCycleCount(Animation.INDEFINITE);
 		this.iconTrans.setDuration(Duration.seconds(1));
@@ -85,5 +147,91 @@ public class MainMenuController extends Resizeable{
 			this.fadeout.setOnFinished(null);
 			this.fadeout.playFromStart();
 		});
+	}
+	public void startAnimation() {
+		this.iconTrans.play();
+		//effetti sonori magari
+	}
+	private void gameOptions() {
+		this.options = new HBox(BOX_SPACING);
+		this.options.setOpacity(0.);
+		
+		this.fadeoutOption = new FadeTransition(Duration.seconds(2), options);
+		fadeoutOption.setFromValue(1.0);
+		fadeoutOption.setToValue(0);
+
+		this.fadeinOption = new FadeTransition(Duration.seconds(2), options);
+		this.fadeinOption.setFromValue(0);
+		this.fadeinOption.setToValue(1);
+		
+		//row 1 
+		Label resolution = new Label("Resolution");
+		resolution .setFont(new Font("Inconsolata Condensed ExtraBold", 30));
+		resolution .setTextFill(Color.WHITE);
+		
+		//row 2
+		HBox hb = new HBox(BOX_SPACING);
+		Button full = new NeonButton("Full screen").getButton();
+		Button medium = new NeonButton("1920x1080").getButton();
+		Button quadratic = new NeonButton("700x400").getButton();
+
+		hb.getChildren().addAll(full, medium, quadratic);
+		options.getChildren().addAll(resolution, hb);
+
+		//row 3 
+		Label showFPS = new Label("Show FPS on Game");
+		showFPS.setFont(new Font("Inconsolata Condensed ExtraBold", 30));
+		showFPS.setTextFill(Color.WHITE);
+		
+
+		//row 4 
+		HBox hb1 = new HBox(BOX_SPACING);
+		Button yes = new NeonButton("Yes").getButton();
+		Button no = new NeonButton("No").getButton();
+		
+		hb1.getChildren().addAll(yes, no);
+		options.getChildren().addAll(showFPS, hb1);
+
+		//row 5 
+		Label volume = new Label("Volume");
+		volume.setFont(new Font("Inconsolata Condensed ExtraBold", 30));
+		volume.setTextFill(Color.WHITE);
+		//row 6
+		Slider slider = new Slider(0, 1, 100);	
+		
+		options.getChildren().addAll(volume, slider);
+		
+	
+		//row 7 
+		Label volumeSfx = new Label("Volume effetti");
+		volumeSfx.setFont(new Font("Inconsolata Condensed ExtraBold", 30));
+		volumeSfx.setTextFill(Color.WHITE);
+		//row 8
+		Slider sliderSfx = new Slider(0, 100, 1);	
+		
+		options.getChildren().addAll(volumeSfx, sliderSfx);
+		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		full.setOnMouseClicked(e -> {
+			this.changeResolution(this.fixedPane, screenSize.width, screenSize.height);
+		});
+	
+		
+		medium.setOnMouseClicked(e -> {
+			this.changeResolution(this.fixedPane, 1920, 1080);
+		});
+		
+		quadratic.setOnMouseClicked(e -> {
+			this.changeResolution(this.fixedPane, 640, 480);
+		});
+		
+		this.optionPane.setPadding(new Insets(0, 0, 0, 30));
+		this.optionPane.getChildren().add(options);
+	}
+	
+	@Override
+	public void changeResolution(Pane pane, double width, double height) {
+		super.changeResolution(pane, width, height);
+		this.stage.sizeToScene();
 	}
 }

@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<Scene fx:id="scene" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="it.unibo.osu.view.LoginMenuController">
+<Scene fx:id="scene" fill="BLACK" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.osu.view.LoginMenuController">
    <root>
-      <AnchorPane fx:id="fixedPane" maxHeight="1080.0" maxWidth="1920.0" minHeight="420.0" minWidth="680.0" prefHeight="1080.0" prefWidth="1920.0">
+      <AnchorPane fx:id="fixedPane" maxHeight="1080.0" maxWidth="1920.0" minHeight="480.0" minWidth="640.0" prefHeight="1080.0" prefWidth="1920.0">
          <children>
-            <AnchorPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="420.0" minWidth="680.0" prefHeight="1080.0" prefWidth="1920.0">
+            <AnchorPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="480.0" minWidth="640.0" prefHeight="1080.0" prefWidth="1920.0">
                <children>
                   <ImageView fx:id="background" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <image>

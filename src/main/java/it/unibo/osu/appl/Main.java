@@ -15,8 +15,9 @@ public class Main extends Application{
 		//new LoginMenu2();
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/LoginMenu.fxml"));
 		myStage.setScene(loader.load());
-		((LoginMenuController)loader.getController()).init();
+		((LoginMenuController)loader.getController()).init(myStage);
 		myStage.show();
+		
 	}
 
 	public static void main(String[] args) {
