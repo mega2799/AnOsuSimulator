@@ -1,11 +1,16 @@
 package it.unibo.osu.controller;
 
+import java.io.IOException;
+
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.util.Clock;
+import it.unibo.osu.view.EndGameController;
 import it.unibo.osu.view.EndgameView;
 import it.unibo.osu.view.GameSceneController;
 import it.unibo.osu.view.GameView;
 import javafx.animation.AnimationTimer;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 
 public class GameLoop extends AnimationTimer {
 	private GameModel game;
@@ -50,7 +55,22 @@ public class GameLoop extends AnimationTimer {
 			// da implementare, aprir� una nuova scena o stage finale.
 			this.view.close();
 			///new EndgameView(this.game.getOsuClock().getTimeStatistic()); // passare map del clock in qualche modo 
-			new EndgameView(this.game);
+			//new EndgameView(this.game);
+			
+				
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/endGame.fxml"));
+			
+			try {
+				((Stage)loader.load()).show();
+				EndGameController ed = ((EndGameController) loader.getController());
+				ed.init(this.game);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+
+			
 			this.stop();
 			this.previous = now;
 			break;

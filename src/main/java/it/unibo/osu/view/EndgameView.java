@@ -5,6 +5,7 @@ import java.util.Map;
 
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GamePoints;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 public class EndgameView  extends Stage{
 	private BorderPane root;
@@ -33,6 +35,10 @@ public class EndgameView  extends Stage{
 	private GameModel game;
 
 	public EndgameView(final GameModel game) {
+	
+		
+		/*
+		
 		this.game = game;
 		this.root = new BorderPane();
 		this.statPane = new GridPane();
@@ -61,6 +67,8 @@ public class EndgameView  extends Stage{
 		//root.getChildren().add(new Label("EndGame"));
 		drawBackgroundImage(screen);
 		this.show();
+		
+		*/
 	}
 
 	private void drawBackgroundImage(Dimension screen) {

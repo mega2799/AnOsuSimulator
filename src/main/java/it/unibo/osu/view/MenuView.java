@@ -175,7 +175,9 @@ public class MenuView extends Stage {
 
 			//new Controller("/sindromeRap", "/VirginitySyndrome[Normal].osu");
 			//harder
+			
 			new Controller(this.username, "/sindromeRap", "/VirginitySyndrome[Insane].osu");
+						
 		});
 		
 		this.exitBtn.setOnMouseClicked(e -> {

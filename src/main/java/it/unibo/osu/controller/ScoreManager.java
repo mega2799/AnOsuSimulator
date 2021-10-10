@@ -9,7 +9,7 @@ import it.unibo.osu.model.Score;
 public class ScoreManager implements HitActionObserver{
 
 	private Score score;
-
+	
 	private Map<GamePoints, Integer> statistic = new HashMap<>(){{
 		put(GamePoints.MISS,0);
 		put(GamePoints.OK,0);
