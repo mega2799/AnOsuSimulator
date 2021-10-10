@@ -61,7 +61,7 @@
             </StackPane>
          </children>
       </VBox>
-      <ImageView fx:id="logo" fitHeight="663.0" fitWidth="676.0" layoutX="190.0" layoutY="219.0" opacity="0.87" pickOnBounds="true" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="1054.0" AnchorPane.topAnchor="219.0">
+      <ImageView fx:id="icon" fitHeight="663.0" fitWidth="676.0" layoutX="190.0" layoutY="219.0" opacity="0.87" pickOnBounds="true" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="1054.0" AnchorPane.topAnchor="219.0">
          <image>
             <Image url="@../image/uso_icon2.png" />
          </image></ImageView>

@@ -103,6 +103,7 @@ public class LoginMenuController extends Resizeable {
 		});
 		this.textField.setOnAction(ev -> {
 			this.fadeout.play();
+			((MainMenuController) loader.getController()).startAnimation();
 		});
 	}
 	@Override

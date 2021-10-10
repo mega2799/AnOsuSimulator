@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import it.unibo.osu.view.LoginMenu2;
 import it.unibo.osu.view.LoginMenuController;
 
@@ -16,6 +17,7 @@ public class Main extends Application{
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/LoginMenu.fxml"));
 		myStage.setScene(loader.load());
 		((LoginMenuController)loader.getController()).init(myStage);
+		//myStage.initStyle(StageStyle.UNDECORATED);
 		myStage.show();
 		
 	}
