@@ -285,6 +285,7 @@ public class MenuView extends Stage {
 		volume.setTextFill(Color.WHITE);
 		//row 6
 		Slider slider = new Slider(0, 1, 100);	
+
 		
 		options.getChildren().addAll(volume, slider);
 		

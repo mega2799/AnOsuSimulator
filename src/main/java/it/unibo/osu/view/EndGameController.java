@@ -1,5 +1,9 @@
 package it.unibo.osu.view;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -10,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -40,10 +45,12 @@ public class EndGameController {
     private Label gameScore;
 
     @FXML
+    private Label multi;
+
+    @FXML
     private VBox historyBox;
     
-    @FXML
-    private ImageView encouragingImage;
+    private ImageView rikkaGif;
     
 	private Map<GamePoints, Integer> map;
     
@@ -52,7 +59,18 @@ public class EndGameController {
 		this.map = game.getScoreManager().getStatistic();
 		this.username.setText(game.getUser());
 		this.gameScore.setText(String.valueOf(game.getScoreManager().getPoints()));
+		this.multi.setText(String.valueOf(game.getScoreManager().getScore().getMaxMultiplier()) + "x");
 		writeOnGrid();
+
+		// non vuole farla vedere
+ 		try {
+			this.rikkaGif = new ImageView(new Image(Files.newInputStream(Paths.get("src/main/resources/gif/rikka-takanashi-takanashi-rikka.gif"))));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.ap.getChildren().addAll(this.rikkaGif);
+
 	}
 
 	/*

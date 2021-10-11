@@ -155,11 +155,24 @@
                   </effect>
                </Label>
                <VBox fx:id="historyVBox" layoutX="667.0" layoutY="87.0" prefHeight="276.0" prefWidth="167.0" />
-               <ImageView fx:id="encouragingImage" fitHeight="262.0" fitWidth="220.0" layoutX="381.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../gif/rikka-takanashi-takanashi-rikka.gif" />
-                  </image>
-               </ImageView>
+               <Label alignment="CENTER" layoutX="358.0" layoutY="292.0" prefHeight="47.0" prefWidth="270.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="longest streak" textFill="#ebebeb">
+                  <effect>
+                     <InnerShadow height="29.79" radius="13.6625" width="26.86">
+                        <color>
+                           <Color opacity="0.699999988079071" />
+                        </color>
+                     </InnerShadow>
+                  </effect>
+               </Label>
+               <Label fx:id="multi" alignment="CENTER" layoutX="369.0" layoutY="342.0" prefHeight="47.0" prefWidth="237.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="234" textFill="#ebebeb">
+                  <effect>
+                     <InnerShadow height="29.79" radius="13.6625" width="26.86">
+                        <color>
+                           <Color opacity="0.699999988079071" />
+                        </color>
+                     </InnerShadow>
+                  </effect>
+               </Label>
             </children></AnchorPane>
         </Scene>
     </scene>
