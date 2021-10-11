@@ -19,11 +19,10 @@ public class GameLoop extends AnimationTimer {
 	private MusicController musicController;
 	private long previous;
 
-	public GameLoop(GameModel game, GameView view, GameSceneController sceneController, MusicController musicController) {
+	public GameLoop(GameModel game, GameView view, GameSceneController sceneController) {
 		this.game = game;
 		this.view = view;
 		this.sceneController = sceneController;
-		this.musicController = musicController;
 		this.previous = System.nanoTime();
 		this.start();
 	}
@@ -38,12 +37,14 @@ public class GameLoop extends AnimationTimer {
 		switch(this.game.getStatus()) {
 		case START:
 			this.game.initGameOnStart();
-			this.musicController.startMusic();
+			MusicControllerImpl.getAudio().startMusic();
+			//MusicControllerImpl.startMusic();
 			this.previous = now;
 			break;
 		case RUNNING:
 			if( this.game.isGameOver()) {
-				this.musicController.stopMusic();
+				//this.musicController.stopMusic();
+				MusicControllerImpl.getAudio().stopMusic();
 				break;
 			}
 			this.tick(t,now); //conversione da nano a millisec

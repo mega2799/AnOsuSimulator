@@ -96,8 +96,11 @@ public class MenuView extends Stage {
 		//makeLogo(this.mainLogo); // center 
 		setAvatar(name); //top
 		
+		/*
 		this.ost = new MusicControllerImpl("/music/menuOst.wav");
 		this.ost.startMusic();
+		*/
+		MusicControllerImpl.getAudio().setSong("/music/menuOst.wav");
 	}
 
 	private void setAvatar(String name) {
@@ -163,7 +166,7 @@ public class MenuView extends Stage {
 		});
 		
 		this.playBtn.setOnMouseClicked(e -> {
-			this.ost.stopMusic();
+			//this.ost.stopMusic();
 			//this.root.setRight(scrollableSongList(this.songList));
 			//new Controller("/beatmaps/legendsNeverDie.osu");
 			//new Controller("/beatmaps/normal.osu");
@@ -171,12 +174,12 @@ public class MenuView extends Stage {
 			
 			//new Controller(this.username, "/demonSlayer", "/Gurenge[Normal].osu");
 			//harder
-			//new Controller("/demonSlayer", "/Gurenge[Hard].osu");
+			new Controller(this.username, "/demonSlayer", "/Gurenge[Hard].osu");
 
 			//new Controller("/sindromeRap", "/VirginitySyndrome[Normal].osu");
 			//harder
 			
-			new Controller(this.username, "/sindromeRap", "/VirginitySyndrome[Insane].osu");
+			//new Controller(this.username, "/sindromeRap", "/VirginitySyndrome[Insane].osu");
 						
 		});
 		
@@ -216,7 +219,8 @@ public class MenuView extends Stage {
 		scroll.getStylesheets().add("/view/style.css");
 
 		scroll.vvalueProperty().addListener(new ChangeListener<Number>() {
-        @Override
+        
+		@Override
         public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
             //System.out.println("observable " + observable + " oldValue " + oldValue + " " + "newValue " + newValue);
             double hmin = scroll.getHmin();
@@ -285,7 +289,7 @@ public class MenuView extends Stage {
 		volume.setTextFill(Color.WHITE);
 		//row 6
 		Slider slider = new Slider(0, 1, 100);	
-
+		
 		
 		options.getChildren().addAll(volume, slider);
 		

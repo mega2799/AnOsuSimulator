@@ -10,7 +10,42 @@ import javafx.util.Duration;
 public class MusicControllerImpl extends AbstractSubject implements MusicController {
 
 	private MediaPlayer audioMedia;
+
 	private GameModel game;
+	/*
+	 * Volume range is (0, 1)
+	 */
+	private double level = 1;
+	
+	private final static MusicControllerImpl AUDIOPLAYER = new MusicControllerImpl();
+	
+	
+	public static MusicControllerImpl getAudio() { //anche final ????
+		return AUDIOPLAYER;
+	}
+	
+	public void setVolume(double level) {
+		this.level = level;
+		AUDIOPLAYER.audioMedia.setVolume(level);
+	}
+	
+	public void setSong(String name) {
+		try {
+			if(AUDIOPLAYER.audioMedia != null) {
+				AUDIOPLAYER.stopMusic();
+			}
+			AUDIOPLAYER.audioMedia = new MediaPlayer(new Media(this.getClass().getResource(name).toURI().toString()));
+			this.setVolume(this.level);
+			AUDIOPLAYER.startMusic();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public MusicControllerImpl() {
+	}
+
 	public MusicControllerImpl(final String name) {
 		//this.audioMedia = new MediaPlayer(new Media(new File(this.getClass().getResource(name).toString()).toString()));
 

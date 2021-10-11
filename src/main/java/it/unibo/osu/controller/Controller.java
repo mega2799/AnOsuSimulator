@@ -23,7 +23,6 @@ public class Controller {
 	private final GameModel game;
 	private final Robot robot;
 	private final PauseMenuView pauseMenu;
-	private final MusicControllerImpl musicController;
 
 	// name sarebbe il package :::
 	public Controller(final String username, final String name, final String beatmap) {
@@ -52,13 +51,16 @@ public class Controller {
 		this.robot = new Robot();
 		this.pauseMenu = new PauseMenuView();
 		//qui bisogna passare il nome della song giustamente 
-		//this.musicController = new MusicControllerImpl("/tracks/joshiraku.wav", this.game);
-		//this.musicController = new MusicControllerImpl("/tracks/demonSlayer.wav", this.game);
-		this.musicController = new MusicControllerImpl(name + "/audio.wav", this.game);
+		
+		//this.musicController = new MusicControllerImpl(name + "/audio.wav", this.game);
+		MusicControllerImpl.getAudio().setSong(name + "/audio.wav");
+		
+		
 		this.setInputHandler();
 		
-		//new GameLoop(this.game, this.view, this.musicController);
-		new GameLoop(this.game, this.view, this.sceneController, this.musicController);
+		//new GameLoop(this.game, this.view, this.sceneController, this.musicController);
+
+		new GameLoop(this.game, this.view, this.sceneController);
 	}
 	
 	private void setInputHandler() {
@@ -68,7 +70,8 @@ public class Controller {
 				case SPACE: 
 					this.game.setPause();
 
-					this.musicController.pauseMusic();
+					//this.musicController.pauseMusic();
+					MusicControllerImpl.getAudio().pauseMusic();
 
 					if(!this.pauseMenu.isShowing()) {
 						this.pauseMenu.show();
@@ -93,7 +96,8 @@ public class Controller {
 			if(e.getCode().equals(KeyCode.SPACE) && this.pauseMenu.isShowing()) {
 				this.pauseMenu.close();
 			}
-			this.musicController.startMusic();
+			//this.musicController.startMusic();
+			MusicControllerImpl.getAudio().startMusic();
 			this.game.setPause();
 		});
 	}

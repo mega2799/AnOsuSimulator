@@ -68,7 +68,7 @@ public class LoginMenu extends Stage {
 		cursorImg();
 		this.show();
 		this.setResizable(true);
-			}
+	}
 
 
 	private void cursorImg() {
@@ -114,9 +114,12 @@ public class LoginMenu extends Stage {
 
 		this.pane.getChildren().add(logoImage);
 		StackPane.setAlignment(logoImage, Pos.CENTER);
-		
+	/*	
 		MusicControllerImpl welcome = new MusicControllerImpl("/music/welcome_sound.wav");
 		welcome.startMusic();
+	*/
+		MusicControllerImpl.getAudio().setSong("/music/welcome_sound.wav");
+		MusicControllerImpl.getAudio().setVolume(.2);
 
 		logoImage.setOnMouseClicked(e -> {
 			final TextField user = new TextField();
@@ -136,7 +139,7 @@ public class LoginMenu extends Stage {
 				MenuView mV = new MenuView(user.getText().toString(), this);
 
 
-				welcome.stopMusic();
+				//welcome.stopMusic();
 				
 			        Parent root = mV.getPane();
 				  	Scene scene = this.ap.getScene();
