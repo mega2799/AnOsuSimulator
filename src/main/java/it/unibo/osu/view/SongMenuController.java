@@ -1,9 +1,15 @@
 package it.unibo.osu.view;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.unibo.osu.controller.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,20 +44,34 @@ public class SongMenuController implements Initializable {
     @FXML
     private Pane downBorder;
     
-    
+    private List<AnchorPane> songButtons;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    	this.songButtons = new ArrayList<>();
     	this.scrollPane.setContent(vbox1);	
     	this.scrollPane.getStylesheets().add("/view/style.css");
-    	try {
-    		for(int i=0;i<10;i++) {
+    	this.initializeButtons();
+    }
+    
+    public List<AnchorPane> getSongButtons(){
+    	return this.songButtons;
+    }
+    
+    private void initializeButtons() {
+    	File[] files = new File(this.getClass().getResource("/beatmaps").getPath()).listFiles();
+    	for(File file: files) {
+    		try {
     			FXMLLoader loader = new FXMLLoader();
     			loader.setLocation(this.getClass().getResource("/fxml/Song.fxml"));
-    			this.vbox1.getChildren().add(loader.load());
+    			AnchorPane song = loader.load();
+    			((SongButtonController) loader.getController()).init(file.getName());
+    			songButtons.add(song);
+    			this.vbox1.getChildren().add(song);
+    		} catch (IOException e) {
+    			e.printStackTrace();
     		}
-    	} catch (IOException e) {
-    		e.printStackTrace();
     	}
     }
+   
 }

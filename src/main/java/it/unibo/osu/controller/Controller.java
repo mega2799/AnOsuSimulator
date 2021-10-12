@@ -14,20 +14,22 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 
 import javafx.scene.robot.Robot;
+import javafx.stage.Stage;
 import it.unibo.osu.view.GameSceneController;
 
 public class Controller {
-	private final GameView view;
+	private final Stage view;
 	private  GameSceneController sceneController;
 	private final GameModel game;
 	private final Robot robot;
 	private final PauseMenuView pauseMenu;
 	private final MusicControllerImpl musicController;
 	
-	public Controller(final String name) {
-		this.game = new GameModel(name);
+	public Controller(final String name, Stage stage) {
+		this.game = new GameModel("/beatmaps/" + name);
 
-		this.view = new GameView();
+		this.view = stage;
+//		this.view = new GameView();
 		//here
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/GameScene.fxml"));
 		
@@ -46,7 +48,8 @@ public class Controller {
 		this.pauseMenu = new PauseMenuView();
 		//qui bisogna passare il nome della song giustamente 
 		//this.musicController = new MusicControllerImpl("/tracks/joshiraku.wav", this.game);
-		this.musicController = new MusicControllerImpl("/tracks/demonSlayer.wav", this.game);
+//		this.musicController = new MusicControllerImpl("/tracks/demonSlayer.wav", this.game);
+		this.musicController = new MusicControllerImpl("/tracks/" + this.game.getBeatMap().getSongName().stripLeading(), this.game);
 		this.setInputHandler();
 		
 		//new GameLoop(this.game, this.view, this.musicController);

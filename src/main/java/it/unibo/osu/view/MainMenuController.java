@@ -1,31 +1,39 @@
 package it.unibo.osu.view;
 
 import java.awt.Dimension;
+import java.awt.List;
 import java.awt.Toolkit;
 import java.io.IOException;
-
+import java.util.Arrays;
+import java.util.Collections;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -50,7 +58,10 @@ public class MainMenuController extends Resizeable{
 
     @FXML
     private AnchorPane pane;
-
+    
+    private ScrollPane scrollPane;
+    @FXML 
+    private VBox vboxButtons;
   
 
 	private ScaleTransition iconTrans;
@@ -62,6 +73,18 @@ public class MainMenuController extends Resizeable{
 	private FadeTransition fadeinOption;
 	private HBox options;
 
+	private TranslateTransition iconTranslateTransition;
+
+	private FadeTransition menuOptionsFadeout;
+
+	private ParallelTransition playEventParallelTransition;
+
+	private FadeTransition songListFadeInTransition;
+
+	private TranslateTransition songListTranslateTransition;
+
+//	private ScaleTransition scaleIconTransition;
+
 	
     
     public void init(Stage stage) {
@@ -69,10 +92,15 @@ public class MainMenuController extends Resizeable{
     	FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/SongMenu.fxml"));
 		try {
 			fixedPane = ((Pane)this.pane.getParent());
-			fixedPane.getChildren().add(0,loader.load());
+//			fixedPane.getChildren().add(0,loader.load());
+			this.scrollPane = (ScrollPane)loader.load();
+			this.scrollPane.setLayoutX(-this.fixedPane.getPrefWidth());
+			this.scrollPane.setOpacity(0);
+			this.pane.getChildren().add(this.scrollPane);
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
     	this.setInputHandlers();
 		this.initializeTransitions();
 		this.initializeSounds();
@@ -88,7 +116,9 @@ public class MainMenuController extends Resizeable{
 			System.exit(0);
 		});
 		this.playButton.setOnMouseClicked(playEvent -> {
-			this.fadeout.play();
+//			this.fadeout.play();
+			this.playEventParallelTransition.play();
+			
 		});
 		this.optionButton.setOnMouseClicked(optionsEvent -> {
 			if( this.options.getOpacity()==1) {
@@ -147,6 +177,37 @@ public class MainMenuController extends Resizeable{
 			this.fadeout.setOnFinished(null);
 			this.fadeout.playFromStart();
 		});
+		
+		this.menuOptionsFadeout = new FadeTransition(Duration.seconds(2), this.vboxButtons);
+		this.menuOptionsFadeout.setToValue(0);
+		this.menuOptionsFadeout.setFromValue(1);
+		
+		this.iconTranslateTransition = new TranslateTransition(Duration.seconds(3), this.icon);
+		this.iconTranslateTransition.setToX(1000);
+		
+		this.songListFadeInTransition = new FadeTransition(Duration.seconds(5), this.scrollPane);
+		this.songListFadeInTransition.setToValue(1);
+		
+		this.songListTranslateTransition = new TranslateTransition(Duration.seconds(4), this.scrollPane);
+		this.songListTranslateTransition.setToX(this.fixedPane.getPrefWidth());
+//		this.scaleIconTransition = new ScaleTransition(Duration.seconds(3),this.icon);
+//		
+//		this.scaleIconTransition.setToX(0.5);
+//		this.scaleIconTransition.setToY(0.5);
+		
+//		this.scaleIconTransition.setOnFinished(ev -> {
+//			this.iconTrans.playFromStart();		
+//		});
+		
+		this.playEventParallelTransition = new ParallelTransition(this.iconTranslateTransition, this.menuOptionsFadeout, this.songListFadeInTransition, 
+				this.songListTranslateTransition);
+//		this.playEventParallelTransition = new ParallelTransition(this.iconTranslateTransition, this.menuOptionsFadeout, this.songListFadeInTransition, 
+//				this.songListTranslateTransition, this.scaleIconTransition);
+		
+		//fare comparire i bottoni uno dopo l altro?
+//		Animation[] animations = this.scrollPane.getContent()
+//		this.playEventParallelTransition.getChildren().addAll()
+		
 	}
 	public void startAnimation() {
 		this.iconTrans.play();

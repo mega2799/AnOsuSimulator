@@ -15,7 +15,7 @@
             <Image url="@../image/montagneAnimeMenu.jpg" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER" layoutX="622.0" layoutY="316.0" prefHeight="434.0" prefWidth="1296.0" scaleShape="false" spacing="25.0" AnchorPane.rightAnchor="0.0">
+      <VBox fx:id="vboxButtons" alignment="CENTER" layoutX="622.0" layoutY="316.0" prefHeight="434.0" prefWidth="1296.0" scaleShape="false" spacing="25.0" AnchorPane.rightAnchor="0.0">
          <children>
             <StackPane fx:id="playButton">
                <children>

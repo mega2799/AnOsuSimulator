@@ -1,7 +1,7 @@
 osu file format v14
 
 [General]
-AudioFilename: audio.mp3
+AudioFilename: demonSlayer.wav
 AudioLeadIn: 0
 PreviewTime: 60390
 Countdown: 0
@@ -19,7 +19,7 @@ GridSize: 32
 TimelineZoom: 1.6
 
 [Metadata]
-Title:Legends Never Die (ft. Against The Current)
+Title:Legends Never Die 
 TitleUnicode:Legends Never Die (ft. Against The Current)
 Artist:League of Legends
 ArtistUnicode:League of Legends

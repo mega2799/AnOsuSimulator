@@ -21,6 +21,7 @@ public class BeatMap {
 	private String songName;
 	private List<List<Double>> breakTimes;
 	private double startingTime;
+	private String beatmapName;
 	
 	public BeatMap(String fileName) {
 
@@ -35,6 +36,7 @@ public class BeatMap {
 			this.songName = reader.getOptionMap(BeatmapOptions.GENERAL).get("AudioFilename");
 			this.breakTimes = reader.getBreakTimes();
 			this.startingTime = reader.getStartingTime();
+			this.beatmapName = reader.getOptionMap(BeatmapOptions.METADATA).get("Title");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 		
@@ -74,6 +76,10 @@ public class BeatMap {
 
 	public double getStartingTime() {
 		return startingTime;
+	}
+
+	public String getBeatmapName() {
+		return beatmapName;
 	}
 
 }

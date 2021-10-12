@@ -55,6 +55,7 @@ public class GameSceneController{
     
      public void  render() {
     	this.lifebar.setProgress(this.game.getLifeBar().getHp()/LifeBar.MAXHP);
+    	System.out.println(this.game.getLifeBar().getHp()/LifeBar.MAXHP);
     	ScoreManager scoreManager = this.game.getScoreManager();
     	this.multiplier.setText("x" + Integer.toString(scoreManager.getMultiplier()));
     	this.points.setText(Integer.toString(scoreManager.getPoints()));

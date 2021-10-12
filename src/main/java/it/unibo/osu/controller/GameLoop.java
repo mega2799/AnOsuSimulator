@@ -1,19 +1,23 @@
 package it.unibo.osu.controller;
 
+import java.io.IOException;
+
 import it.unibo.osu.model.GameModel;
 
 import it.unibo.osu.view.EndgameView;
 import it.unibo.osu.view.GameSceneController;
 import it.unibo.osu.view.GameView;
 import javafx.animation.AnimationTimer;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 
 public class GameLoop extends AnimationTimer {
 	private GameModel game;
-	private GameView view;  // <-- forse meglio passare solo controller, con file fxml che ha dentro anche stage così da fare getStage all occorrenza
+	private Stage view;  // <-- forse meglio passare solo controller, con file fxml che ha dentro anche stage così da fare getStage all occorrenza
 	private GameSceneController sceneController;
 	private MusicController musicController;
 	private long previous;
-	public GameLoop(GameModel game, GameView view, GameSceneController sceneController, MusicController musicController) {
+	public GameLoop(GameModel game, Stage view, GameSceneController sceneController, MusicController musicController) {
 		this.game = game;
 		this.view = view;
 		this.sceneController = sceneController;
@@ -48,6 +52,7 @@ public class GameLoop extends AnimationTimer {
 		case ENDGAME:
 			// da implementare, aprirï¿½ una nuova scena o stage finale.
 			this.view.close();
+		
 			new EndgameView();
 			this.stop();
 			this.previous = now;
