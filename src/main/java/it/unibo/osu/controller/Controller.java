@@ -76,13 +76,22 @@ public class Controller {
 			if(e.getCode().equals(KeyCode.SPACE) || this.game.getStatus() != GameStatus.PAUSE) {
 				switch( e.getCode()) {
 				case SPACE: 
+//					this.game.setPause();
+//
+//					this.musicController.pauseMusic();
+
+//					if(!this.pauseMenu.isShowing()) {
+//						this.pauseMenu.show();
+//					} 
+					
+					this.sceneController.setPausePane();
 					this.game.setPause();
-
-					this.musicController.pauseMusic();
-
-					if(!this.pauseMenu.isShowing()) {
-						this.pauseMenu.show();
-					} 
+					if(this.game.getStatus().equals(GameStatus.PAUSE)) {
+						this.musicController.pauseMusic();
+					} else {
+						this.musicController.startMusic();
+					}
+					
 					break;
 				case X: 
 					this.robot.mouseClick(MouseButton.PRIMARY);
@@ -99,13 +108,21 @@ public class Controller {
 //		this.view.getScene().setOnMouseClicked(e-> {
 //			System.out.println(e.getSceneX() + " " + e.getSceneY());	
 //		});
-		this.pauseMenu.getScene().setOnKeyPressed(e -> {
-			if(e.getCode().equals(KeyCode.SPACE) && this.pauseMenu.isShowing()) {
-				this.pauseMenu.close();
-			}
-			this.musicController.startMusic();
-			this.game.setPause();
-		});
+		
+//		this.pauseMenu.getScene().setOnKeyPressed(e -> {
+//			if(e.getCode().equals(KeyCode.SPACE) && this.pauseMenu.isShowing()) {
+//				this.pauseMenu.close();
+//			}
+//			this.musicController.startMusic();
+//			this.game.setPause();
+//		});
+//		this.sceneController.getPausePane().setOnKeyPressed(keyPressed -> {
+//    		if(keyPressed.getCode().equals(KeyCode.SPACE) ) {
+//    			this.sceneController.setPausePane();
+//    		}
+//			this.musicController.startMusic();
+//			this.game.setPause();
+//    	});
 	}
 	
 	private void startGameLoop()

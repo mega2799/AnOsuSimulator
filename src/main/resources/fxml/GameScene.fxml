@@ -5,12 +5,21 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-
- <AnchorPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="420.0" minWidth="680.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.osu.view.GameSceneController">
+<AnchorPane fx:id="pane" maxHeight="1080.0" maxWidth="1920.0" minHeight="420.0" minWidth="680.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.osu.view.GameSceneController">
    <children>
+      <Pane fx:id="pausePane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(0,0,0,0.5);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="891.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/pauseButton.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
       <MediaView fx:id="backgroundMedia" fitHeight="1080.0" fitWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ImageView fx:id="backgroundImage" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ProgressBar fx:id="lifebar" focusTraversable="false" layoutX="201.0" layoutY="81.0" prefHeight="21.0" prefWidth="640.0" progress="1.0" style="-fx-accent: black; -fx-control-inner-background: white;" AnchorPane.bottomAnchor="977.4" AnchorPane.leftAnchor="201.0" AnchorPane.rightAnchor="1079.0" AnchorPane.topAnchor="81.0" />
@@ -24,7 +33,7 @@
             <Font name="Franklin Gothic Medium Italic" size="94.0" />
          </font>
       </Label>
-      <Label fx:id="points" alignment="CENTER" focusTraversable="false" layoutX="1132.0" layoutY="48.0" prefHeight="118.0" prefWidth="750.0" text="00000000" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="914.0" AnchorPane.leftAnchor="1132.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="48.0">
+      <Label fx:id="points" alignment="CENTER" focusTraversable="false" layoutX="1132.0" layoutY="48.0" prefHeight="118.0" prefWidth="750.0" text="0" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="914.0" AnchorPane.leftAnchor="1132.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="48.0">
          <font>
             <Font name="Franklin Gothic Medium Italic" size="94.0" />
          </font>

@@ -19,6 +19,9 @@ public class SongButtonController {
     
     private String fileName;
     
+    /**
+     * @param fileName
+     */
     public void init(String fileName) {
     	this.fileName = fileName;
     	BeatMap beatmap = new BeatMap("/beatmaps/" + fileName);

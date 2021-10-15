@@ -12,11 +12,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.shape.Circle;
 import javafx.scene.transform.Scale;
 
 public class GameSceneController{
@@ -39,6 +41,9 @@ public class GameSceneController{
 
     @FXML
     private Label points;
+    
+    @FXML
+    private Pane pausePane;
     
     private GameModel game;
     
@@ -97,5 +102,28 @@ public class GameSceneController{
 //	}
     public AnchorPane getPane() {
     	return this.pane;
+    }
+    
+    public void setPausePane() {
+    	if(!this.isPausePaneVisible()) {
+    		this.pausePane.toFront();
+    		if(this.backgroundMedia != null) {
+        		this.backgroundMedia.getMediaPlayer().pause();
+        	}
+    	} else {
+    		this.pausePane.toBack();
+    		if(this.backgroundMedia != null) {
+        		this.backgroundMedia.getMediaPlayer().play();
+        	}
+    	};
+    	
+    }
+    
+   
+    public Pane getPausePane() {
+    	return this.pausePane;
+    }
+    public boolean isPausePaneVisible() {
+    	return this.pane.getChildren().indexOf(this.pausePane) != 0;
     }
 }

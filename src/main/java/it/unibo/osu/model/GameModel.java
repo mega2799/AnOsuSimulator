@@ -15,6 +15,7 @@ public class GameModel implements Observer{
 	private List<Hitpoint> currentHitbuttons;
 	private HitobjectSelector selector;
 	private double timeAcc;
+	 
 	
 	public GameModel(final String name) {
 		this.status = GameStatus.START;
