@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.model.User;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -102,6 +103,7 @@ public class LoginMenuController extends Resizeable {
 			System.out.println("ok");
 		});
 		this.textField.setOnAction(ev -> {
+			User.setUsername(this.textField.getText());
 			this.fadeout.play();
 			((MainMenuController) loader.getController()).startAnimation();
 		});
