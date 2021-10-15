@@ -6,15 +6,15 @@ import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GameStatus;
 import it.unibo.osu.view.GameView;
 import it.unibo.osu.view.PauseMenuView;
-
-
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-
+import javafx.scene.layout.Pane;
 import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import it.unibo.osu.view.GameSceneController;
 
 public class Controller {
@@ -24,38 +24,52 @@ public class Controller {
 	private final Robot robot;
 	private final PauseMenuView pauseMenu;
 	private final MusicControllerImpl musicController;
+	//private Pane fixedPane;
 	
 	public Controller(final String name, Stage stage) {
 		this.game = new GameModel("/beatmaps/" + name);
 
 		this.view = stage;
-//		this.view = new GameView();
-		//here
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/GameScene.fxml"));
+
+		this.initializeGameView();
 		
+		this.robot = new Robot();
+		this.pauseMenu = new PauseMenuView();
+
+		this.musicController = new MusicControllerImpl("/tracks/" + this.game.getBeatMap().getSongName().stripLeading(), this.game);
+		this.setInputHandler();
+		this.changeScene();
+
+	}
+	
+	private void initializeGameView() {
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/GameScene.fxml"));
 		try {
-			this.view.setScene(loader.load());
+			Pane fixedPane = ((Pane)this.view.getScene().getRoot());
+			fixedPane.getChildren().add(0,loader.load());
 			this.sceneController = ((GameSceneController) loader.getController());
 			this.sceneController.init(game);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.view.show();
-		
-		
-		
-		this.robot = new Robot();
-		this.pauseMenu = new PauseMenuView();
-		//qui bisogna passare il nome della song giustamente 
-		//this.musicController = new MusicControllerImpl("/tracks/joshiraku.wav", this.game);
-//		this.musicController = new MusicControllerImpl("/tracks/demonSlayer.wav", this.game);
-		this.musicController = new MusicControllerImpl("/tracks/" + this.game.getBeatMap().getSongName().stripLeading(), this.game);
-		this.setInputHandler();
-		
-		//new GameLoop(this.game, this.view, this.musicController);
-		new GameLoop(this.game, this.view, this.sceneController, this.musicController);
 	}
 	
+	private void changeScene() {
+		Pane fixedPane = ((Pane)this.view.getScene().getRoot());
+		FadeTransition fadeTrans = new FadeTransition(Duration.seconds(2),fixedPane);
+		fadeTrans.setFromValue(1);
+		fadeTrans.setToValue(0);
+		fadeTrans.setOnFinished(finished -> {
+			fixedPane.getChildren().retainAll(this.sceneController.getPane());
+			fadeTrans.setFromValue(0);
+			fadeTrans.setToValue(1);
+			fadeTrans.setOnFinished(finishedChange -> {
+				this.startGameLoop();
+			});
+			fadeTrans.playFromStart();
+		});
+		fadeTrans.play();
+	}
 	
 	private void setInputHandler() {
 		this.view.getScene().setOnKeyPressed(e ->{
@@ -94,6 +108,9 @@ public class Controller {
 		});
 	}
 	
-
+	private void startGameLoop()
+	{
+		new GameLoop(this.game, this.view, this.sceneController, this.musicController);
+	}
 		
 }

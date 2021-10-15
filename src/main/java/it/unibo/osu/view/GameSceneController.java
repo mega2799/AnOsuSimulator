@@ -13,6 +13,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -20,8 +21,7 @@ import javafx.scene.transform.Scale;
 
 public class GameSceneController{
 
-	@FXML
-	private Scene scene;
+
     @FXML
     private AnchorPane pane;
 
@@ -44,13 +44,14 @@ public class GameSceneController{
     
     private HitcircleViewFactory factory;
     
+    
     public void init(GameModel game) {
     	this.game = game;
     	this.setBackground();
     	BeatMap beatmap = this.game.getBeatMap();
     	this.factory = new HitcircleViewFactory("/image/innerCircle.png", "/image/outerCircle.png", beatmap.getCircleSize(), beatmap.getOverallDifficulty(), beatmap.getApproachRate());
-    	Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
-    	this.changeResolution(toolkit.getScreenSize().getWidth(), toolkit.getScreenSize().getHeight());
+    	//Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
+    	//this.changeResolution(toolkit.getScreenSize().getWidth(), toolkit.getScreenSize().getHeight());
     }
     
      public void  render() {
@@ -86,11 +87,15 @@ public class GameSceneController{
     		this.backgroundMedia.getMediaPlayer().play();
     	}
     }
-    public void changeResolution(double width,double height) {
-		// lo scale fa vedere l' immagine sotto lo stage, qualcosa non torna
-		Scale scale = new Scale(width/this.pane.getWidth(),height/this.pane.getHeight());
-		this.pane.getTransforms().add(scale);
-		this.pane.setPrefHeight(height);
-		this.pane.setPrefWidth(width);
-	}
+    //NON PIU NECESSARIO
+//    public void changeResolution(double width,double height) {
+//		// lo scale fa vedere l' immagine sotto lo stage, qualcosa non torna
+//		Scale scale = new Scale(width/this.pane.getWidth(),height/this.pane.getHeight());
+//		this.pane.getTransforms().add(scale);
+//		this.pane.setPrefHeight(height);
+//		this.pane.setPrefWidth(width);
+//	}
+    public AnchorPane getPane() {
+    	return this.pane;
+    }
 }
