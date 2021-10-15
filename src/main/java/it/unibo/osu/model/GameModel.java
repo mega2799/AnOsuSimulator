@@ -15,8 +15,9 @@ public class GameModel implements Observer{
 	private List<Hitpoint> currentHitbuttons;
 	private HitobjectSelector selector;
 	private double timeAcc;
-	 
-	
+ 
+
+
 	public GameModel(final String name) {
 		this.status = GameStatus.START;
 		this.beatMap = new BeatMap(name);
@@ -74,6 +75,8 @@ public class GameModel implements Observer{
 	public List<Hitpoint> getCurrentHitbuttons() {
 		return currentHitbuttons;
 	}
+
+
 
 	public void clearCurrentHitbuttons(List<Hitpoint> currentHitbuttons) {
 		this.currentHitbuttons.clear();

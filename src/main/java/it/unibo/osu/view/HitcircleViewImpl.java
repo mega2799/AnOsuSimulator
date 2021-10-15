@@ -147,6 +147,9 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		return this.pararallelTrans;
 	}
 	
+	public ScaleTransition getScaleTransition() {
+		return this.scaleOuterCircle;
+	}
 	private double getFadeInTime() {
 		if(this.approachRate < 5) {
 			return 800 + 400 * (5 - this.approachRate) / 5;

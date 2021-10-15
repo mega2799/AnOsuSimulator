@@ -83,9 +83,8 @@ public class Controller {
 //					if(!this.pauseMenu.isShowing()) {
 //						this.pauseMenu.show();
 //					} 
-					
-					this.sceneController.setPausePane();
 					this.game.setPause();
+					this.sceneController.setPausePane();
 					if(this.game.getStatus().equals(GameStatus.PAUSE)) {
 						this.musicController.pauseMusic();
 					} else {
