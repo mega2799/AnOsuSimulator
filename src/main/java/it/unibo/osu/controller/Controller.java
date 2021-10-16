@@ -41,7 +41,13 @@ public class Controller {
 		StatisticImpl.getStat().addPlayer(User.getUsername()); // singleton (?)
 //		StatisticImpl.getStat().setSong(name + beatmap);
 		StatisticImpl.getStat().setSong(name);
-		StatisticImpl.getStat().writeJson();
+		try {
+			StatisticImpl.getStat().writeJson();
+			StatisticImpl.getStat().readJson();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 //>>>>>>> logicAndStatistic
 
 		this.view = stage;
