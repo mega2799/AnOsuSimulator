@@ -89,7 +89,8 @@ public class MainMenuController extends Resizeable{
     
     public void init(Stage stage) {
     	this.stage = stage;
-    	FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/SongMenu.fxml"));
+    	FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(this.getClass().getResource("/fxml/SongMenu.fxml"));
 		try {
 			fixedPane = ((Pane)this.pane.getParent());
 //			fixedPane.getChildren().add(0,loader.load());

@@ -54,8 +54,16 @@ public class Clock implements HitActionObserver{
             	}
 	}
 	
+	public final Map<String, GamePoints> getTimeStatistic() {
+		return timeStatistic;
+	}
+
 	public String getCurrent() {
 		return this.text.toString();
+	}
+	
+	public void pause() {
+		timeline.pause();
 	}
 	
 	public void stop() {
@@ -66,7 +74,6 @@ public class Clock implements HitActionObserver{
 	@Override
 	public void onNotify(GamePoints points) {
 		this.timeStatistic.put(this.text.getText(), points);
-		System.out.println(points);
 	}
 	
 }

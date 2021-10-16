@@ -3,12 +3,19 @@ package it.unibo.osu.view;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
+import com.sun.prism.ResourceFactoryListener;
+
+import it.unibo.osu.appl.Launcher;
 import it.unibo.osu.controller.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,19 +66,45 @@ public class SongMenuController implements Initializable {
     }
     
     private void initializeButtons() {
-    	File[] files = new File(this.getClass().getResource("/beatmaps").getPath()).listFiles();
-    	for(File file: files) {
-    		try {
-    			FXMLLoader loader = new FXMLLoader();
-    			loader.setLocation(this.getClass().getResource("/fxml/Song.fxml"));
-    			AnchorPane song = loader.load();
-    			((SongButtonController) loader.getController()).init(file.getName());
-    			songButtons.add(song);
-    			this.vbox1.getChildren().add(song);
-    		} catch (IOException e) {
-    			e.printStackTrace();
+
+    	final String path = "beatmaps/";
+    	final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+
+    	try {
+    		if(jarFile.isFile()) {  // Run with JAR file
+    			final JarFile jar = new JarFile(jarFile);
+    			final Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
+    			while(entries.hasMoreElements()) {
+    				final String name = entries.nextElement().getName();
+    				if (name.contains(path) && !name.equals(path)) { //filter according to the path
+    					FXMLLoader loader = new FXMLLoader();
+    					loader.setLocation(this.getClass().getResource("/fxml/Song.fxml"));
+    					AnchorPane song = loader.load();
+    					((SongButtonController) loader.getController()).init(name.substring(path.length()));
+    					this.songButtons.add(song);
+    					this.vbox1.getChildren().add(song);
+    				}
+    			}
+    			jar.close();
+    		} else { // Run with IDE
+    			final URL url = Launcher.class.getResource("/"+ path.subSequence(0, path.length()-1));
+    			if (url != null) {
+    				try {
+    					final File apps = new File(url.toURI());
+    					for (File app : apps.listFiles()) {
+    						FXMLLoader loader = new FXMLLoader();
+    						loader.setLocation(this.getClass().getResource("/fxml/Song.fxml"));
+    						AnchorPane song = loader.load();
+    						((SongButtonController) loader.getController()).init(app.getName());
+    						this.songButtons.add(song);
+    						this.vbox1.getChildren().add(song);    	            }
+    				} catch (URISyntaxException ex) {
+    				}
+    			}
     		}
+    	}catch(IOException io ) {
+
     	}
     }
-   
+
 }

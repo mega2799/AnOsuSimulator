@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GameStatus;
+import it.unibo.osu.model.StatisticImpl;
+import it.unibo.osu.model.User;
 import it.unibo.osu.view.GameView;
 import it.unibo.osu.view.PauseMenuView;
 import javafx.animation.FadeTransition;
@@ -23,11 +25,24 @@ public class Controller {
 	private final GameModel game;
 	private final Robot robot;
 	private final PauseMenuView pauseMenu;
+//<<<<<<< HEAD
 	private final MusicControllerImpl musicController;
 	//private Pane fixedPane;
 	
 	public Controller(final String name, Stage stage) {
 		this.game = new GameModel("/beatmaps/" + name);
+//=======
+
+//	// name sarebbe il package :::
+//	public Controller(final String username, final String name, final String beatmap) {
+//		this.game = new GameModel(name + beatmap);
+//		this.game.setUser(username);
+
+		StatisticImpl.getStat().addPlayer(User.getUsername()); // singleton (?)
+//		StatisticImpl.getStat().setSong(name + beatmap);
+		StatisticImpl.getStat().setSong(name);
+		StatisticImpl.getStat().writeJson();
+//>>>>>>> logicAndStatistic
 
 		this.view = stage;
 
@@ -48,7 +63,7 @@ public class Controller {
 			Pane fixedPane = ((Pane)this.view.getScene().getRoot());
 			fixedPane.getChildren().add(0,loader.load());
 			this.sceneController = ((GameSceneController) loader.getController());
-			this.sceneController.init(game);
+			this.sceneController.init(game); 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

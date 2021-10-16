@@ -81,8 +81,11 @@ public class GameSceneController{
     		this.pane.getChildren().addAll(hitcircleView.getChildren());
     		hitcircleView.addObserver(this.game.getLifeBar());
     		hitcircleView.addObserver(this.game.getScoreManager());
+
     		this.listTransitions.add(hitcircleView.getParallelTransition());
     		this.listTransitions.add(hitcircleView.getScaleTransition());
+    		hitcircleView.addObserver(this.game.getOsuClock());
+			
     		hitcircleView.getParallelTransition().play();
     	});
     	this.game.getCurrentHitbuttons().clear();

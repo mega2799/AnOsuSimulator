@@ -25,6 +25,8 @@ public class BeatMap {
 	
 	public BeatMap(String fileName) {
 
+//		System.out.println(fileName);
+//		System.exit(0);
 		try(BeatmapReader reader = new BeatmapReader(this.getClass().getResourceAsStream(fileName))){
 			Map<String, String> map = reader.getOptionMap(BeatmapOptions.DIFFICULTY);
 			this.circleSize = Double.parseDouble(map.get("CircleSize"));
