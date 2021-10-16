@@ -9,6 +9,7 @@ import it.unibo.osu.view.GameSceneController;
 import it.unibo.osu.view.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class GameLoop extends AnimationTimer {
@@ -23,6 +24,13 @@ public class GameLoop extends AnimationTimer {
 		this.sceneController = sceneController;
 		this.musicController = musicController;
 		this.previous = System.nanoTime();
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/endGame.fxml"));
+		try {
+			((AnchorPane) this.view.getScene().getRoot()).getChildren().add(0, loader.load());
+			((EndGameController) loader.getController()).init(this.game);
+		} catch (IOException e) {
+			e.printStackTrace();
+		};
 		this.start();
 	}
 	
@@ -51,17 +59,17 @@ public class GameLoop extends AnimationTimer {
 			break;
 		case ENDGAME:
 			// da implementare, aprir� una nuova scena o stage finale.
-			this.view.close();
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/endGame.fxml"));
-			
-			try {
-				((Stage)loader.load()).show();
-				EndGameController ed = ((EndGameController) loader.getController());
-				ed.init(this.game);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}			
+//			this.view.close();
+//			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/endGame.fxml"));		
+//			try {
+//				((Stage)loader.load());
+//				EndGameController ed = ((EndGameController) loader.getController());
+//				ed.init(this.game);
+//			} catch (IOException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}		
+			((AnchorPane) this.view.getScene().getRoot()).getChildren().remove(this.sceneController.getPane());
 			this.stop();
 			this.previous = now;
 			break;

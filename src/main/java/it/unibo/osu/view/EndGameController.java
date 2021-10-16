@@ -24,14 +24,10 @@ import javafx.stage.Stage;
 
 public class EndGameController {
 
-	@FXML
-	private Stage stage;
 
-	@FXML
-	private Scene scene;
 
     @FXML
-    private AnchorPane ap;
+    private AnchorPane pane;
     
     @FXML
     private GridPane scoreGrid;
@@ -70,7 +66,7 @@ public class EndGameController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.ap.getChildren().addAll(this.rikkaGif);
+		this.pane.getChildren().addAll(this.rikkaGif);
 
 	}
 

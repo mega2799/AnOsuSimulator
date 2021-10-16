@@ -24,11 +24,12 @@ public class GameModel implements Observer{
 		this.status = GameStatus.START;
 		this.beatMap = new BeatMap(name);
 		this.osuClock = new Clock();
+		this.scoreManager = new ScoreManager(new Score());
 		this.timeAcc = 0;
 	}
 	
 	public void initGameOnStart() {
-		this.scoreManager = new ScoreManager(new Score());
+//		this.scoreManager = new ScoreManager(new Score());
 		this.lifeBar = new LifeBar(this.beatMap.getHpDrainRate());
 		this.currentHitbuttons = new ArrayList<>();
 		this.selector = new HitobjectSelector(this.beatMap.getHitpoints());
