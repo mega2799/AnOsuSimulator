@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
-
-   <AnchorPane fx:id="pane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.osu.view.EndGameController">
+<AnchorPane fx:id="pane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.osu.view.EndGameController">
    <children>
       <ImageView fx:id="background" fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -169,5 +168,10 @@
             </InnerShadow>
          </effect>
       </Label>
+      <ImageView fx:id="backToMenuButton" fitHeight="88.0" fitWidth="110.0" layoutX="919.0" layoutY="902.0" pickOnBounds="true" preserveRatio="false">
+         <image>
+            <Image url="@../image/backToMenuButton.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

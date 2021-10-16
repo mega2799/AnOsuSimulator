@@ -28,6 +28,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.shape.Circle;
 import javafx.scene.transform.Scale;
+import javafx.util.Duration;
 
 public class GameSceneController{
 
@@ -105,6 +106,7 @@ public class GameSceneController{
     		this.backgroundImage.setImage(new Image(this.getClass().getResource("/wallpaper/" + fileName).toString()));
     	} else {
     		this.backgroundMedia.setMediaPlayer(new MediaPlayer(new Media(this.getClass().getResource("/video/" + fileName).toString())));
+    		this.backgroundMedia.getMediaPlayer().setCycleCount(Integer.MAX_VALUE);
     		this.backgroundMedia.getMediaPlayer().play();
     	}
     }

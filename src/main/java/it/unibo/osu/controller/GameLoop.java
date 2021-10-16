@@ -18,19 +18,21 @@ public class GameLoop extends AnimationTimer {
 	private GameSceneController sceneController;
 	private MusicController musicController;
 	private long previous;
+	private FXMLLoader loader;
+	
 	public GameLoop(GameModel game, Stage view, GameSceneController sceneController, MusicController musicController) {
 		this.game = game;
 		this.view = view;
 		this.sceneController = sceneController;
 		this.musicController = musicController;
 		this.previous = System.nanoTime();
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/endGame.fxml"));
-		try {
-			((AnchorPane) this.view.getScene().getRoot()).getChildren().add(0, loader.load());
-			((EndGameController) loader.getController()).init(this.game);
-		} catch (IOException e) {
-			e.printStackTrace();
-		};
+		this.loader = new FXMLLoader(this.getClass().getResource("/fxml/endGame.fxml"));
+//		try {
+//			((AnchorPane) this.view.getScene().getRoot()).getChildren().add(0, loader.load());
+//			((EndGameController) this.loader.getController()).init(this.game);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		};
 		this.start();
 	}
 	
@@ -69,6 +71,13 @@ public class GameLoop extends AnimationTimer {
 //				// TODO Auto-generated catch block
 //				e1.printStackTrace();
 //			}		
+			try {
+				((AnchorPane) this.view.getScene().getRoot()).getChildren().add(0, loader.load());
+				((EndGameController) this.loader.getController()).init(this.game);
+			} catch (IOException e) {
+				e.printStackTrace();
+			};
+			((EndGameController) this.loader.getController()).registerData();
 			((AnchorPane) this.view.getScene().getRoot()).getChildren().remove(this.sceneController.getPane());
 			this.stop();
 			this.previous = now;

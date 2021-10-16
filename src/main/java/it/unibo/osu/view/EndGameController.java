@@ -12,6 +12,7 @@ import it.unibo.osu.model.GamePoints;
 import it.unibo.osu.model.User;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -28,6 +29,8 @@ public class EndGameController {
 
     @FXML
     private AnchorPane pane;
+    @FXML
+    private ImageView backToMenuButton;
     
     @FXML
     private GridPane scoreGrid;
@@ -48,26 +51,43 @@ public class EndGameController {
     private VBox historyBox;
     
     private ImageView rikkaGif;
+    private GameModel game;
     
 	private Map<GamePoints, Integer> map;
-    
+    private FXMLLoader loader; 
 
 	public void init(GameModel game) {
+		this.game = game;
+//		this.map = game.getScoreManager().getStatistic();
+//		this.username.setText(User.getUsername());
+//		this.gameScore.setText(String.valueOf(game.getScoreManager().getPoints()));
+//		this.multi.setText(String.valueOf(game.getScoreManager().getScore().getMaxMultiplier()) + "x");
+//		writeOnGrid();
+		loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
+		try {
+			((AnchorPane) this.pane.getScene().getRoot()).getChildren().add(0, loader.load());
+			((MainMenuController)loader.getController()).init((Stage)this.pane.getScene().getWindow());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		this.initializeInputHandler();
+		// non vuole farla vedere
+// 		try {
+//			this.rikkaGif = new ImageView(new Image(Files.newInputStream(Paths.get("src/main/resources/gif/rikka-takanashi-takanashi-rikka.gif"))));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		this.pane.getChildren().addAll(this.rikkaGif);
+
+	}
+	
+	public void registerData() {
 		this.map = game.getScoreManager().getStatistic();
 		this.username.setText(User.getUsername());
 		this.gameScore.setText(String.valueOf(game.getScoreManager().getPoints()));
 		this.multi.setText(String.valueOf(game.getScoreManager().getScore().getMaxMultiplier()) + "x");
 		writeOnGrid();
-
-		// non vuole farla vedere
- 		try {
-			this.rikkaGif = new ImageView(new Image(Files.newInputStream(Paths.get("src/main/resources/gif/rikka-takanashi-takanashi-rikka.gif"))));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.pane.getChildren().addAll(this.rikkaGif);
-
 	}
 
 	/*
@@ -110,6 +130,21 @@ public class EndGameController {
 		            break;
 		        }
 		    }
+	}
+	
+	private void initializeInputHandler() {
+		this.backToMenuButton.setOnMouseEntered(entered -> {
+			this.backToMenuButton.setFitWidth(this.backToMenuButton.getFitWidth()+10);
+			this.backToMenuButton.setFitHeight(this.backToMenuButton.getFitHeight()+10);
+		});
+		this.backToMenuButton.setOnMouseExited(exited -> {
+			this.backToMenuButton.setFitWidth(this.backToMenuButton.getFitWidth()-10);
+			this.backToMenuButton.setFitHeight(this.backToMenuButton.getFitHeight()-10);
+		});
+		this.backToMenuButton.setOnMouseClicked(event -> {
+			((MainMenuController)loader.getController()).startAnimation();
+			((AnchorPane)this.pane.getScene().getRoot()).getChildren().remove(this.pane);
+		});
 	}
 
 }
