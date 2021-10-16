@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="146.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../image/montagneAnime.jpg" />
+            <Image url="@../image/montagneAnime.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="146.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
