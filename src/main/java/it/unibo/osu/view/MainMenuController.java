@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 
+import it.unibo.osu.model.User;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
@@ -118,6 +119,9 @@ public class MainMenuController extends Resizeable{
 		});
 		this.playButton.setOnMouseClicked(playEvent -> {
 //			this.fadeout.play();
+			if( this.options.getOpacity()==1) {
+				this.fadeoutOption.play();
+			}
 			this.playEventParallelTransition.play();
 			
 		});
@@ -179,7 +183,7 @@ public class MainMenuController extends Resizeable{
 			this.fadeout.playFromStart();
 		});
 		
-		this.menuOptionsFadeout = new FadeTransition(Duration.seconds(2), this.vboxButtons);
+		this.menuOptionsFadeout = new FadeTransition(Duration.seconds(1), this.vboxButtons);
 		this.menuOptionsFadeout.setToValue(0);
 		this.menuOptionsFadeout.setFromValue(1);
 		
@@ -259,8 +263,10 @@ public class MainMenuController extends Resizeable{
 		volume.setFont(new Font("Inconsolata Condensed ExtraBold", 30));
 		volume.setTextFill(Color.WHITE);
 		//row 6
-		Slider slider = new Slider(0, 1, 100);	
-		
+		Slider slider = new Slider(0, 1, 1);	
+		slider.valueProperty().addListener(changed -> {
+			User.setMusicVolume(slider.getValue());
+		});
 		options.getChildren().addAll(volume, slider);
 		
 	
@@ -269,8 +275,10 @@ public class MainMenuController extends Resizeable{
 		volumeSfx.setFont(new Font("Inconsolata Condensed ExtraBold", 30));
 		volumeSfx.setTextFill(Color.WHITE);
 		//row 8
-		Slider sliderSfx = new Slider(0, 100, 1);	
-		
+		Slider sliderSfx = new Slider(0, 1, 1);	
+		sliderSfx.valueProperty().addListener(changed -> {
+			User.setEffectVolume(sliderSfx.getValue());
+		});
 		options.getChildren().addAll(volumeSfx, sliderSfx);
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
