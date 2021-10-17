@@ -61,7 +61,8 @@ public class Controller {
 		this.robot = new Robot();
 		this.pauseMenu = new PauseMenuView();
 
-		this.musicController = new MusicControllerImpl("/tracks/" + this.game.getBeatMap().getSongName().stripLeading(), this.game);
+//		this.musicController = new MusicControllerImpl("/tracks/" + this.game.getBeatMap().getSongName().stripLeading(), this.game);
+		this.musicController = MusicControllerImplFactory.getMusicImpl("/tracks/" + this.game.getBeatMap().getSongName().stripLeading(), this.game);
 		this.setInputHandler();
 		this.changeScene();
 

@@ -3,7 +3,8 @@ package it.unibo.osu.model;
 import it.unibo.osu.controller.HitActionObserver;
 
 // da implementare
-public class LifeBar implements Updatable, HitActionObserver {
+//public class LifeBar implements Updatable, HitActionObserver {
+public class LifeBar implements Updatable{
 
 	private double hpDrainRate;
 	private double hp;
@@ -57,16 +58,16 @@ public class LifeBar implements Updatable, HitActionObserver {
 		this.drain();
 	}
 
-	@Override
-	public void onNotify(GamePoints points) {
-		switch (points) {
-		case MISS:
-			this.lostLife();
-			break;
-		default:
-			this.gainLife(points);
-			break;
-		}
-	}
+//	@Override
+//	public void onNotify(GamePoints points) {
+//		switch (points) {
+//		case MISS:
+//			this.lostLife();
+//			break;
+//		default:
+//			this.gainLife(points);
+//			break;
+//		}
+//	}
 	
 }

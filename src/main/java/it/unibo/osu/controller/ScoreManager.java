@@ -6,7 +6,8 @@ import java.util.Map;
 import it.unibo.osu.model.GamePoints;
 import it.unibo.osu.model.Score;
 
-public class ScoreManager implements HitActionObserver{
+//public class ScoreManager implements HitActionObserver{
+public class ScoreManager {
 
 	private Score score;
 	
@@ -24,7 +25,8 @@ public class ScoreManager implements HitActionObserver{
 	public void hitted(GamePoints points) {
 		int value = points.getValue();
 		this.score.addPoints(value + value* this.score.getMultiplier());//ci vorrebbe anche difficulty multiplier ma magari ci guardiamo poi 
-		this.score.increaseMultiplier();		
+		this.score.increaseMultiplier();	
+		statMap(points);
 	}
 	
 	private void statMap(GamePoints point) {
@@ -32,6 +34,7 @@ public class ScoreManager implements HitActionObserver{
 	}
 
 	public void missed() {
+		statMap(GamePoints.MISS);
 		this.score.resetMultiplier();
 	}
 	
@@ -55,16 +58,16 @@ public class ScoreManager implements HitActionObserver{
 		return statistic;
 	}
 
-	@Override
-	public void onNotify(GamePoints points) {
-		statMap(points);
-		switch (points) {
-		case MISS:
-			this.missed();
-			break;
-		default:
-			this.hitted(points);
-		}
-	}
+//	@Override
+//	public void onNotify(GamePoints points) {
+//		statMap(points);
+//		switch (points) {
+//		case MISS:
+//			this.missed();
+//			break;
+//		default:
+//			this.hitted(points);
+//		}
+//	}
 	
 }

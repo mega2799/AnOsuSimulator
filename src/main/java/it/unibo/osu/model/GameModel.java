@@ -3,12 +3,16 @@ package it.unibo.osu.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import it.unibo.osu.controller.HitActionObserver;
+import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.controller.Observer;
 import it.unibo.osu.controller.ScoreManager;
 import it.unibo.osu.util.Clock;
 import it.unibo.osu.util.HitobjectSelector;
 
-public class GameModel implements Observer{
+public class GameModel implements Observer, HitActionObserver{
 	private GameStatus status;
 	private BeatMap beatMap;
 	private ScoreManager scoreManager;
@@ -17,7 +21,6 @@ public class GameModel implements Observer{
 	private HitobjectSelector selector;
 	private Clock osuClock;
 	private double timeAcc;
- 
 
 
 	public GameModel(final String name) {
@@ -59,7 +62,6 @@ public class GameModel implements Observer{
     public void buttonMissed() {
     	this.lifeBar.lostLife();
     	this.scoreManager.missed();
-    	
     }
     
     public void buttonHitted(GamePoints gamePoints) {
@@ -120,6 +122,17 @@ public class GameModel implements Observer{
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void onNotify(GamePoints points) {
+		switch (points) {
+		case MISS:
+			this.buttonMissed();
+			break;
+		default:
+			this.buttonHitted(points);
+		}
 	}
 
 }

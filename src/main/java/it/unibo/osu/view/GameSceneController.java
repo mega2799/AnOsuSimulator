@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import it.unibo.osu.controller.MusicEffectController;
 import it.unibo.osu.controller.ScoreManager;
 import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.model.GameModel;
@@ -57,6 +58,7 @@ public class GameSceneController{
     private GameModel game;
     
     private HitcircleViewFactory factory;
+    private MusicEffectController effectController;
     
     private List<Transition> listTransitions;
     
@@ -68,25 +70,26 @@ public class GameSceneController{
     	//Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();
     	//this.changeResolution(toolkit.getScreenSize().getWidth(), toolkit.getScreenSize().getHeight());
     	this.listTransitions = new ArrayList<>();
+    	this.effectController = new MusicEffectController("/music/hitSound.wav","/music/missSound.wav");
+    	
     }
     
      public void  render() {
     	this.clearTransitionList();
     	this.lifebar.setProgress(this.game.getLifeBar().getHp()/LifeBar.MAXHP);
-    	System.out.println(this.game.getLifeBar().getHp()/LifeBar.MAXHP);
     	ScoreManager scoreManager = this.game.getScoreManager();
     	this.multiplier.setText("x" + Integer.toString(scoreManager.getMultiplier()));
     	this.points.setText(Integer.toString(scoreManager.getPoints()));
     	this.game.getCurrentHitbuttons().forEach(x -> {
     		HitcircleViewImpl hitcircleView = factory.getHitcircleView(x);
     		this.pane.getChildren().addAll(hitcircleView.getChildren());
-    		hitcircleView.addObserver(this.game.getLifeBar());
-    		hitcircleView.addObserver(this.game.getScoreManager());
-
+//    		hitcircleView.addObserver(this.game.getLifeBar());
+//    		hitcircleView.addObserver(this.game.getScoreManager());
+    		hitcircleView.addObserver(this.effectController);
+    		hitcircleView.addObserver(this.game);
+    		hitcircleView.addObserver(this.game.getOsuClock());
     		this.listTransitions.add(hitcircleView.getParallelTransition());
     		this.listTransitions.add(hitcircleView.getScaleTransition());
-    		hitcircleView.addObserver(this.game.getOsuClock());
-			
     		hitcircleView.getParallelTransition().play();
     	});
     	this.game.getCurrentHitbuttons().clear();

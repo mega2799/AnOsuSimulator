@@ -10,4 +10,6 @@ public interface MusicController {
 	public Duration getDuration();
 	
 	public void pauseMusic();
+	
+	public void setOnFinished(Runnable runnable);
 }

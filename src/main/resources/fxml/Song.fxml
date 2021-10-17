@@ -11,7 +11,7 @@
 <AnchorPane fx:id="anchorPane" minHeight="146.0" prefHeight="146.0" prefWidth="802.0" style="-fx-background-radius: 40;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.osu.view.SongButtonController">
    <children>
       <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#1f93ff00" height="146.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: url(&quot;/image/montagneAnime.jpg&quot;);" width="802.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#1f93ff00" height="146.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: url(&quot;\image\corniceBottone.png&quot;);" width="802.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Rectangle arcHeight="40.0" arcWidth="40.0" fill="#1f93ff00" height="146.0" stroke="TRANSPARENT" strokeType="INSIDE" style="-fx-fill: url(&quot;/image/corniceBottone.png&quot;);" width="802.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ImageView fitHeight="146.0" fitWidth="182.0" layoutX="620.0" pickOnBounds="true" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="620.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../image/Cute-Anime-Girl-PNG-High-Quality-Image.png" />

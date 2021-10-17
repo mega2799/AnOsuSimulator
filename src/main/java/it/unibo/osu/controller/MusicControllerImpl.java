@@ -7,10 +7,10 @@ import it.unibo.osu.model.GameModel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-public class MusicControllerImpl extends AbstractSubject implements MusicController {
+public abstract class MusicControllerImpl extends AbstractSubject implements MusicController, Observer {
 
 	private MediaPlayer audioMedia;
-	private GameModel game;
+//	private GameModel game;
 	public MusicControllerImpl(final String name) {
 		//this.audioMedia = new MediaPlayer(new Media(new File(this.getClass().getResource(name).toString()).toString()));
 
@@ -22,12 +22,15 @@ public class MusicControllerImpl extends AbstractSubject implements MusicControl
 		}
 
 	}
-	
-	public MusicControllerImpl(String name, GameModel game) {
-		this(name);
-		this.game = game;
-		this.audioMedia.setOnEndOfMedia(() -> notifyObs());
+	protected  MediaPlayer getMediaPlayer() {
+		return this.audioMedia;
 	}
+	
+//	public MusicControllerImpl(String name, GameModel game) {
+//		this(name);
+//		this.game = game;
+//		this.audioMedia.setOnEndOfMedia(() -> notifyObs());
+//	}
 
 	@Override
 	public void startMusic() {
@@ -55,11 +58,26 @@ public class MusicControllerImpl extends AbstractSubject implements MusicControl
 	public void pauseMusic() {
 		this.audioMedia.pause();
 	}
-
+	
 	@Override
-	public void notifyObs() {
-		this.game.onNotify();
+	public void onNotify() {
 	}
+	
+	@Override
+	public void notifyObs() {	
+	}
+	
+	@Override
+	public void setOnFinished(Runnable runnable) {		
+	}
+
+//	public GameModel getGameModel() {
+//		return this.game;
+//	}
+//	@Override
+//	public void notifyObs() {
+//		this.game.onNotify();
+//	}
 	
 //	@Override
 //	public void notifyEntity() {

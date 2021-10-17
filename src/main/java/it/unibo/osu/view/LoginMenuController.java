@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.User;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
@@ -94,7 +95,8 @@ public class LoginMenuController extends Resizeable {
 	}
 	
 	private void initializeSounds() {
-		this.welcomeMusic = new MusicControllerImpl("/music/welcome_sound.wav");
+//		this.welcomeMusic = new MusicControllerImpl("/music/welcome_sound.wav");
+		this.welcomeMusic = MusicControllerImplFactory.getSimpleMusicImpl("/music/welcome_sound.wav");
 	}
 
 	public void setInputHandlers() {

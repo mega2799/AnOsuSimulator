@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 
 import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.controller.Observer;
 import javafx.animation.KeyValue;
 
@@ -153,14 +154,17 @@ public class MenuController implements Initializable {
 	});
 	
 	extBtn.setOnMouseClicked(e -> {
-		MusicControllerImpl sayonara = new MusicControllerImpl("/music/sayonara_sound.wav");
+//		MusicControllerImpl sayonara = new MusicControllerImpl("/music/sayonara_sound.wav");
+//		sayonara.startMusic();
+//		System.out.println(sayonara.getStatus());
+//		sayonara.addObserver(new Observer() {
+//			public void onNotify() {
+//				System.exit(1);
+//			}
+//		});
+		MusicControllerImpl sayonara = new MusicControllerImplFactory().getSimpleMusicImpl("/music/sayonara_sound.wav");
+		sayonara.setOnFinished(()->System.exit(0));
 		sayonara.startMusic();
-		System.out.println(sayonara.getStatus());
-		sayonara.addObserver(new Observer() {
-			public void onNotify() {
-				System.exit(1);
-			}
-		});
 	});
 	
 		getPane().getChildren().add(vB);
