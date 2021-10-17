@@ -38,12 +38,16 @@ public class Controller {
 //		this.game = new GameModel(name + beatmap);
 //		this.game.setUser(username);
 
-		StatisticImpl.getStat().addPlayer(User.getUsername()); // singleton (?)
 //		StatisticImpl.getStat().setSong(name + beatmap);
-		StatisticImpl.getStat().setSong(name);
 		try {
-			StatisticImpl.getStat().writeJson();
+
+			//StatisticImpl.getStat().writeJson(); // andrebbe scritto alla fine del game
 			StatisticImpl.getStat().readJson();
+			StatisticImpl.getStat().addPlayer(User.getUsername()); // singleton (?)
+//		StatisticImpl.getStat().setSong(name + beatmap);
+			StatisticImpl.getStat().setSong(name);
+		
+			StatisticImpl.getStat().writeJson(); // andrebbe scritto alla fine del game
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -23,7 +23,7 @@ public class StatisticImpl implements Statistic {
 
 	private String song = null;
 
-	private Map<String, List<Integer>> map = new HashMap<>();
+	private Map<String, List<String>> map = new HashMap<>();
 
 	@Override
 	public final void setSong(String song) {
@@ -35,14 +35,14 @@ public class StatisticImpl implements Statistic {
 	}
 
 	@Override
-	public List<Integer> getPlayerHistory(String player) {
+	public List<String> getPlayerHistory(String player) {
 		return this.map.get(player);
 	}
 
 	@Override
 	public void addResult(String player, int points) {
 		if (this.song != null) {
-			this.map.get(player).add(points);
+			this.map.get(player).add(String.valueOf(points));
 		}
 	}
 
@@ -53,9 +53,6 @@ public class StatisticImpl implements Statistic {
 		}
 	}
 
-	
-	
-	
 	
 	@Override
 	public void writeJson() throws IOException {
@@ -69,12 +66,12 @@ public class StatisticImpl implements Statistic {
 		this.map.forEach((k, v) -> {
 			try {
 				//jG.writeStringField(k, v.toString());
-				jG.writeFieldName(k);
-				//int[] arr = v.stream().mapToInt(i -> i).toArray();
-				//jG.writeArray(arr, 0, arr.length);
-				//jG.writeString(v.toString());
-				jG.writeString(List.of(3 ,12, 1).toString());
-				//jG.writeNumber(6666);
+				//jG.writeString("NomeSong");
+				//jG.writeFieldName(k);
+
+				jG.writeStringField(this.song, k);
+				jG.writeStringField(k, v.toString());
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -98,9 +95,14 @@ public class StatisticImpl implements Statistic {
 		  while (jP.nextToken() != JsonToken.END_OBJECT) {
 			  String fieldName = jP.getCurrentName();
 			  String value = jP.getValueAsString();
-			  List<String> l = Arrays.asList(value.substring(1, value.length() - 1).split(", "));
-			  System.out.println(fieldName + ":" + l);
+			  
+			  String player = jP.getCurrentName();
+			  String pointList = jP.getValueAsString();
+			  
+			  List<String> l = Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", "));
+			  this.map.put(player, l);
 		  }
+			  System.out.println(this.map);
 	}
 
 }

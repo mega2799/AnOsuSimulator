@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 public interface Statistic {
 	void addPlayer(String player);
 	
-	List<Integer> getPlayerHistory(String player);
+	List<String> getPlayerHistory(String player);
 	
 	void addResult(String player, int points);
 
