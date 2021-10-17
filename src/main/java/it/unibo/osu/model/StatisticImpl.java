@@ -40,9 +40,9 @@ public class StatisticImpl implements Statistic {
 	}
 
 	@Override
-	public void addResult(String player, int points) {
+	public void addResult(String player, String points) {
 		if (this.song != null) {
-			this.map.get(player).add(String.valueOf(points));
+			this.map.get(player).add((points));
 		}
 	}
 
@@ -69,7 +69,7 @@ public class StatisticImpl implements Statistic {
 				//jG.writeString("NomeSong");
 				//jG.writeFieldName(k);
 
-				jG.writeStringField(this.song, k);
+				//jG.writeStringField(this.song, k);
 				jG.writeStringField(k, v.toString());
 				
 			} catch (IOException e) {
@@ -85,16 +85,16 @@ public class StatisticImpl implements Statistic {
 	public void readJson() throws JsonParseException, IOException {
 		// TODO Auto-generated method stub
 		JsonFactory jF = new JsonFactory();
-		JsonParser jP = jF.createJsonParser(new File("users.json"));
-		
+		File f = new File("users.json");
+		JsonParser jP = jF.createJsonParser(f);
 		  // Sanity check: verify that we got "Json Object":
 		if (jP.nextToken() != JsonToken.START_OBJECT) {
 		    throw new IOException("Expected data to start with an Object");
 		  }
 		//jP.getCodec().readValue(jP, int[].class);
 		  while (jP.nextToken() != JsonToken.END_OBJECT) {
-			  String fieldName = jP.getCurrentName();
-			  String value = jP.getValueAsString();
+			  //String fieldName = jP.getCurrentName();
+			  //String value = jP.getValueAsString();
 			  
 			  String player = jP.getCurrentName();
 			  String pointList = jP.getValueAsString();
@@ -102,7 +102,7 @@ public class StatisticImpl implements Statistic {
 			  List<String> l = Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", "));
 			  this.map.put(player, l);
 		  }
-			  System.out.println(this.map);
+		  f.delete();
 	}
 
 }

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GamePoints;
+import it.unibo.osu.model.StatisticImpl;
 import it.unibo.osu.model.User;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -88,6 +89,14 @@ public class EndGameController {
 		this.gameScore.setText(String.valueOf(game.getScoreManager().getPoints()));
 		this.multi.setText(String.valueOf(game.getScoreManager().getScore().getMaxMultiplier()) + "x");
 		writeOnGrid();
+		try {
+			StatisticImpl.getStat().addResult(this.username.getText(), this.gameScore.getText()); 
+			StatisticImpl.getStat().writeJson();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//historyBox
 	}
 
 	/*
