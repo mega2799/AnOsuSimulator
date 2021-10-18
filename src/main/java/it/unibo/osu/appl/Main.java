@@ -17,9 +17,9 @@ public class Main extends Application{
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/LoginMenu.fxml"));
 		myStage.setScene(loader.load());
 		((LoginMenuController)loader.getController()).init(myStage);
-		//myStage.initStyle(StageStyle.UNDECORATED);
+		myStage.initStyle(StageStyle.UTILITY);
+		myStage.setFullScreen(true);
 		myStage.show();
-		
 	}
 
 	public static void main(String[] args) {

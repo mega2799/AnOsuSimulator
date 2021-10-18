@@ -71,14 +71,18 @@ public class GameLoop extends AnimationTimer {
 //				// TODO Auto-generated catch block
 //				e1.printStackTrace();
 //			}		
+			
+			//here
 			try {
 				((AnchorPane) this.view.getScene().getRoot()).getChildren().add(0, loader.load());
-				((EndGameController) this.loader.getController()).init(this.game);
+				EndGameController controller = ((EndGameController) this.loader.getController());
+				controller.init(this.game);
+				controller.enterEndGame();
 			} catch (IOException e) {
 				e.printStackTrace();
 			};
-			((EndGameController) this.loader.getController()).registerData();
-			((AnchorPane) this.view.getScene().getRoot()).getChildren().remove(this.sceneController.getPane());
+//			((EndGameController) this.loader.getController()).registerData();
+//			((AnchorPane) this.view.getScene().getRoot()).getChildren().remove(this.sceneController.getPane());
 			this.stop();
 			this.previous = now;
 			break;

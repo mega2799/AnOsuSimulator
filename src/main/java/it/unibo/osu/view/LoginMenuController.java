@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.User;
@@ -47,6 +48,8 @@ public class LoginMenuController extends Resizeable {
     private FadeTransition fadeout;
     private FXMLLoader loader;
     private Stage stage;
+    private MusicControllerImpl clickSound;
+    private MusicControllerImpl loginSound;
     
 
 	
@@ -65,6 +68,8 @@ public class LoginMenuController extends Resizeable {
 		this.initializeTransitions();
 		this.initializeSounds();
 		this.iconTrans.play();
+		this.clickSound = MusicControllerImplFactory.getEffectImpl("/music/loginClickSound.wav");
+		this.loginSound = MusicControllerImplFactory.getEffectImpl("/music/loginSound.wav");
 		this.welcomeMusic.startMusic();
 	
 //    	System.out.println(toolkit.getScreenSize().getHeight() + " " + toolkit.getScreenSize().getWidth());
@@ -104,7 +109,11 @@ public class LoginMenuController extends Resizeable {
 			this.textField.setVisible(true);
 			System.out.println("ok");
 		});
+		this.textField.setOnMouseClicked(clicked -> {
+			this.clickSound.onNotify();
+		});
 		this.textField.setOnAction(ev -> {
+			this.loginSound.onNotify();
 			User.setUsername(this.textField.getText());
 			this.fadeout.play();
 			((MainMenuController) loader.getController()).startAnimation();

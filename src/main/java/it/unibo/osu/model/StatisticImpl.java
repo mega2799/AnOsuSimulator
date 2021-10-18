@@ -108,6 +108,25 @@ public class StatisticImpl implements Statistic {
 			  this.map.put(player, l);
 		  }
 		  //f.delete();
+//		JsonFactory jF = new JsonFactory();
+//		File f = new File("users.json");
+//		JsonParser jP = jF.createJsonParser(f);
+//		  // Sanity check: verify that we got "Json Object":
+//		if (jP.nextToken() != JsonToken.START_OBJECT) {
+//		    throw new IOException("Expected data to start with an Object");
+//		  }
+//		//jP.getCodec().readValue(jP, int[].class);
+//		  while (jP.nextToken() != JsonToken.END_OBJECT) {
+//			  //String fieldName = jP.getCurrentName();
+//			  //String value = jP.getValueAsString();
+//			  
+//			  String player = jP.getCurrentName();
+//			  String pointList = jP.getValueAsString();
+//			  
+//			  List<String> l = Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", "));
+//			  this.map.put(player, l);
+//		  }
+//		  f.delete();
 	}
 
 }
