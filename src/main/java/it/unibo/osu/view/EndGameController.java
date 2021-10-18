@@ -27,6 +27,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -56,6 +59,9 @@ public class EndGameController {
     @FXML
     private VBox historyBox;
     
+    @FXML
+    private MediaView videoBackground;
+
     private ImageView rikkaGif;
     private GameModel game;
     
@@ -85,6 +91,7 @@ public class EndGameController {
 		this.buttonClickSound = MusicControllerImplFactory.getEffectImpl("/music/clickSongs.wav");
 		this.buttonHoverSound = MusicControllerImplFactory.getEffectImpl("/music/scrollSongs.wav");
 		this.endgameEnteredSound = MusicControllerImplFactory.getEffectImpl("/music/endGame.wav");
+		this.setBackground();
 		this.initializeInputHandler();
 		// non vuole farla vedere
 // 		try {
@@ -114,15 +121,11 @@ public class EndGameController {
 		//makeBox(StatisticImpl.getStat().getPlayerHistory(this.username.getText()));
 	}
 
-	private void makeBox(List<String> playerHistory) {
-		/*
-		playerHistory.forEach(p -> {
-			this.historyBox.getChildren().add(new Label(p));
-		});
-		*/
-		this.historyBox.getChildren().addAll(new Label("ciao"));
-		//this.historyBox.setVisible(true); //per ora 
-	}
+	private void setBackground() {
+    	this.videoBackground.setMediaPlayer(new MediaPlayer(new Media(this.getClass().getResource("/video/Ayanami.mp4").toString())));
+    	this.videoBackground.getMediaPlayer().setCycleCount(Integer.MAX_VALUE);
+    	this.videoBackground.getMediaPlayer().play();
+    }
 
 	/*
 	 * Method used to write the statistic into the grid cells, modifing the text of the Labels took from the FXML

@@ -104,7 +104,6 @@ public class StatisticImpl implements Statistic {
 			  
 			  //List<String> l = Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", "));
 			  List<String> l = new ArrayList<String>(Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", ")));
-			  l.add("20");
 			  this.map.put(player, l);
 		  }
 		  //f.delete();
