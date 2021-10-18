@@ -109,6 +109,7 @@ public class EndGameController {
 		this.username.setText(User.getUsername());
 		this.gameScore.setText(String.valueOf(game.getScoreManager().getPoints()));
 		this.multi.setText(String.valueOf(game.getScoreManager().getScore().getMaxMultiplier()) + "x");
+		this.songName.setText(this.game.getBeatMap().getBeatmapName());
 		writeOnGrid();
 		try {
 			StatisticImpl.getStat().addResult(this.username.getText(), this.gameScore.getText()); 
@@ -182,6 +183,7 @@ public class EndGameController {
 		this.backToMenuButton.setOnMouseClicked(event -> {
 			this.buttonClickSound.onNotify();
 			((MainMenuController)loader.getController()).startAnimation();
+			this.videoBackground.getMediaPlayer().stop(); //FUNZIONERA
 			this.changeScene();
 			//((AnchorPane)this.pane.getScene().getRoot()).getChildren().remove(this.pane);
 		});

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.media.MediaView?>
-<?import javafx.scene.paint.Color?>
 
 <AnchorPane fx:id="pane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unibo.osu.view.EndGameController">
    <children>
@@ -26,132 +25,76 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label alignment="CENTER" prefHeight="47.0" prefWidth="139.0" style="-fx-font-size: 22; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="#ebebeb">
+            <Label alignment="CENTER" prefHeight="47.0" prefWidth="579.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="WHITE">
                <effect>
-                  <InnerShadow height="29.79" radius="13.6625" width="26.86">
-                     <color>
-                        <Color opacity="0.699999988079071" />
-                     </color>
-                  </InnerShadow>
+                  <DropShadow />
                </effect>
             </Label>
-            <Label alignment="CENTER" prefHeight="47.0" prefWidth="139.0" style="-fx-font-size: 22; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="#ebebeb" GridPane.columnIndex="1">
+            <Label alignment="CENTER" prefHeight="47.0" prefWidth="335.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="WHITE" GridPane.columnIndex="1">
                <effect>
-                  <InnerShadow height="28.325" radius="13.29625" width="26.86">
-                     <color>
-                        <Color opacity="0.699999988079071" />
-                     </color>
-                  </InnerShadow>
+                  <DropShadow />
                </effect>
             </Label>
-            <Label alignment="CENTER" prefHeight="47.0" prefWidth="139.0" style="-fx-font-size: 22; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="#ebebeb" GridPane.rowIndex="1">
+            <Label alignment="CENTER" prefHeight="47.0" prefWidth="447.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="WHITE" GridPane.rowIndex="1">
                <effect>
-                  <InnerShadow height="29.79" radius="13.6625" width="26.86">
-                     <color>
-                        <Color opacity="0.699999988079071" />
-                     </color>
-                  </InnerShadow>
+                  <DropShadow />
                </effect>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="139.0" style="-fx-font-size: 22; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="285.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <effect>
-                  <InnerShadow height="29.79" radius="13.6625" width="26.86">
-                     <color>
-                        <Color opacity="0.699999988079071" />
-                     </color>
-                  </InnerShadow>
+                  <DropShadow />
                </effect>
             </Label>
-            <Label alignment="CENTER" prefHeight="47.0" prefWidth="139.0" style="-fx-font-size: 22; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="#ebebeb" GridPane.rowIndex="2">
+            <Label alignment="CENTER" prefHeight="47.0" prefWidth="433.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="WHITE" GridPane.rowIndex="2">
                <effect>
-                  <InnerShadow height="29.79" radius="13.6625" width="26.86">
-                     <color>
-                        <Color opacity="0.699999988079071" />
-                     </color>
-                  </InnerShadow>
+                  <DropShadow />
                </effect>
             </Label>
-            <Label alignment="CENTER" prefHeight="47.0" prefWidth="139.0" style="-fx-font-size: 22; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="#ebebeb" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label alignment="CENTER" prefHeight="47.0" prefWidth="281.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <effect>
-                  <InnerShadow height="29.79" radius="13.6625" width="26.86">
-                     <color>
-                        <Color opacity="0.699999988079071" />
-                     </color>
-                  </InnerShadow>
+                  <DropShadow />
                </effect>
             </Label>
-            <Label alignment="CENTER" prefHeight="47.0" prefWidth="139.0" style="-fx-font-size: 22; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="#ebebeb" GridPane.rowIndex="3">
+            <Label alignment="CENTER" prefHeight="47.0" prefWidth="354.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="WHITE" GridPane.rowIndex="3">
                <effect>
-                  <InnerShadow height="29.79" radius="13.6625" width="26.86">
-                     <color>
-                        <Color opacity="0.699999988079071" />
-                     </color>
-                  </InnerShadow>
+                  <DropShadow />
                </effect>
             </Label>
-            <Label alignment="CENTER" prefHeight="47.0" prefWidth="139.0" style="-fx-font-size: 22; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="#ebebeb" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label alignment="CENTER" prefHeight="47.0" prefWidth="295.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <effect>
-                  <InnerShadow height="29.79" radius="13.6625" width="26.86">
-                     <color>
-                        <Color opacity="0.699999988079071" />
-                     </color>
-                  </InnerShadow>
+                  <DropShadow />
                </effect>
             </Label>
          </children>
       </GridPane>
-      <Label fx:id="songName" alignment="CENTER" layoutX="1371.0" layoutY="347.0" prefHeight="47.0" prefWidth="306.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="SONG NAME" textFill="#ebebeb">
+      <Label fx:id="songName" alignment="CENTER" layoutX="1107.0" layoutY="319.0" prefHeight="47.0" prefWidth="851.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="SONG NAME" textFill="WHITE">
          <effect>
-            <InnerShadow height="29.79" radius="13.6625" width="26.86">
-               <color>
-                  <Color opacity="0.699999988079071" />
-               </color>
-            </InnerShadow>
+            <DropShadow />
          </effect>
       </Label>
-      <Label fx:id="username" alignment="CENTER" layoutX="1461.0" layoutY="441.0" prefHeight="17.0" prefWidth="143.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="#ebebeb">
+      <Label fx:id="username" alignment="CENTER" layoutX="1102.0" layoutY="440.0" prefHeight="47.0" prefWidth="851.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="PLAYER" textFill="WHITE">
          <effect>
-            <InnerShadow height="29.79" radius="13.6625" width="26.86">
-               <color>
-                  <Color opacity="0.699999988079071" />
-               </color>
-            </InnerShadow>
+            <DropShadow />
          </effect>
       </Label>
-      <Label alignment="CENTER" layoutX="1414.0" layoutY="488.0" prefHeight="47.0" prefWidth="237.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="has scored" textFill="#ebebeb">
+      <Label alignment="CENTER" layoutX="1414.0" layoutY="488.0" prefHeight="47.0" prefWidth="237.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="has scored" textFill="WHITE">
          <effect>
-            <InnerShadow height="29.79" radius="13.6625" width="26.86">
-               <color>
-                  <Color opacity="0.699999988079071" />
-               </color>
-            </InnerShadow>
+            <DropShadow />
          </effect>
       </Label>
-      <Label fx:id="gameScore" alignment="CENTER" layoutX="1442.0" layoutY="540.0" prefHeight="47.0" prefWidth="180.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="19999" textFill="#ebebeb">
+      <Label fx:id="gameScore" alignment="CENTER" layoutX="1285.0" layoutY="541.0" prefHeight="47.0" prefWidth="489.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="19999" textFill="WHITE">
          <effect>
-            <InnerShadow height="29.79" radius="13.6625" width="26.86">
-               <color>
-                  <Color opacity="0.699999988079071" />
-               </color>
-            </InnerShadow>
+            <DropShadow />
          </effect>
       </Label>
-      <Label alignment="CENTER" layoutX="1400.0" layoutY="607.0" prefHeight="47.0" prefWidth="270.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="longest streak" textFill="#ebebeb">
+      <Label alignment="CENTER" layoutX="1400.0" layoutY="607.0" prefHeight="47.0" prefWidth="270.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="longest streak" textFill="WHITE">
          <effect>
-            <InnerShadow height="29.79" radius="13.6625" width="26.86">
-               <color>
-                  <Color opacity="0.699999988079071" />
-               </color>
-            </InnerShadow>
+            <DropShadow />
          </effect>
       </Label>
-      <Label fx:id="multi" alignment="CENTER" layoutX="1411.0" layoutY="657.0" prefHeight="47.0" prefWidth="237.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="234" textFill="#ebebeb">
+      <Label fx:id="multi" alignment="CENTER" layoutX="1411.0" layoutY="657.0" prefHeight="47.0" prefWidth="237.0" style="-fx-font-size: 32; -fx-font-family: &quot;Arial Black&quot;; -fx-fill: #818181;" text="234" textFill="WHITE">
          <effect>
-            <InnerShadow height="29.79" radius="13.6625" width="26.86">
-               <color>
-                  <Color opacity="0.699999988079071" />
-               </color>
-            </InnerShadow>
+            <DropShadow />
          </effect>
       </Label>
       <ImageView fx:id="backToMenuButton" fitHeight="118.0" fitWidth="135.0" layoutX="893.0" layoutY="854.0" pickOnBounds="true" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="893.0" AnchorPane.rightAnchor="892.0" AnchorPane.topAnchor="854.0">
