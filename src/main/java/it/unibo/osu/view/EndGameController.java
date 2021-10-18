@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import it.unibo.osu.model.GameModel;
@@ -26,10 +27,9 @@ import javafx.stage.Stage;
 
 public class EndGameController {
 
-
-
     @FXML
     private AnchorPane pane;
+
     @FXML
     private ImageView backToMenuButton;
     
@@ -97,6 +97,17 @@ public class EndGameController {
 			e.printStackTrace();
 		}
 		//historyBox
+		//makeBox(StatisticImpl.getStat().getPlayerHistory(this.username.getText()));
+	}
+
+	private void makeBox(List<String> playerHistory) {
+		/*
+		playerHistory.forEach(p -> {
+			this.historyBox.getChildren().add(new Label(p));
+		});
+		*/
+		this.historyBox.getChildren().addAll(new Label("ciao"));
+		//this.historyBox.setVisible(true); //per ora 
 	}
 
 	/*

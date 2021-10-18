@@ -41,16 +41,19 @@ public class StatisticImpl implements Statistic {
 
 	@Override
 	public void addResult(String player, String points) {
-		if (this.song != null) {
-			this.map.get(player).add((points));
-		}
+  	if (!this.map.containsKey(player)) {
+    		if (this.map.get(player) == null) {
+    			this.map.put(player, new ArrayList<String>());
+    		}
+  	}
+  	this.map.get(player).add(points);
 	}
 
 	@Override
 	public void addPlayer(String player) {
 		if (!this.map.containsKey(player)) {
-			this.map.put(player, new ArrayList<>());
-		}
+			this.map.put(player, new ArrayList<String>());
+    		}
 	}
 
 	
@@ -63,6 +66,7 @@ public class StatisticImpl implements Statistic {
 		jG.useDefaultPrettyPrinter();
 
 		jG.writeStartObject();
+		
 		this.map.forEach((k, v) -> {
 			try {
 				//jG.writeStringField(k, v.toString());
@@ -71,7 +75,6 @@ public class StatisticImpl implements Statistic {
 
 				//jG.writeStringField(this.song, k);
 				jG.writeStringField(k, v.toString());
-				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -99,10 +102,12 @@ public class StatisticImpl implements Statistic {
 			  String player = jP.getCurrentName();
 			  String pointList = jP.getValueAsString();
 			  
-			  List<String> l = Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", "));
+			  //List<String> l = Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", "));
+			  List<String> l = new ArrayList<String>(Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", ")));
+			  l.add("20");
 			  this.map.put(player, l);
 		  }
-		  f.delete();
+		  //f.delete();
 	}
 
 }
