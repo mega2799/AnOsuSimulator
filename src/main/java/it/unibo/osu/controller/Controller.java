@@ -47,7 +47,7 @@ public class Controller {
 //		StatisticImpl.getStat().setSong(name + beatmap);
 			StatisticImpl.getStat().setSong(name);
 		
-			StatisticImpl.getStat().writeJson(); // andrebbe scritto alla fine del game
+			//StatisticImpl.getStat().writeJson(); // andrebbe scritto alla fine del game
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
