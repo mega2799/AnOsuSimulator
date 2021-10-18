@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 
+import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.User;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
@@ -83,6 +85,9 @@ public class MainMenuController extends Resizeable{
 	private FadeTransition songListFadeInTransition;
 
 	private TranslateTransition songListTranslateTransition;
+	
+	private MusicControllerImpl scrollMenuSound;
+	private MusicControllerImpl clickMenuSound;
 
 //	private ScaleTransition scaleIconTransition;
 
@@ -102,7 +107,8 @@ public class MainMenuController extends Resizeable{
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
+		this.scrollMenuSound = MusicControllerImplFactory.getEffectImpl("/music/scrollMenuOptions.wav");
+		this.clickMenuSound = MusicControllerImplFactory.getEffectImpl("/music/clickMenuOptions.wav");
     	this.setInputHandlers();
 		this.initializeTransitions();
 		this.initializeSounds();
@@ -115,6 +121,7 @@ public class MainMenuController extends Resizeable{
 
 	private void setInputHandlers() {
 		this.exitButton.setOnMouseClicked(exitEvent ->{
+			this.clickMenuSound.onNotify();
 			System.exit(0);
 		});
 		this.playButton.setOnMouseClicked(playEvent -> {
@@ -122,6 +129,7 @@ public class MainMenuController extends Resizeable{
 			if( this.options.getOpacity()==1) {
 				this.fadeoutOption.play();
 			}
+			this.clickMenuSound.onNotify();
 			this.playEventParallelTransition.play();
 			
 		});
@@ -131,20 +139,24 @@ public class MainMenuController extends Resizeable{
 			} else {
 				this.fadeinOption.play();
 			}
+			this.clickMenuSound.onNotify();
 		});
 		this.exitButton.setOnMouseEntered(e1 -> {
+			this.scrollMenuSound.onNotify();
 			buttonEffect((Node)this.exitButton, MouseEvent.MOUSE_ENTERED);
 			});
 		this.exitButton.setOnMouseExited(e2 -> {
 			buttonEffect((Node)this.exitButton, MouseEvent.MOUSE_EXITED);
 		});
 		this.optionButton.setOnMouseEntered(e3 -> {
+			this.scrollMenuSound.onNotify();
 			buttonEffect((Node)this.optionButton, MouseEvent.MOUSE_ENTERED);
 			});
 		this.optionButton.setOnMouseExited(e4 -> {
 			buttonEffect((Node)this.optionButton, MouseEvent.MOUSE_EXITED);
 		});
 		this.playButton.setOnMouseEntered(e5 -> {
+			this.scrollMenuSound.onNotify();
 			buttonEffect((Node)this.playButton, MouseEvent.MOUSE_ENTERED);
 			});
 		this.playButton.setOnMouseExited(e6 -> {
@@ -284,14 +296,17 @@ public class MainMenuController extends Resizeable{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		full.setOnMouseClicked(e -> {
 			this.changeResolution(this.fixedPane, screenSize.width, screenSize.height);
+			this.stage.setFullScreen(true);
 		});
 	
 		
 		medium.setOnMouseClicked(e -> {
+			this.stage.setFullScreen(false);
 			this.changeResolution(this.fixedPane, 1920, 1080);
 		});
 		
 		quadratic.setOnMouseClicked(e -> {
+			this.stage.setFullScreen(false);
 			this.changeResolution(this.fixedPane, 640, 480);
 		});
 		
@@ -303,5 +318,6 @@ public class MainMenuController extends Resizeable{
 	public void changeResolution(Pane pane, double width, double height) {
 		super.changeResolution(pane, width, height);
 		this.stage.sizeToScene();
+		this.stage.centerOnScreen();
 	}
 }

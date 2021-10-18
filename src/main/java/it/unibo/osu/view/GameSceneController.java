@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.controller.MusicEffectController;
 import it.unibo.osu.controller.ScoreManager;
 import it.unibo.osu.model.BeatMap;
@@ -59,7 +61,7 @@ public class GameSceneController{
     
     private HitcircleViewFactory factory;
     private MusicEffectController effectController;
-    
+    private MusicControllerImpl pauseSound;
     private List<Transition> listTransitions;
     
     public void init(GameModel game) {
@@ -71,6 +73,7 @@ public class GameSceneController{
     	//this.changeResolution(toolkit.getScreenSize().getWidth(), toolkit.getScreenSize().getHeight());
     	this.listTransitions = new ArrayList<>();
     	this.effectController = new MusicEffectController("/music/hitSound.wav","/music/missSound.wav");
+    	this.pauseSound = MusicControllerImplFactory.getEffectImpl("/music/pauseSound.wav");
     	
     }
     
@@ -126,6 +129,7 @@ public class GameSceneController{
     }
     
     public void setPausePane() {
+    	this.pauseSound.onNotify();
     	if(!this.isPausePaneVisible()) {
     		this.pausePane.toFront();
     		if(this.backgroundMedia != null) {

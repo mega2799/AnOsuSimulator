@@ -7,9 +7,12 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.Map;
 
+import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GamePoints;
 import it.unibo.osu.model.User;
+import javafx.animation.FadeTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,8 +23,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class EndGameController {
 
@@ -55,6 +60,10 @@ public class EndGameController {
     
 	private Map<GamePoints, Integer> map;
     private FXMLLoader loader; 
+    private MusicControllerImpl buttonClickSound;
+    private MusicControllerImpl buttonHoverSound;
+    private MusicControllerImpl endgameEnteredSound;
+    private AnchorPane mainMenuPane;
 
 	public void init(GameModel game) {
 		this.game = game;
@@ -65,11 +74,16 @@ public class EndGameController {
 //		writeOnGrid();
 		loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
 		try {
-			((AnchorPane) this.pane.getScene().getRoot()).getChildren().add(0, loader.load());
+			
+			this.mainMenuPane = loader.load();
+			((AnchorPane) this.pane.getScene().getRoot()).getChildren().add(0, this.mainMenuPane);
 			((MainMenuController)loader.getController()).init((Stage)this.pane.getScene().getWindow());
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		this.buttonClickSound = MusicControllerImplFactory.getEffectImpl("/music/clickSongs.wav");
+		this.buttonHoverSound = MusicControllerImplFactory.getEffectImpl("/music/scrollSongs.wav");
+		this.endgameEnteredSound = MusicControllerImplFactory.getEffectImpl("/music/endGame.wav");
 		this.initializeInputHandler();
 		// non vuole farla vedere
 // 		try {
@@ -134,6 +148,7 @@ public class EndGameController {
 	
 	private void initializeInputHandler() {
 		this.backToMenuButton.setOnMouseEntered(entered -> {
+			this.buttonHoverSound.onNotify();
 			this.backToMenuButton.setFitWidth(this.backToMenuButton.getFitWidth()+10);
 			this.backToMenuButton.setFitHeight(this.backToMenuButton.getFitHeight()+10);
 		});
@@ -142,9 +157,30 @@ public class EndGameController {
 			this.backToMenuButton.setFitHeight(this.backToMenuButton.getFitHeight()-10);
 		});
 		this.backToMenuButton.setOnMouseClicked(event -> {
+			this.buttonClickSound.onNotify();
 			((MainMenuController)loader.getController()).startAnimation();
-			((AnchorPane)this.pane.getScene().getRoot()).getChildren().remove(this.pane);
+			this.changeScene();
+			//((AnchorPane)this.pane.getScene().getRoot()).getChildren().remove(this.pane);
 		});
 	}
+	private void changeScene() {
+		Pane fixedPane = ((Pane)this.pane.getScene().getRoot());
+		FadeTransition fadeTrans = new FadeTransition(Duration.seconds(2),fixedPane);
+		fadeTrans.setFromValue(1);
+		fadeTrans.setToValue(0);
+		fadeTrans.setOnFinished(finished -> {
+			fixedPane.getChildren().remove(this.pane);
+			fadeTrans.setFromValue(0);
+			fadeTrans.setToValue(1);
+			fadeTrans.setOnFinished(null);
+			fadeTrans.playFromStart();
+		});
+		fadeTrans.play();
+	}
 
+	public void enterEndGame() {
+		this.endgameEnteredSound.onNotify();
+		this.registerData();
+		((AnchorPane) this.pane.getScene().getRoot()).getChildren().retainAll(this.pane, this.mainMenuPane);
+	}
 }
