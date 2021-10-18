@@ -124,7 +124,7 @@ public class EndGameController {
 	private void setBackground() {
     	this.videoBackground.setMediaPlayer(new MediaPlayer(new Media(this.getClass().getResource("/video/Ayanami.mp4").toString())));
     	this.videoBackground.getMediaPlayer().setCycleCount(Integer.MAX_VALUE);
-    	this.videoBackground.getMediaPlayer().play();
+//    	this.videoBackground.getMediaPlayer().play();
     }
 
 	/*
@@ -205,5 +205,6 @@ public class EndGameController {
 		this.endgameEnteredSound.onNotify();
 		this.registerData();
 		((AnchorPane) this.pane.getScene().getRoot()).getChildren().retainAll(this.pane, this.mainMenuPane);
+		this.videoBackground.getMediaPlayer().play();
 	}
 }
