@@ -18,10 +18,4 @@ public class MusicEffectController implements HitActionObserver {
 			hitEffect.onNotify();
 		}
 	}
-	
-	public void stopSounds() {
-		this.hitEffect.getMediaPlayer().setVolume(0);
-		this.hitEffect.getMediaPlayer().setVolume(0);
-	}
-
 }

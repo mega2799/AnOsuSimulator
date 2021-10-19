@@ -1,11 +1,12 @@
 package it.unibo.osu.view;
 
 import java.awt.Dimension;
-import java.awt.List;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
@@ -88,7 +89,7 @@ public class MainMenuController extends Resizeable{
 	
 	private MusicControllerImpl scrollMenuSound;
 	private MusicControllerImpl clickMenuSound;
-
+	private List<StackPane> mainButtons;
 //	private ScaleTransition scaleIconTransition;
 
 	
@@ -113,6 +114,11 @@ public class MainMenuController extends Resizeable{
 		this.initializeTransitions();
 		this.initializeSounds();
 		this.gameOptions();
+		this.mainButtons = new ArrayList<>();
+		this.mainButtons.add(this.playButton);
+		this.mainButtons.add(this.optionButton);
+		this.mainButtons.add(this.exitButton);
+		
     }
 
 	private void initializeSounds() {
@@ -131,7 +137,6 @@ public class MainMenuController extends Resizeable{
 			}
 			this.clickMenuSound.onNotify();
 			this.playEventParallelTransition.play();
-			
 		});
 		this.optionButton.setOnMouseClicked(optionsEvent -> {
 			if( this.options.getOpacity()==1) {
@@ -198,6 +203,9 @@ public class MainMenuController extends Resizeable{
 		this.menuOptionsFadeout = new FadeTransition(Duration.seconds(1), this.vboxButtons);
 		this.menuOptionsFadeout.setToValue(0);
 		this.menuOptionsFadeout.setFromValue(1);
+		this.menuOptionsFadeout.setOnFinished(finished -> {
+			this.mainButtons.forEach(button -> button.setVisible(false));
+		});
 		
 		this.iconTranslateTransition = new TranslateTransition(Duration.seconds(3), this.icon);
 		this.iconTranslateTransition.setToX(1000);

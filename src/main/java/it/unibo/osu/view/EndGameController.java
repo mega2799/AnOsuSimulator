@@ -79,15 +79,15 @@ public class EndGameController {
 //		this.gameScore.setText(String.valueOf(game.getScoreManager().getPoints()));
 //		this.multi.setText(String.valueOf(game.getScoreManager().getScore().getMaxMultiplier()) + "x");
 //		writeOnGrid();
-		loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
-		try {
-			
-			this.mainMenuPane = loader.load();
-			((AnchorPane) this.pane.getScene().getRoot()).getChildren().add(0, this.mainMenuPane);
-			((MainMenuController)loader.getController()).init((Stage)this.pane.getScene().getWindow());
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+//		loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
+//		try {
+//			
+//			this.mainMenuPane = loader.load();
+//			((AnchorPane) this.pane.getScene().getRoot()).getChildren().add(0, this.mainMenuPane);
+//			((MainMenuController)loader.getController()).init((Stage)this.pane.getScene().getWindow());
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
 		this.buttonClickSound = MusicControllerImplFactory.getEffectImpl("/music/clickSongs.wav");
 		this.buttonHoverSound = MusicControllerImplFactory.getEffectImpl("/music/scrollSongs.wav");
 		this.endgameEnteredSound = MusicControllerImplFactory.getEffectImpl("/music/endGame.wav");
@@ -209,6 +209,15 @@ public class EndGameController {
 		this.videoBackground.getMediaPlayer().play();
 		this.pane.toFront();
 		//((AnchorPane) this.pane.getScene().getRoot()).getChildren().remove(((AnchorPane) this.pane.getScene().getRoot()).getChildren().size()-1);
-		((AnchorPane) this.pane.getScene().getRoot()).getChildren().retainAll(this.pane, this.mainMenuPane);
+		((AnchorPane) this.pane.getScene().getRoot()).getChildren().retainAll(this.pane);
+		loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
+		try {
+			
+			this.mainMenuPane = loader.load();
+			((AnchorPane) this.pane.getScene().getRoot()).getChildren().add(0, this.mainMenuPane);
+			((MainMenuController)loader.getController()).init((Stage)this.pane.getScene().getWindow());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 }

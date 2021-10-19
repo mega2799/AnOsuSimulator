@@ -146,7 +146,7 @@ public class GameSceneController{
     	
     }
     
-    private void pauseHitbuttons(){
+    public void pauseHitbuttons(){
     	this.listTransitions.forEach(transition -> {
     		if( transition.getStatus().equals(Status.PAUSED)) {
     			transition.play();
@@ -168,7 +168,5 @@ public class GameSceneController{
     public boolean isPausePaneVisible() {
     	return this.pane.getChildren().indexOf(this.pausePane) != 0;
     }
-    public void stopEffectSounds() {
-    	this.effectController.stopSounds();
-    }
+ 
 }

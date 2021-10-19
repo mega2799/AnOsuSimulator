@@ -72,14 +72,14 @@ public class GameLoop extends AnimationTimer {
 //				// TODO Auto-generated catch block
 //				e1.printStackTrace();
 //			}		
-			
+			this.sceneController.pauseHitbuttons();
 			try {
 				((AnchorPane) this.view.getScene().getRoot()).getChildren().add(0, loader.load());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			this.sceneController.stopEffectSounds();
+			//mi sa che stop effect sound non funzia perche` gia sono spawnati ormai i sounds.
 			EndGameController controller = ((EndGameController) this.loader.getController());
 			controller.init(this.game);
 			controller.enterEndGame();
