@@ -132,12 +132,12 @@ public class GameSceneController{
     	this.pauseSound.onNotify();
     	if(!this.isPausePaneVisible()) {
     		this.pausePane.toFront();
-    		if(this.backgroundMedia != null) {
+    		if(this.backgroundMedia.getMediaPlayer() != null) {
         		this.backgroundMedia.getMediaPlayer().pause();
         	}
     	} else {
     		this.pausePane.toBack();
-    		if(this.backgroundMedia != null) {
+    		if(this.backgroundMedia.getMediaPlayer() != null) {
         		this.backgroundMedia.getMediaPlayer().play();
         	}
     	};
@@ -167,5 +167,8 @@ public class GameSceneController{
     }
     public boolean isPausePaneVisible() {
     	return this.pane.getChildren().indexOf(this.pausePane) != 0;
+    }
+    public void stopEffectSounds() {
+    	this.effectController.stopSounds();
     }
 }

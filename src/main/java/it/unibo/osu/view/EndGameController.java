@@ -206,7 +206,9 @@ public class EndGameController {
 	public void enterEndGame() {
 		this.endgameEnteredSound.onNotify();
 		this.registerData();
-		((AnchorPane) this.pane.getScene().getRoot()).getChildren().retainAll(this.pane, this.mainMenuPane);
 		this.videoBackground.getMediaPlayer().play();
+		this.pane.toFront();
+		//((AnchorPane) this.pane.getScene().getRoot()).getChildren().remove(((AnchorPane) this.pane.getScene().getRoot()).getChildren().size()-1);
+		((AnchorPane) this.pane.getScene().getRoot()).getChildren().retainAll(this.pane, this.mainMenuPane);
 	}
 }

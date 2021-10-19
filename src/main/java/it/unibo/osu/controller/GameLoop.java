@@ -48,6 +48,7 @@ public class GameLoop extends AnimationTimer {
 			this.game.initGameOnStart();
 			this.musicController.startMusic();
 			this.previous = now;
+
 			break;
 		case RUNNING:
 			if( this.game.isGameOver()) {
@@ -72,15 +73,16 @@ public class GameLoop extends AnimationTimer {
 //				e1.printStackTrace();
 //			}		
 			
-			//here
 			try {
 				((AnchorPane) this.view.getScene().getRoot()).getChildren().add(0, loader.load());
-				EndGameController controller = ((EndGameController) this.loader.getController());
-				controller.init(this.game);
-				controller.enterEndGame();
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-			};
+			}
+			this.sceneController.stopEffectSounds();
+			EndGameController controller = ((EndGameController) this.loader.getController());
+			controller.init(this.game);
+			controller.enterEndGame();
 //			((EndGameController) this.loader.getController()).registerData();
 //			((AnchorPane) this.view.getScene().getRoot()).getChildren().remove(this.sceneController.getPane());
 			this.stop();
