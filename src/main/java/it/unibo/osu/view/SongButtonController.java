@@ -55,7 +55,6 @@ public class SongButtonController {
     	this.anchorPane.setOnMouseExited(exited -> {
     		this.anchorPane.getTransforms().remove(scale);
     	});
-    	
     }
     
 }

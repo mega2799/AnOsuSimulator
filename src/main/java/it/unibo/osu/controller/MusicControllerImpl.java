@@ -22,7 +22,8 @@ public abstract class MusicControllerImpl extends AbstractSubject implements Mus
 		}
 
 	}
-	protected  MediaPlayer getMediaPlayer() {
+	//mhh 
+	public  MediaPlayer getMediaPlayer() {
 		return this.audioMedia;
 	}
 	
@@ -70,7 +71,8 @@ public abstract class MusicControllerImpl extends AbstractSubject implements Mus
 	@Override
 	public void setOnFinished(Runnable runnable) {		
 	}
-
+	
+	
 //	public GameModel getGameModel() {
 //		return this.game;
 //	}

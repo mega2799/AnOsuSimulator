@@ -11,7 +11,10 @@ import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.User;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,7 +53,7 @@ public class LoginMenuController extends Resizeable {
     private Stage stage;
     private MusicControllerImpl clickSound;
     private MusicControllerImpl loginSound;
-    
+    private Timeline musicFadeout;
 
 	
 	public void init(Stage stage){
@@ -70,6 +73,8 @@ public class LoginMenuController extends Resizeable {
 		this.iconTrans.play();
 		this.clickSound = MusicControllerImplFactory.getEffectImpl("/music/loginClickSound.wav");
 		this.loginSound = MusicControllerImplFactory.getEffectImpl("/music/loginSound.wav");
+		this.musicFadeout = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.welcomeMusic.getMediaPlayer().volumeProperty(), 1)),
+				new KeyFrame(Duration.seconds(3),new KeyValue( this.welcomeMusic.getMediaPlayer().volumeProperty(), 0)));
 		this.welcomeMusic.startMusic();
 	
 //    	System.out.println(toolkit.getScreenSize().getHeight() + " " + toolkit.getScreenSize().getWidth());
@@ -97,6 +102,7 @@ public class LoginMenuController extends Resizeable {
 			this.fadeout.setOnFinished(null);
 			this.fadeout.playFromStart();
 		});
+		
 	}
 	
 	private void initializeSounds() {
@@ -115,6 +121,7 @@ public class LoginMenuController extends Resizeable {
 		this.textField.setOnAction(ev -> {
 			this.loginSound.onNotify();
 			User.setUsername(this.textField.getText());
+			this.musicFadeout.play();
 			this.fadeout.play();
 			((MainMenuController) loader.getController()).startAnimation();
 		});

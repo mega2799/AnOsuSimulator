@@ -13,8 +13,11 @@ import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.User;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.ParallelTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
@@ -90,8 +93,11 @@ public class MainMenuController extends Resizeable{
 	private MusicControllerImpl scrollMenuSound;
 	private MusicControllerImpl clickMenuSound;
 	private List<StackPane> mainButtons;
+	private MusicControllerImpl menuMusic;
 //	private ScaleTransition scaleIconTransition;
+	private Timeline musicFadeIn;
 
+    private Timeline musicFadeOut;
 	
     
     public void init(Stage stage) {
@@ -118,7 +124,11 @@ public class MainMenuController extends Resizeable{
 		this.mainButtons.add(this.playButton);
 		this.mainButtons.add(this.optionButton);
 		this.mainButtons.add(this.exitButton);
-		
+		this.menuMusic = MusicControllerImplFactory.getSimpleMusicImpl("/tracks/joshiraku.wav");
+		this.musicFadeIn = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), 0)),
+				new KeyFrame(Duration.seconds(3),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), User.getMusicVolume())));
+		this.musicFadeOut = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), this.menuMusic.getMediaPlayer().getVolume())),
+				new KeyFrame(Duration.seconds(3),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), 0)));
     }
 
 	private void initializeSounds() {
@@ -128,6 +138,7 @@ public class MainMenuController extends Resizeable{
 	private void setInputHandlers() {
 		this.exitButton.setOnMouseClicked(exitEvent ->{
 			this.clickMenuSound.onNotify();
+			this.musicFadeOut.play();
 			System.exit(0);
 		});
 		this.playButton.setOnMouseClicked(playEvent -> {
@@ -135,6 +146,7 @@ public class MainMenuController extends Resizeable{
 			if( this.options.getOpacity()==1) {
 				this.fadeoutOption.play();
 			}
+			this.musicFadeOut.play();
 			this.clickMenuSound.onNotify();
 			this.playEventParallelTransition.play();
 		});
@@ -236,6 +248,8 @@ public class MainMenuController extends Resizeable{
 	}
 	public void startAnimation() {
 		this.iconTrans.play();
+		this.menuMusic.startMusic();
+		this.musicFadeIn.play();
 		//effetti sonori magari
 	}
 	private void gameOptions() {
@@ -328,4 +342,6 @@ public class MainMenuController extends Resizeable{
 		this.stage.sizeToScene();
 		this.stage.centerOnScreen();
 	}
+	
+	
 }
