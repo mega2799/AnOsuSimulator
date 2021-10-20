@@ -98,6 +98,7 @@ public class MainMenuController extends Resizeable{
 	private Timeline musicFadeIn;
 
     private Timeline musicFadeOut;
+    private SongMenuController songMenuController;
 	
     
     public void init(Stage stage) {
@@ -108,6 +109,7 @@ public class MainMenuController extends Resizeable{
 			fixedPane = ((Pane)this.pane.getParent());
 //			fixedPane.getChildren().add(0,loader.load());
 			this.scrollPane = (ScrollPane)loader.load();
+	    	this.songMenuController = (SongMenuController) loader.getController();
 			this.scrollPane.setLayoutX(-this.fixedPane.getPrefWidth());
 			this.scrollPane.setOpacity(0);
 			this.pane.getChildren().add(this.scrollPane);
@@ -127,8 +129,8 @@ public class MainMenuController extends Resizeable{
 		this.menuMusic = MusicControllerImplFactory.getSimpleMusicImpl("/tracks/joshiraku.wav");
 		this.musicFadeIn = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), 0)),
 				new KeyFrame(Duration.seconds(3),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), User.getMusicVolume())));
-		this.musicFadeOut = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), this.menuMusic.getMediaPlayer().getVolume())),
-				new KeyFrame(Duration.seconds(3),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), 0)));
+//		this.musicFadeOut = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), User.getMusicVolume())),
+//				new KeyFrame(Duration.seconds(3),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), 0)));
     }
 
 	private void initializeSounds() {
@@ -146,8 +148,11 @@ public class MainMenuController extends Resizeable{
 			if( this.options.getOpacity()==1) {
 				this.fadeoutOption.play();
 			}
+			this.musicFadeOut = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), User.getMusicVolume())),
+					new KeyFrame(Duration.seconds(3),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), 0)));
 			this.musicFadeOut.play();
 			this.clickMenuSound.onNotify();
+			this.songMenuController.updateEffectsVolume();
 			this.playEventParallelTransition.play();
 		});
 		this.optionButton.setOnMouseClicked(optionsEvent -> {
@@ -301,6 +306,9 @@ public class MainMenuController extends Resizeable{
 		slider.valueProperty().addListener(changed -> {
 			User.setMusicVolume(slider.getValue());
 		});
+		slider.setOnMouseReleased(released -> {
+			this.menuMusic.getMediaPlayer().setVolume(User.getMusicVolume());
+		});
 		options.getChildren().addAll(volume, slider);
 		
 	
@@ -312,6 +320,10 @@ public class MainMenuController extends Resizeable{
 		Slider sliderSfx = new Slider(0, 1, 1);	
 		sliderSfx.valueProperty().addListener(changed -> {
 			User.setEffectVolume(sliderSfx.getValue());
+		});
+		sliderSfx.setOnMouseReleased(realeased -> {
+			this.clickMenuSound.getMediaPlayer().setVolume(User.getEffectVolume());
+			this.scrollMenuSound.getMediaPlayer().setVolume(User.getEffectVolume());
 		});
 		options.getChildren().addAll(volumeSfx, sliderSfx);
 		

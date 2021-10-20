@@ -37,6 +37,11 @@ public class MusicControllerImplFactory {
 				super.stopMusic();
 				super.startMusic();
 			}
+			
+			@Override
+			public void updateVolume() {
+				this.getMediaPlayer().setVolume(User.getEffectVolume());
+			}
 		};
 	}
 }

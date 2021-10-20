@@ -53,6 +53,7 @@ public class SongMenuController implements Initializable {
     
     private List<AnchorPane> songButtons;
 
+    private List<SongButtonController> controllerList;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	this.songButtons = new ArrayList<>();
@@ -69,7 +70,7 @@ public class SongMenuController implements Initializable {
 
     	final String path = "beatmaps/";
     	final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-
+    	this.controllerList = new ArrayList<>();
     	try {
     		if(jarFile.isFile()) {  // Run with JAR file
     			final JarFile jar = new JarFile(jarFile);
@@ -80,7 +81,10 @@ public class SongMenuController implements Initializable {
     					FXMLLoader loader = new FXMLLoader();
     					loader.setLocation(this.getClass().getResource("/fxml/Song.fxml"));
     					AnchorPane song = loader.load();
-    					((SongButtonController) loader.getController()).init(name.substring(path.length()));
+//    					((SongButtonController) loader.getController()).init(name.substring(path.length()));
+    					SongButtonController controller = ((SongButtonController) loader.getController());
+    					this.controllerList.add(controller);
+    					controller.init(name.substring(path.length()));
     					this.songButtons.add(song);
     					this.vbox1.getChildren().add(song);
     				}
@@ -95,7 +99,10 @@ public class SongMenuController implements Initializable {
     						FXMLLoader loader = new FXMLLoader();
     						loader.setLocation(this.getClass().getResource("/fxml/Song.fxml"));
     						AnchorPane song = loader.load();
-    						((SongButtonController) loader.getController()).init(app.getName());
+//    						((SongButtonController) loader.getController()).init(app.getName());
+    						SongButtonController controller = ((SongButtonController) loader.getController());
+        					this.controllerList.add(controller);
+        					controller.init(app.getName());
     						this.songButtons.add(song);
     						this.vbox1.getChildren().add(song);    	            }
     				} catch (URISyntaxException ex) {
@@ -106,5 +113,9 @@ public class SongMenuController implements Initializable {
 
     	}
     }
-
+    public void updateEffectsVolume() {
+    	this.controllerList.forEach(contr -> {
+    		contr.updateVolume();
+    	});
+    }
 }

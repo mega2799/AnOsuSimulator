@@ -4,6 +4,7 @@ import it.unibo.osu.controller.Controller;
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.BeatMap;
+import it.unibo.osu.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -70,5 +71,9 @@ public class SongButtonController {
     		this.song.stopMusic();
     	});
     }
-    
+    public void updateVolume() {
+    	this.song.getMediaPlayer().setVolume(User.getMusicVolume());
+    	this.clickSound.getMediaPlayer().setVolume(User.getEffectVolume());
+    	this.scrollSound.getMediaPlayer().setVolume(User.getEffectVolume());
+    }
 }

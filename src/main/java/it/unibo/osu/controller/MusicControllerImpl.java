@@ -4,6 +4,7 @@ package it.unibo.osu.controller;
 import java.net.URISyntaxException;
 
 import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.User;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -70,6 +71,10 @@ public abstract class MusicControllerImpl extends AbstractSubject implements Mus
 	
 	@Override
 	public void setOnFinished(Runnable runnable) {		
+	}
+	
+	public void updateVolume() {
+		this.getMediaPlayer().setVolume(User.getMusicVolume());
 	}
 	
 	
