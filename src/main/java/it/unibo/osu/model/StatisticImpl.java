@@ -19,7 +19,7 @@ import com.fasterxml.jackson.core.ObjectCodec;
 
 public class StatisticImpl implements Statistic {
 
-	private static final Statistic STATISTIC = new StatisticImpl();
+	private static Statistic STATISTIC;
 
 	private String song = null;
 
@@ -31,6 +31,9 @@ public class StatisticImpl implements Statistic {
 	}
 
 	public static final Statistic getStat() {
+		if(STATISTIC == null) {
+			STATISTIC = new StatisticImpl();
+		}
 		return STATISTIC;
 	}
 

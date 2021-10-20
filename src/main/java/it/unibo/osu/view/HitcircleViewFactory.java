@@ -1,6 +1,6 @@
 package it.unibo.osu.view;
 
-import it.unibo.osu.model.Hitpoint;
+import it.unibo.osu.model.HitPoint;
 import it.unibo.osu.util.Mapper;
 public class HitcircleViewFactory {
 	private String innerCircleUrl;
@@ -16,8 +16,8 @@ public class HitcircleViewFactory {
 		this.approachRate = approachRate;
 		this.overallDifficulty = difficulty;
 	}
-	public HitcircleViewImpl getHitcircleView(Hitpoint hitpoint) { 
-		Hitpoint mappedHitpoint = Mapper.mapHitpoint(hitpoint);
+	public HitcircleViewImpl getHitcircleView(HitPoint hitpoint) { 
+		HitPoint mappedHitpoint = Mapper.mapHitpoint(hitpoint);
 		return new HitcircleViewImpl(this.innerCircleUrl, this.outerCircleUrl, this.circleSize, this.overallDifficulty, this.approachRate, mappedHitpoint.getX(), mappedHitpoint.getY());
 	}
 }

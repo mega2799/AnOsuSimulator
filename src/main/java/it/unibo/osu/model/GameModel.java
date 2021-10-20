@@ -8,16 +8,16 @@ import it.unibo.osu.controller.HitActionObserver;
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.controller.Observer;
-import it.unibo.osu.controller.ScoreManager;
+import it.unibo.osu.controller.ScoreManagerImpl;
 import it.unibo.osu.util.Clock;
 import it.unibo.osu.util.HitobjectSelector;
 
 public class GameModel implements Observer, HitActionObserver{
 	private GameStatus status;
 	private BeatMap beatMap;
-	private ScoreManager scoreManager;
+	private ScoreManagerImpl scoreManager;
 	private LifeBar lifeBar;
-	private List<Hitpoint> currentHitbuttons;
+	private List<HitpointImpl> currentHitbuttons;
 	private HitobjectSelector selector;
 	private Clock osuClock;
 	private double timeAcc;
@@ -27,13 +27,13 @@ public class GameModel implements Observer, HitActionObserver{
 		this.status = GameStatus.START;
 		this.beatMap = new BeatMap(name);
 		this.osuClock = new Clock();
-		this.scoreManager = new ScoreManager(new Score());
+		this.scoreManager = new ScoreManagerImpl(new ScoreImpl());
 		this.timeAcc = 0;
 	}
 	
 	public void initGameOnStart() {
 //		this.scoreManager = new ScoreManager(new Score());
-		this.lifeBar = new LifeBar(this.beatMap.getHpDrainRate());
+		this.lifeBar = new LifeBarImpl(this.beatMap.getHpDrainRate());
 		this.currentHitbuttons = new ArrayList<>();
 		this.selector = new HitobjectSelector(this.beatMap.getHitpoints());
 		this.status = GameStatus.RUNNING;
@@ -77,11 +77,11 @@ public class GameModel implements Observer, HitActionObserver{
 		return beatMap;
 	}
 
-	public ScoreManager getScoreManager() {
+	public ScoreManagerImpl getScoreManager() {
 		return this.scoreManager;
 	}
 
-	public List<Hitpoint> getCurrentHitbuttons() {
+	public List<HitpointImpl> getCurrentHitbuttons() {
 		return currentHitbuttons;
 	}
 
@@ -89,7 +89,7 @@ public class GameModel implements Observer, HitActionObserver{
 		return osuClock;
 	}
 
-	public void clearCurrentHitbuttons(List<Hitpoint> currentHitbuttons) {
+	public void clearCurrentHitbuttons(List<HitpointImpl> currentHitbuttons) {
 		this.currentHitbuttons.clear();
 	}
 	

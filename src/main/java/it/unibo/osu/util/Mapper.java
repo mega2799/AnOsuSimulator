@@ -1,6 +1,7 @@
 package it.unibo.osu.util;
 
-import it.unibo.osu.model.Hitpoint;
+import it.unibo.osu.model.HitPoint;
+import it.unibo.osu.model.HitpointImpl;
 
 public class Mapper {
 	public final static double WIDTH = 1840;
@@ -11,11 +12,11 @@ public class Mapper {
 	public final static double BEATMAPWIDTH = 640;
 	public final static double BEATMAPHEIGHT = 480;
 	
-	public static Hitpoint mapHitpoint(Hitpoint hitpoint) {
+	public static HitPoint mapHitpoint(HitPoint hitpoint) {
 		double x = hitpoint.getX();
 		double y = hitpoint.getY();
 		double newX = (x  * (WIDTH - XOFFSET) / BEATMAPWIDTH) + XOFFSET;
 		double newY = (y  * (HEIGHT - YOFFSET) / BEATMAPHEIGHT) + YOFFSET;
-		return new Hitpoint(newX, newY, hitpoint.getTime());
+		return new HitpointImpl(newX, newY, hitpoint.getTime());
 	}
 }

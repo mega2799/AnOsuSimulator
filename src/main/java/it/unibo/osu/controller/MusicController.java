@@ -7,7 +7,7 @@ public interface MusicController {
 	
 	public void stopMusic();
 	
-	public Duration getDuration();
+	public Duration getDuration(); //da eliminare
 	
 	public void pauseMusic();
 	

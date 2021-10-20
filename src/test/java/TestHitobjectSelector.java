@@ -13,7 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import it.unibo.osu.model.BeatMap;
-import it.unibo.osu.model.Hitpoint;
+import it.unibo.osu.model.HitpointImpl;
 import it.unibo.osu.util.BeatmapReader;
 import it.unibo.osu.util.HitobjectSelector;
 

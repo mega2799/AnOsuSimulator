@@ -16,12 +16,13 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import it.unibo.osu.model.Hitpoint;
+import it.unibo.osu.model.HitPoint;
+import it.unibo.osu.model.HitpointImpl;
 
 
 
 public class BeatmapReader extends BufferedReader{
-	private List<Hitpoint> hitpoints;
+	private List<HitpointImpl> hitpoints;
 	private Integer n;
 	private int index = 0;
 	private List<String> lines;
@@ -45,16 +46,16 @@ public class BeatmapReader extends BufferedReader{
 				.takeWhile(x -> !x.equals(""))
 				.map((x)-> {
 					String[] values = x.split(",");
-					return new Hitpoint(Double.parseDouble(values[0]), Double.parseDouble(values[1]),Double.parseDouble(values[2]));
+					return new HitpointImpl(Double.parseDouble(values[0]), Double.parseDouble(values[1]),Double.parseDouble(values[2]));
 				})
 				.collect(Collectors.toList());
 	}
 	
-	public  List<Hitpoint> getHitpoints(){
+	public  List<HitpointImpl> getHitpoints(){
 		return this.hitpoints;
 	}
 	
-	public Stream<Hitpoint> hitPointsStream() {
+	public Stream<HitpointImpl> hitPointsStream() {
 		return this.hitpoints.stream();
 	}
 	
@@ -66,7 +67,7 @@ public class BeatmapReader extends BufferedReader{
 			return false;
 		}
 	}
-	public Hitpoint readHitpoint() {
+	public HitPoint readHitpoint() {
 		if(this.hasNextHitpoint()) {
 			index += 1;
 			return this.hitpoints.get(index);

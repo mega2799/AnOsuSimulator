@@ -7,7 +7,7 @@ import it.unibo.osu.model.GamePoints;
 import it.unibo.osu.model.Score;
 
 //public class ScoreManager implements HitActionObserver{
-public class ScoreManager {
+public class ScoreManagerImpl {
 
 	private Score score;
 	
@@ -18,7 +18,7 @@ public class ScoreManager {
 		put(GamePoints.PERFECT,0);
 	}};
 	
-	public ScoreManager(Score score) {
+	public ScoreManagerImpl(Score score) {
 		this.score = score;
 	}
 	
