@@ -23,7 +23,10 @@ public class StatisticImpl implements Statistic {
 
 	private Map<String, List<String>> map = new HashMap<>();
 
-	public static final Statistic getStat() {
+	/*
+	 * using synchronized i make a use of a thread safe Singleton version
+	 */
+	public static final synchronized Statistic getStat() {
 		if(STATISTIC == null) {
 			STATISTIC = new StatisticImpl();
 		}
