@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import com.sun.glass.events.WindowEvent;
+
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.User;
@@ -140,8 +142,11 @@ public class MainMenuController extends Resizeable{
 	private void setInputHandlers() {
 		this.exitButton.setOnMouseClicked(exitEvent ->{
 			this.clickMenuSound.onNotify();
+			this.musicFadeOut = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), User.getMusicVolume())),
+					new KeyFrame(Duration.seconds(3),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), 0)));
 			this.musicFadeOut.play();
-			System.exit(0);
+			this.stage.getOnCloseRequest().handle(null);
+			this.stage.close();
 		});
 		this.playButton.setOnMouseClicked(playEvent -> {
 //			this.fadeout.play();

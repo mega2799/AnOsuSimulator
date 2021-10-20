@@ -20,6 +20,9 @@ public class Main extends Application{
 		myStage.initStyle(StageStyle.UTILITY);
 		myStage.setFullScreen(true);
 		myStage.show();
+		myStage.setOnCloseRequest(close -> {
+			System.out.println("closing");
+		});
 	}
 
 	public static void main(String[] args) {
