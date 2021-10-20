@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 public class GameLoop extends AnimationTimer {
 	private GameModel game;
-	private Stage view;  // <-- forse meglio passare solo controller, con file fxml che ha dentro anche stage così da fare getStage all occorrenza
+	private Stage view;  // <-- forse meglio passare solo controller, con file fxml che ha dentro anche stage cosï¿½ da fare getStage all occorrenza
 	private GameSceneController sceneController;
 	private MusicController musicController;
 	private long previous;
@@ -27,12 +27,6 @@ public class GameLoop extends AnimationTimer {
 		this.musicController = musicController;
 		this.previous = System.nanoTime();
 		this.loader = new FXMLLoader(this.getClass().getResource("/fxml/endGame.fxml"));
-//		try {
-//			((AnchorPane) this.view.getScene().getRoot()).getChildren().add(0, loader.load());
-//			((EndGameController) this.loader.getController()).init(this.game);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		};
 		this.start();
 	}
 	
@@ -61,17 +55,6 @@ public class GameLoop extends AnimationTimer {
 			this.previous = now;
 			break;
 		case ENDGAME:
-			// da implementare, aprirï¿½ una nuova scena o stage finale.
-//			this.view.close();
-//			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/endGame.fxml"));		
-//			try {
-//				((Stage)loader.load());
-//				EndGameController ed = ((EndGameController) loader.getController());
-//				ed.init(this.game);
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}		
 			this.sceneController.pauseHitbuttons();
 			try {
 				((AnchorPane) this.view.getScene().getRoot()).getChildren().add(0, loader.load());
@@ -83,8 +66,6 @@ public class GameLoop extends AnimationTimer {
 			EndGameController controller = ((EndGameController) this.loader.getController());
 			controller.init(this.game);
 			controller.enterEndGame();
-//			((EndGameController) this.loader.getController()).registerData();
-//			((AnchorPane) this.view.getScene().getRoot()).getChildren().remove(this.sceneController.getPane());
 			this.stop();
 			this.previous = now;
 			break;

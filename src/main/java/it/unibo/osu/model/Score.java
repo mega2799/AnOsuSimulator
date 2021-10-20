@@ -1,55 +1,21 @@
 package it.unibo.osu.model;
 
-public class Score {
+public interface Score {
 
-	private int points;
+	void setPoints(int points);
 
-	private int multiplier;
-	
-	private int maxMultiplier;
+	void setMultiplier(int multiplier);
 
-	public Score() {
-		this.points = 0;
-		this.multiplier = 0;
-		this.maxMultiplier = 0;
-	}
-	
-	public void initScore() {
-		this.points = 0;
-		this.multiplier = 0;
-	}
-	
-	public void setPoints(int points) {
-		this.points = points;
-	}
+	int getPoints();
 
-	public void setMultiplier(int multiplier) {
-		this.multiplier = multiplier;
-	}
-	
-	public int getPoints() {
-		return points;
-	}
+	int getMultiplier();
 
-	public int getMultiplier() {
-		return multiplier;
-	}
-	
-	public void addPoints(int points) {
-		this.points += points;
-	}
-	
-	public void increaseMultiplier() {
-		this.multiplier += 1;
-		this.maxMultiplier += this.multiplier > this.maxMultiplier ? 1 : 0;
-	}
-	
-	public void resetMultiplier() {
-		this.multiplier = 0;
-	}
+	void addPoints(int points);
 
-	public final int getMaxMultiplier() {
-		return maxMultiplier;
-	}
+	void increaseMultiplier();
+
+	void resetMultiplier();
+
+	int getMaxMultiplier();
 
 }

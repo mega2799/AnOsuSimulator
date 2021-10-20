@@ -12,7 +12,7 @@ import it.unibo.osu.util.*;
 public class BeatMap {
 
 	//campi obbligatori quindi per ogni beatmap file
-	private List<Hitpoint> hitpoints;
+	private List<HitpointImpl> hitpoints;
 	private double hpDrainRate;
 	private double circleSize;
 	private double overallDifficulty;
@@ -44,7 +44,7 @@ public class BeatMap {
 		} 		
 	}
 	
-	public List<Hitpoint> getHitpoints() {
+	public List<HitpointImpl> getHitpoints() {
 		return hitpoints;
 	}
 

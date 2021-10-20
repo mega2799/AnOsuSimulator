@@ -11,9 +11,7 @@ import javafx.util.Duration;
 public abstract class MusicControllerImpl extends AbstractSubject implements MusicController, Observer {
 
 	private MediaPlayer audioMedia;
-//	private GameModel game;
 	public MusicControllerImpl(final String name) {
-		//this.audioMedia = new MediaPlayer(new Media(new File(this.getClass().getResource(name).toString()).toString()));
 
 		try {
 			this.audioMedia = new MediaPlayer(new Media(this.getClass().getResource(name).toURI().toString()));
@@ -27,12 +25,6 @@ public abstract class MusicControllerImpl extends AbstractSubject implements Mus
 	public  MediaPlayer getMediaPlayer() {
 		return this.audioMedia;
 	}
-	
-//	public MusicControllerImpl(String name, GameModel game) {
-//		this(name);
-//		this.game = game;
-//		this.audioMedia.setOnEndOfMedia(() -> notifyObs());
-//	}
 
 	@Override
 	public void startMusic() {
@@ -77,25 +69,4 @@ public abstract class MusicControllerImpl extends AbstractSubject implements Mus
 		this.getMediaPlayer().setVolume(User.getMusicVolume());
 	}
 	
-	
-//	public GameModel getGameModel() {
-//		return this.game;
-//	}
-//	@Override
-//	public void notifyObs() {
-//		this.game.onNotify();
-//	}
-	
-//	@Override
-//	public void notifyEntity() {
-//		if(this.audioMedia.getStatus() == Status.PAUSED) {
-//			this.audioMedia.play();
-//		} else if(this.audioMedia.getStatus() == Status.PLAYING) {
-//			this.audioMedia.pause();
-//		}
-//	}
-	
-
-	
-
 }

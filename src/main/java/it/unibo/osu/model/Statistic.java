@@ -13,8 +13,6 @@ public interface Statistic {
 	
 	void addResult(String player, String points);
 
-	void setSong(String song);
-
 	void readJson() throws JsonParseException, IOException;
 
 	void writeJson() throws IOException;

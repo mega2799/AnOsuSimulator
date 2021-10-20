@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.controller.MusicEffectController;
-import it.unibo.osu.controller.ScoreManager;
+import it.unibo.osu.controller.ScoreManagerImpl;
 import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.LifeBar;
@@ -80,7 +80,7 @@ public class GameSceneController{
      public void  render() {
     	this.clearTransitionList();
     	this.lifebar.setProgress(this.game.getLifeBar().getHp()/LifeBar.MAXHP);
-    	ScoreManager scoreManager = this.game.getScoreManager();
+    	ScoreManagerImpl scoreManager = this.game.getScoreManager();
     	this.multiplier.setText("x" + Integer.toString(scoreManager.getMultiplier()));
     	this.points.setText(Integer.toString(scoreManager.getPoints()));
     	this.game.getCurrentHitbuttons().forEach(x -> {

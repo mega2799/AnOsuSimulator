@@ -19,18 +19,17 @@ import com.fasterxml.jackson.core.ObjectCodec;
 
 public class StatisticImpl implements Statistic {
 
-	private static final Statistic STATISTIC = new StatisticImpl();
-
-	private String song = null;
+	private static Statistic STATISTIC;
 
 	private Map<String, List<String>> map = new HashMap<>();
 
-	@Override
-	public final void setSong(String song) {
-		this.song = song;
-	}
-
-	public static final Statistic getStat() {
+	/*
+	 * using synchronized i make a use of a thread safe Singleton version
+	 */
+	public static final synchronized Statistic getStat() {
+		if(STATISTIC == null) {
+			STATISTIC = new StatisticImpl();
+		}
 		return STATISTIC;
 	}
 
