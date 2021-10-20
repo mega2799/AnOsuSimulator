@@ -61,16 +61,4 @@ public class LifeBarImpl implements Updatable, LifeBar{
 		this.drain();
 	}
 
-//	@Override
-//	public void onNotify(GamePoints points) {
-//		switch (points) {
-//		case MISS:
-//			this.lostLife();
-//			break;
-//		default:
-//			this.gainLife(points);
-//			break;
-//		}
-//	}
-	
 }

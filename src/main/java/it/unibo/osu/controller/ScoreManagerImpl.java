@@ -6,7 +6,6 @@ import java.util.Map;
 import it.unibo.osu.model.GamePoints;
 import it.unibo.osu.model.Score;
 
-//public class ScoreManager implements HitActionObserver{
 public class ScoreManagerImpl {
 
 	private Score score;

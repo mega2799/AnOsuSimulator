@@ -26,34 +26,19 @@ public class Controller {
 	private final GameModel game;
 	private final Robot robot;
 	private final PauseMenuView pauseMenu;
-//<<<<<<< HEAD
 	private final MusicControllerImpl musicController;
-	//private Pane fixedPane;
 	
 	public Controller(final String name, Stage stage) {
 		this.game = new GameModel("/beatmaps/" + name);
-//=======
 
-//	// name sarebbe il package :::
-//	public Controller(final String username, final String name, final String beatmap) {
-//		this.game = new GameModel(name + beatmap);
-//		this.game.setUser(username);
-
-//		StatisticImpl.getStat().setSong(name + beatmap);
 		try {
 
-			//StatisticImpl.getStat().writeJson(); // andrebbe scritto alla fine del game
 			StatisticImpl.getStat().readJson();
 			StatisticImpl.getStat().addPlayer(User.getUsername()); // singleton (?)
-//		StatisticImpl.getStat().setSong(name + beatmap);
-			StatisticImpl.getStat().setSong(name);
-		
-			//StatisticImpl.getStat().writeJson(); // andrebbe scritto alla fine del game
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//>>>>>>> logicAndStatistic
 
 		this.view = stage;
 
@@ -62,7 +47,6 @@ public class Controller {
 		this.robot = new Robot();
 		this.pauseMenu = new PauseMenuView();
 
-//		this.musicController = new MusicControllerImpl("/tracks/" + this.game.getBeatMap().getSongName().stripLeading(), this.game);
 		this.musicController = MusicControllerImplFactory.getMusicImpl("/tracks/" + this.game.getBeatMap().getSongName().stripLeading(), this.game);
 		this.setInputHandler();
 		this.changeScene();
@@ -103,13 +87,6 @@ public class Controller {
 			if(e.getCode().equals(KeyCode.SPACE) || this.game.getStatus() != GameStatus.PAUSE) {
 				switch( e.getCode()) {
 				case SPACE: 
-//					this.game.setPause();
-//
-//					this.musicController.pauseMusic();
-
-//					if(!this.pauseMenu.isShowing()) {
-//						this.pauseMenu.show();
-//					} 
 					this.game.setPause();
 					this.sceneController.setPausePane();
 					if(this.game.getStatus().equals(GameStatus.PAUSE)) {
@@ -130,25 +107,6 @@ public class Controller {
 				}
 			}
 		});
-//		per testare funzionamento x,z:
-//		this.view.getScene().setOnMouseClicked(e-> {
-//			System.out.println(e.getSceneX() + " " + e.getSceneY());	
-//		});
-		
-//		this.pauseMenu.getScene().setOnKeyPressed(e -> {
-//			if(e.getCode().equals(KeyCode.SPACE) && this.pauseMenu.isShowing()) {
-//				this.pauseMenu.close();
-//			}
-//			this.musicController.startMusic();
-//			this.game.setPause();
-//		});
-//		this.sceneController.getPausePane().setOnKeyPressed(keyPressed -> {
-//    		if(keyPressed.getCode().equals(KeyCode.SPACE) ) {
-//    			this.sceneController.setPausePane();
-//    		}
-//			this.musicController.startMusic();
-//			this.game.setPause();
-//    	});
 	}
 	
 	private void startGameLoop()

@@ -21,14 +21,7 @@ public class StatisticImpl implements Statistic {
 
 	private static Statistic STATISTIC;
 
-	private String song = null;
-
 	private Map<String, List<String>> map = new HashMap<>();
-
-	@Override
-	public final void setSong(String song) {
-		this.song = song;
-	}
 
 	public static final Statistic getStat() {
 		if(STATISTIC == null) {
