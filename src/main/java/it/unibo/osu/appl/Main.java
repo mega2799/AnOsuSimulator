@@ -1,5 +1,7 @@
 package it.unibo.osu.appl;
 
+import it.unibo.osu.controller.MusicControllerImpl;
+import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.BeatMap;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,9 +22,6 @@ public class Main extends Application{
 		myStage.initStyle(StageStyle.UTILITY);
 		myStage.setFullScreen(true);
 		myStage.show();
-		myStage.setOnCloseRequest(close -> {
-			System.out.println("closing");
-		});
 	}
 
 	public static void main(String[] args) {
