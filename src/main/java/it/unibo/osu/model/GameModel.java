@@ -66,7 +66,7 @@ public class GameModel implements Observer, HitActionObserver{
     
     public void buttonHitted(GamePoints gamePoints) {
     	this.lifeBar.gainLife(gamePoints);
-    	this.scoreManager.hitted(gamePoints);
+    	this.scoreManager.hit(gamePoints);
     }
     
 	public GameStatus getStatus() {

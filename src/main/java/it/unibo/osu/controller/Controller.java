@@ -3,6 +3,7 @@ package it.unibo.osu.controller;
 
 import java.io.IOException;
 
+import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GameStatus;
 import it.unibo.osu.model.StatisticImpl;
@@ -11,7 +12,7 @@ import it.unibo.osu.view.GameView;
 import it.unibo.osu.view.PauseMenuView;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
-
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
@@ -28,7 +29,13 @@ public class Controller {
 	private final PauseMenuView pauseMenu;
 	private final MusicControllerImpl musicController;
 	
-	public Controller(final String name, Stage stage) {
+	/**
+	 * Instantiates a new controller.
+	 *
+	 * @param name the {@link BeatMap} song title
+	 * @param stage is the stage where the {@link Scene} is loaded when a song is selected
+	 */
+	public Controller(final String name,final Stage stage) {
 		this.game = new GameModel("/beatmaps/" + name);
 
 		try {

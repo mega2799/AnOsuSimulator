@@ -9,7 +9,7 @@ public class HitcircleViewFactory {
 	private double overallDifficulty;
 	private double approachRate;
 	
-	public HitcircleViewFactory(String innerCircleUrl, String outerCircleUrl, double circleSize, double difficulty, double approachRate) {
+	public HitcircleViewFactory(final String innerCircleUrl, final String outerCircleUrl, double circleSize, double difficulty, double approachRate) {
 		this.innerCircleUrl = innerCircleUrl;
 		this.outerCircleUrl = outerCircleUrl;
 		this.circleSize = circleSize;

@@ -20,7 +20,16 @@ public class GameLoop extends AnimationTimer {
 	private long previous;
 	private FXMLLoader loader;
 	
-	public GameLoop(GameModel game, Stage view, GameSceneController sceneController, MusicController musicController) {
+	/**
+	 * Instantiates a new game loop, using a {@link GameModel}  instance that models a match using all the necessary entity, a 
+	 * {@link Stage} in which the game takes place, {@link MusicController} is how we reproduce the song into the game.
+	 *
+	 * @param game GameModel 
+	 * @param view the stage 
+	 * @param sceneController the scene controller where we can 
+	 * @param musicController the music controller
+	 */
+	public GameLoop(final GameModel game,final Stage view,final GameSceneController sceneController,final MusicController musicController) {
 		this.game = game;
 		this.view = view;
 		this.sceneController = sceneController;
