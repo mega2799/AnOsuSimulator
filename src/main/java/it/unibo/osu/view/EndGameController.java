@@ -8,10 +8,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import it.unibo.osu.controller.MusicController;
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GamePoints;
+import it.unibo.osu.model.Statistic;
 import it.unibo.osu.model.StatisticImpl;
 import it.unibo.osu.model.User;
 import javafx.animation.FadeTransition;
@@ -61,8 +63,6 @@ public class EndGameController {
     
     @FXML
     private MediaView videoBackground;
-
-    private ImageView rikkaGif;
     private GameModel game;
     
 	private Map<GamePoints, Integer> map;
@@ -74,36 +74,18 @@ public class EndGameController {
 
 	public void init(GameModel game) {
 		this.game = game;
-//		this.map = game.getScoreManager().getStatistic();
-//		this.username.setText(User.getUsername());
-//		this.gameScore.setText(String.valueOf(game.getScoreManager().getPoints()));
-//		this.multi.setText(String.valueOf(game.getScoreManager().getScore().getMaxMultiplier()) + "x");
-//		writeOnGrid();
-//		loader = new FXMLLoader(this.getClass().getResource("/fxml/MainMenu.fxml"));
-//		try {
-//			
-//			this.mainMenuPane = loader.load();
-//			((AnchorPane) this.pane.getScene().getRoot()).getChildren().add(0, this.mainMenuPane);
-//			((MainMenuController)loader.getController()).init((Stage)this.pane.getScene().getWindow());
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
 		this.buttonClickSound = MusicControllerImplFactory.getEffectImpl("/music/clickSongs.wav");
 		this.buttonHoverSound = MusicControllerImplFactory.getEffectImpl("/music/scrollSongs.wav");
 		this.endgameEnteredSound = MusicControllerImplFactory.getEffectImpl("/music/endGame.wav");
 		this.setBackground();
 		this.initializeInputHandler();
-		// non vuole farla vedere
-// 		try {
-//			this.rikkaGif = new ImageView(new Image(Files.newInputStream(Paths.get("src/main/resources/gif/rikka-takanashi-takanashi-rikka.gif"))));
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		this.pane.getChildren().addAll(this.rikkaGif);
-
 	}
 	
+	/**
+	 * Register data is a function called at the end and takes data like username of the {@link User}, total 
+	 * score and writes them into the {@link EndgameView} Labels, it also uses {@link Statistic} 
+	 * to make statistics and write them into the .json file.
+	 */
 	public void registerData() {
 		this.map = game.getScoreManager().getStatistic();
 		this.username.setText(User.getUsername());
@@ -118,14 +100,13 @@ public class EndGameController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//historyBox
-		//makeBox(StatisticImpl.getStat().getPlayerHistory(this.username.getText()));
 	}
-
+	/**
+	 * set the background, using an mp4 file, so we don't need to use a {@link MusicController}, that is under the Labels.
+	 */
 	private void setBackground() {
     	this.videoBackground.setMediaPlayer(new MediaPlayer(new Media(this.getClass().getResource("/video/Ayanami.mp4").toString())));
     	this.videoBackground.getMediaPlayer().setCycleCount(Integer.MAX_VALUE);
-//    	this.videoBackground.getMediaPlayer().play();
     }
 
 	/*
@@ -185,7 +166,6 @@ public class EndGameController {
 			((MainMenuController)loader.getController()).startAnimation();
 			this.videoBackground.getMediaPlayer().stop(); //FUNZIONERA
 			this.changeScene();
-			//((AnchorPane)this.pane.getScene().getRoot()).getChildren().remove(this.pane);
 		});
 	}
 	private void changeScene() {

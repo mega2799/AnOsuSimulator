@@ -11,6 +11,12 @@ public enum GamePoints {
 	GamePoints(int value){
 		this.value = value;
 	}
+	
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
 	public int getValue() {
 		return this.value;
 	}

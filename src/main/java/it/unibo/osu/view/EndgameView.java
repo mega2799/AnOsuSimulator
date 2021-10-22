@@ -37,38 +37,6 @@ public class EndgameView  extends Stage{
 	public EndgameView(final GameModel game) {
 	
 		
-		/*
-		
-		this.game = game;
-		this.root = new BorderPane();
-		this.statPane = new GridPane();
-		
-		gridSetter();
-
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setScene(new Scene(root, screen.getHeight(), screen.getWidth())); //da aggiustare
-		Label topLbl = styledLabel("Nome song");
-		this.root.setTop(topLbl);
-		this.root.setAlignment(topLbl, Pos.TOP_CENTER);
-		this.root.setCenter(statPane);
-		Label btmLbl = styledLabel(this.game.getUser() + " has scored " + this.game.getScoreManager().getPoints());
-		
-		
-		Button exitBtn = new Button("Close the game");
-		exitBtn.setStyle("-fx-background-radius: 5em;");
-		exitBtn.setOnMouseClicked(e -> {
-			System.exit(1);
-		});
-		this.root.setBottom(btmLbl);
-		this.root.setAlignment(btmLbl, Pos.BOTTOM_CENTER);
-		this.root.setRight(exitBtn);
-		this.root.setAlignment(exitBtn, Pos.CENTER_LEFT);
-		this.setFullScreen(true);
-		//root.getChildren().add(new Label("EndGame"));
-		drawBackgroundImage(screen);
-		this.show();
-		
-		*/
 	}
 
 	private void drawBackgroundImage(Dimension screen) {

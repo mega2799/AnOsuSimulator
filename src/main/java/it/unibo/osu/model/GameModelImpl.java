@@ -71,7 +71,7 @@ public class GameModelImpl implements Observer, HitActionObserver, GameModel{
     @Override
 	public void buttonHitted(GamePoints gamePoints) {
     	this.lifeBar.gainLife(gamePoints);
-    	this.scoreManager.hitted(gamePoints);
+    	this.scoreManager.hit(gamePoints);
     }
     
 	@Override

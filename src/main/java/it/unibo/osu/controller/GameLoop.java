@@ -3,6 +3,7 @@ package it.unibo.osu.controller;
 import java.io.IOException;
 
 import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.view.EndGameController;
 import it.unibo.osu.view.EndgameView;
 import it.unibo.osu.view.GameSceneController;
@@ -19,7 +20,15 @@ public class GameLoop extends AnimationTimer {
 	private MusicController musicController;
 	private long previous;
 	private FXMLLoader loader;
-	
+	/**
+	 * Instantiates a new game loop, using a {@link GameModelImpl}  instance that models a match using all the necessary entity, a 
+	 * {@link Stage} in which the game takes place, {@link MusicController} is how we reproduce the song into the game.
+	 *
+	 * @param game GameModel 
+	 * @param view the stage 
+	 * @param sceneController the scene controller where we can 
+	 * @param musicController the music controller
+	 */
 	public GameLoop(GameModel game, Stage view, GameSceneController sceneController, MusicController musicController) {
 		this.game = game;
 		this.view = view;

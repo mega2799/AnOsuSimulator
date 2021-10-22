@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 import it.unibo.osu.util.*;
-//da implementare usando un reader da file + parser 
+
 public class BeatMapImpl implements BeatMap {
 
-	//campi obbligatori quindi per ogni beatmap file
+	/* Mandatory entities for each BeatMap file */
 	private List<HitpointImpl> hitpoints;
 	private double hpDrainRate;
 	private double circleSize;
@@ -23,6 +23,11 @@ public class BeatMapImpl implements BeatMap {
 	private double startingTime;
 	private String beatmapName;
 	
+	/**
+	 * Instantiates a new beat map.
+	 *
+	 * @param fileName is the file name
+	 */
 	public BeatMapImpl(String fileName) {
 
 //		System.out.println(fileName);
