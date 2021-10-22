@@ -89,15 +89,6 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.outerCircle.setStrokeWidth(this.outerCircle.getRadius()*0.10);
 		this.outerCircle.setStroke(Color.WHITESMOKE);
 		
-//		this.innerCircle.setFitHeight(innerCircleSize);
-//		this.innerCircle.setFitWidth(innerCircleSize);
-//		this.outerCircle.setFitHeight(outerCircleSize);
-//		this.outerCircle.setFitWidth(outerCircleSize);	
-		
-//		this.innerCircle.setLayoutX(this.x - this.innerCircle.getFitWidth() / 2);
-//		this.innerCircle.setLayoutY(this.y - this.innerCircle.getFitHeight() / 2);
-//		this.outerCircle.setLayoutX(this.x - this.outerCircle.getFitWidth() / 2);
-//		this.outerCircle.setLayoutY(this.y - this.outerCircle.getFitHeight() / 2);
 		
 		this.scaleOuterCircle.setNode(this.outerCircle);
 		this.scaleOuterCircle.setToX(0.5);

@@ -76,9 +76,8 @@ public class LoginMenuController extends Resizeable {
 		this.musicFadeout = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.welcomeMusic.getMediaPlayer().volumeProperty(), 1)),
 				new KeyFrame(Duration.seconds(3),new KeyValue( this.welcomeMusic.getMediaPlayer().volumeProperty(), 0)));
 		this.welcomeMusic.startMusic();
-	
-//    	System.out.println(toolkit.getScreenSize().getHeight() + " " + toolkit.getScreenSize().getWidth());
     	}
+
 	private void initializeTransitions() {
 		this.iconTrans = new ScaleTransition();
 		this.iconTrans.setNode(this.icon);
@@ -115,9 +114,11 @@ public class LoginMenuController extends Resizeable {
 			this.textField.setVisible(true);
 			System.out.println("ok");
 		});
+
 		this.textField.setOnMouseClicked(clicked -> {
 			this.clickSound.onNotify();
 		});
+
 		this.textField.setOnAction(ev -> {
 			this.loginSound.onNotify();
 			User.setUsername(this.textField.getText());
@@ -126,6 +127,7 @@ public class LoginMenuController extends Resizeable {
 			((MainMenuController) loader.getController()).startAnimation();
 		});
 	}
+
 	@Override
 	public void changeResolution(Pane pane, double width, double height) {
 		super.changeResolution(pane, width, height);

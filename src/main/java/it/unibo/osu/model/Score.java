@@ -7,14 +7,14 @@ public interface Score {
 	 *
 	 * @param points the new points
 	 */
-	void setPoints(int points);
+	//void setPoints(int points);
 
 	/**
 	 * Sets the multiplier.
 	 *
 	 * @param multiplier the new multiplier
 	 */
-	void setMultiplier(int multiplier);
+	//void setMultiplier(int multiplier);
 
 	/**
 	 * Gets the points.
@@ -31,7 +31,7 @@ public interface Score {
 	int getMultiplier();
 
 	/**
-	 * Adds the points.
+	 * Adds points.
 	 *
 	 * @param points the points
 	 */

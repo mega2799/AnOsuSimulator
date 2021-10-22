@@ -19,6 +19,7 @@ public class ScoreImpl implements Score {
 		this.multiplier = 0;
 	}
 	
+	/*
 	@Override
 	public void setPoints(int points) {
 		this.points = points;
@@ -28,11 +29,13 @@ public class ScoreImpl implements Score {
 	public void setMultiplier(int multiplier) {
 		this.multiplier = multiplier;
 	}
+	*/
 	
 	@Override
 	public int getPoints() {
 		return points;
 	}
+
 
 	@Override
 	public int getMultiplier() {
