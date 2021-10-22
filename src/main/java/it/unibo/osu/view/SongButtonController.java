@@ -4,6 +4,7 @@ import it.unibo.osu.controller.Controller;
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.BeatMap;
+import it.unibo.osu.model.BeatMapImpl;
 import it.unibo.osu.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -33,7 +34,7 @@ public class SongButtonController {
      */
     public void init(String fileName) {
     	this.fileName = fileName;
-    	BeatMap beatmap = new BeatMap("/beatmaps/" + fileName);
+    	BeatMap beatmap = new BeatMapImpl("/beatmaps/" + fileName);
     	this.setSongName(beatmap.getBeatmapName());
     	this.setDifficulty(beatmap.getOverallDifficulty());
     	this.scrollSound = MusicControllerImplFactory.getEffectImpl("/music/scrollSongs.wav");

@@ -1,7 +1,7 @@
 package it.unibo.osu.controller;
 
 
-import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.User;
 
 public class MusicControllerImplFactory {
@@ -14,7 +14,7 @@ public class MusicControllerImplFactory {
 		};
 	}
 	
-	public static MusicControllerImpl getMusicImpl(String name,GameModel game) {
+	public static MusicControllerImpl getMusicImpl(String name,GameModelImpl game) {
 		return new MusicControllerImpl(name) {
 			
 			{super.getMediaPlayer().setOnEndOfMedia(() -> this.notifyObs());

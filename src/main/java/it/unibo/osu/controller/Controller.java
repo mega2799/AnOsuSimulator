@@ -3,7 +3,7 @@ package it.unibo.osu.controller;
 
 import java.io.IOException;
 
-import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.GameStatus;
 import it.unibo.osu.model.StatisticImpl;
 import it.unibo.osu.model.User;
@@ -23,13 +23,13 @@ import it.unibo.osu.view.GameSceneController;
 public class Controller {
 	private final Stage view;
 	private  GameSceneController sceneController;
-	private final GameModel game;
+	private final GameModelImpl game;
 	private final Robot robot;
 	private final PauseMenuView pauseMenu;
 	private final MusicControllerImpl musicController;
 	
 	public Controller(final String name, Stage stage) {
-		this.game = new GameModel("/beatmaps/" + name);
+		this.game = new GameModelImpl("/beatmaps/" + name);
 
 		try {
 

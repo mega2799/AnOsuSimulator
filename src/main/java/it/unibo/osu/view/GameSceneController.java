@@ -12,7 +12,7 @@ import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.controller.MusicEffectController;
 import it.unibo.osu.controller.ScoreManagerImpl;
 import it.unibo.osu.model.BeatMap;
-import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.LifeBar;
 import javafx.animation.Animation.Status;
 import javafx.animation.ParallelTransition;
@@ -57,14 +57,14 @@ public class GameSceneController{
     @FXML
     private Pane pausePane;
     
-    private GameModel game;
+    private GameModelImpl game;
     
     private HitcircleViewFactory factory;
     private MusicEffectController effectController;
     private MusicControllerImpl pauseSound;
     private List<Transition> listTransitions;
     
-    public void init(GameModel game) {
+    public void init(GameModelImpl game) {
     	this.game = game;
     	this.setBackground();
     	BeatMap beatmap = this.game.getBeatMap();

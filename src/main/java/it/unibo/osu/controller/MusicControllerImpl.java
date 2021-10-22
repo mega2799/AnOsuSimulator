@@ -1,16 +1,22 @@
 package it.unibo.osu.controller;
 
-//import java.io.File;
 import java.net.URISyntaxException;
 
-import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.User;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+
 public abstract class MusicControllerImpl extends AbstractSubject implements MusicController, Observer {
 
 	private MediaPlayer audioMedia;
+	
+	/**
+	 * Instantiates a new music controller implementation.
+	 *
+	 * @param name the song name
+	 */
 	public MusicControllerImpl(final String name) {
 
 		try {
@@ -21,7 +27,12 @@ public abstract class MusicControllerImpl extends AbstractSubject implements Mus
 		}
 
 	}
-	//mhh 
+	
+	/**
+	 * Gets the {@link MediaPlayer}.
+	 *
+	 * @return the media player
+	 */
 	public  MediaPlayer getMediaPlayer() {
 		return this.audioMedia;
 	}
@@ -44,6 +55,11 @@ public abstract class MusicControllerImpl extends AbstractSubject implements Mus
 		return this.audioMedia.getTotalDuration();
 	}
 	
+	/**
+	 * Gets the status of the {@link MediaPlayer}.
+	 *
+	 * @return the status
+	 */
 	public MediaPlayer.Status getStatus(){
 		return this.audioMedia.getStatus();
 	}
@@ -65,6 +81,9 @@ public abstract class MusicControllerImpl extends AbstractSubject implements Mus
 	public void setOnFinished(Runnable runnable) {		
 	}
 	
+	/**
+	 * Update volume.
+	 */
 	public void updateVolume() {
 		this.getMediaPlayer().setVolume(User.getMusicVolume());
 	}

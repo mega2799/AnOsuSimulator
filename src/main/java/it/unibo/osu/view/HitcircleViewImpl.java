@@ -8,7 +8,7 @@ import it.unibo.osu.controller.HitActionObserver;
 import it.unibo.osu.controller.HitActionSubject;
 import it.unibo.osu.controller.Observer;
 import it.unibo.osu.controller.Subject;
-import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.GamePoints;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
