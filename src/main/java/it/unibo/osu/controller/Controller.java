@@ -3,8 +3,8 @@ package it.unibo.osu.controller;
 
 import java.io.IOException;
 
-import it.unibo.osu.model.BeatMap;
-import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.BeatMapImpl;
+import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.GameStatus;
 import it.unibo.osu.model.StatisticImpl;
 import it.unibo.osu.model.User;
@@ -24,7 +24,7 @@ import it.unibo.osu.view.GameSceneController;
 public class Controller {
 	private final Stage view;
 	private  GameSceneController sceneController;
-	private final GameModel game;
+	private final GameModelImpl game;
 	private final Robot robot;
 	private final PauseMenuView pauseMenu;
 	private final MusicControllerImpl musicController;
@@ -32,11 +32,11 @@ public class Controller {
 	/**
 	 * Instantiates a new controller.
 	 *
-	 * @param name the {@link BeatMap} song title
+	 * @param name the {@link BeatMapImpl} song title
 	 * @param stage is the stage where the {@link Scene} is loaded when a song is selected
 	 */
 	public Controller(final String name,final Stage stage) {
-		this.game = new GameModel("/beatmaps/" + name);
+		this.game = new GameModelImpl("/beatmaps/" + name);
 
 		try {
 

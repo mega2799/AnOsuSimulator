@@ -2,7 +2,7 @@ package it.unibo.osu.appl;
 
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
-import it.unibo.osu.model.BeatMap;
+import it.unibo.osu.model.BeatMapImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

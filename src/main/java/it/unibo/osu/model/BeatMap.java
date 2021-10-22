@@ -1,87 +1,77 @@
 package it.unibo.osu.model;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Map;
 
-import it.unibo.osu.util.*;
-//da implementare usando un reader da file + parser 
-public class BeatMap {
+public interface BeatMap {
 
-	//campi obbligatori quindi per ogni beatmap file
-	private List<HitpointImpl> hitpoints;
-	private double hpDrainRate;
-	private double circleSize;
-	private double overallDifficulty;
-	private double approachRate;
-	private String background;   
-	private String songName;
-	private List<List<Double>> breakTimes;
-	private double startingTime;
-	private String beatmapName;
-	
-	public BeatMap(String fileName) {
+	/**
+	 * Gets the {@link List} {@link HitPoint}.
+	 *
+	 * @return the hitpoints
+	 */
+	List<HitpointImpl> getHitpoints();
 
-//		System.out.println(fileName);
-//		System.exit(0);
-		try(BeatmapReader reader = new BeatmapReader(this.getClass().getResourceAsStream(fileName))){
-			Map<String, String> map = reader.getOptionMap(BeatmapOptions.DIFFICULTY);
-			this.circleSize = Double.parseDouble(map.get("CircleSize"));
-			this.overallDifficulty = Double.parseDouble(map.get("OverallDifficulty"));
-			this.approachRate = Double.parseDouble(map.get("ApproachRate"));
-			this.hpDrainRate = Double.parseDouble(map.get("HPDrainRate"));
-			this.hitpoints = reader.getHitpoints();
-			this.background = reader.getBakground();
-			this.songName = reader.getOptionMap(BeatmapOptions.GENERAL).get("AudioFilename");
-			this.breakTimes = reader.getBreakTimes();
-			this.startingTime = reader.getStartingTime();
-			this.beatmapName = reader.getOptionMap(BeatmapOptions.METADATA).get("Title");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 		
-	}
-	
-	public List<HitpointImpl> getHitpoints() {
-		return hitpoints;
-	}
+	/**
+	 * Gets the hp drain rate.
+	 *
+	 * @return the hp drain rate
+	 */
+	double getHpDrainRate();
 
-	public double getHpDrainRate() {
-		return hpDrainRate;
-	}
+	/**
+	 * Gets the circle size.
+	 *
+	 * @return the circle size
+	 */
+	double getCircleSize();
 
-	public double getCircleSize() {
-		return circleSize;
-	}
+	/**
+	 * Gets the overall difficulty.
+	 *
+	 * @return the overall difficulty
+	 */
+	double getOverallDifficulty();
 
-	public double getOverallDifficulty() {
-		return overallDifficulty;
-	}
+	/**
+	 * Gets the approach rate.
+	 *
+	 * @return the approach rate
+	 */
+	double getApproachRate();
 
-	public double getApproachRate() {
-		return approachRate;
-	}
-	
-	public String getBackground() {
-		return this.background;
-	}
+	/**
+	 * Gets the background name.
+	 *
+	 * @return the background
+	 */
+	String getBackground();
 
-	public String getSongName() {
-		return songName;
-	}
+	/**
+	 * Gets the song name.
+	 *
+	 * @return the song name
+	 */
+	String getSongName();
 
-	public List<List<Double>> getBreakTimes() {
-		return breakTimes;
-	}
+	/**
+	 * Gets the break times.
+	 *
+	 * @return the break times
+	 */
+	List<List<Double>> getBreakTimes();
 
-	public double getStartingTime() {
-		return startingTime;
-	}
+	/**
+	 * Gets the starting time.
+	 *
+	 * @return the starting time
+	 */
+	double getStartingTime();
 
-	public String getBeatmapName() {
-		return beatmapName;
-	}
+	/**
+	 * Gets the beatmap name.
+	 *
+	 * @return the beatmap name
+	 */
+	String getBeatmapName();
 
 }

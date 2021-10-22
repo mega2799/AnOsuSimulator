@@ -2,7 +2,7 @@ package it.unibo.osu.controller;
 
 import java.net.URISyntaxException;
 
-import it.unibo.osu.model.GameModel;
+import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.User;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
