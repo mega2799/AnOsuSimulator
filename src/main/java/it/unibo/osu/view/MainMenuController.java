@@ -145,7 +145,7 @@ public class MainMenuController extends Resizeable{
 			this.musicFadeOut = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), User.getMusicVolume())),
 					new KeyFrame(Duration.seconds(3),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), 0)));
 			this.musicFadeOut.play();
-			this.stage.getOnCloseRequest().handle(null);
+			//this.stage.getOnCloseRequest().handle(null);
 			this.stage.close();
 		});
 		this.playButton.setOnMouseClicked(playEvent -> {

@@ -29,7 +29,7 @@ ApproachRate:3
 
 [Events]
 //Background and Video events
-0,0,"Toradora.jpg"
+0,0,"Toradora.png"
 //Break Periods
 2,13499,24848
 2,81399,92524
