@@ -2,56 +2,42 @@ package it.unibo.osu.model;
 
 public interface Score {
 
-	/**
-	 * Sets point .
-	 *
-	 * @param points the new points
-	 */
-	//void setPoints(int points);
+    /**
+     * Gets the points.
+     *
+     * @return the points
+     */
+    int getPoints();
 
-	/**
-	 * Sets the multiplier.
-	 *
-	 * @param multiplier the new multiplier
-	 */
-	//void setMultiplier(int multiplier);
+    /**
+     * Gets the multiplier.
+     *
+     * @return the multiplier
+     */
+    int getMultiplier();
 
-	/**
-	 * Gets the points.
-	 *
-	 * @return the points
-	 */
-	int getPoints();
+    /**
+     * Adds points.
+     *
+     * @param points the points
+     */
+    void addPoints(int points);
 
-	/**
-	 * Gets the multiplier.
-	 *
-	 * @return the multiplier
-	 */
-	int getMultiplier();
+    /**
+     * Increase multiplier.
+     */
+    void increaseMultiplier();
 
-	/**
-	 * Adds points.
-	 *
-	 * @param points the points
-	 */
-	void addPoints(int points);
+    /**
+     * Reset multiplier.
+     */
+    void resetMultiplier();
 
-	/**
-	 * Increase multiplier.
-	 */
-	void increaseMultiplier();
-
-	/**
-	 * Reset multiplier.
-	 */
-	void resetMultiplier();
-
-	/**
-	 * Gets the max multiplier.
-	 *
-	 * @return the max multiplier
-	 */
-	int getMaxMultiplier();
+    /**
+     * Gets the max multiplier.
+     *
+     * @return the max multiplier
+     */
+    int getMaxMultiplier();
 
 }

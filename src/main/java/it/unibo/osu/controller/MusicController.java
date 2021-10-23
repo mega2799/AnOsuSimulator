@@ -2,14 +2,30 @@ package it.unibo.osu.controller;
 
 import javafx.util.Duration;
 
+/**
+ * The Interface MusicController.
+ */
 public interface MusicController {
-	void startMusic();
-	
-	void stopMusic();
-	
-	Duration getDuration(); //da eliminare
-	
-	void pauseMusic();
-	
-	void setOnFinished(Runnable runnable);
+
+    /**
+     * Start the music.
+     */
+    void startMusic();
+
+    /**
+     * Stop the music.
+     */
+    void stopMusic();
+
+    /**
+     * Pause the music.
+     */
+    void pauseMusic();
+
+    /**
+     * Sets the on finished Action.
+     *
+     * @param runnable on finished song
+     */
+    void setOnFinished(Runnable runnable);
 }

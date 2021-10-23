@@ -17,111 +17,91 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.core.ObjectCodec;
 
+/**
+ * The Class StatisticImpl.
+ */
 public class StatisticImpl implements Statistic {
 
-	private static Statistic STATISTIC;
+    private static Statistic STATISTIC;
 
-	private Map<String, List<String>> map = new HashMap<>();
+    private Map<String, List<String>> map = new HashMap<>();
 
-	public static final Statistic getStat() {
-		if(STATISTIC == null) {
-			STATISTIC = new StatisticImpl();
-		}
-		return STATISTIC;
-	}
+    /**
+     * Instantiate a {@link Statistic} object, use of Singleton.
+     *
+     * @return the stat
+     */
+    public static final Statistic getStat() {
+        if (STATISTIC == null) {
+            STATISTIC = new StatisticImpl();
+        }
+        return STATISTIC;
+    }
 
-	@Override
-	public List<String> getPlayerHistory(String player) {
-		return this.map.get(player);
-	}
+    @Override
+    public List<String> getPlayerHistory(String player) {
+        return this.map.get(player);
+    }
 
-	@Override
-	public void addResult(String player, String points) {
-  	if (!this.map.containsKey(player)) {
-    		if (this.map.get(player) == null) {
-    			this.map.put(player, new ArrayList<String>());
-    		}
-  	}
-  	this.map.get(player).add(points);
-	}
+    @Override
+    public void addResult(String player, String points) {
+        if (!this.map.containsKey(player)) {
+            if (this.map.get(player) == null) {
+                this.map.put(player, new ArrayList<String>());
+            }
+        }
+        this.map.get(player).add(points);
+    }
 
-	@Override
-	public void addPlayer(String player) {
-		if (!this.map.containsKey(player)) {
-			this.map.put(player, new ArrayList<String>());
-    		}
-	}
+    @Override
+    public void addPlayer(String player) {
+        if (!this.map.containsKey(player)) {
+            this.map.put(player, new ArrayList<String>());
+        }
+    }
 
-	
-	@Override
-	public void writeJson() throws IOException {
-		JsonFactory jF = new JsonFactory();
-		JsonGenerator jG;
+    @Override
+    public void writeJson() throws IOException {
+        JsonFactory jF = new JsonFactory();
+        JsonGenerator jG;
 
-		jG = jF.createGenerator(new File("users.json"), JsonEncoding.UTF8);
-		jG.useDefaultPrettyPrinter();
+        jG = jF.createGenerator(new File("users.json"), JsonEncoding.UTF8);
+        jG.useDefaultPrettyPrinter();
 
-		jG.writeStartObject();
-		
-		this.map.forEach((k, v) -> {
-			try {
-				//jG.writeStringField(k, v.toString());
-				//jG.writeString("NomeSong");
-				//jG.writeFieldName(k);
+        jG.writeStartObject();
 
-				//jG.writeStringField(this.song, k);
-				jG.writeStringField(k, v.toString());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
-		jG.close();
-	}
+        this.map.forEach((k, v) -> {
+            try {
+                jG.writeStringField(k, v.toString());
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        });
+        jG.close();
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public void readJson() throws JsonParseException, IOException {
-		// TODO Auto-generated method stub
-		JsonFactory jF = new JsonFactory();
-		File f = new File("users.json");
-		JsonParser jP = jF.createJsonParser(f);
-		  // Sanity check: verify that we got "Json Object":
-		if (jP.nextToken() != JsonToken.START_OBJECT) {
-		    throw new IOException("Expected data to start with an Object");
-		  }
-		//jP.getCodec().readValue(jP, int[].class);
-		  while (jP.nextToken() != JsonToken.END_OBJECT) {
-			  //String fieldName = jP.getCurrentName();
-			  //String value = jP.getValueAsString();
-			  
-			  String player = jP.getCurrentName();
-			  String pointList = jP.getValueAsString();
-			  
-			  //List<String> l = Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", "));
-			  List<String> l = new ArrayList<String>(Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", ")));
-			  this.map.put(player, l);
-		  }
-		  //f.delete();
-//		JsonFactory jF = new JsonFactory();
-//		File f = new File("users.json");
-//		JsonParser jP = jF.createJsonParser(f);
-//		  // Sanity check: verify that we got "Json Object":
-//		if (jP.nextToken() != JsonToken.START_OBJECT) {
-//		    throw new IOException("Expected data to start with an Object");
-//		  }
-//		//jP.getCodec().readValue(jP, int[].class);
-//		  while (jP.nextToken() != JsonToken.END_OBJECT) {
-//			  //String fieldName = jP.getCurrentName();
-//			  //String value = jP.getValueAsString();
-//			  
-//			  String player = jP.getCurrentName();
-//			  String pointList = jP.getValueAsString();
-//			  
-//			  List<String> l = Arrays.asList(pointList.substring(1, pointList.length() - 1).split(", "));
-//			  this.map.put(player, l);
-//		  }
-//		  f.delete();
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    public void readJson() throws JsonParseException, IOException {
+        // TODO Auto-generated method stub
+        JsonFactory jF = new JsonFactory();
+        File f = new File("users.json");
+        JsonParser jP = jF.createJsonParser(f);
+        /*
+         * Sanity check: verify that we got "Json Object"
+         */
+        if (jP.nextToken() != JsonToken.START_OBJECT) {
+            throw new IOException("Expected data to start with an Object");
+        }
+        while (jP.nextToken() != JsonToken.END_OBJECT) {
+            String player = jP.getCurrentName();
+            String pointList = jP.getValueAsString();
+
+            List<String> l = new ArrayList<String>(Arrays.asList(pointList
+                    .substring(1, pointList.length() - 1).split(", ")));
+            this.map.put(player, l);
+        }
+    }
 
 }

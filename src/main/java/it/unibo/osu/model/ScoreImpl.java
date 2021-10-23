@@ -1,66 +1,88 @@
 package it.unibo.osu.model;
 
+/**
+ * The Class ScoreImpl implementation of {@link Score}.
+ */
 public class ScoreImpl implements Score {
 
-	private int points;
+    private int points;
 
-	private int multiplier;
-	
-	private int maxMultiplier;
+    private int multiplier;
 
-	public ScoreImpl() {
-		this.points = 0;
-		this.multiplier = 0;
-		this.maxMultiplier = 0;
-	}
-	
-	public void initScore() {
-		this.points = 0;
-		this.multiplier = 0;
-	}
-	
-	/*
-	@Override
-	public void setPoints(int points) {
-		this.points = points;
-	}
+    private int maxMultiplier;
 
-	@Override
-	public void setMultiplier(int multiplier) {
-		this.multiplier = multiplier;
-	}
-	*/
-	
-	@Override
-	public int getPoints() {
-		return points;
-	}
+    /**
+     * Constructor sets to 0 attributes of the class.
+     */
+    public ScoreImpl() {
+        this.points = 0;
+        this.multiplier = 0;
+        this.maxMultiplier = 0;
+    }
 
+    /**
+     * Inits the score.
+     */
+    public void initScore() {
+        this.points = 0;
+        this.multiplier = 0;
+    }
 
-	@Override
-	public int getMultiplier() {
-		return multiplier;
-	}
-	
-	@Override
-	public void addPoints(int points) {
-		this.points += points;
-	}
-	
-	@Override
-	public void increaseMultiplier() {
-		this.multiplier += 1;
-		this.maxMultiplier += this.multiplier > this.maxMultiplier ? 1 : 0;
-	}
-	
-	@Override
-	public void resetMultiplier() {
-		this.multiplier = 0;
-	}
+    /**
+     * Gets the points.
+     *
+     * @return the points
+     */
+    @Override
+    public int getPoints() {
+        return points;
+    }
 
-	@Override
-	public final int getMaxMultiplier() {
-		return maxMultiplier;
-	}
+    /**
+     * Gets the multiplier.
+     *
+     * @return the multiplier
+     */
+    @Override
+    public int getMultiplier() {
+        return multiplier;
+    }
+
+    /**
+     * Adds the points.
+     *
+     * @param points the points
+     */
+    @Override
+    public void addPoints(int points) {
+        this.points += points;
+    }
+
+    /**
+     * Increase multiplier.
+     */
+    @Override
+    public void increaseMultiplier() {
+        this.multiplier += 1;
+        this.maxMultiplier += this.multiplier > this.maxMultiplier ? 1 : 0;
+    }
+
+    /**
+     * Reset multiplier.
+     */
+    @Override
+    public void resetMultiplier() {
+        this.multiplier = 0;
+    }
+
+    /**
+     * Gets the max multiplier.
+     *
+     * @return the max multiplier
+     */
+    @Override
+    public final int getMaxMultiplier() {
+        return maxMultiplier;
+    }
 
 }

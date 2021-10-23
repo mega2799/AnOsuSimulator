@@ -1,7 +1,26 @@
 package it.unibo.osu.controller;
 
-public interface Subject  {
-	void notifyObs();
-	void addObserver(Observer obs);
-	void removeObserver(Observer obs);
+/**
+ * The Interface Subject.
+ */
+public interface Subject {
+
+    /**
+     * Notify obs.
+     */
+    void notifyObs();
+
+    /**
+     * Adds the observer.
+     *
+     * @param obs the obs
+     */
+    void addObserver(Observer obs);
+
+    /**
+     * Removes the observer.
+     *
+     * @param obs the obs
+     */
+    void removeObserver(Observer obs);
 }

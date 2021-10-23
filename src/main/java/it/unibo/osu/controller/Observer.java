@@ -1,6 +1,12 @@
 package it.unibo.osu.controller;
 
+/**
+ * The Interface Observer.
+ */
 public interface Observer {
 
-	void onNotify();
+    /**
+     * On notify.
+     */
+    void onNotify();
 }
