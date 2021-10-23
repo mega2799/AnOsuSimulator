@@ -48,7 +48,7 @@ public class SongButtonController {
         this.nameLabel.setText(songName);
     }
     private void setDifficulty(double difficulty) {
-        this.difficultyLabel.setText(Double.toString(difficulty));
+        this.difficultyLabel.setText("Difficulty: " + Double.toString(difficulty));
     }
     private void initializeInputHandler() {
         Scale scale = new Scale(1.1, 1.1);
