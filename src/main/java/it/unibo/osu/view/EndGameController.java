@@ -94,7 +94,7 @@ public class EndGameController {
     /**
      * Register data is a function called at the end and takes data like
      * username of the {@link User}, total score and writes them into the
-     * {@link EndgameView} Labels, it also uses {@link Statistic} to make
+     * {@link EndGameController} Labels, it also uses {@link Statistic} to make
      * statistics and write them into the .json file.
      */
     public void registerData() {

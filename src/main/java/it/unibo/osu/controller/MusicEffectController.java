@@ -2,7 +2,6 @@ package it.unibo.osu.controller;
 
 import it.unibo.osu.model.GamePoints;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class MusicEffectController.
  */

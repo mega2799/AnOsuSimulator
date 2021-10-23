@@ -7,8 +7,6 @@ import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.GameStatus;
 import it.unibo.osu.model.StatisticImpl;
 import it.unibo.osu.model.User;
-import it.unibo.osu.view.GameView;
-import it.unibo.osu.view.PauseMenuView;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

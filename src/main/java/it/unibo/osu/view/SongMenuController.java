@@ -2,29 +2,22 @@ package it.unibo.osu.view;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import com.sun.prism.ResourceFactoryListener;
-
 import it.unibo.osu.appl.Launcher;
-import it.unibo.osu.controller.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -58,7 +51,7 @@ public class SongMenuController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.songButtons = new ArrayList<>();
         this.scrollPane.setContent(vbox1);  
-        this.scrollPane.getStylesheets().add("/view/style.css");
+        this.scrollPane.getStylesheets().add("/css/style.css");
         this.initializeButtons();
     }
     

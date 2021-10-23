@@ -29,7 +29,7 @@ public class NeonButton {
 	 */
 	public NeonButton(final String text) {
 		try {
-			this.button = FXMLLoader.load(this.getClass().getResource("/view/NeonPinkButton.fxml"));
+			this.button = FXMLLoader.load(this.getClass().getResource("/fxml/NeonPinkButton.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
