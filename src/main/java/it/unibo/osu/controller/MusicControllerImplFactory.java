@@ -15,13 +15,16 @@ public class MusicControllerImplFactory {
      * @return the simple music
      */
     public static MusicControllerImpl getSimpleMusicImpl(final String name) {
-        return new MusicControllerImpl(name) {
+        return new Music(name);
+    }
 
-            {
-                super.getMediaPlayer().setVolume(User.getMusicVolume());
-            }
+    private static class Music extends MusicControllerImpl{
 
-        };
+        public Music(final String name) {
+            super(name);
+            super.getMediaPlayer().setVolume(User.getMusicVolume());
+        }
+
     }
 
     /**
@@ -33,18 +36,27 @@ public class MusicControllerImplFactory {
      */
     public static MusicControllerImpl getMusicImpl(final String name,
             final GameModelImpl game) {
-        return new MusicControllerImpl(name) {
 
-            {
-                super.getMediaPlayer().setOnEndOfMedia(() -> this.notifyObs());
-                super.getMediaPlayer().setVolume(User.getMusicVolume());
-            }
+        return new IngameMusic(name, game);
 
-            @Override
-            public void notifyObs() {
-                game.onNotify();
-            }
-        };
+    }
+
+    private static class IngameMusic extends MusicControllerImpl {
+
+        private GameModelImpl game;
+
+        public IngameMusic (final String name, final GameModelImpl game) {
+            super(name);
+            super.getMediaPlayer().setOnEndOfMedia(() -> this.notifyObs());
+            super.getMediaPlayer().setVolume(User.getMusicVolume());
+            this.game = game;
+        }
+
+        @Override
+        public void notifyObs() {
+            this.game.onNotify();
+        }
+
     }
 
     /**
@@ -54,22 +66,26 @@ public class MusicControllerImplFactory {
      * @return the effect impl
      */
     public static MusicControllerImpl getEffectImpl(String name) {
-        return new MusicControllerImpl(name) {
-
-            {
-                super.getMediaPlayer().setVolume(User.getEffectVolume());
-            }
-
-            @Override
-            public void onNotify() {
-                super.stopMusic();
-                super.startMusic();
-            }
-
-            @Override
-            public void updateVolume() {
-                this.getMediaPlayer().setVolume(User.getEffectVolume());
-            }
-        };
+        return new Effect(name);
     }
+
+    private static class Effect extends MusicControllerImpl{
+        public Effect(String name) {
+            super(name);
+            super.getMediaPlayer().setVolume(User.getEffectVolume());
+        }
+
+        @Override
+        public void onNotify() {
+            super.stopMusic();
+            super.startMusic();
+        }
+
+        @Override
+        public void updateVolume() {
+            this.getMediaPlayer().setVolume(User.getEffectVolume());
+        }
+
+    }
+
 }
