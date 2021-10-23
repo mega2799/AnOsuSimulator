@@ -25,27 +25,58 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+/**
+ * The Class HitcircleViewImpl implementation of {@link HitcircleView}.
+ */
 public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
+	
 	private Circle innerCircle;
+	
 	private Circle outerCircle;
+	
 	private double circleSize;
+	
 	private double overallDifficulty; //<--
+	
 	private double approachRate;
+	
 	private ScaleTransition scaleOuterCircle;
+	
 	private FadeTransition fadeInnerCircle;
+	
 	private FadeTransition fadeOuterCircle;
+	
 	private ParallelTransition pararallelTrans;
+	
 	private ScaleTransition finalScaleTrans;
+	
 	private FadeTransition finalFadeOutTrans;
+	
 	private ParallelTransition finalParallelTrans;
+	
 	private double x;
+	
 	private double y;
+	
 	private double fadeInTime;
+	
 	private double approachTime;
+	
 	private List<HitActionObserver> observers = new ArrayList<>();
 	
 	
 	
+	/**
+	 * Instantiates a new hitcircle view impl.
+	 *
+	 * @param innerCircleUrl the inner circle url
+	 * @param outerCircleUrl the outer circle url
+	 * @param circleSize the circle size, the radius
+	 * @param overallDifficulty the overall difficulty
+	 * @param approachRate the approach rate
+	 * @param x the x position
+	 * @param y the y position
+	 */
 	public HitcircleViewImpl(String innerCircleUrl, String outerCircleUrl, double circleSize, double overallDifficulty,
 			double approachRate,double x, double y) {
 		
@@ -72,7 +103,13 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	}
 
 	
+	/**
+	 * Init of class.
+	 */
 	private void init() {
+	    /*
+	     * These "magic numbers" comes from the Official Osu circle creator.
+	     */
 		double innerCircleSize = (109 - 9 * this.circleSize) / 2;
 		double outerCircleSize = innerCircleSize * 2;
 		this.innerCircle.setCenterX(x);
@@ -88,16 +125,6 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.innerCircle.setStrokeWidth(this.innerCircle.getRadius()*0.10);
 		this.outerCircle.setStrokeWidth(this.outerCircle.getRadius()*0.10);
 		this.outerCircle.setStroke(Color.WHITESMOKE);
-		
-//		this.innerCircle.setFitHeight(innerCircleSize);
-//		this.innerCircle.setFitWidth(innerCircleSize);
-//		this.outerCircle.setFitHeight(outerCircleSize);
-//		this.outerCircle.setFitWidth(outerCircleSize);	
-		
-//		this.innerCircle.setLayoutX(this.x - this.innerCircle.getFitWidth() / 2);
-//		this.innerCircle.setLayoutY(this.y - this.innerCircle.getFitHeight() / 2);
-//		this.outerCircle.setLayoutX(this.x - this.outerCircle.getFitWidth() / 2);
-//		this.outerCircle.setLayoutY(this.y - this.outerCircle.getFitHeight() / 2);
 		
 		this.scaleOuterCircle.setNode(this.outerCircle);
 		this.scaleOuterCircle.setToX(0.5);
@@ -133,23 +160,44 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		
 	}
 
+	/**
+	 * Gets the children.
+	 *
+	 * @return the children
+	 */
 	@Override
 	public List<Circle> getChildren() {
-		List<Circle> list = new ArrayList<>();
+		final List<Circle> list = new ArrayList<>();
 		list.add(this.outerCircle);
 		list.add(this.innerCircle);
 		return list;
 	}
 
 
+	/**
+	 * Gets the parallel transition.
+	 *
+	 * @return the parallel transition
+	 */
 	@Override
 	public ParallelTransition getParallelTransition() {
 		return this.pararallelTrans;
 	}
 	
+	/**
+	 * Gets the scale transition.
+	 *
+	 * @return the scale transition
+	 */
 	public ScaleTransition getScaleTransition() {
 		return this.scaleOuterCircle;
 	}
+	
+	/**
+	 * Gets the fade in time.
+	 *
+	 * @return the fade in time
+	 */
 	private double getFadeInTime() {
 		if(this.approachRate < 5) {
 			return 800 + 400 * (5 - this.approachRate) / 5;
@@ -160,6 +208,11 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		}
 	}
 	
+	/**
+	 * Gets the approach time.
+	 *
+	 * @return the approach time
+	 */
 	private double getApproachTime() {
 		double preempt;
 		if( this.approachRate < 5) {
@@ -172,6 +225,9 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		return preempt - this.getFadeInTime();
 	}
 	
+	/**
+	 * Sets the input handlers.
+	 */
 	@Override
 	public void setInputHandlers() {
 		
@@ -195,22 +251,43 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		});	
 	}
 
+	/**
+	 * Notify obs.
+	 *
+	 * @param points the points
+	 */
 	@Override
 	public void notifyObs(GamePoints points) {
 		this.observers.forEach(x -> x.onNotify(points));
 	}
 
+	/**
+	 * Adds the observer.
+	 *
+	 * @param obs the observer
+	 */
 	@Override
 	public void addObserver(HitActionObserver obs) {
 		this.observers.add(obs);
 	}
 
+	/**
+	 * Removes the observer.
+	 *
+	 * @param obs the observer
+	 */
 	@Override
 	public void removeObserver(HitActionObserver obs) {
 		this.observers.remove(obs);
 	}
 
-	private GamePoints getHitWindowScore(double time) {
+	/**
+	 * Gets the hit window score.
+	 *
+	 * @param time the time player made
+	 * @return the hit window score
+	 */
+	private GamePoints getHitWindowScore(final double time) {
 		if(time <= 160 - 12 *  this.overallDifficulty) {
 			return GamePoints.PERFECT;
 		} else if(time <= 280 - 16 * this.overallDifficulty) {

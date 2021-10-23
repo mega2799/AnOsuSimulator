@@ -1,13 +1,11 @@
 package it.unibo.osu.view;
 
-import java.awt.Toolkit;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.User;
+import java.awt.Toolkit;
+import java.io.IOException;
+
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -16,7 +14,6 @@ import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -24,10 +21,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * The Class LoginMenuController.
+ */
 public class LoginMenuController extends Resizeable {
 
     @FXML
@@ -47,16 +46,29 @@ public class LoginMenuController extends Resizeable {
 
     @FXML
     private TextField textField;
+    
     private ScaleTransition iconTrans;
+    
     private MusicControllerImpl welcomeMusic;
+    
     private FadeTransition fadeout;
+    
     private FXMLLoader loader;
+    
     private Stage stage;
+    
     private MusicControllerImpl clickSound;
+    
     private MusicControllerImpl loginSound;
+    
     private Timeline musicFadeout;
 
-    public void init(Stage stage) {
+    /**
+     * Init 
+     *
+     * @param stage the stage
+     */
+    public void init(final Stage stage) {
         this.stage = stage;
         loader = new FXMLLoader(
                 this.getClass().getResource("/fxml/MainMenu.fxml"));
@@ -88,9 +100,11 @@ public class LoginMenuController extends Resizeable {
         this.welcomeMusic.startMusic();
         this.stage.getScene().setCursor(new ImageCursor(new Image(this
                 .getClass().getResource("/wallpaper/cursor.png").toString())));
-//    	System.out.println(toolkit.getScreenSize().getHeight() + " " + toolkit.getScreenSize().getWidth());
     }
 
+    /**
+     * Initialize transitions.
+     */
     private void initializeTransitions() {
         this.iconTrans = new ScaleTransition();
         this.iconTrans.setNode(this.icon);
@@ -117,12 +131,17 @@ public class LoginMenuController extends Resizeable {
 
     }
 
+    /**
+     * Initialize sounds.
+     */
     private void initializeSounds() {
-//		this.welcomeMusic = new MusicControllerImpl("/music/welcome_sound.wav");
         this.welcomeMusic = MusicControllerImplFactory
                 .getSimpleMusicImpl("/music/welcome_sound.wav");
     }
 
+    /**
+     * Sets the input handlers.
+     */
     public void setInputHandlers() {
         this.icon.setOnMouseClicked(e -> {
             this.textField.setVisible(true);
@@ -140,6 +159,13 @@ public class LoginMenuController extends Resizeable {
         });
     }
 
+    /**
+     * Change resolution.
+     *
+     * @param pane the pane
+     * @param width the width
+     * @param height the height
+     */
     @Override
     public void changeResolution(Pane pane, double width, double height) {
         super.changeResolution(pane, width, height);

@@ -5,8 +5,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-//da sistemare, mettere stage in file fxml
+/**
+ * The Class GameView.
+ */
 public class GameView extends Stage{
+	
+	/**
+	 * Instantiates a new game view.
+	 */
 	public GameView() {
 		Pane root = new Pane();
 		
