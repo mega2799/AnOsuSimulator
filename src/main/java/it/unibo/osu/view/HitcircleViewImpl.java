@@ -78,7 +78,7 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	 * @param x the x position
 	 * @param y the y position
 	 */
-	public HitcircleViewImpl(String innerCircleUrl, String outerCircleUrl, double circleSize, double overallDifficulty,
+	public HitcircleViewImpl(double circleSize, double overallDifficulty,
 			double approachRate,double x, double y) {
 		
 //		this.outerCircle = new ImageView(new Image(this.getClass().getResource(outerCircleUrl).toString()));

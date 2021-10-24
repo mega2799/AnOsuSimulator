@@ -23,6 +23,10 @@ public class GameLoop extends AnimationTimer {
     private FXMLLoader loader;
 
     private final static double UPTIME = 1e-6;
+    /*
+     * This variable is to adjust the framerate to 60 fps.
+     */
+    private final static double MSFORFRAME = 17d; 
 
     /**
      * Instantiates a new game loop, using a {@link GameModelImpl} instance that
@@ -105,9 +109,9 @@ public class GameLoop extends AnimationTimer {
         this.sceneController.render();
 
         // long tmp = this.previous;
-        if (updateTime < 17) {
+        if (updateTime < MSFORFRAME) {
             try {
-                final long diff = (long) (17d - updateTime);
+                final long diff = (long) (MSFORFRAME - updateTime);
                 Thread.sleep((long) (diff));
                 /*
                  * Update those few seconds to synchronize loop

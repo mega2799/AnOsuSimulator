@@ -139,11 +139,6 @@ public class BeatmapReader extends BufferedReader {
         }
     }
 
-    // solo per retribuire elementi separati da ": " non per BeatmapOptions con
-    // la "," . quindi non posso usare
-    // questo metodo per [events],[timingpoints],[hitobjects], vanno gestiti nel
-    // caso come ho fatto con
-    // gli hitobjects -> vedere set hitpoints
     /**
      * Gets the option map.
      *
@@ -151,7 +146,6 @@ public class BeatmapReader extends BufferedReader {
      * @return the option map
      * @throws IOException Signals that an I/O exception has occurred.
      */
-    // guardando gli unici utili potrebbero essere hitobjects e difficulty
     public HashMap<String, String> getOptionMap(final BeatmapOptions opt)
             throws IOException {
         this.n = findNumOfLinesToOptions(this.lines, opt);

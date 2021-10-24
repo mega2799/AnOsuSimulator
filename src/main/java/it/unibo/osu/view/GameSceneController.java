@@ -68,8 +68,7 @@ public class GameSceneController {
         this.game = game;
         this.setBackground();
         final BeatMap beatmap = this.game.getBeatMap();
-        this.factory = new HitcircleViewFactory("/image/innerCircle.png",
-                "/image/outerCircle.png", beatmap.getCircleSize(),
+        this.factory = new HitcircleViewFactory(beatmap.getCircleSize(),
                 beatmap.getOverallDifficulty(), beatmap.getApproachRate());
         this.listTransitions = new ArrayList<>();
         this.effectController = new MusicEffectController("/music/hitSound.wav",

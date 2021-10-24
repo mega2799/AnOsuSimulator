@@ -27,9 +27,7 @@ public class HitcircleViewFactory {
 	 * @param difficulty the difficulty
 	 * @param approachRate the approach rate
 	 */
-	public HitcircleViewFactory(String innerCircleUrl, String outerCircleUrl, double circleSize, double difficulty, double approachRate) {
-		this.innerCircleUrl = innerCircleUrl;
-		this.outerCircleUrl = outerCircleUrl;
+	public HitcircleViewFactory(final double circleSize, final double difficulty, final double approachRate) {
 		this.circleSize = circleSize;
 		this.approachRate = approachRate;
 		this.overallDifficulty = difficulty;
@@ -41,8 +39,8 @@ public class HitcircleViewFactory {
 	 * @param hitpoint the hitpoint
 	 * @return the hitcircle view
 	 */
-	public HitcircleViewImpl getHitcircleView(HitPoint hitpoint) { 
-		HitPoint mappedHitpoint = Mapper.mapHitpoint(hitpoint);
-		return new HitcircleViewImpl(this.innerCircleUrl, this.outerCircleUrl, this.circleSize, this.overallDifficulty, this.approachRate, mappedHitpoint.getX(), mappedHitpoint.getY());
+	public HitcircleViewImpl getHitcircleView(final HitPoint hitpoint) { 
+		final HitPoint mappedHitpoint = Mapper.mapHitpoint(hitpoint);
+		return new HitcircleViewImpl(this.circleSize, this.overallDifficulty, this.approachRate, mappedHitpoint.getX(), mappedHitpoint.getY());
 	}
 }
