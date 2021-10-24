@@ -1,7 +1,7 @@
 osu file format v14
 
 [General]
-AudioFilename: DemonSlayer.wav
+AudioFilename: demonSlayer.wav
 AudioLeadIn: 0
 PreviewTime: 61715
 Countdown: 0
