@@ -8,10 +8,6 @@ import it.unibo.osu.util.Mapper;
  */
 public class HitcircleViewFactory {
 
-    private String innerCircleUrl;
-
-    private String outerCircleUrl;
-
     private double circleSize;
 
     private double overallDifficulty;
@@ -21,15 +17,14 @@ public class HitcircleViewFactory {
     /**
      * Instantiates a new hitcircle view factory.
      *
-     * @param circleSize the circle size
-     * @param difficulty the difficulty
+     * @param circleSize   the circle size
+     * @param difficulty   the difficulty
      * @param approachRate the approach rate
      */
-    public HitcircleViewFactory(final double circleSize,
-       final double difficulty, final double approachRate) {
-       this.circleSize = circleSize;
-       this.approachRate = approachRate;
-       this.overallDifficulty = difficulty;
+    public HitcircleViewFactory(final double circleSize, final double difficulty, final double approachRate) {
+        this.circleSize = circleSize;
+        this.approachRate = approachRate;
+        this.overallDifficulty = difficulty;
     }
 
     /**
@@ -40,7 +35,7 @@ public class HitcircleViewFactory {
      */
     public HitcircleViewImpl getHitcircleView(final HitPoint hitpoint) {
         final HitPoint mappedHitpoint = Mapper.mapHitpoint(hitpoint);
-        return new HitcircleViewImpl(this.circleSize, this.overallDifficulty,
-            this.approachRate, mappedHitpoint.getX(), mappedHitpoint.getY());
+        return new HitcircleViewImpl(this.circleSize, this.overallDifficulty, this.approachRate, mappedHitpoint.getX(),
+                mappedHitpoint.getY());
     }
 }

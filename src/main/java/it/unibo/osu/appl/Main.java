@@ -19,8 +19,7 @@ public class Main extends Application {
      */
     @Override
     public void start(final Stage myStage) throws Exception {
-        final FXMLLoader loader = new FXMLLoader(
-                this.getClass().getResource("/fxml/LoginMenu.fxml"));
+        final FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/LoginMenu.fxml"));
         myStage.setScene(loader.load());
         ((LoginMenuController) loader.getController()).init(myStage);
         myStage.initStyle(StageStyle.UTILITY);
