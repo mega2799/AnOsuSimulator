@@ -5,7 +5,11 @@ Uso! is a simulator of the open source rhythm game [Osu!](https://osu.ppy.sh/hom
 This project was developed following those [examination rules](https://apice.unibo.it/xwiki/bin/view/Courses/OOP2021-esame), proposed on this [form](https://virtuale.unibo.it/mod/forum/discuss.php?d=78799).
 
 ## How to run me!
-We discovered that we can't push into the repository large files, out jar is over 400Mb so you need to build it yourself
+We discovered that we can't push into the repository large files, our jar is over 400Mb so you need to build it yourself
+using the command
+```py
+./gradlew build
+```
 
 - You can run using the command 
 ```py
@@ -16,11 +20,6 @@ We discovered that we can't push into the repository large files, out jar is ove
 
   ```py
   java -jar ./build/libs/AnOsuSimulator-all.jar
-  ```
-  
-  or
-  ```py 
-  java -jar ./lib/AnOsuSimulator-all.jar
   ```
 
 ## License
