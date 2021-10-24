@@ -6,9 +6,22 @@ This project was developed following those [examination rules](https://apice.uni
 
 ## How to run me!
 
-- You can run using the command `./gradlew run`
+- You can run using the command 
+```py
+./gradlew run
+```
 
 - You can also run this project via jar in the `/lib` directory using the command 
 
-  ```sh java -jar ./build/libs/AnOsuSimulator-all.jar``` or `java -jar ./lib/AnOsuSimulator-all.jar`
+  ```py
+  java -jar ./build/libs/AnOsuSimulator-all.jar
+  ```
+  
+  or
+  ```py 
+  java -jar ./lib/AnOsuSimulator-all.jar
+  ```
 
+## License
+
+This product is licensed under the [MIT License](LICENSE)
