@@ -233,14 +233,9 @@ public class EndGameController {
         this.endgameEnteredSound.onNotify();
         this.registerData();
         this.videoBackground.getMediaPlayer().play();
-        this.pane.toFront();
-        ((AnchorPane) this.pane.getScene().getRoot()).getChildren()
-                .retainAll(this.pane);
         loader = new FXMLLoader(
                 this.getClass().getResource("/fxml/MainMenu.fxml"));
-        try {
-
-            this.mainMenuPane = loader.load();
+        try { this.mainMenuPane = loader.load();
             ((AnchorPane) this.pane.getScene().getRoot()).getChildren().add(0,
                     this.mainMenuPane);
             ((MainMenuController) loader.getController())
@@ -248,5 +243,21 @@ public class EndGameController {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+        final Pane fixedPane = ((Pane) this.pane.getScene().getRoot());
+        final FadeTransition fadeTrans = new FadeTransition(Duration.seconds(1),
+                fixedPane);
+        fadeTrans.setFromValue(1);
+        fadeTrans.setToValue(0);
+
+        fadeTrans.setOnFinished(finished -> {
+            this.pane.toFront();
+            fixedPane.getChildren().retainAll(this.pane,this.mainMenuPane);
+            fadeTrans.setFromValue(0);
+            fadeTrans.setToValue(1);
+            fadeTrans.setOnFinished(null);
+            fadeTrans.playFromStart();
+
+        });
+        fadeTrans.play();
     }
 }

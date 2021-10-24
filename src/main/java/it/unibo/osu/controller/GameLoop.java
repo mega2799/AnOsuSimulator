@@ -85,8 +85,7 @@ public class GameLoop extends AnimationTimer {
                 e.printStackTrace();
             }
             final EndGameController controller =
-                    ((EndGameController) this.loader
-                    .getController());
+                    ((EndGameController) this.loader.getController());
             controller.init(this.game);
             controller.enterEndGame();
             this.stop();
