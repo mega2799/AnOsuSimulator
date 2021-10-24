@@ -3,23 +3,25 @@ package it.unibo.osu.util;
 import it.unibo.osu.model.HitPoint;
 import it.unibo.osu.model.HitpointImpl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Mapper.
  */
-public class Mapper {
+public final class Mapper {
 
-    public final static double WIDTH = 1840;
+    public static final double WIDTH = 1840;
 
-    public final static double XOFFSET = 80;
+    public static final double XOFFSET = 80;
 
-    public final static double HEIGHT = 910;
+    public static final double HEIGHT = 910;
 
-    public final static double YOFFSET = 234;
+    public static final double YOFFSET = 234;
 
-    public final static double BEATMAPWIDTH = 640;
+    public static final double BEATMAPWIDTH = 640;
 
-    public final static double BEATMAPHEIGHT = 480;
+    public static final double BEATMAPHEIGHT = 480;
+
+    private Mapper() {
+    }
 
     /**
      * Map hitpoints position according to visual.
@@ -27,7 +29,7 @@ public class Mapper {
      * @param hitpoint the hitpoint
      * @return the hit point implementation
      */
-    public static HitPoint mapHitpoint(HitPoint hitpoint) {
+    public static HitPoint mapHitpoint(final HitPoint hitpoint) {
         double x = hitpoint.getX();
         double y = hitpoint.getY();
         double newX = (x * (WIDTH - XOFFSET) / BEATMAPWIDTH) + XOFFSET;

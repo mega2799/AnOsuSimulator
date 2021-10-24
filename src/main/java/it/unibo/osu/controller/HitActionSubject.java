@@ -27,4 +27,5 @@ public interface HitActionSubject {
      * @param obs the obs
      */
     void removeObserver(HitActionObserver obs);
+
 }

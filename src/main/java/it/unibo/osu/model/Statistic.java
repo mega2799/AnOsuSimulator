@@ -2,7 +2,6 @@ package it.unibo.osu.model;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonParseException;
 
@@ -35,8 +34,9 @@ public interface Statistic {
     void addResult(String player, String points);
 
     /**
-     * Read json file that contains the statistic to import it as a {@link Map}
-     * that contains the player's name and a list of the previous game score.
+     * Read json file that contains the statistic to import it as a
+     *  {@link java.util.Map} that contains the player's name and a list
+     *  of the previous game score.
      *
      * @throws JsonParseException the json parse exception
      * @throws IOException        Signals that an I/O exception has occurred.

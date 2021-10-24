@@ -1,11 +1,9 @@
 package it.unibo.osu.view;
 
-import it.unibo.osu.controller.MusicController;
 import it.unibo.osu.controller.MusicControllerImpl;
 import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.model.GameModel;
 import it.unibo.osu.model.GamePoints;
-import it.unibo.osu.model.Statistic;
 import it.unibo.osu.model.StatisticImpl;
 import it.unibo.osu.model.User;
 import java.io.IOException;
@@ -33,6 +31,7 @@ import javafx.util.Duration;
  */
 public class EndGameController {
 
+    public static final int HOVER_INCREASE = 10;
     @FXML
     private AnchorPane pane;
 
@@ -94,7 +93,8 @@ public class EndGameController {
     /**
      * Register data is a function called at the end and takes data like
      * username of the {@link User}, total score and writes them into the
-     * {@link EndGameController} Labels, it also uses {@link Statistic} to make
+     * {@link EndGameController} Labels, it also uses
+     * {@link it.unibo.osu.model.Statistic} to make
      * statistics and write them into the .json file.
      */
     public void registerData() {
@@ -111,14 +111,13 @@ public class EndGameController {
                     this.gameScore.getText());
             StatisticImpl.getStat().writeJson();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     /**
      * set the background, using an mp4 file, so we don't need to use a
-     * {@link MusicController}, that is under the Labels.
+     * {@link MusicControllerImpl}, that is under the Labels.
      */
     private void setBackground() {
         this.videoBackground.setMediaPlayer(new MediaPlayer(new Media(
@@ -128,7 +127,7 @@ public class EndGameController {
 
     /**
      * Write on grid is a Method used to write the statistic into the grid
-     * cells, modifying the text of the Labels took from the FXML
+     * cells, modifying the text of the Labels took from the FXML.
      */
     private void writeOnGrid() {
         final ObservableList<Node> childrens = this.scoreGrid.getChildren();
@@ -149,8 +148,8 @@ public class EndGameController {
      * @param row       the row
      * @param column    the column
      */
-    private void modifyRowColumn(ObservableList<Node> childrens, String string,
-            int row, int column) {
+    private void modifyRowColumn(final ObservableList<Node> childrens,
+         final String string, final int row, final int column) {
         for (Node node : childrens) {
             /*
              * i need to use Integer because GridPane.getRowIndex and
@@ -186,15 +185,19 @@ public class EndGameController {
         this.backToMenuButton.setOnMouseEntered(entered -> {
             this.buttonHoverSound.onNotify();
             this.backToMenuButton
-                    .setFitWidth(this.backToMenuButton.getFitWidth() + 10);
+                    .setFitWidth(this.backToMenuButton.getFitWidth()
+                    + HOVER_INCREASE);
             this.backToMenuButton
-                    .setFitHeight(this.backToMenuButton.getFitHeight() + 10);
+                    .setFitHeight(this.backToMenuButton.getFitHeight()
+                    + HOVER_INCREASE);
         });
         this.backToMenuButton.setOnMouseExited(exited -> {
             this.backToMenuButton
-                    .setFitWidth(this.backToMenuButton.getFitWidth() - 10);
+                    .setFitWidth(this.backToMenuButton.getFitWidth()
+                    - HOVER_INCREASE);
             this.backToMenuButton
-                    .setFitHeight(this.backToMenuButton.getFitHeight() - 10);
+                    .setFitHeight(this.backToMenuButton.getFitHeight()
+                    - HOVER_INCREASE);
         });
         this.backToMenuButton.setOnMouseClicked(event -> {
             this.buttonClickSound.onNotify();

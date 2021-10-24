@@ -1,22 +1,20 @@
 package it.unibo.osu.controller;
 
-import java.io.IOException;
-
-import it.unibo.osu.model.BeatMapImpl;
 import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.GameStatus;
 import it.unibo.osu.model.StatisticImpl;
 import it.unibo.osu.model.User;
+import it.unibo.osu.view.GameSceneController;
+import java.io.IOException;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import it.unibo.osu.view.GameSceneController;
+
 
 /**
  * Controller Class.
@@ -38,28 +36,21 @@ public class Controller {
      */
     public Controller(final String name, final Stage stage) {
         this.game = new GameModelImpl("/beatmaps/" + name);
-
         try {
             StatisticImpl.getStat().readJson();
-            StatisticImpl.getStat().addPlayer(User.getUsername()); // singleton
+            StatisticImpl.getStat().addPlayer(User.getUsername());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         this.view = stage;
-
         this.initializeGameView();
-
         this.robot = new Robot();
-
         this.musicController = MusicControllerImplFactory.getMusicImpl(
                 "/tracks/"
-                        + this.game.getBeatMap().getSongName().stripLeading(),
+                + this.game.getBeatMap().getSongName().stripLeading(),
                 this.game);
         this.setInputHandler();
         this.changeScene();
-
     }
 
     private void initializeGameView() {
@@ -107,7 +98,6 @@ public class Controller {
                     } else {
                         this.musicController.startMusic();
                     }
-
                     break;
                 case X:
                     this.robot.mouseClick(MouseButton.PRIMARY);

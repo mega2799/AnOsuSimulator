@@ -3,13 +3,16 @@ package it.unibo.osu.model;
 /**
  * The Class User.
  */
-public class User {
+public final class User {
     private static String username;
 
+    private User() {
+    }
+
     /** The Constant MAXVOLUME. */
-    public final static double MAXVOLUME = 1;
-    private static double MusicVolume = MAXVOLUME;
-    private static double EffectVolume = MAXVOLUME;
+    public static final double MAXVOLUME = 1;
+    private static double musicVolume = MAXVOLUME;
+    private static double effectVolume = MAXVOLUME;
 
     /**
      * Gets the username.
@@ -25,7 +28,7 @@ public class User {
      *
      * @param username is set as the new username
      */
-    public static void setUsername(String username) {
+    public static void setUsername(final String username) {
         User.username = username;
     }
 
@@ -35,7 +38,7 @@ public class User {
      * @return the music volume
      */
     public static double getMusicVolume() {
-        return MusicVolume;
+        return musicVolume;
     }
 
     /**
@@ -43,8 +46,8 @@ public class User {
      *
      * @param musicVolume is set as the new music volume
      */
-    public static void setMusicVolume(double musicVolume) {
-        MusicVolume = musicVolume;
+    public static void setMusicVolume(final double musicVolume) {
+        User.musicVolume = musicVolume;
     }
 
     /**
@@ -53,7 +56,7 @@ public class User {
      * @return the effect volume
      */
     public static double getEffectVolume() {
-        return EffectVolume;
+        return effectVolume;
     }
 
     /**
@@ -61,8 +64,8 @@ public class User {
      *
      * @param effectVolume is set as the new effect volume
      */
-    public static void setEffectVolume(double effectVolume) {
-        EffectVolume = effectVolume;
+    public static void setEffectVolume(final double effectVolume) {
+        User.effectVolume = effectVolume;
     }
 
 }

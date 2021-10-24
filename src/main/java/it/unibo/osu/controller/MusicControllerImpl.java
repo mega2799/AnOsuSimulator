@@ -72,7 +72,7 @@ public abstract class MusicControllerImpl extends AbstractSubject
     }
 
     @Override
-    public void setOnFinished(Runnable runnable) {
+    public void setOnFinished(final Runnable runnable) {
     }
 
     /**

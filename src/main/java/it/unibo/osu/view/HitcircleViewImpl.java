@@ -2,25 +2,14 @@ package it.unibo.osu.view;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 import it.unibo.osu.controller.HitActionObserver;
 import it.unibo.osu.controller.HitActionSubject;
-import it.unibo.osu.controller.Observer;
-import it.unibo.osu.controller.Subject;
-import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.GamePoints;
-import javafx.animation.*;
-import javafx.event.EventDispatcher;
-import javafx.print.PageLayout;
-import javafx.scene.Group;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.animation.FadeTransition;
+import javafx.animation.FillTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
@@ -29,60 +18,65 @@ import javafx.util.Duration;
  * The Class HitcircleViewImpl implementation of {@link HitcircleView}.
  */
 public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
-	
+
+	public static final double STROKE_PERCENT = 0.10;
+	public static final double SCALE_RATE = 0.5;
+	public static final int FINALTRANSITION_DURATION_MS = 500;
+	public static final double FINALTRANSITION_SCALE_RATIO = 1.5;
+	public static final int MISSTRANSITION_DURATION_MS = 200;
+	public static final int MAXAPPROACHTIME_DRUTAION_MS = 800;
+	public static final int MAXPREEMPT_DURATION_MS = 1200;
+	public static final int PERFECTMAXTIME_MS = 160;
+	public static final int GREATMAXTIME_MS = 280;
+	public static final int OKMAXTIME_MS = 400;
 	private Circle innerCircle;
-	
+
 	private Circle outerCircle;
-	
-	private double circleSize;
-	
+
+    private double circleSize;
+
 	private double overallDifficulty; //<--
-	
+
 	private double approachRate;
-	
+
 	private ScaleTransition scaleOuterCircle;
-	
+
 	private FadeTransition fadeInnerCircle;
-	
+
 	private FadeTransition fadeOuterCircle;
-	
+
 	private ParallelTransition pararallelTrans;
-	
+
 	private ScaleTransition finalScaleTrans;
-	
+
 	private FadeTransition finalFadeOutTrans;
-	
+
 	private ParallelTransition finalParallelTrans;
-	
+
 	private double x;
-	
+
 	private double y;
-	
+
 	private double fadeInTime;
-	
+
 	private double approachTime;
-	
+
 	private List<HitActionObserver> observers = new ArrayList<>();
 
 	private FillTransition missTransition;
-	
-	
+
 	/**
 	 * Instantiates a new hitcircle view impl.
 	 *
-	 * @param innerCircleUrl the inner circle url
-	 * @param outerCircleUrl the outer circle url
 	 * @param circleSize the circle size, the radius
 	 * @param overallDifficulty the overall difficulty
 	 * @param approachRate the approach rate
 	 * @param x the x position
 	 * @param y the y position
 	 */
-	public HitcircleViewImpl(double circleSize, double overallDifficulty,
-			double approachRate,double x, double y) {
-		
-//		this.outerCircle = new ImageView(new Image(this.getClass().getResource(outerCircleUrl).toString()));
-//		this.innerCircle = new ImageView(new Image(this.getClass().getResource(innerCircleUrl).toString()));
+	public HitcircleViewImpl(final double circleSize, final double overallDifficulty,
+			final double approachRate, final double x, final double y) {
+
 		this.circleSize = circleSize;
 		this.innerCircle = new Circle();
 		this.outerCircle = new Circle();
@@ -91,10 +85,12 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.scaleOuterCircle = new ScaleTransition();
 		this.fadeInnerCircle = new FadeTransition();
 		this.fadeOuterCircle = new FadeTransition();
-		this.pararallelTrans = new ParallelTransition(this.fadeInnerCircle,this.fadeOuterCircle);
+		this.pararallelTrans = new ParallelTransition(this.fadeInnerCircle,
+			this.fadeOuterCircle);
 		this.finalScaleTrans = new ScaleTransition();
 		this.finalFadeOutTrans = new FadeTransition();
-		this.finalParallelTrans = new ParallelTransition(this.finalScaleTrans,this.finalFadeOutTrans);
+		this.finalParallelTrans = new ParallelTransition(
+			this.finalScaleTrans, this.finalFadeOutTrans);
 		this.missTransition = new FillTransition();
 		this.x = x;
 		this.y = y;
@@ -104,7 +100,6 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.setInputHandlers();
 	}
 
-	
 	/**
 	 * Init of class.
 	 */
@@ -124,15 +119,17 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.innerCircle.setFill(Color.RED);
 		this.outerCircle.setFill(Color.TRANSPARENT);
 		this.innerCircle.setStroke(Color.WHITESMOKE);
-		this.innerCircle.setStrokeWidth(this.innerCircle.getRadius()*0.10);
-		this.outerCircle.setStrokeWidth(this.outerCircle.getRadius()*0.10);
+		this.innerCircle.setStrokeWidth(this.innerCircle.getRadius()
+			* STROKE_PERCENT);
+		this.outerCircle.setStrokeWidth(this.outerCircle.getRadius()
+			* STROKE_PERCENT);
 		this.outerCircle.setStroke(Color.WHITESMOKE);
 		
 		this.scaleOuterCircle.setNode(this.outerCircle);
-		this.scaleOuterCircle.setToX(0.5);
-		this.scaleOuterCircle.setToY(0.5);
+		this.scaleOuterCircle.setToX(SCALE_RATE);
+		this.scaleOuterCircle.setToY(SCALE_RATE);
 		this.scaleOuterCircle.setCycleCount(1);
-		this.scaleOuterCircle.setDuration(Duration.millis(this.approachTime));
+        this.scaleOuterCircle.setDuration(Duration.millis(this.approachTime));
 		
 		this.fadeInnerCircle.setNode(this.innerCircle);
 		this.fadeInnerCircle.setCycleCount(1);
@@ -148,12 +145,12 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.pararallelTrans.setOnFinished(e -> this.scaleOuterCircle.play());
 		
 		this.finalScaleTrans.setNode(this.innerCircle);
-		this.finalScaleTrans.setDuration(Duration.millis(500));
+		this.finalScaleTrans.setDuration(Duration.millis(FINALTRANSITION_DURATION_MS));
 		this.finalScaleTrans.setCycleCount(1);
-		this.finalScaleTrans.setToX(1.5);
-		this.finalScaleTrans.setToY(1.5);
+		this.finalScaleTrans.setToX(FINALTRANSITION_SCALE_RATIO);
+		this.finalScaleTrans.setToY(FINALTRANSITION_SCALE_RATIO);
 		
-		this.finalFadeOutTrans.setDuration(Duration.millis(500));
+		this.finalFadeOutTrans.setDuration(Duration.millis(FINALTRANSITION_DURATION_MS));
 		this.finalFadeOutTrans.setFromValue(1);
 		this.finalFadeOutTrans.setToValue(0);
 		this.finalFadeOutTrans.setCycleCount(1);
@@ -161,7 +158,7 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 
 		this.missTransition.setShape((Shape) this.innerCircle);
 		this.missTransition.setToValue(Color.valueOf("black"));
-		this.missTransition.setDuration(Duration.millis(200));
+		this.missTransition.setDuration(Duration.millis(MISSTRANSITION_DURATION_MS));
 
 	}
 
@@ -188,7 +185,7 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	public ParallelTransition getParallelTransition() {
 		return this.pararallelTrans;
 	}
-	
+
 	/**
 	 * Gets the scale transition.
 	 *
@@ -204,12 +201,12 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	 * @return the fade in time
 	 */
 	private double getFadeInTime() {
-		if(this.approachRate < 5) {
-			return 800 + 400 * (5 - this.approachRate) / 5;
-		} else if ( this.approachRate == 5) {
-			return 800;
+		if (this.approachRate < 5) {
+			return MAXAPPROACHTIME_DRUTAION_MS + OKMAXTIME_MS * (5 - this.approachRate) / 5;
+		} else if (this.approachRate == 5) {
+			return MAXAPPROACHTIME_DRUTAION_MS;
 		} else {
-			return 800 - 500 * (this.approachRate - 5) / 5;
+			return MAXAPPROACHTIME_DRUTAION_MS - FINALTRANSITION_DURATION_MS * (this.approachRate - 5) / 5;
 		}
 	}
 	
@@ -220,22 +217,22 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	 */
 	private double getApproachTime() {
 		double preempt;
-		if( this.approachRate < 5) {
-			preempt = 1200 + 600 * (5 - this.approachRate) / 5;
-		} else if(this.approachRate == 5) {
-			preempt = 1200;
+		if (this.approachRate < 5) {
+			preempt = MAXPREEMPT_DURATION_MS + 600 * (5 - this.approachRate) / 5;
+		} else if (this.approachRate == 5) {
+			preempt = MAXPREEMPT_DURATION_MS;
 		} else {
-			preempt = 1200 - 750 * (this.approachRate - 5) / 5;
+			preempt = MAXPREEMPT_DURATION_MS - 750 * (this.approachRate - 5) / 5;
 		}
 		return preempt - this.getFadeInTime();
 	}
-	
+
 	/**
 	 * Sets the input handlers.
 	 */
 	@Override
 	public void setInputHandlers() {
-		
+
 		
 		this.innerCircle.setOnMouseClicked(e -> {
 			double time = this.scaleOuterCircle.getTotalDuration().toMillis() - this.scaleOuterCircle.getCurrentTime().toMillis();
@@ -244,7 +241,7 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 			GamePoints points = this.getHitWindowScore(time);
 			this.notifyObs(points);	
 		});
-		this.finalParallelTrans.setOnFinished(e->{
+		this.finalParallelTrans.setOnFinished(event -> {
 			this.innerCircle.setVisible(false);
 			this.outerCircle.setVisible(false);
 		});
@@ -252,7 +249,7 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 			this.innerCircle.setVisible(false);
 			this.outerCircle.setVisible(false);
 		});
-		this.scaleOuterCircle.setOnFinished(e -> {
+		this.scaleOuterCircle.setOnFinished(event -> {
 			this.innerCircle.setOnMouseClicked(null);
 			this.missTransition.play();
 			this.notifyObs(GamePoints.MISS);
@@ -296,11 +293,11 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	 * @return the hit window score
 	 */
 	private GamePoints getHitWindowScore(final double time) {
-		if(time <= 160 - 12 *  this.overallDifficulty) {
+		if (time <= PERFECTMAXTIME_MS - 12 *  this.overallDifficulty) {
 			return GamePoints.PERFECT;
-		} else if(time <= 280 - 16 * this.overallDifficulty) {
+		} else if (time <= GREATMAXTIME_MS - 16 * this.overallDifficulty) {
 			return GamePoints.GREAT;
-		} else if(time <= 400 - 20 * this.overallDifficulty) {
+		} else if (time <= OKMAXTIME_MS - 20 * this.overallDifficulty) {
 			return GamePoints.OK;
 		} else {
 			return GamePoints.MISS;

@@ -9,7 +9,7 @@ public abstract class AbstractSubject implements Subject {
      * Notify obs.
      */
     @Override
-    abstract public void notifyObs();
+    public abstract void notifyObs();
 
     /**
      * Adds the observer.
@@ -28,5 +28,4 @@ public abstract class AbstractSubject implements Subject {
     @Override
     public void removeObserver(Observer obs) {
     }
-
 }

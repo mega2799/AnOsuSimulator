@@ -5,6 +5,9 @@ package it.unibo.osu.model;
  */
 public class LifeBarImpl implements Updatable, LifeBar {
 
+    public static final double OK_INCREASE_RATE = 0.5;
+    public static final double PERFECT_INCREASE_RATE = 1.05;
+    public static final int FPS = 60;
     private double hpDrainRate;
     private double hp;
     private static final double MAX_HEALTH_INCREASE = 5;
@@ -31,17 +34,23 @@ public class LifeBarImpl implements Updatable, LifeBar {
         case MISS:
             break;
         case OK:
-            hpValue = (this.hp + LifeBarImpl.MAX_HEALTH_INCREASE * 0.5);
+            hpValue = (this.hp + LifeBarImpl.MAX_HEALTH_INCREASE
+                * OK_INCREASE_RATE);
             this.addHp(hpValue);
+
             break;
         case GREAT:
             hpValue = (this.hp + LifeBarImpl.MAX_HEALTH_INCREASE);
             this.addHp(hpValue);
             break;
         case PERFECT:
-            hpValue = (this.hp + LifeBarImpl.MAX_HEALTH_INCREASE * 1.05);
+            hpValue = (this.hp + LifeBarImpl.MAX_HEALTH_INCREASE
+                * PERFECT_INCREASE_RATE);
             this.addHp(hpValue);
             break;
+        default:
+            break;
+
         }
 
     }
@@ -52,7 +61,7 @@ public class LifeBarImpl implements Updatable, LifeBar {
 
     @Override
     public void drain() {
-        this.hp -= hpDrainRate / 60;
+        this.hp -= hpDrainRate / FPS;
     }
 
     @Override

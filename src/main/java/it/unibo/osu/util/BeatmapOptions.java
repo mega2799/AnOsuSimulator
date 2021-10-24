@@ -5,18 +5,18 @@ package it.unibo.osu.util;
  */
 public enum BeatmapOptions {
 
-    HITOBJECTS("[HitObjects]"), 
-    GENERAL("[General]"), 
+    HITOBJECTS("[HitObjects]"),
+    GENERAL("[General]"),
     EDITOR("[Editor]"),
-    METADATA("[Metadata]"), 
-    DIFFICULTY("[Difficulty]"), 
+    METADATA("[Metadata]"),
+    DIFFICULTY("[Difficulty]"),
     EVENTS("[Events]"),
-    TIMINGPOINTS("[TimingPoints]"), 
+    TIMINGPOINTS("[TimingPoints]"),
     COLOURS("[Colours]");
 
     private String value;
 
-    private BeatmapOptions(String value) {
+    BeatmapOptions(final String value) {
         this.value = value;
     }
 

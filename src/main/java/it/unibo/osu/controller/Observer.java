@@ -9,4 +9,5 @@ public interface Observer {
      * On notify.
      */
     void onNotify();
+
 }

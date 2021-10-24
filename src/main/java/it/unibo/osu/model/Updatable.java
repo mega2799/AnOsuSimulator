@@ -9,4 +9,5 @@ public interface Updatable {
      * Update.
      */
     void update();
+
 }

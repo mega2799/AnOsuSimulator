@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -15,14 +14,13 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.core.ObjectCodec;
 
 /**
  * The Class StatisticImpl.
  */
 public class StatisticImpl implements Statistic {
 
-    private static Statistic STATISTIC;
+    private static Statistic statistic;
 
     private Map<String, List<String>> map = new HashMap<>();
 
@@ -32,19 +30,19 @@ public class StatisticImpl implements Statistic {
      * @return the stat
      */
     public static final Statistic getStat() {
-        if (STATISTIC == null) {
-            STATISTIC = new StatisticImpl();
+        if (statistic == null) {
+            statistic = new StatisticImpl();
         }
-        return STATISTIC;
+        return statistic;
     }
 
     @Override
-    public List<String> getPlayerHistory(String player) {
+    public List<String> getPlayerHistory(final String player) {
         return this.map.get(player);
     }
 
     @Override
-    public void addResult(String player, String points) {
+    public void addResult(final String player, final String points) {
         if (!this.map.containsKey(player)) {
             if (this.map.get(player) == null) {
                 this.map.put(player, new ArrayList<String>());
@@ -54,7 +52,7 @@ public class StatisticImpl implements Statistic {
     }
 
     @Override
-    public void addPlayer(String player) {
+    public void addPlayer(final String player) {
         if (!this.map.containsKey(player)) {
             this.map.put(player, new ArrayList<String>());
         }
@@ -64,17 +62,14 @@ public class StatisticImpl implements Statistic {
     public void writeJson() throws IOException {
         JsonFactory jF = new JsonFactory();
         JsonGenerator jG;
-
         jG = jF.createGenerator(new File("users.json"), JsonEncoding.UTF8);
         jG.useDefaultPrettyPrinter();
-
         jG.writeStartObject();
 
         this.map.forEach((k, v) -> {
             try {
                 jG.writeStringField(k, v.toString());
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });
@@ -84,7 +79,6 @@ public class StatisticImpl implements Statistic {
     @SuppressWarnings("deprecation")
     @Override
     public void readJson() throws JsonParseException, IOException {
-        // TODO Auto-generated method stub
         JsonFactory jF = new JsonFactory();
         File f = new File("users.json");
         JsonParser jP = jF.createJsonParser(f);

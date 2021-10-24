@@ -6,7 +6,10 @@ import it.unibo.osu.model.User;
 /**
  * A factory for creating MusicControllerImpl objects.
  */
-public class MusicControllerImplFactory {
+public final class MusicControllerImplFactory {
+
+    private MusicControllerImplFactory() {
+    }
 
     /**
      * Gets the simple music.
@@ -18,9 +21,9 @@ public class MusicControllerImplFactory {
         return new Music(name);
     }
 
-    private static class Music extends MusicControllerImpl{
+    private static class Music extends MusicControllerImpl {
 
-        public Music(final String name) {
+         Music(final String name) {
             super(name);
             super.getMediaPlayer().setVolume(User.getMusicVolume());
         }
@@ -45,7 +48,7 @@ public class MusicControllerImplFactory {
 
         private GameModelImpl game;
 
-        public IngameMusic (final String name, final GameModelImpl game) {
+        IngameMusic(final String name, final GameModelImpl game) {
             super(name);
             super.getMediaPlayer().setOnEndOfMedia(() -> this.notifyObs());
             super.getMediaPlayer().setVolume(User.getMusicVolume());
@@ -65,12 +68,12 @@ public class MusicControllerImplFactory {
      * @param name the name
      * @return the effect impl
      */
-    public static MusicControllerImpl getEffectImpl(String name) {
+    public static MusicControllerImpl getEffectImpl(final String name) {
         return new Effect(name);
     }
 
-    private static class Effect extends MusicControllerImpl{
-        public Effect(String name) {
+    private static class Effect extends MusicControllerImpl {
+        Effect(final String name) {
             super(name);
             super.getMediaPlayer().setVolume(User.getEffectVolume());
         }

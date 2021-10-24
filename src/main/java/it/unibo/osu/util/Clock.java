@@ -18,11 +18,11 @@ import javafx.util.Duration;
 public class Clock implements HitActionObserver {
 
     private Text text;
-    Timeline timeline;
-    int mins = 0;
-    int secs = 0;
-    int millis = 0;
-    boolean sos = true;
+    private Timeline timeline;
+    private int mins = 0;
+    private int secs = 0;
+    private int millis = 0;
+    private boolean sos = true;
 
     /** The end time. */
     private Text endTime;
@@ -30,7 +30,7 @@ public class Clock implements HitActionObserver {
     /** The time statistic. */
     private Map<String, GamePoints> timeStatistic = new HashMap<>();
 
-    void change(Text text) {
+    void change(final Text text) {
         if (millis == 1000) {
             secs++;
             millis = 0;
@@ -55,7 +55,7 @@ public class Clock implements HitActionObserver {
         timeline = new Timeline(new KeyFrame(Duration.millis(1),
                 new EventHandler<ActionEvent>() {
                     @Override
-                    public void handle(ActionEvent event) {
+                    public void handle(final ActionEvent event) {
                         change(text);
                     }
                 }));
@@ -110,7 +110,7 @@ public class Clock implements HitActionObserver {
      * @param points the points
      */
     @Override
-    public void onNotify(GamePoints points) {
+    public void onNotify(final GamePoints points) {
         this.timeStatistic.put(this.text.getText(), points);
     }
 

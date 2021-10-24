@@ -2,7 +2,6 @@ package it.unibo.osu.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import it.unibo.osu.model.GamePoints;
 import it.unibo.osu.model.HitPoint;
 import it.unibo.osu.model.Score;
@@ -10,7 +9,7 @@ import it.unibo.osu.model.Score;
 /**
  * The ScoreManage implementation.
  */
-public class ScoreManagerImpl {
+public class ScoreManagerImpl implements ScoreManager {
 
     private Score score;
 
@@ -60,7 +59,7 @@ public class ScoreManagerImpl {
 
     /**
      * Used to get {@link Score}.
-     * 
+     *
      * @return the {@link Score}
      */
     public Score getScore() {
@@ -72,7 +71,7 @@ public class ScoreManagerImpl {
      *
      * @param score the new score
      */
-    public void setScore(Score score) {
+    public void setScore(final Score score) {
         this.score = score;
     }
 

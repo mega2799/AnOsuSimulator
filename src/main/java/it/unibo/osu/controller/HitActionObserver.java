@@ -15,4 +15,5 @@ public interface HitActionObserver {
      * @param points the points
      */
     void onNotify(GamePoints points);
+
 }

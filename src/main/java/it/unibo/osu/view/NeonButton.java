@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
  * The Class NeonButton.
  */
 public class NeonButton {
-	
+
 	private Button button;
 
 	/**

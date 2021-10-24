@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Main Class.
  */
@@ -37,5 +36,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }

@@ -54,7 +54,7 @@ public class ScoreImpl implements Score {
      * @param points the points
      */
     @Override
-    public void addPoints(int points) {
+    public void addPoints(final int points) {
         this.points += points;
     }
 

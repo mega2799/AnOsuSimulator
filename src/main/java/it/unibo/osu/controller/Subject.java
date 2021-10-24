@@ -23,4 +23,5 @@ public interface Subject {
      * @param obs the obs
      */
     void removeObserver(Observer obs);
+
 }

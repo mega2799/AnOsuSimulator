@@ -28,6 +28,7 @@ import javafx.scene.media.MediaView;
  */
 public class GameSceneController {
 
+    public static final int MAX_TRANSITIONLIST_SIZE = 50;
     @FXML
     private AnchorPane pane;
 
@@ -75,7 +76,6 @@ public class GameSceneController {
                 "/music/missSound.wav");
         this.pauseSound = MusicControllerImplFactory
                 .getEffectImpl("/music/pauseSound.wav");
-
     }
 
     /**
@@ -101,10 +101,12 @@ public class GameSceneController {
         });
         this.game.getCurrentHitbuttons().clear();
     }
-    private enum BackgroundType{
+
+    private enum BackgroundType {
         PHOTO,
         VIDEO
     }
+
     /**
      * Gets the background type.
      *
@@ -164,7 +166,6 @@ public class GameSceneController {
                 this.backgroundMedia.getMediaPlayer().play();
             }
         }
-        ;
         this.pauseHitbuttons();
     }
 
@@ -185,7 +186,7 @@ public class GameSceneController {
      * Clear transition list.
      */
     private void clearTransitionList() {
-        if (this.listTransitions.size() > 50) {
+        if (this.listTransitions.size() > MAX_TRANSITIONLIST_SIZE) {
             this.listTransitions.clear();
         }
     }

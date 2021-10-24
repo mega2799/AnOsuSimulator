@@ -22,11 +22,11 @@ public class GameLoop extends AnimationTimer {
     private long previous;
     private FXMLLoader loader;
 
-    private final static double UPTIME = 1e-6;
+    private static final double UPTIME = 1e-6;
     /*
      * This variable is to adjust the framerate to 60 fps.
      */
-    private final static double MSFORFRAME = 17d; 
+    private static final double MSFORFRAME = 17d;
 
     /**
      * Instantiates a new game loop, using a {@link GameModelImpl} instance that
@@ -39,7 +39,6 @@ public class GameLoop extends AnimationTimer {
      * @param sceneController the scene controller where we can
      * @param musicController the music controller
      */
-
     public GameLoop(final GameModel game, final Stage view,
             final GameSceneController sceneController,
             final MusicController musicController) {
@@ -54,21 +53,17 @@ public class GameLoop extends AnimationTimer {
     }
 
     @Override
-    public void handle(long now) {
+    public void handle(final long now) {
         long t = (now - this.previous);
-
-        // rendo ciclo deterministico, fissando loop a 60 fps, sfruttando il
-        // pulse
-        // di javafx
         // long tmp = this.previous;
-
         switch (this.game.getStatus()) {
+
         case START:
             this.game.initGameOnStart();
             this.musicController.startMusic();
             this.previous = now;
-
             break;
+
         case RUNNING:
             if (this.game.isGameOver()) {
                 this.musicController.stopMusic();
@@ -76,26 +71,28 @@ public class GameLoop extends AnimationTimer {
             }
             this.tick(t, now); // conversione da nano a millisec
             break;
+
         case PAUSE:
             this.previous = now;
             break;
+
         case ENDGAME:
             this.sceneController.pauseHitbuttons();
             try {
                 ((AnchorPane) this.view.getScene().getRoot()).getChildren()
                         .add(0, loader.load());
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-
-            final EndGameController controller = ((EndGameController) this.loader
+            final EndGameController controller =
+                    ((EndGameController) this.loader
                     .getController());
             controller.init(this.game);
             controller.enterEndGame();
             this.stop();
             this.previous = now;
             break;
+
         default:
             System.out.println("It shoulnd't be here");
             throw new RuntimeException();
@@ -107,7 +104,6 @@ public class GameLoop extends AnimationTimer {
         final double updateTime = t * UPTIME;
         this.game.update(updateTime);
         this.sceneController.render();
-
         // long tmp = this.previous;
         if (updateTime < MSFORFRAME) {
             try {

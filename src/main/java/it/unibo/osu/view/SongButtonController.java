@@ -8,7 +8,6 @@ import it.unibo.osu.model.BeatMapImpl;
 import it.unibo.osu.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
@@ -16,23 +15,29 @@ import javafx.util.Duration;
 
 public class SongButtonController {
 
+    public static final int TRAILERMUSIC_START_SECONDS = 20;
+    public static final double SCALE_HOVER = 1.1;
     @FXML
     private Text difficultyLabel;
 
     @FXML
     private Text nameLabel;
+
     @FXML
     private AnchorPane anchorPane;
-    
+
     private String fileName;
+
     private MusicControllerImpl scrollSound;
+
     private MusicControllerImpl clickSound;
+
     private MusicControllerImpl song;
-    
+
     /**
      * @param fileName
      */
-    public void init(String fileName) {
+    public void init(final String fileName) {
         this.fileName = fileName;
         BeatMap beatmap = new BeatMapImpl("/beatmaps/" + fileName);
         this.setSongName(beatmap.getBeatmapName());
@@ -41,22 +46,22 @@ public class SongButtonController {
         this.clickSound = MusicControllerImplFactory.getEffectImpl("/music/clickSongs.wav");
 //      System.out.println("/tracks/" + beatmap.getSongName().stripLeading());
         this.song = MusicControllerImplFactory.getSimpleMusicImpl("/tracks/" + beatmap.getSongName().stripLeading());
-        this.song.getMediaPlayer().setStartTime(Duration.seconds(20));
+        this.song.getMediaPlayer().setStartTime(Duration.seconds(TRAILERMUSIC_START_SECONDS));
         this.initializeInputHandler();
     }
-    private void setSongName(String songName) {
+    private void setSongName(final String songName) {
         this.nameLabel.setText(songName);
     }
-    private void setDifficulty(double difficulty) {
+    private void setDifficulty(final double difficulty) {
         this.difficultyLabel.setText("Difficulty: " + Double.toString(difficulty));
     }
     private void initializeInputHandler() {
-        Scale scale = new Scale(1.1, 1.1);
+        Scale scale = new Scale(SCALE_HOVER, SCALE_HOVER);
         this.anchorPane.setOnMouseClicked(clicked -> {
-            if(clicked.getClickCount()==2) {
+            if (clicked.getClickCount() == 2) {
                 this.song.stopMusic();
                 this.clickSound.onNotify();
-                new Controller(this.fileName,(Stage) this.anchorPane.getScene().getWindow());   
+                new Controller(this.fileName, (Stage) this.anchorPane.getScene().getWindow());
             } else {
                 this.song.stopMusic();
                 this.song.startMusic();

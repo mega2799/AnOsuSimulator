@@ -20,4 +20,5 @@ public interface MusicFactory {
      * @return the music controller
      */
     MusicController song(String title);
+
 }

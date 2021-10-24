@@ -1,7 +1,5 @@
 package it.unibo.osu.controller;
 
-import javafx.util.Duration;
-
 /**
  * The Interface MusicController.
  */
@@ -28,4 +26,5 @@ public interface MusicController {
      * @param runnable on finished song
      */
     void setOnFinished(Runnable runnable);
+
 }

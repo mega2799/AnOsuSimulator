@@ -29,6 +29,8 @@ import javafx.util.Duration;
  */
 public class LoginMenuController extends Resizeable {
 
+    public static final int FADEOUT_DURATION_SEC = 3;
+    public static final double ICON_TRANSITION_RATE = 0.1;
     @FXML
     private Scene scene;
 
@@ -46,25 +48,25 @@ public class LoginMenuController extends Resizeable {
 
     @FXML
     private TextField textField;
-    
+
     private ScaleTransition iconTrans;
-    
+
     private MusicControllerImpl welcomeMusic;
-    
+
     private FadeTransition fadeout;
-    
+
     private FXMLLoader loader;
-    
+
     private Stage stage;
-    
+
     private MusicControllerImpl clickSound;
-    
+
     private MusicControllerImpl loginSound;
-    
+
     private Timeline musicFadeout;
 
     /**
-     * Init 
+     * Init.
      *
      * @param stage the stage
      */
@@ -94,12 +96,12 @@ public class LoginMenuController extends Resizeable {
                 new KeyFrame(Duration.seconds(0),
                         new KeyValue(this.welcomeMusic.getMediaPlayer()
                                 .volumeProperty(), 1)),
-                new KeyFrame(Duration.seconds(3), new KeyValue(
+                new KeyFrame(Duration.seconds(FADEOUT_DURATION_SEC), new KeyValue(
                         this.welcomeMusic.getMediaPlayer().volumeProperty(),
                         0)));
         this.welcomeMusic.startMusic();
-        this.stage.getScene().setCursor(new ImageCursor(new Image(this
-                .getClass().getResource("/wallpaper/cursor.png").toString())));
+//        this.stage.getScene().setCursor(new ImageCursor(new Image(this
+//                .getClass().getResource("/wallpaper/cursor.png").toString())));
     }
 
     /**
@@ -111,8 +113,8 @@ public class LoginMenuController extends Resizeable {
         this.iconTrans.setAutoReverse(true);
         this.iconTrans.setCycleCount(Animation.INDEFINITE);
         this.iconTrans.setDuration(Duration.seconds(1));
-        this.iconTrans.setByX(0.1);
-        this.iconTrans.setByY(0.1);
+        this.iconTrans.setByX(ICON_TRANSITION_RATE);
+        this.iconTrans.setByY(ICON_TRANSITION_RATE);
 
         this.fadeout = new FadeTransition();
         this.fadeout.setNode(this.fixedPane);
@@ -167,7 +169,7 @@ public class LoginMenuController extends Resizeable {
      * @param height the height
      */
     @Override
-    public void changeResolution(Pane pane, double width, double height) {
+    public void changeResolution(final Pane pane, final double width, final double height) {
         super.changeResolution(pane, width, height);
         this.stage.sizeToScene();
     }

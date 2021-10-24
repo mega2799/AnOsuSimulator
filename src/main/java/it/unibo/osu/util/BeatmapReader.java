@@ -1,6 +1,5 @@
 package it.unibo.osu.util;
 
-import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.model.HitPoint;
 import it.unibo.osu.model.HitpointImpl;
 import java.io.BufferedReader;
@@ -220,7 +219,8 @@ public class BeatmapReader extends BufferedReader {
         }
         return this.lines.stream().skip(this.n).filter(x -> !x.contains("//"))
                 .takeWhile(x -> !x.equals(""))
-                .filter(x -> x.split(",")[0].equals("2")).map((x) -> {
+                .filter(x -> x.split(",")[0].equals("2"))
+                .map((x) -> {
                     String[] values = x.split(",");
                     return Arrays.asList(values).subList(1, 3).stream()
                             .map(y -> Double.parseDouble(y))

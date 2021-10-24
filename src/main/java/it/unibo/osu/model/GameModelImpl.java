@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.unibo.osu.controller.HitActionObserver;
-import it.unibo.osu.controller.MusicControllerImpl;
-import it.unibo.osu.controller.MusicControllerImplFactory;
 import it.unibo.osu.controller.Observer;
 import it.unibo.osu.controller.ScoreManagerImpl;
 import it.unibo.osu.util.Clock;
@@ -58,9 +56,6 @@ public class GameModelImpl implements Observer, HitActionObserver, GameModel {
     public void update(final double t) {
         this.timeAcc += t;
         this.currentHitbuttons.addAll(this.selector.nextHitobjects(t));
-        // this.lifeBar.drain(); // ricorda di scommentare/commentare per
-        // testare
-        // game
         if (this.isDrainable()) {
             this.lifeBar.drain();
         }

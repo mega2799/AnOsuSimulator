@@ -48,14 +48,14 @@ public class SongMenuController implements Initializable {
 
     private List<SongButtonController> controllerList;
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(final URL location, final ResourceBundle resources) {
         this.songButtons = new ArrayList<>();
         this.scrollPane.setContent(vbox1);  
         this.scrollPane.getStylesheets().add("/css/style.css");
         this.initializeButtons();
     }
     
-    public List<AnchorPane> getSongButtons(){
+    public List<AnchorPane> getSongButtons() {
         return this.songButtons;
     }
     
@@ -65,10 +65,10 @@ public class SongMenuController implements Initializable {
         final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
         this.controllerList = new ArrayList<>();
         try {
-            if(jarFile.isFile()) {  // Run with JAR file
+            if (jarFile.isFile()) {  // Run with JAR file
                 final JarFile jar = new JarFile(jarFile);
                 final Enumeration<JarEntry> entries = jar.entries(); //gives ALL entries in jar
-                while(entries.hasMoreElements()) {
+                while (entries.hasMoreElements()) {
                     final String name = entries.nextElement().getName();
                     if (name.contains(path) && !name.equals(path)) { //filter according to the path
                         FXMLLoader loader = new FXMLLoader();
@@ -84,7 +84,7 @@ public class SongMenuController implements Initializable {
                 }
                 jar.close();
             } else { // Run with IDE
-                final URL url = Launcher.class.getResource("/"+ path.subSequence(0, path.length()-1));
+                final URL url = Launcher.class.getResource("/" + path.subSequence(0, path.length() - 1));
                 if (url != null) {
                     try {
                         final File apps = new File(url.toURI());
@@ -102,8 +102,8 @@ public class SongMenuController implements Initializable {
                     }
                 }
             }
-        }catch(IOException io ) {
-
+        } catch (IOException io) {
+            io.printStackTrace();
         }
     }
     public void updateEffectsVolume() {

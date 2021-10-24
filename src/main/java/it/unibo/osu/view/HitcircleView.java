@@ -1,7 +1,6 @@
 package it.unibo.osu.view;
 
 import java.util.List;
-
 import javafx.animation.ParallelTransition;
 import javafx.scene.shape.Circle;
 
@@ -28,4 +27,5 @@ public interface HitcircleView {
      * Sets the input handlers.
      */
     void setInputHandlers();
+
 }

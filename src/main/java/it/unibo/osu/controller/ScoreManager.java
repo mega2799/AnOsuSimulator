@@ -16,7 +16,8 @@ public interface ScoreManager {
     void hit(GamePoints points);
 
     /**
-     * missed is the function that is called when the user miss a {@link HitPoint}.
+     * missed is the function that is called when the user miss
+     * a {@link HitPoint}.
      */
     void missed();
 
