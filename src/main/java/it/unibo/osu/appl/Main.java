@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Main Class.
  */

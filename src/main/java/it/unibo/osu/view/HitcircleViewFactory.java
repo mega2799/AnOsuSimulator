@@ -21,8 +21,6 @@ public class HitcircleViewFactory {
 	/**
 	 * Instantiates a new hitcircle view factory.
 	 *
-	 * @param innerCircleUrl the inner circle url
-	 * @param outerCircleUrl the outer circle url
 	 * @param circleSize the circle size
 	 * @param difficulty the difficulty
 	 * @param approachRate the approach rate

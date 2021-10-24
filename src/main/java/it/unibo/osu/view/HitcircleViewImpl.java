@@ -70,8 +70,6 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	/**
 	 * Instantiates a new hitcircle view impl.
 	 *
-	 * @param innerCircleUrl the inner circle url
-	 * @param outerCircleUrl the outer circle url
 	 * @param circleSize the circle size, the radius
 	 * @param overallDifficulty the overall difficulty
 	 * @param approachRate the approach rate
