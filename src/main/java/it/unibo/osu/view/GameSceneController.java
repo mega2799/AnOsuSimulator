@@ -102,20 +102,23 @@ public class GameSceneController {
         });
         this.game.getCurrentHitbuttons().clear();
     }
-
+    private enum BackgroundType{
+        PHOTO,
+        VIDEO
+    }
     /**
      * Gets the background type.
      *
      * @param url the url
      * @return the background type
      */
-    private String getBackgroundType(final String url) {
+    private BackgroundType getBackgroundType(final String url) {
         final String ext = url.substring(url.indexOf(".") + 1);
         if (ext.equalsIgnoreCase("jpg") || ext.equalsIgnoreCase("png")
                 || ext.equalsIgnoreCase("jpeg")) {
-            return "photo";
+            return BackgroundType.PHOTO;
         } else {
-            return "video";
+            return BackgroundType.VIDEO;
         }
     }
 
@@ -124,8 +127,8 @@ public class GameSceneController {
      */
     private void setBackground() {
         final String fileName = game.getBeatMap().getBackground();
-        final String type = getBackgroundType(fileName);
-        if (type.equals("photo")) {
+        final BackgroundType type = getBackgroundType(fileName);
+        if (type.equals(BackgroundType.PHOTO)) {
             this.backgroundImage.setImage(new Image(this.getClass()
                     .getResource("/wallpaper/" + fileName).toString()));
         } else {

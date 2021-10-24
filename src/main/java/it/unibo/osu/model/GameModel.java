@@ -55,7 +55,7 @@ public interface GameModel {
     BeatMap getBeatMap();
 
     /**
-     * Gets the {@link ScoreManager}.
+     * Gets the {@link ScoreManagerImpl}.
      *
      * @return the score manager
      */

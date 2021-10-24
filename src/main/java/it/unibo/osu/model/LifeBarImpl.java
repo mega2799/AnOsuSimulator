@@ -47,7 +47,7 @@ public class LifeBarImpl implements Updatable, LifeBar {
     }
 
     private void addHp(final double hpValue) {
-        this.hp = (this.hp + hpValue) > MAXHP ? MAXHP : (this.hp + hpValue);
+        this.hp = Math.min((this.hp + hpValue), MAXHP);
     }
 
     @Override

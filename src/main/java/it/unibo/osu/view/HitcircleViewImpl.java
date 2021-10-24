@@ -10,9 +10,7 @@ import it.unibo.osu.controller.Observer;
 import it.unibo.osu.controller.Subject;
 import it.unibo.osu.model.GameModelImpl;
 import it.unibo.osu.model.GamePoints;
-import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import javafx.event.EventDispatcher;
 import javafx.print.PageLayout;
 import javafx.scene.Group;
@@ -22,7 +20,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 /**
@@ -63,7 +63,8 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 	private double approachTime;
 	
 	private List<HitActionObserver> observers = new ArrayList<>();
-	
+
+	private FillTransition missTransition;
 	
 	
 	/**
@@ -94,6 +95,7 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.finalScaleTrans = new ScaleTransition();
 		this.finalFadeOutTrans = new FadeTransition();
 		this.finalParallelTrans = new ParallelTransition(this.finalScaleTrans,this.finalFadeOutTrans);
+		this.missTransition = new FillTransition();
 		this.x = x;
 		this.y = y;
 		this.fadeInTime = this.getFadeInTime();
@@ -156,8 +158,11 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.finalFadeOutTrans.setToValue(0);
 		this.finalFadeOutTrans.setCycleCount(1);
 		this.finalFadeOutTrans.setNode(this.innerCircle);
-		
-		
+
+		this.missTransition.setShape((Shape) this.innerCircle);
+		this.missTransition.setToValue(Color.valueOf("black"));
+		this.missTransition.setDuration(Duration.millis(200));
+
 	}
 
 	/**
@@ -243,11 +248,13 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 			this.innerCircle.setVisible(false);
 			this.outerCircle.setVisible(false);
 		});
-		
-		this.scaleOuterCircle.setOnFinished(e -> {
+		this.missTransition.setOnFinished(event -> {
 			this.innerCircle.setVisible(false);
 			this.outerCircle.setVisible(false);
 			this.notifyObs(GamePoints.MISS);
+		});
+		this.scaleOuterCircle.setOnFinished(e -> {
+			this.missTransition.play();
 		});	
 	}
 
