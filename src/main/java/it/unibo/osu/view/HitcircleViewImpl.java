@@ -251,10 +251,11 @@ public class HitcircleViewImpl implements HitcircleView, HitActionSubject {
 		this.missTransition.setOnFinished(event -> {
 			this.innerCircle.setVisible(false);
 			this.outerCircle.setVisible(false);
-			this.notifyObs(GamePoints.MISS);
 		});
 		this.scaleOuterCircle.setOnFinished(e -> {
+			this.innerCircle.setOnMouseClicked(null);
 			this.missTransition.play();
+			this.notifyObs(GamePoints.MISS);
 		});	
 	}
 
