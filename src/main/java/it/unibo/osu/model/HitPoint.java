@@ -1,18 +1,16 @@
 package it.unibo.osu.model;
 
-import javafx.geometry.Point2D;
-
 /**
  * The Interface HitPoint.
  */
 public interface HitPoint {
 
     /**
-     * Sets the {@link Point2D}.
+     * Sets the {@link Pair}.
      *
-     * @param position the new position
+     * @param pair the new position
      */
-    void setPosition(Point2D position);
+    void setPosition(Pair<Double, Double> pair);
 
     /**
      * Sets the time.
@@ -22,12 +20,11 @@ public interface HitPoint {
     void setTime(double time);
 
     /**
-     * Gets the {@link Point2D}.
+     * Gets the {@link Pair}.
      *
      * @return the position
      */
-    Point2D getPosition();
-
+    Pair<Double, Double> getPosition();
     /**
      * Gets the time.
      *

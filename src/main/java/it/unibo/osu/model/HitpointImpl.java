@@ -1,21 +1,20 @@
 package it.unibo.osu.model;
 
-import javafx.geometry.Point2D;
-
 /**
  * The Class HitpointImpl implementation of {@link HitPoint}.
  */
 public class HitpointImpl implements HitPoint {
-    private Point2D position;
+    private Pair<Double, Double> position;
+
     private double time;
 
     /**
      * Instantiates a new hitpoint impl.
      *
-     * @param position the position
+    // * @param position the position
      * @param time     the time
      */
-    public HitpointImpl(final Point2D position, final double time) {
+    public HitpointImpl(final Pair<Double, Double> pair, final double time) {
         this.position = position;
         this.time = time;
     }
@@ -28,12 +27,12 @@ public class HitpointImpl implements HitPoint {
      * @param time the time
      */
     public HitpointImpl(final double x, final double y, final double time) {
-        this.position = new Point2D(x, y);
+        this.position = new Pair<Double, Double>(x, y);
         this.time = time;
     }
 
     @Override
-    public void setPosition(final Point2D position) {
+    public void setPosition(final Pair<Double, Double> position) {
         this.position = position;
     }
 
@@ -43,7 +42,7 @@ public class HitpointImpl implements HitPoint {
     }
 
     @Override
-    public Point2D getPosition() {
+    public Pair<Double, Double> getPosition() {
         return position;
     }
 
@@ -64,12 +63,12 @@ public class HitpointImpl implements HitPoint {
 
     @Override
     public void setX(final double x) {
-        this.position = new Point2D(x, this.position.getY());
+        this.position = new Pair<Double, Double>(x, this.position.getY());
     }
 
     @Override
     public void setY(final double y) {
-        this.position = new Point2D(this.position.getX(), y);
+        this.position = new Pair<Double, Double>(this.position.getX(), y);
     }
 
     @Override
