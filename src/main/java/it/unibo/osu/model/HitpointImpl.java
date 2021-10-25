@@ -13,6 +13,7 @@ public class HitpointImpl implements HitPoint {
      *
     // * @param position the position
      * @param time     the time
+     * @param pair      the pair of coordinates
      */
     public HitpointImpl(final Pair<Double, Double> pair, final double time) {
         this.position = position;

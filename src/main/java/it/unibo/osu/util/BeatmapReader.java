@@ -2,6 +2,7 @@ package it.unibo.osu.util;
 
 import it.unibo.osu.model.HitPoint;
 import it.unibo.osu.model.HitpointImpl;
+import it.unibo.osu.model.BeatMap;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
