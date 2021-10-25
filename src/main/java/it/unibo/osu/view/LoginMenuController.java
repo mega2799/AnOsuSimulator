@@ -147,7 +147,6 @@ public class LoginMenuController extends Resizeable {
     public void setInputHandlers() {
         this.icon.setOnMouseClicked(e -> {
             this.textField.setVisible(true);
-            System.out.println("ok");
         });
         this.textField.setOnMouseClicked(clicked -> {
             this.clickSound.onNotify();
