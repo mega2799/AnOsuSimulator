@@ -1,70 +1,57 @@
 package it.unibo.osu.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import it.unibo.osu.model.GamePoints;
+import it.unibo.osu.model.HitPoint;
 import it.unibo.osu.model.Score;
 
-public class ScoreManager implements HitActionObserver{
+public interface ScoreManager {
 
-	private Score score;
-	
-	private Map<GamePoints, Integer> statistic = new HashMap<>(){{
-		put(GamePoints.MISS,0);
-		put(GamePoints.OK,0);
-		put(GamePoints.GREAT,0);
-		put(GamePoints.PERFECT,0);
-	}};
-	
-	public ScoreManager(Score score) {
-		this.score = score;
-	}
-	
-	public void hitted(GamePoints points) {
-		int value = points.getValue();
-		this.score.addPoints(value + value* this.score.getMultiplier());//ci vorrebbe anche difficulty multiplier ma magari ci guardiamo poi 
-		this.score.increaseMultiplier();		
-	}
-	
-	private void statMap(GamePoints point) {
-		statistic.compute(point, (k,v)-> v+=1);
-	}
+    /**
+     * Hit is the function that is called when the user hit a {@link HitPoint}.
+     *
+     * @param points the points
+     */
+    void hit(GamePoints points);
 
-	public void missed() {
-		this.score.resetMultiplier();
-	}
-	
-	public Score getScore() {
-		return this.score;
-	}
-	
-	public void setScore(Score score) {
-		this.score = score;
-	}
-	
-	public int getPoints() {
-		return this.score.getPoints();
-	}
-	
-	public int getMultiplier() {
-		return this.score.getMultiplier();
-	}
+    /**
+     * missed is the function that is called when the user miss
+     * a {@link HitPoint}.
+     */
+    void missed();
 
-	public final Map<GamePoints, Integer> getStatistic() {
-		return statistic;
-	}
+    /**
+     * @return the {@link Score}
+     */
+    Score getScore();
 
-	@Override
-	public void onNotify(GamePoints points) {
-		statMap(points);
-		switch (points) {
-		case MISS:
-			this.missed();
-			break;
-		default:
-			this.hitted(points);
-		}
-	}
-	
+    /**
+     * Sets the score.
+     *
+     * @param score the new score
+     */
+    void setScore(Score score);
+
+    /**
+     * Gets the points.
+     *
+     * @return the points
+     */
+    int getPoints();
+
+    /**
+     * Gets the multiplier.
+     *
+     * @return the multiplier
+     */
+    int getMultiplier();
+
+    /**
+     * Gets the statistic.
+     *
+     * @return the statistic
+     */
+    Map<GamePoints, Integer> getStatistic();
+
 }

@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"it.unibo.osu.appl"},{"l":"it.unibo.osu.controller"},{"l":"it.unibo.osu.model"},{"l":"it.unibo.osu.util"},{"l":"it.unibo.osu.view"}];updateSearchResults();

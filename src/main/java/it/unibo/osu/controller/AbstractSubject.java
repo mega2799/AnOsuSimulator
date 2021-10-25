@@ -1,18 +1,31 @@
 package it.unibo.osu.controller;
-import it.unibo.osu.controller.Observer;
-import it.unibo.osu.controller.Subject;
 
+/**
+ * The Class AbstractSubject.
+ */
 public abstract class AbstractSubject implements Subject {
 
-	@Override
-	abstract public void notifyObs();
+    /**
+     * Notify obs.
+     */
+    @Override
+    public abstract void notifyObs();
 
-	@Override
-	public void addObserver(Observer obs) {
-	}
+    /**
+     * Adds the observer.
+     *
+     * @param obs the obs
+     */
+    @Override
+    public void addObserver(Observer obs) {
+    }
 
-	@Override
-	public void removeObserver(Observer obs) {
-	}
-
+    /**
+     * Removes the observer.
+     *
+     * @param obs the obs
+     */
+    @Override
+    public void removeObserver(Observer obs) {
+    }
 }

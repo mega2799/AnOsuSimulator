@@ -6,16 +6,30 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 
+/**
+ * The Class NeonButton.
+ */
 public class NeonButton {
+
 	private Button button;
 
+	/**
+	 * Gets the button.
+	 *
+	 * @return the button
+	 */
 	public Button getButton() {
 		return this.button;
 	}
 
+	/**
+	 * Instantiates a new Neon button.
+	 *
+	 * @param text the text displayed
+	 */
 	public NeonButton(final String text) {
 		try {
-			this.button = FXMLLoader.load(this.getClass().getResource("/view/NeonPinkButton.fxml"));
+			this.button = FXMLLoader.load(this.getClass().getResource("/fxml/NeonPinkButton.fxml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

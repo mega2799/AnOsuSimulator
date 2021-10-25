@@ -1,124 +1,99 @@
 package it.unibo.osu.model;
 
-
-import java.util.ArrayList;
 import java.util.List;
-import it.unibo.osu.controller.Observer;
-import it.unibo.osu.controller.ScoreManager;
+
+import it.unibo.osu.controller.ScoreManagerImpl;
 import it.unibo.osu.util.Clock;
-import it.unibo.osu.util.HitobjectSelector;
+import it.unibo.osu.view.HitcircleView;
 
-public class GameModel implements Observer{
-	private GameStatus status;
-	private BeatMap beatMap;
-	private ScoreManager scoreManager;
-	private LifeBar lifeBar;
-	private List<Hitpoint> currentHitbuttons;
-	private HitobjectSelector selector;
-	private Clock osuClock;
-	private double timeAcc;
- 
+/**
+ * The Interface GameModel.
+ */
+public interface GameModel {
 
+    /**
+     * Inits the game on start.
+     */
+    void initGameOnStart();
 
-	public GameModel(final String name) {
-		this.status = GameStatus.START;
-		this.beatMap = new BeatMap(name);
-		this.osuClock = new Clock();
-		this.timeAcc = 0;
-	}
-	
-	public void initGameOnStart() {
-		this.scoreManager = new ScoreManager(new Score());
-		this.lifeBar = new LifeBar(this.beatMap.getHpDrainRate());
-		this.currentHitbuttons = new ArrayList<>();
-		this.selector = new HitobjectSelector(this.beatMap.getHitpoints());
-		this.status = GameStatus.RUNNING;
-		this.osuClock.start();
-	}
-	
-	public void update(double t) {
-		this.timeAcc += t;
-		this.currentHitbuttons.addAll(this.selector.nextHitobjects(t));
-		//this.lifeBar.drain();   // ricorda di scommentare/commentare per testare game
-		if(this.isDrainable()) {
-			this.lifeBar.drain();
-		}
-	}
-	
-    public void setPause() {
-        if (this.status.equals(GameStatus.RUNNING)) {
-            this.status = GameStatus.PAUSE;
-            this.osuClock.pause();
-        } else if (this.status.equals(GameStatus.PAUSE)) {
-            this.status = GameStatus.RUNNING;
-            this.osuClock.start();
-        }
-    }
-    
-    public void buttonMissed() {
-    	this.lifeBar.lostLife();
-    	this.scoreManager.missed();
-    	
-    }
-    
-    public void buttonHitted(GamePoints gamePoints) {
-    	this.lifeBar.gainLife(gamePoints);
-    	this.scoreManager.hitted(gamePoints);
-    }
-    
-	public GameStatus getStatus() {
-		return status;
-	}
+    /**
+     * Update game controller.
+     *
+     * @param t the t
+     */
+    void update(double t);
 
-	public BeatMap getBeatMap() {
-		return beatMap;
-	}
+    /**
+     * Sets the pause.
+     */
+    void setPause();
 
-	public ScoreManager getScoreManager() {
-		return this.scoreManager;
-	}
+    /**
+     * Button missed.
+     */
+    void buttonMissed();
 
-	public List<Hitpoint> getCurrentHitbuttons() {
-		return currentHitbuttons;
-	}
+    /**
+     * Button hitted.
+     *
+     * @param gamePoints the game points associated with the {@link HitPoint}
+     */
+    void buttonHitted(GamePoints gamePoints);
 
-	public final Clock getOsuClock() {
-		return osuClock;
-	}
+    /**
+     * Gets the {@link GameStatus}.
+     *
+     * @return the status
+     */
+    GameStatus getStatus();
 
-	public void clearCurrentHitbuttons(List<Hitpoint> currentHitbuttons) {
-		this.currentHitbuttons.clear();
-	}
-	
-	//da implementare
-	public boolean isGameOver() {
-		if(this.lifeBar.getHp() <= 0) {
-			this.status = GameStatus.ENDGAME;
-			return true;
-		}
-		return false;
-	}
+    /**
+     * Gets the {@link BeatMap}.
+     *
+     * @return the beat map
+     */
+    BeatMap getBeatMap();
 
-	@Override
-	public void onNotify() {
-		this.status = GameStatus.ENDGAME;
-	}
-	
-	public LifeBar getLifeBar() {
-		return this.lifeBar;
-	}
-	
-	private boolean isDrainable() {
-		if(this.timeAcc < this.beatMap.getStartingTime()){
-			return false;
-		} else {
-			for(List<Double> breakTime: this.beatMap.getBreakTimes()) {
-				if( this.timeAcc >= breakTime.get(0) && this.timeAcc <= breakTime.get(1)) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+    /**
+     * Gets the {@link ScoreManagerImpl}.
+     *
+     * @return the score manager
+     */
+    ScoreManagerImpl getScoreManager();
+
+    /**
+     * Gets the current {@link HitPoint}.
+     *
+     * @return the current hitbuttons
+     */
+    List<HitpointImpl> getCurrentHitbuttons();
+
+    /**
+     * Gets the osu {@link Clock}.
+     *
+     * @return the osu clock
+     */
+    Clock getOsuClock();
+
+    /**
+     * Clear current hitbuttons.
+     *
+     * @param currentHitbuttons the current hitbuttons
+     */
+    void clearCurrentHitbuttons(List<HitpointImpl> currentHitbuttons);
+
+    /**
+     * Checks if is game over.
+     *
+     * @return true, if is game over
+     */
+    boolean isGameOver();
+
+    /**
+     * Gets the {@link LifeBar}.
+     *
+     * @return the life bar
+     */
+    LifeBar getLifeBar();
 
 }

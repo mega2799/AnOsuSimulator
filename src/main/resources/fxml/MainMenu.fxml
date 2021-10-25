@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../image/montagneAnimeMenu.jpg" />
+            <Image url="@../image/montagneAnimeMenu.png" />
          </image>
       </ImageView>
       <VBox fx:id="vboxButtons" alignment="CENTER" layoutX="622.0" layoutY="316.0" prefHeight="434.0" prefWidth="1296.0" scaleShape="false" spacing="25.0" AnchorPane.rightAnchor="0.0">

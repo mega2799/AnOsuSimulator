@@ -1,76 +1,85 @@
 package it.unibo.osu.controller;
 
-//import java.io.File;
+import it.unibo.osu.model.User;
 import java.net.URISyntaxException;
-
-import it.unibo.osu.model.GameModel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
-public class MusicControllerImpl extends AbstractSubject implements MusicController {
 
-	private MediaPlayer audioMedia;
-	private GameModel game;
-	public MusicControllerImpl(final String name) {
-		//this.audioMedia = new MediaPlayer(new Media(new File(this.getClass().getResource(name).toString()).toString()));
+/**
+ * The Class MusicControllerImpl.
+ */
+public abstract class MusicControllerImpl extends AbstractSubject
+        implements MusicController, Observer {
 
-		try {
-			this.audioMedia = new MediaPlayer(new Media(this.getClass().getResource(name).toURI().toString()));
-		} catch (URISyntaxException e) {
-			System.out.println("error in resource loading");
-			e.printStackTrace();
-		}
+    private MediaPlayer audioMedia;
 
-	}
-	
-	public MusicControllerImpl(String name, GameModel game) {
-		this(name);
-		this.game = game;
-		this.audioMedia.setOnEndOfMedia(() -> notifyObs());
-	}
+    /**
+     * Instantiates a new music controller implementation.
+     *
+     * @param name the song name
+     */
+    public MusicControllerImpl(final String name) {
 
-	@Override
-	public void startMusic() {
-		this.audioMedia.play();
-	}
+        try {
+            this.audioMedia = new MediaPlayer(new Media(
+                    this.getClass().getResource(name).toURI().toString()));
+        } catch (URISyntaxException e) {
+            System.out.println("error in resource loading");
+            e.printStackTrace();
+        }
 
-	@Override
-	public void stopMusic() {
-		this.audioMedia.stop();
-	}
-	
-	@Override
-	public Duration getDuration() {
-		if( this.audioMedia == null) {
-			throw new NullPointerException();
-		}
-		return this.audioMedia.getTotalDuration();
-	}
-	
-	public MediaPlayer.Status getStatus(){
-		return this.audioMedia.getStatus();
-	}
-	
-	@Override
-	public void pauseMusic() {
-		this.audioMedia.pause();
-	}
+    }
 
-	@Override
-	public void notifyObs() {
-		this.game.onNotify();
-	}
-	
-//	@Override
-//	public void notifyEntity() {
-//		if(this.audioMedia.getStatus() == Status.PAUSED) {
-//			this.audioMedia.play();
-//		} else if(this.audioMedia.getStatus() == Status.PLAYING) {
-//			this.audioMedia.pause();
-//		}
-//	}
-	
+    /**
+     * Gets the {@link MediaPlayer}.
+     *
+     * @return the media player
+     */
+    public MediaPlayer getMediaPlayer() {
+        return this.audioMedia;
+    }
 
-	
+    @Override
+    public void startMusic() {
+        this.audioMedia.play();
+    }
+
+    @Override
+    public void stopMusic() {
+        this.audioMedia.stop();
+    }
+
+    /**
+     * Gets the status of the {@link MediaPlayer}.
+     *
+     * @return the status
+     */
+    public MediaPlayer.Status getStatus() {
+        return this.audioMedia.getStatus();
+    }
+
+    @Override
+    public void pauseMusic() {
+        this.audioMedia.pause();
+    }
+
+    @Override
+    public void onNotify() {
+    }
+
+    @Override
+    public void notifyObs() {
+    }
+
+    @Override
+    public void setOnFinished(final Runnable runnable) {
+    }
+
+    /**
+     * Update volume.
+     */
+    public void updateVolume() {
+        this.getMediaPlayer().setVolume(User.getMusicVolume());
+    }
 
 }

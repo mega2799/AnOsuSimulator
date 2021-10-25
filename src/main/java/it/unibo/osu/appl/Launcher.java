@@ -1,15 +1,22 @@
 package it.unibo.osu.appl;
 
-public class Launcher {
-	private Launcher() {
+/**
+ * The Launcher class.
+ */
+public final class Launcher {
 
-	}
+    /**
+     * Instantiates a new launcher.
+     */
+    private Launcher() {
+    }
 
-	/**
-	 * @param args unused
-	 */
-	public static void main(final String[] args) {
-		Main.main(args);
-		
-	}
+    /**
+     * The main method.
+     *
+     * @param args to launch
+     */
+    public static void main(final String[] args) {
+    Main.main(args);
+    }
 }

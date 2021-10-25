@@ -1,29 +1,38 @@
 package it.unibo.osu.appl;
 
-import it.unibo.osu.model.BeatMap;
+import it.unibo.osu.view.LoginMenuController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-//import it.unibo.osu.view.LoginMenu2;
-import it.unibo.osu.view.LoginMenuController;
 
-public class Main extends Application{
-	@Override
-	public void start(Stage myStage) throws Exception {
-		//new LoginMenu2();
-		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/LoginMenu.fxml"));
-		myStage.setScene(loader.load());
-		((LoginMenuController)loader.getController()).init(myStage);
-		//myStage.initStyle(StageStyle.UNDECORATED);
-		myStage.show();
-		
-	}
+/**
+ * The Main Class.
+ */
+public class Main extends Application {
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+    /**
+     * Start.
+     *
+     * @param myStage the my stage
+     * @throws Exception the exception
+     */
+    @Override
+    public void start(final Stage myStage) throws Exception {
+        final FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/LoginMenu.fxml"));
+        myStage.setScene(loader.load());
+        ((LoginMenuController) loader.getController()).init(myStage);
+        myStage.initStyle(StageStyle.UTILITY);
+        myStage.setFullScreen(true);
+        myStage.show();
+    }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
