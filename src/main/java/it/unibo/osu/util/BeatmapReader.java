@@ -1,5 +1,6 @@
 package it.unibo.osu.util;
 
+import it.unibo.osu.model.BeatMap;
 import it.unibo.osu.model.HitPoint;
 import it.unibo.osu.model.HitpointImpl;
 import java.io.BufferedReader;

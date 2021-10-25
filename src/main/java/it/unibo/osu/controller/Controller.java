@@ -1,13 +1,11 @@
 package it.unibo.osu.controller;
 
-import it.unibo.osu.model.GameModelImpl;
-import it.unibo.osu.model.GameStatus;
-import it.unibo.osu.model.StatisticImpl;
-import it.unibo.osu.model.User;
+import it.unibo.osu.model.*;
 import it.unibo.osu.view.GameSceneController;
 import java.io.IOException;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
