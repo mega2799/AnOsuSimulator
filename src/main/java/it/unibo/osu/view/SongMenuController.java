@@ -74,7 +74,6 @@ public class SongMenuController implements Initializable {
                         FXMLLoader loader = new FXMLLoader();
                         loader.setLocation(this.getClass().getResource("/fxml/Song.fxml"));
                         AnchorPane song = loader.load();
-//                      ((SongButtonController) loader.getController()).init(name.substring(path.length()));
                         SongButtonController controller = ((SongButtonController) loader.getController());
                         this.controllerList.add(controller);
                         controller.init(name.substring(path.length()));

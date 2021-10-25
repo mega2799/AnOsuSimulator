@@ -115,7 +115,6 @@ public class MainMenuController extends Resizeable {
         loader.setLocation(this.getClass().getResource("/fxml/SongMenu.fxml"));
         try {
             fixedPane = ((Pane) this.pane.getParent());
-//          fixedPane.getChildren().add(0,loader.load());
             this.scrollPane = (ScrollPane) loader.load();
             this.songMenuController = (SongMenuController) loader.getController();
             this.scrollPane.setLayoutX(-this.fixedPane.getPrefWidth());
@@ -142,9 +141,7 @@ public class MainMenuController extends Resizeable {
                 new KeyValue(this.menuMusic.getMediaPlayer().volumeProperty(), 0)),
                 new KeyFrame(Duration.seconds(MUSICFADE_DURATION_SECONDS), new KeyValue(this.menuMusic.getMediaPlayer().volumeProperty(),
                  User.getMusicVolume())));
-//      this.musicFadeOut = new Timeline(new KeyFrame(Duration.seconds(0),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), User.getMusicVolume())),
-//              new KeyFrame(Duration.seconds(3),new KeyValue( this.menuMusic.getMediaPlayer().volumeProperty(), 0)));
-    }
+ }
 
     private void initializeSounds() {
         
@@ -163,7 +160,6 @@ public class MainMenuController extends Resizeable {
             this.stage.close();
         });
         this.playButton.setOnMouseClicked(playEvent -> {
-//          this.fadeout.play();
             if (this.options.getOpacity() == 1) {
                 this.fadeoutOption.play();
             }
